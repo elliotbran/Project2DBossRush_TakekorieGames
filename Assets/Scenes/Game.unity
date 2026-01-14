@@ -258,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &40474420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40474419}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb4843bae7d24943842ea23130dcd55, type: 3}
   m_Name: 
@@ -380,7 +380,7 @@ Transform:
   m_GameObject: {fileID: 40474419}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.770562, y: 6.819489, z: -9.86122}
+  m_LocalPosition: {x: 10.433059, y: 6.805619, z: -9.86122}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -575,8 +575,8 @@ GameObject:
   - component: {fileID: 525409375}
   - component: {fileID: 525409374}
   - component: {fileID: 525409373}
-  - component: {fileID: 525409372}
   - component: {fileID: 525409377}
+  - component: {fileID: 525409378}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -584,26 +584,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &525409372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525409371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab0115c8eb1549d49862de6b207e93ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 1078465790}
-  - {fileID: 2010664645}
-  offset: {x: 0, y: 0, z: -8}
-  smoothTime: 0.5
-  minZoom: 250
-  maxZoom: 50
-  zoomLimiter: 55
 --- !u!114 &525409373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -689,7 +669,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 38.0161
+  field of view: 59.999996
   orthographic: 0
   orthographic size: 2.8125
   m_Depth: 0
@@ -716,7 +696,7 @@ Transform:
   m_GameObject: {fileID: 525409371}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0.07, z: -7.77}
+  m_LocalPosition: {x: 0.09500027, y: 0, z: -8.660255}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -746,6 +726,38 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &525409378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525409371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!1 &588553517
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &723415681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,7 +883,7 @@ MonoBehaviour:
     Radius: 4
   - Object: {fileID: 2010664645}
     Weight: 1
-    Radius: 4
+    Radius: 2
   m_LegacyTargets: []
 --- !u!4 &723415682
 Transform:
@@ -882,7 +894,7 @@ Transform:
   m_GameObject: {fileID: 723415680}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.770562, y: 6.819489, z: 0.13877992}
+  m_LocalPosition: {x: 10.433059, y: 6.805619, z: 0.13877992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1166,7 +1178,7 @@ GameObject:
   - component: {fileID: 2010664648}
   - component: {fileID: 2010664647}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Enemigo prueba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1323,5 +1335,5 @@ SceneRoots:
   - {fileID: 1078465790}
   - {fileID: 1748399}
   - {fileID: 2010664645}
-  - {fileID: 1971820474}
   - {fileID: 525409376}
+  - {fileID: 1971820474}
