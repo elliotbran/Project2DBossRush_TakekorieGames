@@ -628,7 +628,7 @@ Camera:
   m_GameObject: {fileID: 1056224732}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -653,7 +653,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 11.25
   m_Depth: -1
   m_CullingMask:
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowDebugText: 0
-  ShowCameraFrustum: 1
+  ShowCameraFrustum: 0
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
@@ -798,6 +798,7 @@ GameObject:
   - component: {fileID: 1078465792}
   - component: {fileID: 1078465787}
   - component: {fileID: 1078465791}
+  - component: {fileID: 1078465793}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -846,6 +847,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5.5
   moveActionReference: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  rb: {fileID: 0}
+  movementInput: {x: 0, y: 0}
 --- !u!4 &1078465790
 Transform:
   m_ObjectHideFlags: 0
@@ -930,6 +933,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1078465793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078465786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df016ae11d6428949a05c7e1b14bef2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacking: 0
+  attack_range: {x: 2, y: 2, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
