@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;  
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerControllerTest : MonoBehaviour
 {
 
     [SerializeField] private float moveSpeed = 5f;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         movementInput = Vector2.zero;
     }
-
+    // Marie mi vieja
     private void OnEnable()
     {
         moveActionReference.action.Enable();
