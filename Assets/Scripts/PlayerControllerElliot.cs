@@ -11,7 +11,7 @@ public class PlayerControllerElliot : MonoBehaviour
     }
 
     private Rigidbody2D rb;
-    private Vector3 moveDir;
+    public Vector3 moveDir;
     private Vector3 rollDir;
     private Vector3 lastMoveDir;
     private float rollSpeed = 20f;

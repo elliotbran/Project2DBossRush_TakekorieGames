@@ -1,32 +1,48 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerAttackController : MonoBehaviour
 {
-    PlayerController controller;
+    PlayerControllerElliot controller;
+    public Camera maincamera;
     public bool attacking;
-    public Vector3 attack_range;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public GameObject attacker;
+
     void Start()
     {
-        controller = GetComponent<PlayerController>();
+        controller = GetComponent<PlayerControllerElliot>();
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        Ray ray = new Ray(transform.position, controller.movementInput);
+    {        
+        Ray ray = new Ray(transform.position, controller.moveDir);
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
-    }
-    public void Attack()
-    {
-        attacking = true;
-        //DIBUJA GIZMO DE RANGO
 
+        if (Input.GetMouseButton(0))        
+        {
+            //Debug.Log("ATTACK");
+            //StartCoroutine (attacktimeing());
+            //Ray rayattack = new Ray(transform.position, Input.mousePosition);
+            //Debug.DrawRay(rayattack.origin, rayattack.direction * 2f, Color.red);
+
+
+            Vector3 mouseWorldPos = maincamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 dir = mouseWorldPos - transform.position;
+
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            attacker.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+
+            attacking = false;
+        }
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, attack_range);
-    }
+
+        IEnumerator attacktimeing()
+        {
+            attacking = true;
+            yield return new WaitForSeconds(2);
+        }
 }
