@@ -1201,6 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pocima: {fileID: 1940571496}
   player: {fileID: 1078465793}
+  manaController: {fileID: 1926773800}
 --- !u!1 &1867352010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1361,7 @@ GameObject:
   - component: {fileID: 1926773797}
   - component: {fileID: 1926773799}
   - component: {fileID: 1926773798}
+  - component: {fileID: 1926773800}
   m_Layer: 5
   m_Name: Background mana
   m_TagString: Untagged
@@ -1425,6 +1427,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926773796}
   m_CullTransparentMesh: 1
+--- !u!114 &1926773800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926773796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce513c36de95b54f886956d75ac2bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mana: {fileID: 1039854402}
 --- !u!1 &1933358858
 GameObject:
   m_ObjectHideFlags: 0

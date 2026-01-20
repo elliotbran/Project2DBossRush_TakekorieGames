@@ -5,7 +5,7 @@ public class Pocima_Controller : MonoBehaviour
 {
     public Image Pocima; 
     public Player_ControllerRaul player;
-
+    public Mana_Controller manaController;
     private bool estaLlena = false;
 
     void Start()
@@ -15,9 +15,17 @@ public class Pocima_Controller : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.T) && !estaLlena)
         {
-            ActualizarEstado(true);
+            if (manaController.ConsumirMana(1f))
+            {
+                ActualizarEstado(true);
+                Debug.Log("Pócima recargada con maná");
+            }
+            else
+            {
+                Debug.Log("No tienes suficiente maná");
+            }
         }
         if (Input.GetKeyDown(KeyCode.F) && estaLlena)
         {
@@ -30,20 +38,20 @@ public class Pocima_Controller : MonoBehaviour
         estaLlena = llena;
         if (estaLlena)
         {
-            Pocima.color = Color.green; 
-            Pocima.fillAmount = 1f;     
+            Pocima.color = Color.green;
+            Pocima.fillAmount = 1f;
         }
         else
         {
-            Pocima.color = Color.red; 
-            Pocima.fillAmount = 0.2f; 
+            Pocima.color = Color.red;
+            Pocima.fillAmount = 0.2f;
         }
     }
 
     void UsarPocima()
     {
-        player.Curar(1f); 
-        ActualizarEstado(false); 
-        Debug.Log("Pocima usada");
+        player.Curar(1f);
+        ActualizarEstado(false);
+        Debug.Log("Pocima usada, salud restaurada");
     }
 }

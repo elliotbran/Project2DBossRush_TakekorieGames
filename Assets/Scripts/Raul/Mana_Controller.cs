@@ -26,7 +26,16 @@ public class Mana_Controller : MonoBehaviour
         ManaActual = Mathf.Clamp(ManaActual + cantidad, 0f, ManaMaxima);
         ActualizarEstado();
     }
-
+    public bool ConsumirMana(float cantidad)
+    {
+        if (ManaActual >= cantidad)
+        {
+            ManaActual -= cantidad;
+            ActualizarEstado();
+            return true; // Indica que se pudo gastar
+        }
+        return false; // No había suficiente maná
+    }
     void ActualizarEstado()
     {
         Mana.fillAmount = ManaActual / ManaMaxima;
