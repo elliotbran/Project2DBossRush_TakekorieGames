@@ -32,9 +32,9 @@ public class Mana_Controller : MonoBehaviour
         {
             ManaActual -= cantidad;
             ActualizarEstado();
-            return true; // Indica que se pudo gastar
+            return true; 
         }
-        return false; // No había suficiente maná
+        return false; 
     }
     void ActualizarEstado()
     {
