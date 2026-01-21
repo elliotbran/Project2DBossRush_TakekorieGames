@@ -22,14 +22,8 @@ public class PlayerAttackController : MonoBehaviour
         Ray ray = new Ray(transform.position, controller.moveDir);
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
 
-        if (Input.GetMouseButton(0))        
+        if (Input.GetMouseButton(0))//CAMBIAR A DOWN     
         {
-            //Debug.Log("ATTACK");
-            //StartCoroutine (attacktimeing());
-            //Ray rayattack = new Ray(transform.position, Input.mousePosition);
-            //Debug.DrawRay(rayattack.origin, rayattack.direction * 2f, Color.red);
-
-
             Vector3 mouseWorldPos = maincamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 dir = mouseWorldPos - transform.position;
 
