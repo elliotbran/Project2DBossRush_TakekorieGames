@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerElliot : MonoBehaviour
 {
     private const float moveSpeed = 10f;
-    public float Vida = 3f;
-    public float vidaMaxima = 3f;
 
     private enum State
     {
@@ -93,24 +89,6 @@ public class PlayerControllerElliot : MonoBehaviour
     void Start()
     {
 
-    }
-    public void TomarDaño(float cantidad)
-    {
-        Vida -= cantidad;
-        if (Vida <= 0)
-        {
-            Vida = 0;
-            Debug.Log("El jugador ha muerto");
-            Destroy(gameObject);
-        }
-    }
-    public void Curar(float cantidad)
-    {
-        Vida += cantidad;
-        if (Vida > vidaMaxima)
-        {
-            Vida = vidaMaxima;
-        }
     }
 
 }

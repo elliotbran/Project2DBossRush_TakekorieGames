@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControllerTest : MonoBehaviour
 {
-    public int Vida = 3;
 
     [SerializeField] private float moveSpeed = 5f;
 
