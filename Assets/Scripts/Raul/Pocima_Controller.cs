@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Pocima_Controller : MonoBehaviour
 {
     public Image Pocima; 
-    public Player_ControllerRaul player;
+    public PlayerControllerElliot player;
     public Mana_Controller manaController;
     private bool estaLlena = false;
 

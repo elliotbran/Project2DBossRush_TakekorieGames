@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class barradevida2 : MonoBehaviour
 {
     public Image rellenarbarradevida;
-    private Player_ControllerRaul player_controller;
+    private PlayerControllerElliot player_controller;
 
     void Start()
     {
-        player_controller = GameObject.Find("Player").GetComponent<Player_ControllerRaul>();
+        player_controller = GameObject.Find("Player").GetComponent<PlayerControllerElliot>();
     }
 
     void Update()
