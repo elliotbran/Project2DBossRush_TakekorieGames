@@ -20,11 +20,11 @@ public class Pocima_Controller : MonoBehaviour
             if (manaController.ConsumirMana(1f))
             {
                 ActualizarEstado(true);
-                Debug.Log("Pócima recargada con maná");
+                Debug.Log("Pócima recargada con mana");
             }
             else
             {
-                Debug.Log("No tienes suficiente maná");
+                Debug.Log("No tienes suficiente mana");
             }
         }
         if (Input.GetKeyDown(KeyCode.F) && estaLlena)
