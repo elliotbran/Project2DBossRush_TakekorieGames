@@ -10,7 +10,7 @@ public class barraenemigovida : MonoBehaviour
 
     void Start()
     {
-        enemigocontroller = GameObject.Find("Enemigo").GetComponent<EnemigoController>();
+        enemigocontroller = GameObject.Find("Enemigo prueba").GetComponent<EnemigoController>();
     }
 
     void Update()
