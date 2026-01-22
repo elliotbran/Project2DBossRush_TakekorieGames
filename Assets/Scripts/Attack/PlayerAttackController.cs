@@ -24,19 +24,20 @@ public class PlayerAttackController : MonoBehaviour
 
         if (Input.GetMouseButton(0))//CAMBIAR A DOWN     
         {
-            Vector3 mouseWorldPos = maincamera.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 dir = mouseWorldPos - transform.position;
-
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            attacker.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-
-            attacking = false;
+            StartCoroutine(Attacktimeing());
         }
     }
+    IEnumerator Attacktimeing()
+    {
+        attacking = true;
+        Vector3 mouseWorldPos = maincamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = mouseWorldPos - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        attacker.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        //Debug.Log("ATAQUE INICIADO");
+        yield return new WaitForSeconds(2f);//Cuanto dura el ataque
+        attacking = false;
+        //Debug.Log("ATAQUE FINALIZADO");
 
-        IEnumerator attacktimeing()
-        {
-            attacking = true;
-            yield return new WaitForSeconds(2);
-        }
+    }
 }
