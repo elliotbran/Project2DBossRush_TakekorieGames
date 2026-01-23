@@ -10,6 +10,7 @@ public class EnemigoController : MonoBehaviour
     public float daño = 1f;
     public float vida = 3f;
     public float MaxVida = 3f;
+    
     public void Daño(float cantidad)
     {
         vida -= cantidad;
@@ -24,24 +25,24 @@ public class EnemigoController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Spear"))
-        {
+        { 
             Daño(1f);
         }
     }
 
-    
-    
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Player_ControllerRaul player = collision.GetComponent<Player_ControllerRaul>();
 
-            if (player != null)
-            {
-                player.TomarDaño(daño);
-                Debug.Log("Daño realizado. Vida restante: " + player.Vida);
-            }
-        }
+
+    /*private void OnTriggerEnter2D(Collider2D collision)
+   {
+       if (collision.CompareTag("Player"))
+       {
+           /*Player_ControllerRaul player = collision.GetComponent<Player_ControllerRaul>();
+
+           if (player != null)
+           {
+               player.TomarDaño(daño);
+               Debug.Log("Daño realizado. Vida restante: " + player.Vida);
+           }
+       }
     }*/
 }

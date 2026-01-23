@@ -17,16 +17,6 @@ public class Player_ControllerRaul : MonoBehaviour
     {
         
     }
-    public void TomarDaño(float cantidad)
-    {
-        Vida -= cantidad;
-        if (Vida <= 0)
-        {
-            Vida = 0;
-            Debug.Log("El jugador ha muerto");
-            Destroy(gameObject);
-        }
-    }
     public void Curar(float cantidad)
     {
         Vida += cantidad;

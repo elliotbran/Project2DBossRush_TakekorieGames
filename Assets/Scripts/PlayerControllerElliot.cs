@@ -90,20 +90,16 @@ public class PlayerControllerElliot : MonoBehaviour
                 break;
         }
     }
-    void Start()
-    {
-
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     { 
         if (collision.CompareTag("Enemy"))
         {
             TomarDaño(1f);
         }
-    }
-    public void TomarDaño(float cantidad)
+    }*/
+    public void TomarDaño(float damagerecive)
     {
-        Vida -= cantidad;
+        Vida -= damagerecive;
         if (Vida <= 0)
         {
             Vida = 0;

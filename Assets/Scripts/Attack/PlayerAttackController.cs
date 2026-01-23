@@ -34,18 +34,18 @@ public class PlayerAttackController : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))//CAMBIAR A DOWN     
         {
+            Debug.Log("ATAQUE INICIADO");
             StartCoroutine(Attacktimeing());
+            Debug.Log("ATAQUE FINALIZADO");
         }
     }
     IEnumerator Attacktimeing()
     { 
-        //Debug.Log("ATAQUE INICIADO");
-        attacking = true;
         attacker.SetActive(true);//Esto activa HitRange que es la zona de daño, se pondra en el animator
+        attacking = true;
         yield return new WaitForSeconds(1f);//Cuanto dura el ataque
-        attacking = false;
         attacker.SetActive(false);
-        //Debug.Log("ATAQUE FINALIZADO");
+        attacking = false;
 
     }
 }
