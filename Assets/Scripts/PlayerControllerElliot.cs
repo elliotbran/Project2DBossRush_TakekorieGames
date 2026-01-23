@@ -15,7 +15,7 @@ public class PlayerControllerElliot : MonoBehaviour
     }
 
     private Rigidbody2D rb;
-    private Vector3 moveDir;
+    public Vector3 moveDir;
     private Vector3 rollDir;
     private Vector3 lastMoveDir;
     private float rollSpeed = 30f;
@@ -93,6 +93,13 @@ public class PlayerControllerElliot : MonoBehaviour
     void Start()
     {
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    { 
+        if (collision.CompareTag("Enemy"))
+        {
+            TomarDaño(1f);
+        }
     }
     public void TomarDaño(float cantidad)
     {

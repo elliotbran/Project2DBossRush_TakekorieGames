@@ -10,8 +10,8 @@ public class PlayerControllerTest : MonoBehaviour
 
     [SerializeField] private InputActionReference moveActionReference;
 
-    private Rigidbody2D rb;
-    private Vector2 movementInput;
+    public Rigidbody2D rb;
+    public Vector2 movementInput;
 
     private void Awake()
     {
