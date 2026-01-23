@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class barradevida2 : MonoBehaviour
+public class Playerlifebar : MonoBehaviour
 {
-    public Image rellenarbarradevida;
+    public Image PlayerlifeBar;
     private PlayerControllerElliot player_controller;
 
     void Start()
@@ -15,6 +15,6 @@ public class barradevida2 : MonoBehaviour
 
     void Update()
     {
-        rellenarbarradevida.fillAmount = player_controller.Vida / player_controller.vidaMaxima;
+        PlayerlifeBar.fillAmount = player_controller.Life / player_controller.MaximumLife;
     }
 }

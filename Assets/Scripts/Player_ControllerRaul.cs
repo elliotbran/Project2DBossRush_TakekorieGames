@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player_ControllerRaul : MonoBehaviour
 {
-    public float Vida = 3f;
-    public float vidaMaxima = 3f;
+    public float Life = 3f;
+    public float MaximumLife = 3f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,20 +19,20 @@ public class Player_ControllerRaul : MonoBehaviour
     }
     public void TomarDaño(float cantidad)
     {
-        Vida -= cantidad;
-        if (Vida <= 0)
+        Life -= cantidad;
+        if (Life <= 0)
         {
-            Vida = 0;
+            Life = 0;
             Debug.Log("El jugador ha muerto");
             Destroy(gameObject);
         }
     }
     public void Curar(float cantidad)
     {
-        Vida += cantidad;
-        if (Vida > vidaMaxima) 
+        Life += cantidad;
+        if (Life > MaximumLife) 
         {
-            Vida = vidaMaxima;
+            Life = MaximumLife;
         }
     }
 }

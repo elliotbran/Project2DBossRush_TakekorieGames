@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerControllerElliot : MonoBehaviour
 {
     private const float moveSpeed = 10f;
-    public float Vida = 3f;
-    public float vidaMaxima = 3f;
+    public float Life = 3f;
+    public float MaximumLife = 3f;
 
     private enum State
     {
@@ -96,20 +96,20 @@ public class PlayerControllerElliot : MonoBehaviour
     }
     public void TomarDaño(float cantidad)
     {
-        Vida -= cantidad;
-        if (Vida <= 0)
+        Life -= cantidad;
+        if (Life <= 0)
         {
-            Vida = 0;
+            Life = 0;
             Debug.Log("El jugador ha muerto");
             Destroy(gameObject);
         }
     }
-    public void Curar(float cantidad)
+    public void Cure(float cantidad)
     {
-        Vida += cantidad;
-        if (Vida > vidaMaxima)
+        Life += cantidad;
+        if (Life > MaximumLife)
         {
-            Vida = vidaMaxima;
+            Life = MaximumLife;
         }
     }
 
