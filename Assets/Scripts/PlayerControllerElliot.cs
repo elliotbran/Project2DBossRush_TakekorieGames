@@ -61,7 +61,7 @@ public class PlayerControllerElliot : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     rollDir = lastMoveDir;
-                    rollSpeed = 100f;
+                    rollSpeed = 50f;
                     state = State.Rolling;
                 }
                 break;
@@ -69,7 +69,7 @@ public class PlayerControllerElliot : MonoBehaviour
                 float rollSpeedDropMultiplier = 5f; 
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
-                float minRollSpeed = 50f;
+                float minRollSpeed = 25f;
                 if (rollSpeed < minRollSpeed)
                 {
                     state = State.Normal;
