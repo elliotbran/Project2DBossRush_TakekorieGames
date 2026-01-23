@@ -94,6 +94,13 @@ public class PlayerControllerElliot : MonoBehaviour
     {
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    { 
+        if (collision.CompareTag("Enemy"))
+        {
+            TomarDaño(1f);
+        }
+    }
     public void TomarDaño(float cantidad)
     {
         Vida -= cantidad;

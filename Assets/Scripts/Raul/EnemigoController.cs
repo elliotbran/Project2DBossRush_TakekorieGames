@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 
 
@@ -9,11 +10,6 @@ public class EnemigoController : MonoBehaviour
     public float daño = 1f;
     public float vida = 3f;
     public float MaxVida = 3f;
-
-    private void OnMouseDown()
-    {
-        Daño(1f);
-    }
     public void Daño(float cantidad)
     {
         vida -= cantidad;
@@ -25,8 +21,17 @@ public class EnemigoController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Spear"))
+        {
+            Daño(1f);
+        }
+    }
+
+    
+    
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -38,5 +43,5 @@ public class EnemigoController : MonoBehaviour
                 Debug.Log("Daño realizado. Vida restante: " + player.Vida);
             }
         }
-    }
+    }*/
 }
