@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControllerElliot : MonoBehaviour
 {
-    private const float moveSpeed = 10f;
+    private const float moveSpeed = 5f;
     public float Vida = 3f;
     public float vidaMaxima = 3f;
 
@@ -18,7 +18,7 @@ public class PlayerControllerElliot : MonoBehaviour
     private Vector3 moveDir;
     private Vector3 rollDir;
     private Vector3 lastMoveDir;
-    private float rollSpeed = 20f;
+    private float rollSpeed = 30f;
     private State state;
 
 
@@ -61,15 +61,15 @@ public class PlayerControllerElliot : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     rollDir = lastMoveDir;
-                    rollSpeed = 50f;
+                    rollSpeed = 30f;
                     state = State.Rolling;
                 }
                 break;
             case State.Rolling:
-                float rollSpeedDropMultiplier = 5f; 
+                float rollSpeedDropMultiplier = 5; 
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
-                float minRollSpeed = 25f;
+                float minRollSpeed = 15f;
                 if (rollSpeed < minRollSpeed)
                 {
                     state = State.Normal;
