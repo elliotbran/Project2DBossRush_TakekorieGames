@@ -1,8 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerElliot : MonoBehaviour
 {
-    private const float moveSpeed = 10f;
+    private const float moveSpeed = 5f;
+    public float Vida = 3f;
+    public float vidaMaxima = 3f;
 
     private enum State
     {
@@ -14,7 +18,7 @@ public class PlayerControllerElliot : MonoBehaviour
     public Vector3 moveDir;
     private Vector3 rollDir;
     private Vector3 lastMoveDir;
-    private float rollSpeed = 20f;
+    private float rollSpeed = 30f;
     private State state;
 
 
@@ -57,15 +61,15 @@ public class PlayerControllerElliot : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     rollDir = lastMoveDir;
-                    rollSpeed = 100f;
+                    rollSpeed = 30f;
                     state = State.Rolling;
                 }
                 break;
             case State.Rolling:
-                float rollSpeedDropMultiplier = 5f; 
+                float rollSpeedDropMultiplier = 5; 
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
-                float minRollSpeed = 50f;
+                float minRollSpeed = 15f;
                 if (rollSpeed < minRollSpeed)
                 {
                     state = State.Normal;
@@ -86,9 +90,30 @@ public class PlayerControllerElliot : MonoBehaviour
                 break;
         }
     }
-    void Start()
+    /*private void OnTriggerEnter2D(Collider2D collision)
+    { 
+        if (collision.CompareTag("Enemy"))
+        {
+            TomarDaño(1f);
+        }
+    }*/
+    public void TomarDaño(float damagerecive)
     {
-
+        Vida -= damagerecive;
+        if (Vida <= 0)
+        {
+            Vida = 0;
+            Debug.Log("El jugador ha muerto");
+            Destroy(gameObject);
+        }
+    }
+    public void Curar(float cantidad)
+    {
+        Vida += cantidad;
+        if (Vida > vidaMaxima)
+        {
+            Vida = vidaMaxima;
+        }
     }
 
 }

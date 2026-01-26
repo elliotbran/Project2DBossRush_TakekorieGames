@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
@@ -15,6 +17,7 @@ public class PlayerAttackController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<PlayerControllerElliot>();
+        attacker.SetActive(false);
     }
 
     void Update()
@@ -22,22 +25,27 @@ public class PlayerAttackController : MonoBehaviour
         Ray ray = new Ray(transform.position, controller.moveDir);
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
 
-        if (Input.GetMouseButton(0))//CAMBIAR A DOWN     
-        {
-            StartCoroutine(Attacktimeing());
-        }
-    }
-    IEnumerator Attacktimeing()
-    {
-        attacking = true;
+        /////////------------NO TOCAR------------/////////
         Vector3 mouseWorldPos = maincamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = mouseWorldPos - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         attacker.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-        //Debug.Log("ATAQUE INICIADO");
-        yield return new WaitForSeconds(2f);//Cuanto dura el ataque
+        /////////------------NO TOCAR------------/////////
+        
+        if (Input.GetMouseButtonDown(0))//CAMBIAR A DOWN     
+        {
+            Debug.Log("ATAQUE INICIADO");
+            StartCoroutine(Attacktimeing());
+            Debug.Log("ATAQUE FINALIZADO");
+        }
+    }
+    IEnumerator Attacktimeing()
+    { 
+        attacker.SetActive(true);//Esto activa HitRange que es la zona de daño, se pondra en el animator
+        attacking = true;
+        yield return new WaitForSeconds(1f);//Cuanto dura el ataque
+        attacker.SetActive(false);
         attacking = false;
-        //Debug.Log("ATAQUE FINALIZADO");
 
     }
 }
