@@ -32,7 +32,7 @@ public class PlayerAttackController : MonoBehaviour
         attacker.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
         /////////------------NO TOCAR------------/////////
         
-        if (Input.GetMouseButtonDown(0))//CAMBIAR A DOWN     
+        if (Input.GetMouseButtonDown(0)&&attacking==false)  
         {
             Debug.Log("ATAQUE INICIADO");
             StartCoroutine(Attacktimeing());

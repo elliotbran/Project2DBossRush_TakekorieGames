@@ -8,7 +8,7 @@ public class SpearTestLucas : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            controller.Daño(5f);
+            controller.Daño(1f);
         }
     }
 }
