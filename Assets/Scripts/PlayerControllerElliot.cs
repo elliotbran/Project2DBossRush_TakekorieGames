@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerControllerElliot : MonoBehaviour
 {
-    private const float moveSpeed = 5f;
-    public float Vida = 3f;
-    public float vidaMaxima = 3f;
+    private const float moveSpeed = 10f;
+    public float Life = 3f;
+    public float MaximumLife = 3f;
 
     private enum State
     {
@@ -18,11 +18,12 @@ public class PlayerControllerElliot : MonoBehaviour
     public Vector3 moveDir;
     private Vector3 rollDir;
     private Vector3 lastMoveDir;
-    private float rollSpeed = 30f;
+    private float rollSpeed = 20f;
     private State state;
 
     [SerializeField] private float rollCooldown = 1f; // cooldown in seconds
     private float rollCooldownTimer = 0f;
+
 
     void Awake()
     {
@@ -59,7 +60,9 @@ public class PlayerControllerElliot : MonoBehaviour
                 {
                     moveX = 1f;
                 }
+                
                 moveDir = new Vector3(moveX, moveY).normalized;
+
                 if(moveX != 0 || moveY != 0)
                 {
                     // Not Idle
@@ -84,7 +87,7 @@ public class PlayerControllerElliot : MonoBehaviour
                 }
                 break;
             case State.Rolling:
-                float rollSpeedDropMultiplier = 5; 
+                float rollSpeedDropMultiplier = 5f; 
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
                 float minRollSpeed = 15f;
@@ -101,37 +104,33 @@ public class PlayerControllerElliot : MonoBehaviour
     {
         switch (state) { 
             case State.Normal:
-                rb.linearVelocity = moveDir * moveSpeed;
+        rb.linearVelocity = moveDir * moveSpeed;
                 break;
             case State.Rolling:
                 rb.linearVelocity = rollDir * rollSpeed;
                 break;
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    { 
-        if (collision.CompareTag("Enemy"))
-        {
-            TomarDaño(1f);
-        }
-    }*/
-    public void TomarDaño(float damagerecive)
+    void Start()
     {
-        Vida -= damagerecive;
-        if (Vida <= 0)
+
+    }
+    public void TomarDaño(float cantidad)
+    {
+        Life -= cantidad;
+        if (Life <= 0)
         {
-            Vida = 0;
+            Life = 0;
             Debug.Log("El jugador ha muerto");
             Destroy(gameObject);
         }
     }
-    public void Curar(float cantidad)
+    public void Cure(float cantidad)
     {
-        Vida += cantidad;
-        if (Vida > vidaMaxima)
+        Life += cantidad;
+        if (Life > MaximumLife)
         {
-            Vida = vidaMaxima;
+            Life = MaximumLife;
         }
     }
-
 }

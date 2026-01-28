@@ -651,6 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce513c36de95b54f886956d75ac2bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Manna: {fileID: 1111896367}
 --- !u!114 &444155109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,7 +959,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.01875
+  orthographic size: 5.625
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1726,6 +1727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c32198d68a89145a65140b06cebed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Potion: {fileID: 2145218001}
+  player: {fileID: 1078465793}
+  mannacontroller: {fileID: 444155108}
 --- !u!114 &835369019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,6 +1742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6071b8163b62db248b65e773eb20fdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerlifeBar: {fileID: 2058805959}
 --- !u!1 &1050380593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1970,9 +1975,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55699b6ebb1f1ca4eb152e264a4c382f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Vida: 3
-  vidaMaxima: 3
+  Life: 3
+  MaximumLife: 3
   moveDir: {x: 0, y: 0, z: 0}
+  rollCooldown: 0.5
 --- !u!114 &1078465794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,7 +2258,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1490241310}
   - component: {fileID: 1490241311}
-  - component: {fileID: 1490241312}
   m_Layer: 0
   m_Name: HitRange
   m_TagString: Spear
@@ -2321,19 +2326,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.22448447, y: 8.032041}
   m_EdgeRadius: 0
---- !u!114 &1490241312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490241309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d1ded5e2cf3b2478a12293666bec5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 2010664649}
 --- !u!1 &1668219271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,6 +2414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6093c0cd43de446913a2c47fd76ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemylife: {fileID: 1085151141}
 --- !u!1 &1715471477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,9 +2539,9 @@ GameObject:
   - component: {fileID: 2010664645}
   - component: {fileID: 2010664653}
   - component: {fileID: 2010664646}
+  - component: {fileID: 2010664654}
   - component: {fileID: 2010664651}
   - component: {fileID: 2010664647}
-  - component: {fileID: 2010664649}
   - component: {fileID: 2010664650}
   - component: {fileID: 2010664652}
   m_Layer: 0
@@ -2656,21 +2649,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2010664649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010664644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901259a282d8835489038516b17428f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "da\xF1o": 1
-  vida: 3
-  MaxVida: 3
 --- !u!95 &2010664650
 Animator:
   serializedVersion: 7
@@ -2764,6 +2742,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1078465790}
+--- !u!114 &2010664654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010664644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c396686a10de84ab1e986cca2916d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  life: 3
+  Maximumlife: 3
 --- !u!1 &2058805957
 GameObject:
   m_ObjectHideFlags: 0
