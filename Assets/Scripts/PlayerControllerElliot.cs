@@ -21,6 +21,8 @@ public class PlayerControllerElliot : MonoBehaviour
     private float rollSpeed = 30f;
     private State state;
 
+    [SerializeField] private float rollCooldown = 1f; // cooldown in seconds
+    private float rollCooldownTimer = 0f;
 
     void Awake()
     {
@@ -29,6 +31,12 @@ public class PlayerControllerElliot : MonoBehaviour
     }
     void Update()
     {
+        // cooldown timer update
+        if (rollCooldownTimer > 0f)
+        {
+            rollCooldownTimer -= Time.deltaTime;
+        }
+
         switch (state)
         {
             case State.Normal:
@@ -56,13 +64,23 @@ public class PlayerControllerElliot : MonoBehaviour
                 {
                     // Not Idle
                     lastMoveDir = moveDir;
-                }           
+                }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                // Only allow roll if cooldown has expired
+                if (Input.GetKeyDown(KeyCode.Space) && rollCooldownTimer <= 0f)
                 {
+                    // fallback direction if player hasn't moved yet
+                    if (lastMoveDir == Vector3.zero)
+                    {
+                        lastMoveDir = Vector3.right;
+                    }
+
                     rollDir = lastMoveDir;
                     rollSpeed = 30f;
                     state = State.Rolling;
+
+                    // start cooldown
+                    rollCooldownTimer = rollCooldown;
                 }
                 break;
             case State.Rolling:
@@ -83,7 +101,7 @@ public class PlayerControllerElliot : MonoBehaviour
     {
         switch (state) { 
             case State.Normal:
-        rb.linearVelocity = moveDir * moveSpeed;
+                rb.linearVelocity = moveDir * moveSpeed;
                 break;
             case State.Rolling:
                 rb.linearVelocity = rollDir * rollSpeed;
