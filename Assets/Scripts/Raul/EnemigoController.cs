@@ -14,7 +14,7 @@ public class EnemigoController : MonoBehaviour
     public void Daño(float cantidad)
     {
         vida -= cantidad;
-        Debug.Log("Vida restante" + vida);
+        Debug.Log("Vida restante" + vida);  
         if (vida <= 0)
         {
             vida = 0;

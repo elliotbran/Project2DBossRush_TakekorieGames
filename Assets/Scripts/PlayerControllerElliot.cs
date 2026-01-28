@@ -14,7 +14,10 @@ public class PlayerControllerElliot : MonoBehaviour
         Rolling,
     }
 
+    BodyTestLucas body;
+
     private Rigidbody2D rb;
+    private BoxCollider2D col;
     public Vector3 moveDir;
     private Vector3 rollDir;
     private Vector3 lastMoveDir;
@@ -24,8 +27,13 @@ public class PlayerControllerElliot : MonoBehaviour
 
     void Awake()
     {
+        body = GetComponent<BodyTestLucas>();
         rb = GetComponent<Rigidbody2D>();
         state = State.Normal;
+    }
+    private void Start()
+    {
+        col = body.GetComponent<BoxCollider2D>();
     }
     void Update()
     {
@@ -100,6 +108,8 @@ public class PlayerControllerElliot : MonoBehaviour
     public void TomarDaño(float damagerecive)
     {
         Vida -= damagerecive;
+        StartCoroutine(iFrames());
+        Debug.Log("Vida del jugador: " + Vida);
         if (Vida <= 0)
         {
             Vida = 0;
@@ -114,6 +124,13 @@ public class PlayerControllerElliot : MonoBehaviour
         {
             Vida = vidaMaxima;
         }
+    }
+
+    public IEnumerator iFrames()
+    {
+        col.enabled = false;
+        yield return new WaitForSeconds(1f);
+        col.enabled = true;
     }
 
 }
