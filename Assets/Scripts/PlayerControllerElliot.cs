@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerControllerElliot : MonoBehaviour
 {
-    private const float moveSpeed = 5f;
-    public float Vida = 3f;
-    public float vidaMaxima = 3f;
+    private const float moveSpeed = 10f;
+    public float Life = 3f;
+    public float MaximumLife = 3f;
 
     private enum State
     {
@@ -14,29 +14,30 @@ public class PlayerControllerElliot : MonoBehaviour
         Rolling,
     }
 
-    BodyTestLucas body;
-
     private Rigidbody2D rb;
-    private BoxCollider2D col;
     public Vector3 moveDir;
     private Vector3 rollDir;
     private Vector3 lastMoveDir;
-    private float rollSpeed = 30f;
+    private float rollSpeed = 20f;
     private State state;
+
+    [SerializeField] private float rollCooldown = 1f; // cooldown in seconds
+    private float rollCooldownTimer = 0f;
 
 
     void Awake()
     {
-        body = GetComponent<BodyTestLucas>();
         rb = GetComponent<Rigidbody2D>();
         state = State.Normal;
     }
-    private void Start()
-    {
-        col = body.GetComponent<BoxCollider2D>();
-    }
     void Update()
     {
+        // cooldown timer update
+        if (rollCooldownTimer > 0f)
+        {
+            rollCooldownTimer -= Time.deltaTime;
+        }
+
         switch (state)
         {
             case State.Normal:
@@ -59,22 +60,34 @@ public class PlayerControllerElliot : MonoBehaviour
                 {
                     moveX = 1f;
                 }
+                
                 moveDir = new Vector3(moveX, moveY).normalized;
+
                 if(moveX != 0 || moveY != 0)
                 {
                     // Not Idle
                     lastMoveDir = moveDir;
-                }           
+                }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                // Only allow roll if cooldown has expired
+                if (Input.GetKeyDown(KeyCode.Space) && rollCooldownTimer <= 0f)
                 {
+                    // fallback direction if player hasn't moved yet
+                    if (lastMoveDir == Vector3.zero)
+                    {
+                        lastMoveDir = Vector3.right;
+                    }
+
                     rollDir = lastMoveDir;
                     rollSpeed = 30f;
                     state = State.Rolling;
+
+                    // start cooldown
+                    rollCooldownTimer = rollCooldown;
                 }
                 break;
             case State.Rolling:
-                float rollSpeedDropMultiplier = 5; 
+                float rollSpeedDropMultiplier = 5f; 
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
                 float minRollSpeed = 15f;
@@ -98,39 +111,26 @@ public class PlayerControllerElliot : MonoBehaviour
                 break;
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    { 
-        if (collision.CompareTag("Enemy"))
-        {
-            TomarDaño(1f);
-        }
-    }*/
-    public void TomarDaño(float damagerecive)
+    void Start()
     {
-        Vida -= damagerecive;
-        StartCoroutine(iFrames());
-        Debug.Log("Vida del jugador: " + Vida);
-        if (Vida <= 0)
+
+    }
+    public void TomarDaño(float cantidad)
+    {
+        Life -= cantidad;
+        if (Life <= 0)
         {
-            Vida = 0;
+            Life = 0;
             Debug.Log("El jugador ha muerto");
             Destroy(gameObject);
         }
     }
-    public void Curar(float cantidad)
+    public void Cure(float cantidad)
     {
-        Vida += cantidad;
-        if (Vida > vidaMaxima)
+        Life += cantidad;
+        if (Life > MaximumLife)
         {
-            Vida = vidaMaxima;
+            Life = MaximumLife;
         }
     }
-
-    public IEnumerator iFrames()
-    {
-        col.enabled = false;
-        yield return new WaitForSeconds(1f);
-        col.enabled = true;
-    }
-
 }
