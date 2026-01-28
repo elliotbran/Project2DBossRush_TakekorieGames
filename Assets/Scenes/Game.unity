@@ -1841,7 +1841,7 @@ GameObject:
   - component: {fileID: 1078465790}
   - component: {fileID: 1078465793}
   - component: {fileID: 1078465794}
-  - component: {fileID: 1078465792}
+  - component: {fileID: 1078465795}
   - component: {fileID: 1078465787}
   - component: {fileID: 1078465791}
   m_Layer: 0
@@ -1917,7 +1917,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &1078465792
+--- !u!114 &1078465793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078465786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55699b6ebb1f1ca4eb152e264a4c382f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Life: 3
+  MaximumLife: 3
+  moveDir: {x: 0, y: 0, z: 0}
+  rollCooldown: 0.5
+--- !u!114 &1078465794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078465786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df016ae11d6428949a05c7e1b14bef2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maincamera: {fileID: 525409375}
+  attacking: 0
+  attacker: {fileID: 1490241309}
+--- !u!61 &1078465795
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1961,39 +1992,8 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.58501834, y: 0.58501834}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1078465793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078465786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55699b6ebb1f1ca4eb152e264a4c382f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Life: 3
-  MaximumLife: 3
-  moveDir: {x: 0, y: 0, z: 0}
-  rollCooldown: 0.5
---- !u!114 &1078465794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078465786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df016ae11d6428949a05c7e1b14bef2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maincamera: {fileID: 525409375}
-  attacking: 0
-  attacker: {fileID: 1490241309}
 --- !u!1 &1085151139
 GameObject:
   m_ObjectHideFlags: 0
