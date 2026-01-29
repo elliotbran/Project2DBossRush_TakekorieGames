@@ -27,18 +27,18 @@ public class PlayerControllerElliot : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        state = State.Normal;
+        rb = GetComponent<Rigidbody2D>(); // get the Rigidbody2D component
+        state = State.Normal; // start in Normal state
     }
     void Update()
     {
-        // cooldown timer update
+        // cooldown timer 
         if (rollCooldownTimer > 0f)
         {
             rollCooldownTimer -= Time.deltaTime;
         }
 
-        switch (state)
+        switch (state) // change behavior based on state
         {
             case State.Normal:
                 float moveX = 0f;
@@ -102,6 +102,7 @@ public class PlayerControllerElliot : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // movement based on state
         switch (state) { 
             case State.Normal:
         rb.linearVelocity = moveDir * moveSpeed;
@@ -115,7 +116,7 @@ public class PlayerControllerElliot : MonoBehaviour
     {
 
     }
-    public void TomarDaño(float cantidad)
+    public void TomarDaño(float cantidad) // damage player
     {
         Life -= cantidad;
         if (Life <= 0)
@@ -125,7 +126,7 @@ public class PlayerControllerElliot : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void Cure(float cantidad)
+    public void Cure(float cantidad) // cure player
     {
         Life += cantidad;
         if (Life > MaximumLife)

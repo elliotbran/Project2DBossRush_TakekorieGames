@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 430725432}
   - component: {fileID: 430725431}
   m_Layer: 0
-  m_Name: Barra de vida
+  m_Name: Boss Lifebar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2026,10 +2026,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 430725430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21, y: 475}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -21, y: -65}
+  m_SizeDelta: {x: -1820, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1085151141
 MonoBehaviour:
@@ -2359,10 +2359,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 430725430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21, y: 475}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -21, y: -65}
+  m_SizeDelta: {x: -1820, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668219273
 MonoBehaviour:
@@ -2917,6 +2917,6 @@ SceneRoots:
   - {fileID: 525409376}
   - {fileID: 1971820474}
   - {fileID: 651634545}
-  - {fileID: 125061016}
   - {fileID: 1715471480}
   - {fileID: 430725430}
+  - {fileID: 125061016}
