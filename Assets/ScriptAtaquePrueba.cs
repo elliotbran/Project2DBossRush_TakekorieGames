@@ -56,7 +56,7 @@ public class ScriptAtaquePrueba : MonoBehaviour
     public void MiBomboBombez()
     {
         player.TomarDaño(1f);
-        Debug.Log("Me cago en satanas "+player.Vida);
+        Debug.Log("Me cago en satanas "+player.Life);
     }
 }
 
