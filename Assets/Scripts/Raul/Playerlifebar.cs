@@ -15,10 +15,6 @@ public class Playerlifebar : MonoBehaviour
 
     void Update()
     {
-<<<<<<<< HEAD:Assets/Scripts/Raul/Playerlifebar.cs
         PlayerlifeBar.fillAmount = player_controller.Life / player_controller.MaximumLife;
-========
-        rellenarbarradevida.fillAmount = player_controller.Life / player_controller.MaximumLife;
->>>>>>>> main:Assets/Scripts/Raul/barradevida2.cs
     }
 }

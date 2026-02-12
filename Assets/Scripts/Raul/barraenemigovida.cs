@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class barraenemigovida : MonoBehaviour
 {
     public Image vidaenemigo;
-    private EnemigoController enemigocontroller;
+    private EnemyController enemigocontroller;
 
     void Start()
     {
-        enemigocontroller = GameObject.Find("Enemigo prueba").GetComponent<EnemigoController>();
+        enemigocontroller = GameObject.Find("Enemigo prueba").GetComponent<EnemyController>();
     }
 
     void Update()

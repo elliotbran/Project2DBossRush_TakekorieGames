@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class SpearTestLucas : MonoBehaviour
 {
-    public EnemigoController controller;
+    public EnemyController controller;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            controller.Daño(5f);
+            controller.Damage(5f);
         }
     }
 }

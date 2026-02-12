@@ -12,6 +12,8 @@ public class PlayerControllerElliot : MonoBehaviour
     {
         Normal,
         Rolling,
+        Attack,
+        Parry,
     }
 
     private Rigidbody2D rb;
@@ -123,6 +125,11 @@ public class PlayerControllerElliot : MonoBehaviour
             case State.Rolling:
                 rb.linearVelocity = rollDir * rollSpeed;
                 break;
+            case State.Attack:
+                break;
+            case State.Parry:
+                break;
+
         }
     }
     void Start()

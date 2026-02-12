@@ -5,7 +5,7 @@ public class Pocima_Controller : MonoBehaviour
 {
     public Image Pocima; 
     public PlayerControllerElliot player;
-    public Mana_Controller manaController;
+    public Manna_Controller manaController;
     private bool estaLlena = false;
 
     void Start()
@@ -17,7 +17,7 @@ public class Pocima_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T) && !estaLlena)
         {
-            if (manaController.ConsumirMana(1f))
+            if (manaController.ConsumeMana(1f))
             {
                 ActualizarEstado(true);
                 Debug.Log("Pócima recargada con mana");
