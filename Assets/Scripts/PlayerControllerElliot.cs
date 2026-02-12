@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControllerElliot : MonoBehaviour
 {
-    private const float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed;
     public float Life = 3f;
     public float MaximumLife = 3f;
 
@@ -21,6 +21,8 @@ public class PlayerControllerElliot : MonoBehaviour
     private float rollSpeed = 20f;
     private State state;
 
+    private Animator animator;
+
     [SerializeField] private float rollCooldown = 1f; // cooldown in seconds
     private float rollCooldownTimer = 0f;
 
@@ -29,6 +31,7 @@ public class PlayerControllerElliot : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>(); // get the Rigidbody2D component
         state = State.Normal; // start in Normal state
+        animator = GetComponent<Animator>(); // get the Animator component
     }
     void Update()
     {
@@ -62,11 +65,21 @@ public class PlayerControllerElliot : MonoBehaviour
                 }
                 
                 moveDir = new Vector3(moveX, moveY).normalized;
+                animator.SetFloat("Speed", Mathf.Abs(moveX) + Mathf.Abs(moveY));
 
-                if(moveX != 0 || moveY != 0)
+
+                if (moveX != 0 || moveY != 0)
                 {
                     // Not Idle
                     lastMoveDir = moveDir;
+
+
+                    // Swap direction of sprite depending on walk direction
+                    if (moveX > 0)
+                        transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                    else if (moveX < 0)
+                        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
                 }
 
                 // Only allow roll if cooldown has expired
@@ -105,7 +118,7 @@ public class PlayerControllerElliot : MonoBehaviour
         // movement based on state
         switch (state) { 
             case State.Normal:
-        rb.linearVelocity = moveDir * moveSpeed;
+                rb.linearVelocity = moveDir * moveSpeed;
                 break;
             case State.Rolling:
                 rb.linearVelocity = rollDir * rollSpeed;
