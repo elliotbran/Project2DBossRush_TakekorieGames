@@ -124,11 +124,7 @@ public class PlayerControllerElliot : MonoBehaviour
                 rb.linearVelocity = rollDir * rollSpeed;
                 break;
         }
-    }
-    void Start()
-    {
-
-    }
+    }   
     public void TomarDaño(float cantidad) // damage player
     {
         Life -= cantidad;

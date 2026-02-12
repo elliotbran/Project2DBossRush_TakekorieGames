@@ -3,45 +3,79 @@ using UnityEngine.AI;
 
 public class EnemyAITest : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    [SerializeField] Transform player;
 
-    NavMeshAgent agent;
+    // Components
+    NavMeshAgent _agent;        
+    Animator _animator;
 
-    Animator animator;
+    // Change from Idle to Chase
 
-
+    // If the player is whitin a certain range, Attack
     private enum BossState
     {
         Idle,
         Chase,
+        Attack,
     }
 
-    private BossState currentState;
+    private BossState currentState = BossState.Idle;
            
     private void Start()
     {
-        currentState = BossState.Idle;
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
     }
 
     private void Update()
     {
+        UpdateStates();
+    }  
 
-        switch(currentState)
+    void UpdateStates()
+    {
+        switch (currentState)
         {
-            case BossState.Idle:    
+            case BossState.Idle:
+                UpdateIdle();
                 break;
             case BossState.Chase:
-                if (agent.speed > 0)
-                {
-                    animator.SetFloat("Speed", Mathf.Abs(agent.speed));
-                }
+                UpdateChase();
                 break;
-        }      
+            case BossState.Attack:
+                UpdateAttack();
+                break;
+        }
+    } 
+    void UpdateIdle()
+    {
 
-        agent.SetDestination(target.position);
-    }  
+    }
+
+    void UpdateChase()
+    {
+        if (_agent.speed > 0)
+        {
+            _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
+        }
+
+        _agent.SetDestination(player.position);
+    }
+
+    void UpdateAttack()
+    {
+        _animator.SetTrigger("Attack");
+    }
+
+    void SetNewState (BossState newState)
+    {
+        if(newState == BossState.Attack) 
+        {
+
+        }
+        currentState = newState;
+    }
+
 }
