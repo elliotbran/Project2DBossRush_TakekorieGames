@@ -11,16 +11,16 @@ public class EnemyController : MonoBehaviour
     public float damage = 1f;
     public float life = 3f;
     public float maximumLife = 3f;
-
-    [SerializeField] Transform player;
-    private enum BossState
+    public enum BossState
     {
         Idle,
         Chase,
         Attack,
     }
 
-    private BossState currentState = BossState.Idle;
+    [SerializeField] Transform player;
+
+    public BossState currentState;
 
 
     // Components
@@ -34,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        currentState = BossState.Chase;
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _agent.updateRotation = false;
