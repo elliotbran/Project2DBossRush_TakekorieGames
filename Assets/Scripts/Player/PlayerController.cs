@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerElliot : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    public float Life = 3f;
-    public float MaximumLife = 3f;
+    public float life = 3f;
+    public float maximumLife = 3f;
 
     private enum State
     {
@@ -125,22 +125,22 @@ public class PlayerControllerElliot : MonoBehaviour
                 break;
         }
     }   
-    public void TomarDaño(float cantidad) // damage player
+    public void ReceiveDamage(float quantity) // damage player
     {
-        Life -= cantidad;
-        if (Life <= 0)
+        life -= quantity;
+        if (life <= 0)
         {
-            Life = 0;
+            life = 0;
             Debug.Log("El jugador ha muerto");
             Destroy(gameObject);
         }
     }
-    public void Cure(float cantidad) // cure player
+    public void Cure(float quantity) // cure player
     {
-        Life += cantidad;
-        if (Life > MaximumLife)
+        life += quantity;
+        if (life > maximumLife)
         {
-            Life = MaximumLife;
+            life = maximumLife;
         }
     }
 }

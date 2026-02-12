@@ -9,7 +9,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class PlayerAttackController : MonoBehaviour
 {
     public enum AttackState { Idle, Attacking, Cooldown }
-    PlayerControllerElliot controller;
+    PlayerController playerController;
     public Camera maincamera;
     public bool attacking;
     private Animator playerAnimator;
@@ -19,7 +19,7 @@ public class PlayerAttackController : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<PlayerControllerElliot>();
+        playerController = GetComponent<PlayerController>();
         playerAnimator = GetComponent<Animator>();
         attacker.SetActive(false);
     }
@@ -27,7 +27,7 @@ public class PlayerAttackController : MonoBehaviour
     void Update()
     {
         UpdateStates();
-        Ray ray = new Ray(transform.position, controller.moveDir);
+        Ray ray = new Ray(transform.position, playerController.moveDir);
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
 
         /////////------------NO TOCAR------------/////////

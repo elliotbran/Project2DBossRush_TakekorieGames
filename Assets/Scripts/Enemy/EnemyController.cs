@@ -1,17 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAITest : MonoBehaviour
+
+
+public class EnemyController : MonoBehaviour
 {
+    [Header("Health")]
+    public float damage = 1f;
+    public float life = 3f;
+    public float maximumLife = 3f;
+
     [SerializeField] Transform player;
-
-    // Components
-    NavMeshAgent _agent;        
-    Animator _animator;
-
-    // Change from Idle to Chase
-
-    // If the player is whitin a certain range, Attack
     private enum BossState
     {
         Idle,
@@ -20,7 +21,17 @@ public class EnemyAITest : MonoBehaviour
     }
 
     private BossState currentState = BossState.Idle;
-           
+
+
+    // Components
+    NavMeshAgent _agent;
+    Animator _animator;
+
+    /*private void OnMouseDown()
+    {
+        Damage(1f);
+    }*/
+
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -32,7 +43,7 @@ public class EnemyAITest : MonoBehaviour
     private void Update()
     {
         UpdateStates();
-    }  
+    }
 
     void UpdateStates()
     {
@@ -48,7 +59,7 @@ public class EnemyAITest : MonoBehaviour
                 UpdateAttack();
                 break;
         }
-    } 
+    }
     void UpdateIdle()
     {
 
@@ -69,13 +80,38 @@ public class EnemyAITest : MonoBehaviour
         _animator.SetTrigger("Attack");
     }
 
-    void SetNewState (BossState newState)
+    void SetNewState(BossState newState)
     {
-        if(newState == BossState.Attack) 
+        if (newState == BossState.Attack)
         {
 
         }
         currentState = newState;
     }
 
+    public void Damage(float amount)
+    {
+        life -= amount;
+        Debug.Log("Vida restante" + life);
+        if (life <= 0)
+        {
+            life = 0;
+            Debug.Log("El enemigo ha muerto");
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerController player = collision.GetComponent<PlayerController>();
+
+            if (player != null)
+            {
+                player.ReceiveDamage(damage);
+                Debug.Log("Daño realizado. Vida restante: " + player.life);
+            }
+        }
+    }
 }

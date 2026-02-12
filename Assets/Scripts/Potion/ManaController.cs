@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Manna_Controller : MonoBehaviour
+public class ManaController : MonoBehaviour
 {
-    public Image Manna;
-    private float CurrentMana = 0;
-    private float MaximalMana = 5;
+    public Image mana;
+    private float _currentMana = 0;
+    private float _maximumMana = 5;
 
 
     void Start()
@@ -17,20 +17,20 @@ public class Manna_Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            ReffilMana(1f);
+            RefillMana(1f);
            
         }
     }
-    void ReffilMana(float amount)
+    void RefillMana(float amount)
     {
-        CurrentMana = Mathf.Clamp(CurrentMana + amount, 0f, MaximalMana);
+        _currentMana = Mathf.Clamp(_currentMana + amount, 0f, _maximumMana);
         UpdateStatus();
     }
     public bool ConsumeMana(float amount)
     {
-        if (CurrentMana >= amount)
+        if (_currentMana >= amount)
         {
-            CurrentMana -= amount;
+            _currentMana -= amount;
             UpdateStatus();
             return true; 
         }
@@ -38,6 +38,6 @@ public class Manna_Controller : MonoBehaviour
     }
     void UpdateStatus()
     {
-        Manna.fillAmount = CurrentMana / MaximalMana;
+        mana.fillAmount = _currentMana / _maximumMana;
     }
 }

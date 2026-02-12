@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class BodyTestLucas : MonoBehaviour
 {
-    public PlayerControllerElliot controller;
+    public PlayerController playerController;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            controller.TomarDaño(1f);
+            playerController.ReceiveDamage(1f);
         }
     }
 }
