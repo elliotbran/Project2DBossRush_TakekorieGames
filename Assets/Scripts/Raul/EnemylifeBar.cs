@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class barraenemigovida : MonoBehaviour
+public class EnemylifeBar : MonoBehaviour
 {
     public Image enemylife;
     private EnemyController enemycontroller;

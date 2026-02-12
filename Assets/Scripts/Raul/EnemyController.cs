@@ -10,10 +10,10 @@ public class EnemyController : MonoBehaviour
     public float life = 3f;
     public float Maximumlife = 3f;
 
-    private void OnMouseDown()
+    /*private void OnMouseDown()
     {
         Damage(1f);
-    }
+    }*/
     public void Damage(float amount)
     {
         life -= amount;

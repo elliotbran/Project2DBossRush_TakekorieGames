@@ -4,14 +4,13 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControllerTest : MonoBehaviour
 {
-    public int Vida = 3;
 
     [SerializeField] private float moveSpeed = 5f;
 
     [SerializeField] private InputActionReference moveActionReference;
 
-    private Rigidbody2D rb;
-    private Vector2 movementInput;
+    public Rigidbody2D rb;
+    public Vector2 movementInput;
 
     private void Awake()
     {

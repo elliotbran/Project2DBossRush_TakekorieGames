@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemylifeBar : MonoBehaviour
+public class barraenemigovida : MonoBehaviour
 {
-    public Image enemylife;
-    private EnemyController enemycontroller;
+    public Image vidaenemigo;
+    private EnemigoController enemigocontroller;
 
     void Start()
     {
-        enemycontroller = GameObject.Find("Enemigo prueba").GetComponent<EnemyController>();
+        enemigocontroller = GameObject.Find("Enemigo prueba").GetComponent<EnemigoController>();
     }
 
     void Update()
     {
-        enemylife.fillAmount = enemycontroller.life / enemycontroller.Maximumlife;
+        vidaenemigo.fillAmount = enemigocontroller.life / enemigocontroller.Maximumlife;
     }
 }
