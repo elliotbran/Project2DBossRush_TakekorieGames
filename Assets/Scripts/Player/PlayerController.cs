@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDir;
 
     [Header("Player Speed")]
-    [SerializeField] private float moveSpeed;
+    [SerializeField] float _speed;
+    private float _maxSpeed = 10f;
 
     public enum PlayerState
     {
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
         Rolling,
         Attacking,
     }
-
+    public bool attacking;
     private Rigidbody2D rb;
     private Animator animator;
 
@@ -37,8 +38,7 @@ public class PlayerController : MonoBehaviour
 
     private float rollCooldownTimer = 0f;
 
-    public Camera maincamera;
-    public bool attacking;
+    public Camera mainCamera;
     private PlayerController _playerController;
     private Animator _playerAnimator;
 
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        _speed = _maxSpeed;
         health = maxHealth;
         _playerController = GetComponent<PlayerController>();
         _playerAnimator = GetComponent<Animator>();
@@ -68,23 +69,23 @@ public class PlayerController : MonoBehaviour
 
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)) 
             {
+                attacking = true;
                 Debug.Log("ATAQUE INICIADO");
-                Attack();
+                StartCoroutine(AttackTiming());
                 nextAttackTime = Time.time + 1f / attackRate;
                 Debug.Log("ATAQUE FINALIZADO");
             }
         }
        
-
         UpdateStates();
 
         Ray ray = new Ray(transform.position, _playerController.moveDir);
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
 
         /////////------------NO TOCAR------------/////////
-        Vector3 mouseWorldPos = maincamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = mouseWorldPos - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         target.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
@@ -177,7 +178,7 @@ public class PlayerController : MonoBehaviour
         switch (playerState)
         {
             case PlayerState.Normal:
-                rb.linearVelocity = moveDir * moveSpeed;
+                rb.linearVelocity = moveDir * _speed;
                 break;
             case PlayerState.Rolling:
                 rb.linearVelocity = rollDir * rollSpeed;
@@ -197,14 +198,15 @@ public class PlayerController : MonoBehaviour
     }
         
 
-    IEnumerator Attacktimeing()
+    IEnumerator AttackTiming()
     { 
         target.SetActive(true);//Esto activa HitRange que es la zona de daño, se pondra en el animator
         attacking = true;
         Attack();
-        yield return new WaitForSeconds(1f);//Cuanto dura el ataque
+        yield return new WaitForSeconds(.25f);//Cuanto dura el ataque
         target.SetActive(false);
         attacking = false;
+        _speed = _maxSpeed;
 
     }
     public void ReceiveDamage(float quantity) // damage player
@@ -243,6 +245,9 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
+        // Restrict player movement 
+        _speed = _speed / 4;
+
         // Play attack animation
         _playerAnimator.SetTrigger("Attack");
 
@@ -250,11 +255,11 @@ public class PlayerController : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         // Damage them
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
             Debug.Log("We hit " + enemy.name);
-        }
+        }                  
     }
 
     private void OnDrawGizmosSelected()
