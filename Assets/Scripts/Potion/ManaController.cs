@@ -5,7 +5,7 @@ public class ManaController : MonoBehaviour
 {
     public Image mana;
     private float _currentMana = 0;
-    private float _maximumMana = 5;
+    private float _maxMana = 5;
 
 
     void Start()
@@ -23,7 +23,7 @@ public class ManaController : MonoBehaviour
     }
     void RefillMana(float amount)
     {
-        _currentMana = Mathf.Clamp(_currentMana + amount, 0f, _maximumMana);
+        _currentMana = Mathf.Clamp(_currentMana + amount, 0f, _maxMana);
         UpdateStatus();
     }
     public bool ConsumeMana(float amount)
@@ -38,6 +38,6 @@ public class ManaController : MonoBehaviour
     }
     void UpdateStatus()
     {
-        mana.fillAmount = _currentMana / _maximumMana;
+        mana.fillAmount = _currentMana / _maxMana;
     }
 }

@@ -15,6 +15,6 @@ public class EnemyHealthbar : MonoBehaviour
 
     void Update()
     {
-        enemylife.fillAmount = enemycontroller.life / enemycontroller.maximumLife;
+        enemylife.fillAmount = enemycontroller.currentHealth / enemycontroller.maxHealth;
     }
 }

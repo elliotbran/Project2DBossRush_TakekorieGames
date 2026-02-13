@@ -8,9 +8,9 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     [Header("Health")]
-    public float damage = 1f;
-    public float life = 3f;
-    public float maximumLife = 3f;
+    public float damage = 25f;
+    public float currentHealth;
+    public float maxHealth = 100f;
     public enum BossState
     {
         Idle,
@@ -34,6 +34,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        currentHealth = maxHealth;
         currentState = BossState.Chase;
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
@@ -90,15 +91,16 @@ public class EnemyController : MonoBehaviour
         currentState = newState;
     }
 
-    public void Damage(float amount)
+    public void TakeDamage(int damage)
     {
-        life -= amount;
-        Debug.Log("Vida restante" + life);
-        if (life <= 0)
+        currentHealth -= damage;
+
+        _animator.SetTrigger("Hurt");
+
+        Debug.Log("Vida restante" + currentHealth);
+        if (currentHealth <= 0)
         {
-            life = 0;
-            Debug.Log("El enemigo ha muerto");
-            Destroy(gameObject);
+            Die();
         }
     }
 
@@ -111,8 +113,18 @@ public class EnemyController : MonoBehaviour
             if (player != null)
             {
                 player.ReceiveDamage(damage);
-                Debug.Log("Daño realizado. Vida restante: " + player.life);
+                Debug.Log("Daño realizado. Vida restante: " + player.health);
             }
         }
+    }
+
+    void Die()
+    {
+        Debug.Log("El enemigo ha muerto");
+
+        _animator.SetBool("IsDead", true);
+
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
     }
 }
