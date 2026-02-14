@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
     public float health;
     public float maxHealth = 100f;
 
-    public Vector3 moveDir;
-
     [Header("Player Speed")]
     [SerializeField] float _speed;
     private float _maxSpeed = 10f;
@@ -25,30 +23,32 @@ public class PlayerController : MonoBehaviour
         Attacking,
     }
     public bool attacking;
-    private Rigidbody2D rb;
-    private Animator animator;
 
-    private Vector3 rollDir;
-    private Vector3 lastMoveDir;
+    public Vector3 moveDir;
 
-    private float rollSpeed = 20f;
-    [SerializeField] private float rollCooldown = 1f; // cooldown in seconds
+    private Vector3 _rollDir;
+    private Vector3 _lastMoveDir;
+
+    [SerializeField] private float _rollCooldown = 1f; // cooldown in seconds
+    private float _rollSpeed = 20f;
 
     public PlayerState playerState;
 
-    private float rollCooldownTimer = 0f;
+    private float _rollCooldownTimer = 0f;
 
     public Camera mainCamera;
     private PlayerController _playerController;
     private Animator _playerAnimator;
+    private Rigidbody2D _rb;
+    private Animator _animator;
 
     public GameObject target;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // get the Rigidbody2D component
+        _rb = GetComponent<Rigidbody2D>(); // get the Rigidbody2D component
         playerState = PlayerState.Normal; // start in Normal state
-        animator = GetComponent<Animator>(); // get the Animator component
+        _animator = GetComponent<Animator>(); // get the Animator component
     }
     void Start()
     {
@@ -59,12 +59,25 @@ public class PlayerController : MonoBehaviour
         target.SetActive(false);
     }
 
+    private void FixedUpdate()
+    {
+        // movement based on state
+        switch (playerState)
+        {
+            case PlayerState.Normal:
+                _rb.linearVelocity = moveDir * _speed;
+                break;
+            case PlayerState.Rolling:
+                _rb.linearVelocity = _rollDir * _rollSpeed;
+                break;
+        }
+    } 
     void Update()
     {
         // cooldown timer 
-        if (rollCooldownTimer > 0f)
+        if (_rollCooldownTimer > 0f)
         {
-            rollCooldownTimer -= Time.deltaTime;
+            _rollCooldownTimer -= Time.deltaTime;
         }
 
         if (Time.time >= nextAttackTime)
@@ -99,124 +112,17 @@ public class PlayerController : MonoBehaviour
         switch (playerState) // change behavior based on state
         {
             case PlayerState.Normal:
-                float moveX = 0f;
-                float moveY = 0f;
-
-                if (Input.GetKey(KeyCode.W))
-                {
-                    moveY = 1f;
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    moveY = -1f;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    moveX = -1f;
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    moveX = 1f;
-                }
-
-                moveDir = new Vector3(moveX, moveY).normalized;
-                animator.SetFloat("Speed", Mathf.Abs(moveX) + Mathf.Abs(moveY));
-
-
-                if (moveX != 0 || moveY != 0)
-                {
-                    // Not Idle
-                    lastMoveDir = moveDir;
-
-
-                    // Swap direction of sprite depending on walk direction
-                    if (moveX > 0)
-                        transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-                    else if (moveX < 0)
-                        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-                }
-
-                // Only allow roll if cooldown has expired
-                if (Input.GetKeyDown(KeyCode.Space) && rollCooldownTimer <= 0f)
-                {
-                    // fallback direction if player hasn't moved yet
-                    if (lastMoveDir == Vector3.zero)
-                    {
-                        lastMoveDir = Vector3.right;
-                    }
-
-                    rollDir = lastMoveDir;
-                    rollSpeed = 30f;
-                    playerState = PlayerState.Rolling;
-
-                    // start cooldown
-                    rollCooldownTimer = rollCooldown;
-                }
+                HandleMovement();               
                 break;
 
 
             case PlayerState.Rolling:
-                float rollSpeedDropMultiplier = 5f;
-                rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
-
-                float minRollSpeed = 15f;
-                if (rollSpeed < minRollSpeed)
-                {
-                    playerState = PlayerState.Normal;
-                }
+                HandleRolling();
                 break;
 
             case PlayerState.Attacking:
-                
+                HandleAttack();
                 break;
-        }
-    }
-    private void FixedUpdate()
-    {
-        // movement based on state
-        switch (playerState)
-        {
-            case PlayerState.Normal:
-                rb.linearVelocity = moveDir * _speed;
-                break;
-            case PlayerState.Rolling:
-                rb.linearVelocity = rollDir * rollSpeed;
-                break;
-        }
-    }
-
-    void UpdateIdle()
-    {
-        //Setear el animator
-        //Recuperar stamina
-    }
-
-    void UpdateAttack()
-    {
-
-    }
-        
-
-    IEnumerator AttackTiming()
-    { 
-        target.SetActive(true);//Esto activa HitRange que es la zona de daño, se pondra en el animator
-        attacking = true;
-        Attack();
-        yield return new WaitForSeconds(.25f);//Cuanto dura el ataque
-        target.SetActive(false);
-        attacking = false;
-        _speed = _maxSpeed;
-
-    }
-    public void ReceiveDamage(float quantity) // damage player
-    {
-        health -= quantity;
-        if (health <= 0)
-        {
-            health = 0;
-            Debug.Log("El jugador ha muerto");
-            Destroy(gameObject);
         }
     }
     public void Cure(float quantity) // cure player
@@ -227,6 +133,79 @@ public class PlayerController : MonoBehaviour
             health = maxHealth;
         }
     }
+
+    #region Movement
+    void HandleMovement()
+    {
+        float moveX = 0f;
+        float moveY = 0f;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            moveY = 1f;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveY = -1f;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveX = -1f;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveX = 1f;
+        }
+
+        moveDir = new Vector3(moveX, moveY).normalized;
+        _animator.SetFloat("Speed", Mathf.Abs(moveX) + Mathf.Abs(moveY));
+
+
+        if (moveX != 0 || moveY != 0)
+        {
+            // Not Idle
+            _lastMoveDir = moveDir;
+
+
+            // Swap direction of sprite depending on walk direction
+            if (moveX > 0)
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            else if (moveX < 0)
+                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        }
+
+        // Only allow roll if cooldown has expired
+        if (Input.GetKeyDown(KeyCode.Space) && _rollCooldownTimer <= 0f)
+        {
+            // fallback direction if player hasn't moved yet
+            if (_lastMoveDir == Vector3.zero)
+            {
+                _lastMoveDir = Vector3.right;
+            }
+
+            _rollDir = _lastMoveDir;
+            _rollSpeed = 30f;
+            playerState = PlayerState.Rolling;
+
+            // start cooldown
+            _rollCooldownTimer = _rollCooldown;
+        }
+    }
+
+    void HandleRolling()
+    {
+        float rollSpeedDropMultiplier = 5f;
+        _rollSpeed -= _rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
+
+        float minRollSpeed = 15f;
+        if (_rollSpeed < minRollSpeed)
+        {
+            playerState = PlayerState.Normal;
+        }
+    }
+    #endregion
+
 
     #region Combat
 
@@ -239,10 +218,23 @@ public class PlayerController : MonoBehaviour
 
     private float nextAttackTime = 0f;
 
-
     public LayerMask enemyLayers;
 
+    public void ReceiveDamage(float quantity) // damage player
+    {
+        health -= quantity;
+        if (health <= 0)
+        {
+            health = 0;
+            Debug.Log("El jugador ha muerto");
+            Destroy(gameObject);
+        }
+    }
 
+    void HandleAttack()
+    {
+        StartCoroutine(AttackTiming());
+    }
     void Attack()
     {
         // Restrict player movement 
@@ -270,5 +262,18 @@ public class PlayerController : MonoBehaviour
         }
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+    IEnumerator AttackTiming()
+    { 
+        target.SetActive(true);//Esto activa HitRange que es la zona de daño, se pondra en el animator
+        attacking = true;
+        Attack();
+        yield return new WaitForSeconds(.25f);//Cuanto dura el ataque
+        target.SetActive(false);
+        attacking = false;
+        _speed = _maxSpeed;
+
+    }
+
+
     #endregion
 }
