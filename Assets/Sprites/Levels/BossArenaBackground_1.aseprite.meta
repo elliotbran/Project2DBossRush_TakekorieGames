@@ -133,7 +133,7 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1846
+      width: 1324
       height: 1135
     spriteID: 5dba87862c1860e4a94bdc6ff5fd3f39
     spriteBone: []
@@ -162,9 +162,9 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
+        x: 261
         y: 0
-        width: 1846
+        width: 1324
         height: 1135
       spriteId: 5dba87862c1860e4a94bdc6ff5fd3f39
     linkedCells: []

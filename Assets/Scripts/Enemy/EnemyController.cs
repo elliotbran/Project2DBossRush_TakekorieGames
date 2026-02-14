@@ -25,12 +25,7 @@ public class EnemyController : MonoBehaviour
 
     // Components
     NavMeshAgent _agent;
-    Animator _animator;
-
-    /*private void OnMouseDown()
-    {
-        Damage(1f);
-    }*/
+    Animator _animator;       
 
     private void Start()
     {
@@ -72,7 +67,7 @@ public class EnemyController : MonoBehaviour
         if (_agent.speed > 0)
         {
             _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
-        }
+        }      
 
         _agent.SetDestination(player.position);
     }
