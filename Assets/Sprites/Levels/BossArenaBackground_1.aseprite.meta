@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: BossArenaBackground_1
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5574866, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,8 +133,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1324
-      height: 1135
+      width: 1496
+      height: 1060
     spriteID: 5dba87862c1860e4a94bdc6ff5fd3f39
     spriteBone: []
     spriteOutline: []
@@ -162,10 +162,10 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 261
+        x: 89
         y: 0
-        width: 1324
-        height: 1135
+        width: 1496
+        height: 1060
       spriteId: 5dba87862c1860e4a94bdc6ff5fd3f39
     linkedCells: []
     parentIndex: -1
