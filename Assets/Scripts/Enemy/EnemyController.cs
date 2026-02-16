@@ -21,7 +21,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform player;
 
     public BossState currentState;
+    public LayerMask whatIsPlayer;
 
+    // Attacking
+    public float timeBetweenAttacks = 2f;
+    bool _alreadyAttacked;
+
+    // States
+    public float attackRange;
+    public bool playerInAttackRange;
 
     // Components
     NavMeshAgent _agent;
@@ -30,7 +38,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        currentState = BossState.Chase;
+        currentState = BossState.Idle;
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _agent.updateRotation = false;
@@ -40,6 +48,8 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         UpdateStates();
+        playerInAttackRange = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
+        
     }
 
     void UpdateStates()
@@ -59,32 +69,44 @@ public class EnemyController : MonoBehaviour
     }
     void UpdateIdle()
     {
-
+       _agent.SetDestination(transform.position);                
     }
 
     void UpdateChase()
     {
-        if (_agent.speed > 0)
+        _agent.SetDestination(player.position);
+
+        if (!playerInAttackRange)
         {
             _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
-        }      
-
-        _agent.SetDestination(player.position);
+        }
+        else 
+        {
+            currentState = BossState.Idle;
+        }
     }
 
     void UpdateAttack()
     {
-        _animator.SetTrigger("Attack");
-    }
-
-    void SetNewState(BossState newState)
-    {
-        if (newState == BossState.Attack)
+        if (playerInAttackRange)
         {
-
+            if (!_alreadyAttacked)
+            {
+                currentState = BossState.Attack;
+                _alreadyAttacked = true;
+                _animator.SetTrigger("Attack");
+                Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            }
         }
-        currentState = newState;
+       
+        
     }
+
+    private void ResetAttack()
+    {
+        _alreadyAttacked = false;
+    }
+        
 
     public void TakeDamage(int damage)
     {
@@ -99,7 +121,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -111,7 +133,7 @@ public class EnemyController : MonoBehaviour
                 Debug.Log("Daño realizado. Vida restante: " + player.health);
             }
         }
-    }
+    }*/
 
     void Die()
     {
@@ -119,7 +141,14 @@ public class EnemyController : MonoBehaviour
 
         _animator.SetBool("IsDead", true);
 
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         this.enabled = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange); 
     }
 }

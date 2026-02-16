@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         Rolling,
         Attacking,
     }
-    public bool attacking;
+    public bool isAttacking;
 
     public Vector3 moveDir;
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _rollCooldown = 1f; // cooldown in seconds
     private float _rollSpeed = 20f;
 
-    public PlayerState playerState;
+    public PlayerState currentState;
 
     private float _rollCooldownTimer = 0f;
 
@@ -44,10 +44,24 @@ public class PlayerController : MonoBehaviour
 
     public GameObject target;
 
+    [Header("Combat")]
+    [SerializeField] private float attackDuration = 0.25f; // how long the attack lasts (seconds)
+
+    public UnityEngine.Transform attackPoint;
+
+    public float attackRange = 0.5f;
+    public int attackDamage = 40;
+
+    public float attackRate = 2f;
+
+    private float nextAttackTime = 0f;
+
+    public LayerMask enemyLayers;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>(); // get the Rigidbody2D component
-        playerState = PlayerState.Normal; // start in Normal state
+        currentState = PlayerState.Normal; // start in Normal state
         _animator = GetComponent<Animator>(); // get the Animator component
     }
     void Start()
@@ -56,19 +70,26 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         _playerController = GetComponent<PlayerController>();
         _playerAnimator = GetComponent<Animator>();
-        target.SetActive(false);
+        if (target != null)
+        {
+            target.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
     {
         // movement based on state
-        switch (playerState)
+        switch (currentState)
         {
             case PlayerState.Normal:
                 _rb.linearVelocity = moveDir * _speed;
                 break;
             case PlayerState.Rolling:
                 _rb.linearVelocity = _rollDir * _rollSpeed;
+                break;
+            case PlayerState.Attacking:
+                // while attacking, movement is restricted by reduced _speed set in Attack()
+                _rb.linearVelocity = moveDir * _speed;
                 break;
         }
     } 
@@ -84,11 +105,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) 
             {
-                attacking = true;
                 Debug.Log("ATAQUE INICIADO");
-                StartCoroutine(AttackTiming());
+                // set next attack time (cooldown)
                 nextAttackTime = Time.time + 1f / attackRate;
-                Debug.Log("ATAQUE FINALIZADO");
+                Attack(); // Attack will handle isAttacking and its reset
             }
         }
        
@@ -109,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateStates()
     {
-        switch (playerState) // change behavior based on state
+        switch (currentState) // change behavior based on state
         {
             case PlayerState.Normal:
                 HandleMovement();               
@@ -121,7 +141,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.Attacking:
-                HandleAttack();
+                // Do nothing here; Attack() manages the attack lifecycle via coroutine
                 break;
         }
     }
@@ -137,6 +157,8 @@ public class PlayerController : MonoBehaviour
     #region Movement
     void HandleMovement()
     {
+        _speed = _maxSpeed;
+
         float moveX = 0f;
         float moveY = 0f;
 
@@ -186,7 +208,7 @@ public class PlayerController : MonoBehaviour
 
             _rollDir = _lastMoveDir;
             _rollSpeed = 30f;
-            playerState = PlayerState.Rolling;
+            currentState = PlayerState.Rolling;
 
             // start cooldown
             _rollCooldownTimer = _rollCooldown;
@@ -201,24 +223,13 @@ public class PlayerController : MonoBehaviour
         float minRollSpeed = 15f;
         if (_rollSpeed < minRollSpeed)
         {
-            playerState = PlayerState.Normal;
+            currentState = PlayerState.Normal;
         }
     }
     #endregion
 
 
     #region Combat
-
-    public UnityEngine.Transform attackPoint;
-
-    public float attackRange = 0.5f;
-    public int attackDamage = 40;
-
-    public float attackRate = 2f;
-
-    private float nextAttackTime = 0f;
-
-    public LayerMask enemyLayers;
 
     public void ReceiveDamage(float quantity) // damage player
     {
@@ -231,27 +242,59 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleAttack()
-    {
-        StartCoroutine(AttackTiming());
-    }
     void Attack()
     {
+        // Prevent starting a new attack while one is active
+        if (isAttacking)
+            return;
+
+        // Activate attack bool
+        isAttacking = true;
+
+        // Change state to Attacking
+        currentState = PlayerState.Attacking;
+
         // Restrict player movement 
-        _speed = _speed / 4;
+        _speed = _maxSpeed / 4f;
 
         // Play attack animation
-        _playerAnimator.SetTrigger("Attack");
+        if (_playerAnimator != null)
+            _playerAnimator.SetTrigger("Attack");
 
-        // Detect enemies in range of attack
+        // Activate target hitbox (if you use it)
+        if (target != null)
+            target.SetActive(true);
+
+        // Detect enemies in range of attack and damage them immediately
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        // Damage them
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyController>().TakeDamage(attackDamage);
-            Debug.Log("We hit " + enemy.name);
-        }                  
+            var enemyController = enemy.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.TakeDamage(attackDamage);
+                Debug.Log("We hit " + enemy.name);
+            }
+        }
+
+        // Start coroutine to finish the attack after duration
+        StartCoroutine(AttackRoutine());
+    }
+
+    private IEnumerator AttackRoutine()
+    {
+        yield return new WaitForSeconds(attackDuration);
+
+        // Deactivate target hitbox
+        if (target != null)
+            target.SetActive(false);
+
+        // Reset attack flags and state
+        isAttacking = false;
+        currentState = PlayerState.Normal;
+        _speed = _maxSpeed;
+
+        Debug.Log("ATAQUE FINALIZADO");
     }
 
     private void OnDrawGizmosSelected()
@@ -260,20 +303,9 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-    IEnumerator AttackTiming()
-    { 
-        target.SetActive(true);//Esto activa HitRange que es la zona de daño, se pondra en el animator
-        attacking = true;
-        Attack();
-        yield return new WaitForSeconds(.25f);//Cuanto dura el ataque
-        target.SetActive(false);
-        attacking = false;
-        _speed = _maxSpeed;
-
-    }
-
 
     #endregion
 }
