@@ -28,18 +28,22 @@ public class EnemyController : MonoBehaviour
     bool _alreadyAttacked;
 
     // States
-    public float attackRange;
-    public bool playerInAttackRange;
+    public float sightRange, attackRange;
+    public bool playerInSightRange, playerInAttackRange;
 
     // Components
     NavMeshAgent _agent;
-    Animator _animator;       
+    Animator _animator;
+
+    private void Awake()
+    {
+        _agent = GetComponent<NavMeshAgent>();
+    }
 
     private void Start()
     {
         currentHealth = maxHealth;
         currentState = BossState.Idle;
-        _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
@@ -49,57 +53,68 @@ public class EnemyController : MonoBehaviour
     {
         UpdateStates();
         playerInAttackRange = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
+
         
     }
 
     void UpdateStates()
     {
-        switch (currentState)
+        /*switch (currentState)
         {
             case BossState.Idle:
-                UpdateIdle();
+                currentState = BossState.Idle;
                 break;
             case BossState.Chase:
-                UpdateChase();
+                currentState = BossState.Chase;
                 break;
             case BossState.Attack:
-                UpdateAttack();
+                currentState = BossState.Attack;
                 break;
+        }*/
+
+        if (!playerInSightRange)
+        {
+            currentState = BossState.Idle;
+            UpdateIdle();
         }
+
+        if (!playerInAttackRange && playerInSightRange)
+        {
+            currentState = BossState.Chase;
+            UpdateChase();
+        }
+
+        if (playerInAttackRange && playerInSightRange)
+        {
+            currentState = BossState.Attack;
+            UpdateAttack();
+        }
+
     }
     void UpdateIdle()
     {
-       _agent.SetDestination(transform.position);                
+        _agent.SetDestination(transform.position);
+        _animator.SetFloat("Speed", 0);              
     }
 
     void UpdateChase()
     {
         _agent.SetDestination(player.position);
-
-        if (!playerInAttackRange)
-        {
-            _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
-        }
-        else 
-        {
-            currentState = BossState.Idle;
-        }
+        _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
 
     void UpdateAttack()
     {
-        if (playerInAttackRange)
+        _agent.SetDestination(transform.position);
+                
+        if (!_alreadyAttacked)
         {
-            if (!_alreadyAttacked)
-            {
-                currentState = BossState.Attack;
-                _alreadyAttacked = true;
-                _animator.SetTrigger("Attack");
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            }
-        }
-       
-        
+            _animator.SetTrigger("Attack");            
+
+            _alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }        
     }
 
     private void ResetAttack()
@@ -121,7 +136,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -133,7 +148,7 @@ public class EnemyController : MonoBehaviour
                 Debug.Log("Daño realizado. Vida restante: " + player.health);
             }
         }
-    }*/
+    }
 
     void Die()
     {
@@ -150,5 +165,7 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange); 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }
