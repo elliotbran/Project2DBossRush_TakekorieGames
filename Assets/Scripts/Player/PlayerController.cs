@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         Normal,        
         Rolling,
         Attacking,
+        Parry,
     }
     public bool attacking;
 
@@ -123,7 +124,16 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Attacking:
                 HandleAttack();
                 break;
+            case PlayerState.Parry:
+                HandleParry();
+                break;
+
         }
+    }
+
+    void HandleParry()
+    {
+
     }
     public void Cure(float quantity) // cure player
     {
