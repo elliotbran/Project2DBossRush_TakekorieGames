@@ -21,17 +21,29 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform player;
 
     public BossState currentState;
+    public LayerMask whatIsPlayer;
 
+    // Attacking
+    public float timeBetweenAttacks = 2f;
+    bool _alreadyAttacked;
+
+    // States
+    public float sightRange, attackRange;
+    public bool playerInSightRange, playerInAttackRange;
 
     // Components
     NavMeshAgent _agent;
-    Animator _animator;       
+    Animator _animator;
+
+    private void Awake()
+    {
+        _agent = GetComponent<NavMeshAgent>();
+    }
 
     private void Start()
     {
         currentHealth = maxHealth;
-        currentState = BossState.Chase;
-        _agent = GetComponent<NavMeshAgent>();
+        currentState = BossState.Idle;
         _animator = GetComponent<Animator>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
@@ -40,51 +52,76 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         UpdateStates();
+        playerInAttackRange = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
+
+        
     }
 
     void UpdateStates()
     {
-        switch (currentState)
+        /*switch (currentState)
         {
             case BossState.Idle:
-                UpdateIdle();
+                currentState = BossState.Idle;
                 break;
             case BossState.Chase:
-                UpdateChase();
+                currentState = BossState.Chase;
                 break;
             case BossState.Attack:
-                UpdateAttack();
+                currentState = BossState.Attack;
                 break;
+        }*/
+
+        if (!playerInSightRange)
+        {
+            currentState = BossState.Idle;
+            UpdateIdle();
         }
+
+        if (!playerInAttackRange && playerInSightRange)
+        {
+            currentState = BossState.Chase;
+            UpdateChase();
+        }
+
+        if (playerInAttackRange && playerInSightRange)
+        {
+            currentState = BossState.Attack;
+            UpdateAttack();
+        }
+
     }
     void UpdateIdle()
     {
-
+        _agent.SetDestination(transform.position);
+        _animator.SetFloat("Speed", 0);              
     }
 
     void UpdateChase()
     {
-        if (_agent.speed > 0)
-        {
-            _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
-        }      
-
         _agent.SetDestination(player.position);
+        _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
 
     void UpdateAttack()
     {
-        _animator.SetTrigger("Attack");
-    }
-
-    void SetNewState(BossState newState)
-    {
-        if (newState == BossState.Attack)
+        _agent.SetDestination(transform.position);
+                
+        if (!_alreadyAttacked)
         {
+            _animator.SetTrigger("Attack");            
 
-        }
-        currentState = newState;
+            _alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }        
     }
+
+    private void ResetAttack()
+    {
+        _alreadyAttacked = false;
+    }
+        
 
     public void TakeDamage(int damage)
     {
@@ -119,7 +156,16 @@ public class EnemyController : MonoBehaviour
 
         _animator.SetBool("IsDead", true);
 
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
         this.enabled = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange); 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }
