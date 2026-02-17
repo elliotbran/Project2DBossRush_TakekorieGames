@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class ManaController : MonoBehaviour
 {
     public Image mana;
+    public PotionController potioncontroller;
     private float _currentMana = 0;
     private float _maxMana = 5;
 
@@ -19,7 +20,17 @@ public class ManaController : MonoBehaviour
     }
     public void RefillMana(float amount)
     {
-        _currentMana = Mathf.Clamp(_currentMana + amount, 0f, _maxMana);
+        _currentMana += amount;
+        if (_currentMana >= _maxMana)
+        {
+            _currentMana = 0; 
+            if (potioncontroller != null)
+            {
+                potioncontroller.UpdateStatus(true);
+                Debug.Log("Pocion Recargada");
+            }
+        }
+        _currentMana = Mathf.Clamp(_currentMana, 0f, _maxMana);
         UpdateStatus();
     }
     public bool ConsumeMana(float amount)

@@ -16,25 +16,13 @@ public class PotionController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && !_isFull)
-        {
-            if (manaController.ConsumeMana(1f))
-            {
-                UpdateStatus(true);
-                Debug.Log("Pócima recargada con mana");
-            }
-            else
-            {
-                Debug.Log("No tienes suficiente mana");
-            }
-        }
         if (Input.GetKeyDown(KeyCode.F) && _isFull)
         {
             UsePotion();
         }
     }
 
-    void UpdateStatus(bool full)
+    public void UpdateStatus(bool full)
     {
         _isFull = full;
         if (_isFull)
