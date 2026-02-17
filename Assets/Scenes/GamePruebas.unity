@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 125061015}
   - component: {fileID: 125061014}
   - component: {fileID: 125061013}
+  - component: {fileID: 125061017}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -415,6 +416,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &125061017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125061012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f3a6893afe710469fba9c731d88a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potion: {fileID: 2145218001}
+  playerController: {fileID: 1078465794}
+  manaController: {fileID: 444155111}
 --- !u!1 &175095463
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +646,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1668219272}
-  - {fileID: 1085151140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -712,7 +727,7 @@ GameObject:
   - component: {fileID: 444155107}
   - component: {fileID: 444155110}
   - component: {fileID: 444155109}
-  - component: {fileID: 444155108}
+  - component: {fileID: 444155111}
   m_Layer: 5
   m_Name: Background mana
   m_TagString: Untagged
@@ -740,18 +755,6 @@ RectTransform:
   m_AnchoredPosition: {x: 677, y: -442}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &444155108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444155106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ce513c36de95b54f886956d75ac2bbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &444155109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,6 +793,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444155106}
   m_CullTransparentMesh: 1
+--- !u!114 &444155111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444155106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3667e91b94e15489cbeff967fd3b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mana: {fileID: 1111896367}
 --- !u!1 &454219195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,7 +2012,6 @@ GameObject:
   - component: {fileID: 835369015}
   - component: {fileID: 835369017}
   - component: {fileID: 835369016}
-  - component: {fileID: 835369019}
   - component: {fileID: 835369018}
   m_Layer: 5
   m_Name: Background
@@ -2069,21 +2084,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 835369014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c32198d68a89145a65140b06cebed8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c76fed100697a548b120a8919b2c664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &835369019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835369014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6071b8163b62db248b65e773eb20fdbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  PlayerlifeBar: {fileID: 2058805959}
 --- !u!1 &937358357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,17 +2477,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085151139}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -17.428978, y: -0.8448108, z: -2.2171323}
+  m_LocalScale: {x: 0.90892076, y: 0.7916182, z: 0.90892065}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 430725430}
+  m_Father: {fileID: 1668219272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -21, y: -65}
-  m_SizeDelta: {x: -1820, y: 100}
+  m_AnchoredPosition: {x: 0, y: -49.99999}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1085151141
 MonoBehaviour:
@@ -2880,7 +2884,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -19.175465, y: -1.0671948, z: -2.4393024}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1085151140}
   m_Father: {fileID: 430725430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2933,7 +2938,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668219271}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a6093c0cd43de446913a2c47fd76ac3, type: 3}
   m_Name: 
@@ -3032,7 +3037,7 @@ GameObject:
   - component: {fileID: 1764213288}
   m_Layer: 0
   m_Name: No Parry
-  m_TagString: Untagged
+  m_TagString: AtaqueNormal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3814,7 +3819,7 @@ MonoBehaviour:
   damage: 25
   currentHealth: 0
   maxHealth: 100
-  player: {fileID: 0}
+  player: {fileID: 1078465790}
   currentState: 0
 --- !u!1 &2017062954
 GameObject:
@@ -3829,7 +3834,7 @@ GameObject:
   - component: {fileID: 2017062955}
   m_Layer: 0
   m_Name: Parry
-  m_TagString: Untagged
+  m_TagString: AtaqueAmarillo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3934,7 +3939,7 @@ Transform:
   m_GameObject: {fileID: 2017062954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.2860584, y: -1.3945392, z: 0}
+  m_LocalPosition: {x: -6.2860584, y: 1.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4004,7 +4009,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2058805960
