@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
             else if (Object.CompareTag("AtaqueNormal"))
             {
                 Debug.Log("No parreado Daño recibido");
-                ReceiveDamage(10f);
+                ReceiveDamage(25f);
             }
             canParry = false;
             Object = null;

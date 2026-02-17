@@ -2610,7 +2610,7 @@ GameObject:
   - component: {fileID: 1264873304}
   - component: {fileID: 1264873303}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: UnParry
   m_TagString: AtaqueNormal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2986,7 +2986,7 @@ GameObject:
   - component: {fileID: 1622551674}
   - component: {fileID: 1622551673}
   m_Layer: 0
-  m_Name: Circle (1)
+  m_Name: Parry
   m_TagString: AtaqueAmarillo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
