@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     public Camera mainCamera;
     private PlayerController _playerController;
+    private ManaController _maanaController;
     private Animator _playerAnimator;
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
         _speed = _maxSpeed;
         health = maxHealth;
         _playerController = GetComponent<PlayerController>();
+        _maanaController = GameObject.FindAnyObjectByType<ManaController>();
         _playerAnimator = GetComponent<Animator>();
         target.SetActive(false);
     }
@@ -126,7 +128,6 @@ public class PlayerController : MonoBehaviour
                 HandleMovement();               
                 break;
 
-
             case PlayerState.Rolling:
                 HandleRolling();
                 break;
@@ -134,6 +135,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Attacking:
                 HandleAttack();
                 break;
+
             case PlayerState.Parry:
                 HandleParry();
                 break;
@@ -153,12 +155,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Object.CompareTag("AtaqueAmarillo"))
             {
+                if (_maanaController != null) _maanaController.RefillMana(1f);
                 Debug.Log("parreado");
             }
             else if (Object.CompareTag("AtaqueNormal"))
             {
-                Debug.Log("No parreado Daño recibido");
                 ReceiveDamage(25f);
+                Debug.Log("No parreado Daño recibido");
             }
             canParry = false;
             Object = null;

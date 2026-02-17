@@ -15,13 +15,9 @@ public class ManaController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RefillMana(1f);
-           
-        }
+
     }
-    void RefillMana(float amount)
+    public void RefillMana(float amount)
     {
         _currentMana = Mathf.Clamp(_currentMana + amount, 0f, _maxMana);
         UpdateStatus();
