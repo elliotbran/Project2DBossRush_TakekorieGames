@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Spear
   - Enemy
+  - AtaqueNormal
+  - AtaqueAmarillo
   layers:
   - Default
   - TransparentFX
