@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal) 
         {
+            _playerAnimator.SetBool("Parry", true);
             StartCoroutine(ParryWindowRoutine());
         }
         UpdateStates();
@@ -179,6 +180,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Parry Activado");
         yield return new WaitForSeconds(0.25f);
         currentState = PlayerState.Normal;
+        _playerAnimator.SetBool("Parry", false);
     }
     void HandleParry()
     {
