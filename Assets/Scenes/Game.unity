@@ -3014,7 +3014,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   timeBetweenAttacks: 2
-  sightRange: 50
+  sightRange: -4.8
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
