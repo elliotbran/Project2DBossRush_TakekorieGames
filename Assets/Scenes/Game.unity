@@ -2802,7 +2802,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  timeBetweenAttacks: 0.25
+  timeBetweenAttacks: 3
   sightRange: 50
   attackRange: 4
   playerInSightRange: 0
