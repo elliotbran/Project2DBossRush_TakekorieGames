@@ -107,7 +107,9 @@ public class EnemyController : MonoBehaviour
     void UpdateAttack()
     {
         _agent.SetDestination(transform.position);
-                
+        _animator.SetFloat("Speed", 0);
+
+
         if (!_alreadyAttacked)
         {
             _animator.SetTrigger("Attack");            

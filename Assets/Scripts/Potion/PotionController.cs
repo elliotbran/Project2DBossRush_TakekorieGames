@@ -39,7 +39,7 @@ public class PotionController : MonoBehaviour
 
     void UsePotion()
     {
-        playerController.Cure(1f);
+        playerController.Cure(25f);
         UpdateStatus(false);
         Debug.Log("Pocima usada, salud restaurada");
     }

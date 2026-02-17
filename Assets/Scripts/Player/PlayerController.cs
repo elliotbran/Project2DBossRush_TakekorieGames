@@ -177,7 +177,8 @@ public class PlayerController : MonoBehaviour
     {
         currentState = PlayerState.Parry;
         Debug.Log("Parry Activado");
-        yield return new WaitForSeconds(0.25f);
+        _playerAnimator.SetTrigger("Parry");
+        yield return new WaitForSeconds(0.40f);
         currentState = PlayerState.Normal;
     }
     void HandleParry()
@@ -222,6 +223,7 @@ public class PlayerController : MonoBehaviour
             health = maxHealth;
         }
     }
+    
 
     #region Movement
     void HandleMovement()
