@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 
 
-public class EnemigoController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
-    public float daño = 1f;
+    public float damage = 1f;
     public float life = 3f;
     public float Maximumlife = 3f;
 
     private void OnMouseDown()
     {
-        Daño(1f);
+        Damage(1f);
     }
-    public void Daño(float cantidad)
+    public void Damage(float amount)
     {
-        life -= cantidad;
+        life -= amount;
         Debug.Log("Vida restante" + life);
         if (life <= 0)
         {
@@ -34,7 +34,7 @@ public class EnemigoController : MonoBehaviour
 
             if (player != null)
             {
-                player.TomarDaño(daño);
+                player.TomarDaño(damage);
                 Debug.Log("Daño realizado. Vida restante: " + player.Life);
             }
         }
