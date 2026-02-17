@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ca7a00b442f8714f86cb003b554fb6e
+guid: 34713ded08fc4c9429ebb927a760f8a8
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639066265365457425
+  platformSettingsDirtyTick: 639069461304744418
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: BossArenaFrontPillars_1
+  - name: Frame_0
     originalName: 
-    pivot: {x: 0.49999994, y: 0}
+    pivot: {x: 0.5, y: -2.5314465}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 578
-      height: 777
-    spriteID: bf0b8cb2e53ace4438c27e6f479c7afb
+      width: 478
+      height: 318
+    spriteID: 620e4986b75d0914d80f437bd5a0edcb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -146,101 +146,17 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: Frame_1
     originalName: 
-    pivot: {x: 0.49999994, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 590
-      y: 4
-      width: 578
-      height: 777
-    spriteID: d383a80e68b879b4f9e422aa0c6959ad
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 590, y: 4}
-  - name: Frame_2
-    originalName: 
-    pivot: {x: 0.49999994, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1176
-      y: 4
-      width: 578
-      height: 777
-    spriteID: c8284f86bedf9c64cae7bcf8d752bf2f
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 1176, y: 4}
-  - name: Frame_3
-    originalName: 
-    pivot: {x: 0.49999994, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 590
-      y: 789
-      width: 578
-      height: 776
-    spriteID: ea871dd0be4d4874ba8c580d5fa7c288
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 590, y: 789}
-  - name: Frame_4
-    originalName: 
-    pivot: {x: 0.49999994, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1176
-      y: 789
-      width: 578
-      height: 774
-    spriteID: e8b14d7bb20c8204e9fc172871f6f81b
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 1176, y: 789}
-  - name: Frame_5
-    originalName: 
-    pivot: {x: 0.49999994, y: 0}
+    pivot: {x: 0.5, y: -2.5314465}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
       x: 4
-      y: 789
-      width: 578
-      height: 777
-    spriteID: 5bfb15efaf4ea4943a7c53fb04d53d88
+      y: 330
+      width: 478
+      height: 318
+    spriteID: 49a72a17e3ce73c4b9fc389328a92a56
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -248,17 +164,101 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 789}
+    uvTransform: {x: 4, y: 330}
+  - name: Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -2.5314465}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 656
+      width: 478
+      height: 318
+    spriteID: 4e7ecfca9301d8143ae7e9bf9ca64e1f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 656}
+  - name: Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: -2.5394323}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 490
+      y: 330
+      width: 478
+      height: 317
+    spriteID: 0edfc8399f5ab2d4b8367fbd89c53521
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 490, y: 330}
+  - name: Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: -2.5555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 490
+      y: 655
+      width: 478
+      height: 315
+    spriteID: 631569fde3cae994aa6484233cfa5572
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 490, y: 655}
+  - name: Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: -2.5314465}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 490
+      y: 4
+      width: 478
+      height: 318
+    spriteID: fb036809962fcb4408afe405fa6e7dfa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 490, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 3601336578
+      value0: 1998120506
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: BossArenaFrontPillars_1
+    name: BossArenaBackPillars_1
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -267,56 +267,56 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 777
-      spriteId: bf0b8cb2e53ace4438c27e6f479c7afb
+        x: 684
+        y: 805
+        width: 478
+        height: 318
+      spriteId: 620e4986b75d0914d80f437bd5a0edcb
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 777
-      spriteId: d383a80e68b879b4f9e422aa0c6959ad
+        x: 684
+        y: 805
+        width: 478
+        height: 318
+      spriteId: 49a72a17e3ce73c4b9fc389328a92a56
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 777
-      spriteId: c8284f86bedf9c64cae7bcf8d752bf2f
+        x: 684
+        y: 805
+        width: 478
+        height: 318
+      spriteId: 4e7ecfca9301d8143ae7e9bf9ca64e1f
     - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 776
-      spriteId: ea871dd0be4d4874ba8c580d5fa7c288
+        x: 684
+        y: 805
+        width: 478
+        height: 317
+      spriteId: 0edfc8399f5ab2d4b8367fbd89c53521
     - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 774
-      spriteId: e8b14d7bb20c8204e9fc172871f6f81b
+        x: 684
+        y: 805
+        width: 478
+        height: 315
+      spriteId: 631569fde3cae994aa6484233cfa5572
     - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 777
-      spriteId: 5bfb15efaf4ea4943a7c53fb04d53d88
+        x: 684
+        y: 805
+        width: 478
+        height: 318
+      spriteId: fb036809962fcb4408afe405fa6e7dfa
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -360,4 +360,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 1846, y: 1135}
-  previousTextureSize: {x: 2048, y: 2048}
+  previousTextureSize: {x: 1024, y: 1024}

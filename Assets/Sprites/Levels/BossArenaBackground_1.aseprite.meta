@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: BossArenaBackground_1
     originalName: 
-    pivot: {x: 0.5574866, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,8 +133,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1496
-      height: 1060
+      width: 1324
+      height: 850
     spriteID: 5dba87862c1860e4a94bdc6ff5fd3f39
     spriteBone: []
     spriteOutline: []
@@ -144,6 +144,111 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1336
+      y: 4
+      width: 1324
+      height: 850
+    spriteID: 86f50c9c48c5ed840bc679ef50d69308
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1336, y: 4}
+  - name: Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2668
+      y: 4
+      width: 1324
+      height: 850
+    spriteID: 10ebc8c526c308e44b19e6d76d28b2ff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2668, y: 4}
+  - name: Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 862
+      width: 1324
+      height: 850
+    spriteID: 758579a816909204cad90ea82e978900
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 862}
+  - name: Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1336
+      y: 862
+      width: 1324
+      height: 850
+    spriteID: 88920fcb78d4ed644b8c03e62fa88414
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1336, y: 862}
+  - name: Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2668
+      y: 862
+      width: 1324
+      height: 850
+    spriteID: 44a6666a6c2fcb04eb464c8973a01215
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2668, y: 862}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -158,15 +263,60 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: BossArenaBackground_1
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 89
+        x: 261
         y: 0
-        width: 1496
-        height: 1060
+        width: 1324
+        height: 850
       spriteId: 5dba87862c1860e4a94bdc6ff5fd3f39
+    - name: Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 261
+        y: 0
+        width: 1324
+        height: 850
+      spriteId: 86f50c9c48c5ed840bc679ef50d69308
+    - name: Frame_2
+      frameIndex: 2
+      additiveSortOrder: 0
+      cellRect:
+        x: 261
+        y: 0
+        width: 1324
+        height: 850
+      spriteId: 10ebc8c526c308e44b19e6d76d28b2ff
+    - name: Frame_3
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 261
+        y: 0
+        width: 1324
+        height: 850
+      spriteId: 758579a816909204cad90ea82e978900
+    - name: Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: 261
+        y: 0
+        width: 1324
+        height: 850
+      spriteId: 88920fcb78d4ed644b8c03e62fa88414
+    - name: Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 261
+        y: 0
+        width: 1324
+        height: 850
+      spriteId: 44a6666a6c2fcb04eb464c8973a01215
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -210,4 +360,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 1846, y: 1135}
-  previousTextureSize: {x: 2048, y: 2048}
+  previousTextureSize: {x: 4096, y: 2048}
