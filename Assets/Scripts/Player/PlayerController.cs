@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _speed;
     private float _maxSpeed = 10f;
 
+    [Header("Parry")]
+    private Collider2D Object;
+    private bool canParry = false;
     public enum PlayerState
     {
         Normal,        
@@ -71,6 +74,9 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Rolling:
                 _rb.linearVelocity = _rollDir * _rollSpeed;
                 break;
+            case PlayerState.Parry:
+                _rb.linearVelocity = Vector2.zero; 
+                break;
         }
     } 
     void Update()
@@ -91,6 +97,10 @@ public class PlayerController : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
                 Debug.Log("ATAQUE FINALIZADO");
             }
+        }
+        if (Input.GetMouseButtonDown(1) && playerState == PlayerState.Normal)
+        {
+            StartCoroutine(ParryWindowRoutine());
         }
        
         UpdateStates();
@@ -130,10 +140,45 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-
+    IEnumerator ParryWindowRoutine()
+    {
+        playerState = PlayerState.Parry;
+        Debug.Log("Parreando?");
+        yield return new WaitForSeconds(0.25f);
+        playerState = PlayerState.Normal;
+    }
     void HandleParry()
     {
-
+        if (canParry && Object != null)
+        {
+            if (Object.CompareTag("AtaqueAmarillo"))
+            {
+                Debug.Log("parreado");
+            }
+            else if (Object.CompareTag("AtaqueNormal"))
+            {
+                Debug.Log("No parreado Daño recibido");
+                ReceiveDamage(10f);
+            }
+            canParry = false;
+            Object = null;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueNormal"))
+        {
+            Object = collision;
+            canParry = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision == Object)
+        {
+            Object = null;
+            canParry = false;
+        }
     }
     public void Cure(float quantity) // cure player
     {
