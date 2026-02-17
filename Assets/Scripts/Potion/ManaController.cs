@@ -8,7 +8,6 @@ public class ManaController : MonoBehaviour
     private float _currentMana = 0;
     private float _maxMana = 5;
 
-
     void Start()
     {
         UpdateStatus();
