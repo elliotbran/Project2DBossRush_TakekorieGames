@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator ParryWindowRoutine()
     {
         playerState = PlayerState.Parry;
-        Debug.Log("Parreando?");
+        Debug.Log("ParryActivado");
         yield return new WaitForSeconds(0.25f);
         playerState = PlayerState.Normal;
     }
