@@ -20,11 +20,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _speed;
     private float _maxSpeed = 10f;
 
+    [Header("Parry system")]
+    private Collider2D Object;
+    private bool canParry = false;
+
+    
+
     public enum PlayerState
     {
         Normal,        
         Rolling,
         Attacking,
+        Parry,
     }
     public bool isAttacking;
 
@@ -42,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     public Camera mainCamera;
     private PlayerController _playerController;
+    private ManaController _manacontroller;
     private Animator _playerAnimator;
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -73,6 +81,7 @@ public class PlayerController : MonoBehaviour
         _speed = _maxSpeed;
         health = maxHealth;
         _playerController = GetComponent<PlayerController>();
+        _manacontroller = GameObject.FindAnyObjectByType<ManaController>();
         _playerAnimator = GetComponent<Animator>();
         if (target != null)
         {
@@ -94,6 +103,9 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Attacking:
                 // while attacking, movement is restricted by reduced _speed set in Attack()
                 _rb.linearVelocity = moveDir * _speed;
+                break;
+            case PlayerState.Parry:
+                _rb.linearVelocity = Vector2.zero;
                 break;
         }
     } 
@@ -120,7 +132,10 @@ public class PlayerController : MonoBehaviour
                 Attack(); // Attack will handle isAttacking and its reset
             }
         }
-       
+        if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal) 
+        {
+            StartCoroutine(ParryWindowRoutine());
+        }
         UpdateStates();
 
         Ray ray = new Ray(transform.position, _playerController.moveDir);
@@ -152,6 +167,51 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Attacking:
                 // Do nothing here; Attack() manages the attack lifecycle via coroutine
                 break;
+               
+            case PlayerState.Parry:
+                HandleParry();
+                break;
+        }
+    }
+    IEnumerator ParryWindowRoutine()
+    {
+        currentState = PlayerState.Parry;
+        Debug.Log("Parry Activado");
+        yield return new WaitForSeconds(0.25f);
+        currentState = PlayerState.Normal;
+    }
+    void HandleParry()
+    {
+        if (canParry && Object != null)
+        {
+            if (Object.CompareTag("AtaqueAmarillo"))
+            {
+                if (_manacontroller != null) _manacontroller.RefillMana(1f);
+                Debug.Log("parreando");
+            }
+            else if (Object.CompareTag("AtaqueNormal"))
+            {
+                ReceiveDamage(25f);
+                Debug.Log("No parreando Daño recibido");
+            }
+            canParry = false;
+            Object = null;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("AtaqueAmarillo")|| collision.CompareTag("AtaqueNormal"))
+        {
+            Object = collision;
+            canParry = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision == Object)
+        {
+            Object = null;
+            canParry = false;
         }
     }
     public void Cure(float quantity) // cure player
