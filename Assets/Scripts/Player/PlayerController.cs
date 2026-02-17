@@ -8,6 +8,10 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private DialogueUI dialogueUI;
+    public DialogueUI DialogueUI => dialogueUI;
+
+    public IInteractable interactable { get; set; }
     [Header("Player Health")]
     public float health;
     public float maxHealth = 100f;
@@ -95,6 +99,11 @@ public class PlayerController : MonoBehaviour
     } 
     void Update()
     {
+        if (dialogueUI.IsOpen) return;
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit"))
+        {
+            interactable?.Interact(this);
+        }
         // cooldown timer 
         if (_rollCooldownTimer > 0f)
         {
