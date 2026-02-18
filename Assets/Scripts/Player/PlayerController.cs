@@ -163,8 +163,6 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Normal:
                 HandleMovement();               
                 break;
-
-
             case PlayerState.Rolling:
                 HandleRolling();
                 break;
@@ -174,7 +172,10 @@ public class PlayerController : MonoBehaviour
                 break;
                
             case PlayerState.Parry:
-                HandleParry();
+                if (canParry)
+                {
+                    HandleParry();
+                }
                 break;
         }
     }
@@ -184,6 +185,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Parry Activado");
         _playerAnimator.SetTrigger("Parry");
         yield return new WaitForSeconds(0.40f);
+        canParry = true;
         currentState = PlayerState.Normal;
     }
     void HandleParry()
