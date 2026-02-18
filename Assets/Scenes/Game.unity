@@ -1801,7 +1801,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 100
   _speed: 0
-  _parrycooldown: 1
+  _parrycooldown: 0.3
   isAttacking: 0
   moveDir: {x: 0, y: 0, z: 0}
   _rollCooldown: 1
@@ -1860,7 +1860,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078465786}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
