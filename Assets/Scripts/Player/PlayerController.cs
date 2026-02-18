@@ -184,6 +184,7 @@ public class PlayerController : MonoBehaviour
         currentState = PlayerState.Parry;
         Debug.Log("Parry Activado");
         _playerAnimator.SetTrigger("Parry");
+        canParry = false;
         yield return new WaitForSeconds(0.40f);
         canParry = true;
         currentState = PlayerState.Normal;
