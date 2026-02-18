@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private float _maxSpeed = 10f;
 
     [Header("Parry system")]
+    [SerializeField] private float _parrycooldown = 1f;
+    private float _parrycooldowntime = 0;
     private Collider2D Object;
     private bool canParry = false;
 
@@ -112,6 +114,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (dialogueUI.IsOpen) return;
+        if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime;
+        if (_parrycooldowntime > 0f) _parrycooldowntime -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit"))
         {
             interactable?.Interact(this);
@@ -132,8 +136,9 @@ public class PlayerController : MonoBehaviour
                 Attack(); // Attack will handle isAttacking and its reset
             }
         }
-        if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal) 
+        if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal && _parrycooldowntime <= 0f) 
         {
+            _parrycooldowntime = _parrycooldown;
             StartCoroutine(ParryWindowRoutine());
         }
         UpdateStates();
@@ -158,8 +163,6 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Normal:
                 HandleMovement();               
                 break;
-
-
             case PlayerState.Rolling:
                 HandleRolling();
                 break;
@@ -169,7 +172,10 @@ public class PlayerController : MonoBehaviour
                 break;
                
             case PlayerState.Parry:
-                HandleParry();
+                if (canParry)
+                {
+                    HandleParry();
+                }
                 break;
         }
     }
@@ -178,7 +184,9 @@ public class PlayerController : MonoBehaviour
         currentState = PlayerState.Parry;
         Debug.Log("Parry Activado");
         _playerAnimator.SetTrigger("Parry");
+        canParry = false;
         yield return new WaitForSeconds(0.40f);
+        canParry = true;
         currentState = PlayerState.Normal;
     }
     void HandleParry()

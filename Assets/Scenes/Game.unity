@@ -1801,6 +1801,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 100
   _speed: 0
+  _parrycooldown: 1
   isAttacking: 0
   moveDir: {x: 0, y: 0, z: 0}
   _rollCooldown: 1
