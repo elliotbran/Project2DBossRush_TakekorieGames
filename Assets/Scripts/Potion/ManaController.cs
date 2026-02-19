@@ -10,14 +10,14 @@ public class ManaController : MonoBehaviour
 
     void Start()
     {
-        UpdateStatus();
+        UpdateStatus();//actualiza la barra del mana de la UI empezando en 0/vacia
     }
 
     void Update()
     {
 
     }
-    public void RefillMana(float amount)
+    public void RefillMana(float amount) //esta funcion rellena la barra de mana y cuando ve que esta llena deja la barra a cero y rellena la pocion 
     {
         _currentMana += amount;
         if (_currentMana >= _maxMana)
@@ -29,10 +29,10 @@ public class ManaController : MonoBehaviour
                 Debug.Log("Pocion Recargada");
             }
         }
-        _currentMana = Mathf.Clamp(_currentMana, 0f, _maxMana);
+        _currentMana = Mathf.Clamp(_currentMana, 0f, _maxMana); 
         UpdateStatus();
     }
-    public bool ConsumeMana(float amount)
+    public bool ConsumeMana(float amount)// esta funcion intenta gastar mana si ha gastado mana devuelve el true y si no devuelve el false
     {
         if (_currentMana >= amount)
         {
@@ -42,7 +42,7 @@ public class ManaController : MonoBehaviour
         }
         return false; 
     }
-    void UpdateStatus()
+    void UpdateStatus() //actualiza la barra del mana de la UI
     {
         mana.fillAmount = _currentMana / _maxMana;
     }
