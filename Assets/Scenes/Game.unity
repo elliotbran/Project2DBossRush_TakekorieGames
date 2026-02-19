@@ -948,7 +948,6 @@ GameObject:
   m_Component:
   - component: {fileID: 588553518}
   - component: {fileID: 588553519}
-  - component: {fileID: 588553521}
   - component: {fileID: 588553520}
   m_Layer: 6
   m_Name: Body
@@ -1073,19 +1072,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5318743, y: 1.0059729}
   m_EdgeRadius: 0
---- !u!114 &588553521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588553517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12201cffac795e149814439865c3afd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 1078465794}
 --- !u!1 &651634542
 GameObject:
   m_ObjectHideFlags: 0
