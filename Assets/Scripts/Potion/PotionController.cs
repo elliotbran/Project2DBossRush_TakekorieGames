@@ -11,18 +11,18 @@ public class PotionController : MonoBehaviour
 
     void Start()
     {
-        UpdateStatus(false);
+        UpdateStatus(false); //empieza la pocion vacia
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && _isFull)
+        if (Input.GetKeyDown(KeyCode.F) && _isFull) //Al darle a la tecla F llama a la funcion UsePotion
         {
             UsePotion();
         }
     }
 
-    public void UpdateStatus(bool full)
+    public void UpdateStatus(bool full) //mira si la potion si se llena se pone de color verde y si no esta llena se mantiene en color rojo
     {
         _isFull = full;
         if (_isFull)
@@ -37,7 +37,7 @@ public class PotionController : MonoBehaviour
         }
     }
 
-    void UsePotion()
+    void UsePotion() //la funcion llama al playercontroller y cura al player con 25 de vida y la potion se queda vacia
     {
         playerController.Cure(25f);
         UpdateStatus(false);
