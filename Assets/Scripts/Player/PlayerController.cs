@@ -197,6 +197,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (_manacontroller != null) _manacontroller.RefillMana(1f);
                 Debug.Log("parreando");
+                Destroy(Object.gameObject);
+                Debug.Log("destruido");
             }
             else if (Object.CompareTag("AtaqueNormal"))
             {
