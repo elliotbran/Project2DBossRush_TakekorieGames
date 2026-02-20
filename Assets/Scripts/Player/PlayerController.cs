@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 _rb.linearVelocity = moveDir * _speed;
                 break;
             case PlayerState.Parry:
-                _rb.linearVelocity = Vector2.zero;
+                _rb.linearVelocity = Vector2.zero; //se queda quieto al realizar el parry
                 break;
         }
     } 
@@ -137,8 +137,8 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal && _parrycooldowntime <= 0f) 
         {
-            _parrycooldowntime = _parrycooldown;
-            StartCoroutine(ParryWindowRoutine());
+            _parrycooldowntime = _parrycooldown; //Inicia el Cooldown del parry
+            StartCoroutine(ParryWindowRoutine()); //Llama a la corrutina ParryWindowRoutine()
         }
         UpdateStates();
 
@@ -172,57 +172,12 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Parry:
                 if (canParry)
                 {
-                    HandleParry();
+                    HandleParry(); //llama a la funcion handleParry cuando este en el estado parry activado
                 }
                 break;
         }
     }
-    IEnumerator ParryWindowRoutine()
-    {
-        currentState = PlayerState.Parry;
-        Debug.Log("Parry Activado");
-        _playerAnimator.SetTrigger("Parry");
-        canParry = false;
-        yield return new WaitForSeconds(0.40f);
-        canParry = true;
-        currentState = PlayerState.Normal;
-    }
-    void HandleParry()
-    {
-        if (canParry && _object != null)
-        {
-            if (_object.CompareTag("AtaqueAmarillo"))
-            {
-                if (_manacontroller != null) _manacontroller.RefillMana(1f);
-                Debug.Log("parreando");
-                Destroy(_object.gameObject);
-                Debug.Log("destruido");
-            }
-            else if (_object.CompareTag("AtaqueNormal"))
-            {
-                ReceiveDamage(25f);
-                Debug.Log("No parreando Daño recibido");
-            }
-            canParry = false;
-            _object = null;
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("AtaqueAmarillo")|| collision.CompareTag("AtaqueNormal"))
-        {
-            _object = collision;
-            canParry = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision == _object)
-        {
-            _object = null;
-            canParry = false;
-        }
-    }
+
     public void Cure(float quantity) // Cure player with potion
     {
         health += quantity;
@@ -359,7 +314,53 @@ public class PlayerController : MonoBehaviour
         // Start coroutine to finish the attack after duration
         StartCoroutine(AttackRoutine());
     }
-
+    IEnumerator ParryWindowRoutine()
+    {
+        currentState = PlayerState.Parry; //cambia el estado al estado del parry
+        Debug.Log("Parry Activado");
+        _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
+        canParry = false;
+        yield return new WaitForSeconds(0.40f); //tiempo del parry
+        canParry = true;
+        currentState = PlayerState.Normal; //vuelve al estado nromal
+    }
+    void HandleParry()
+    {
+        if (canParry && _object != null) //detecta el objeto y mira que tag le corresponde
+        {
+            if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana y destrulle el objeto
+            {
+                if (_manacontroller != null) _manacontroller.RefillMana(1f);
+                Debug.Log("parreando");
+                Destroy(_object.gameObject);
+                Debug.Log("destruido");
+            }
+            else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto
+            {
+                ReceiveDamage(25f);
+                Destroy(_object.gameObject);
+                Debug.Log("No parreando Daño recibido");
+            }
+            canParry = false;
+            _object = null;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision) //Si hay un objeto con el tag AtaqueAmarillo o AtaqueNormal, guarda el objeto y activa el parry
+    {
+        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueNormal"))
+        {
+            _object = collision;
+            canParry = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision) //si el parry no llega al objeto se cancela el parry
+    {
+        if (collision == _object)
+        {
+            _object = null;
+            canParry = false;
+        }
+    }
     private IEnumerator AttackRoutine() // Manages the attack lifecycle and resets state after attackDuration
     {
         yield return new WaitForSeconds(attackDuration);
