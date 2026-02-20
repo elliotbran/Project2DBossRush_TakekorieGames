@@ -7,18 +7,18 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Health")]
+    [Header("Health")] // Header for health related variables 
     public float damage = 25f;
     public float currentHealth;
     public float maxHealth = 100f;
-    public enum BossState
+    public enum BossState // Different states for the boss
     {
         Idle,
         Chase,
         Attack,
     }
 
-    [SerializeField] Transform player;
+    [SerializeField] Transform player; // Get the player's position to chase and attack the player
 
     public BossState currentState;
     public LayerMask whatIsPlayer;
@@ -37,16 +37,16 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
+        _animator = GetComponent<Animator>(); // Get the Animator component attached to the boss
     }
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        currentState = BossState.Idle;
-        _animator = GetComponent<Animator>();
-        _agent.updateRotation = false;
-        _agent.updateUpAxis = false;
+        currentHealth = maxHealth; // Initialize the boss's health to the maximum health at the start of the game
+        currentState = BossState.Idle; // Start the boss in the Idle state (doesn't matter right now because he detects the player right away and changes to Chase)
+        _agent.updateRotation = false;  
+        _agent.updateUpAxis = false; 
     }
 
     private void Update()
@@ -54,25 +54,11 @@ public class EnemyController : MonoBehaviour
         UpdateStates();
         playerInAttackRange = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
-
         
     }
 
-    void UpdateStates()
-    {
-        /*switch (currentState)
-        {
-            case BossState.Idle:
-                currentState = BossState.Idle;
-                break;
-            case BossState.Chase:
-                currentState = BossState.Chase;
-                break;
-            case BossState.Attack:
-                currentState = BossState.Attack;
-                break;
-        }*/
-
+    void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
+    {      
         if (!playerInSightRange)
         {
             currentState = BossState.Idle;
@@ -92,19 +78,19 @@ public class EnemyController : MonoBehaviour
         }
 
     }
-    void UpdateIdle()
+    void UpdateIdle() // In the Idle state, the boss will stop moving and play the idle animation
     {
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);              
     }
 
-    void UpdateChase()
+    void UpdateChase() // In the Chase state, the boss will move towards the player and play the running animation
     {
         _agent.SetDestination(player.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
 
-    void UpdateAttack()
+    void UpdateAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
@@ -119,13 +105,13 @@ public class EnemyController : MonoBehaviour
         }        
     }
 
-    private void ResetAttack()
+    private void ResetAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
         _alreadyAttacked = false;
     }
         
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
         currentHealth -= damage;
 
@@ -138,7 +124,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) // This function is called when the boss's attack hitbox collides with the player. It checks if the collided object is the player and if it is, it calls the player's ReceiveDamage function to deal damage to the player.
     {
         if (collision.CompareTag("Player"))
         {
@@ -152,7 +138,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Die()
+    void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
     {
         Debug.Log("El enemigo ha muerto");
 
@@ -163,7 +149,7 @@ public class EnemyController : MonoBehaviour
         this.enabled = false;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmos() // Show the attack range and sight range of the boss in the editor for debugging.
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange); 
