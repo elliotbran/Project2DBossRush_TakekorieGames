@@ -9,8 +9,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private DialogueUI dialogueUI;
-    public DialogueUI DialogueUI => dialogueUI;
-    public IInteractable interactable { get; set; }
+    public DialogueUI DialogueUI => dialogueUI; //Lets other scritps access the dialogueUI without allowing them to change it
+    public IInteractable interactable { get; set; } //Gets the "IInteractable" interface from the object the player is interacting with
 
 
     [Header("Player Health")]
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [Header("Parry system")]
     [SerializeField] private float _parrycooldown = 1f;
     private float _parrycooldowntime = 0;
-    public enum PlayerState
+    public enum PlayerState //State machine for the player
     {
         Normal,        
         Rolling,
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private float nextAttackTime = 0f;
 
-    public LayerMask enemyLayers;
+    public LayerMask enemyLayers; //Its used by the boss to detect our player
 
     void Awake()
     {
@@ -106,16 +106,16 @@ public class PlayerController : MonoBehaviour
                 _rb.linearVelocity = moveDir * _speed;
                 break;
             case PlayerState.Parry:
-                _rb.linearVelocity = Vector2.zero; //se queda quieto al realizar el parry
+                _rb.linearVelocity = Vector2.zero; // While parryign the player cannot move
                 break;
         }
     } 
     void Update()
     {
-        if (dialogueUI.IsOpen) return;
-        if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime;
+        if (dialogueUI.IsOpen) return; //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
+        if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime; 
         if (_parrycooldowntime > 0f) _parrycooldowntime -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit"))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit")) //In case is not open, this activates it if the player is in range of an interactable object and presses the interact button
         {
             interactable?.Interact(this);
         }
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         }
         UpdateStates();
 
-        Ray ray = new Ray(transform.position, _playerController.moveDir);
+        Ray ray = new Ray(transform.position, _playerController.moveDir); //Raycast that shows the direction the player is moving
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
 
         /////////------------NO TOCAR------------/////////
@@ -172,13 +172,13 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Parry:
                 if (canParry)
                 {
-                    HandleParry(); //llama a la funcion handleParry cuando este en el estado parry activado
+                    HandleParry(); // Calls "handleParry" when the player is parryng and canParry is true
                 }
                 break;
         }
     }
 
-    public void Cure(float quantity) // Cure player with potion
+    public void Cure(float quantity) // Heals the player with the potion
     {
         health += quantity;
         if (health > maxHealth)
