@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Parry:
                 if (canParry)
                 {
-                    HandleParry(); //llama a la funcion handleParry
+                    HandleParry(); //llama a la funcion handleParry cuando este el estado parry activado
                 }
                 break;
         }
