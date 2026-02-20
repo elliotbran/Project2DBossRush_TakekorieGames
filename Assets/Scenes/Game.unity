@@ -3051,12 +3051,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1337780079157557240, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337780079157557240, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.75
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 1337780079157557240, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.08
+      value: -9.31
       objectReference: {fileID: 0}
     - target: {fileID: 1337780079157557240, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3093,6 +3097,18 @@ PrefabInstance:
     - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_Name
       value: Personaje Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8202615
+      objectReference: {fileID: 0}
+    - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_SortingOrder
