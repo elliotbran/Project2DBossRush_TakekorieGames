@@ -163,6 +163,8 @@ GameObject:
   - component: {fileID: 40474421}
   - component: {fileID: 40474420}
   - component: {fileID: 40474425}
+  - component: {fileID: 40474426}
+  - component: {fileID: 40474427}
   m_Layer: 0
   m_Name: 'CinemachineCamera '
   m_TagString: Untagged
@@ -280,6 +282,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &40474426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40474419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 0
+  FrequencyGain: 0
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &40474427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40474419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf4441b2d1da394f9cca1f222b34ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noise: {fileID: 40474426}
 --- !u!1 &67394219
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +445,48 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!1 &199432478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+  m_PrefabInstance: {fileID: 2058622336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &199432485
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199432478}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.00000010374889, y: -0.4105231}
+  m_Size: {x: 0.73464775, y: 0.17895624}
+  m_Direction: 1
 --- !u!1 &200283444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,11 +2872,11 @@ GameObject:
   - component: {fileID: 2010664645}
   - component: {fileID: 2010664658}
   - component: {fileID: 2010664655}
+  - component: {fileID: 2010664659}
   - component: {fileID: 2010664657}
   - component: {fileID: 2010664647}
   - component: {fileID: 2010664650}
   - component: {fileID: 2010664652}
-  - component: {fileID: 2010664659}
   m_Layer: 8
   m_Name: Boss#1
   m_TagString: Enemy
@@ -3002,7 +3076,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   timeBetweenAttacks: 2
-  sightRange: 0
+  sightRange: 20
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -3112,20 +3186,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_SortingOrder
-      value: 128
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_SortingLayerID
       value: 1922073265
       objectReference: {fileID: 0}
+    - target: {fileID: 5151748111933288975, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 199432485}
   m_SourcePrefab: {fileID: 100100000, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
 --- !u!4 &560573596445940684
 Transform:
