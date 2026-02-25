@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,6 +35,9 @@ public class EnemyController : MonoBehaviour
     // Components
     NavMeshAgent _agent;
     Animator _animator;
+
+    public GameObject CameraGroup;
+    public GameObject CameraPlayer;
 
     private void Awake()
     {
@@ -146,6 +150,10 @@ public class EnemyController : MonoBehaviour
 
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
+
+        CameraGroup.SetActive(false);
+        CameraPlayer.SetActive(true);
+
         this.enabled = false;
     }
 
