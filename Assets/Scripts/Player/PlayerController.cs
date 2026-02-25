@@ -214,7 +214,11 @@ public class PlayerController : MonoBehaviour
         }
 
         moveDir = new Vector3(moveX, moveY).normalized;
-        _animator.SetFloat("Speed", Mathf.Abs(moveX) + Mathf.Abs(moveY));
+        _animator.SetFloat("MoveX", moveX);
+        _animator.SetFloat("MoveY", moveY);
+        _animator.SetFloat("MoveMagnitude", moveDir.magnitude);
+        _animator.SetFloat("LastMoveX", _lastMoveDir.x);
+        _animator.SetFloat("LastMoveY", _lastMoveDir.y);
 
 
         if (moveX != 0 || moveY != 0)

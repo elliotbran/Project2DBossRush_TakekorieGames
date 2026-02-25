@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ca7a00b442f8714f86cb003b554fb6e
+guid: 24bda178c9431244ea67063bb5477ea6
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639066265365457425
+  platformSettingsDirtyTick: 639076465075730023
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,19 +123,19 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: BossArenaFrontPillars_1
+  - name: EscaleraCutradaHisotirca
     originalName: 
     pivot: {x: 0.5, y: 0}
-    alignment: 7
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 578
-      height: 777
-    spriteID: bf0b8cb2e53ace4438c27e6f479c7afb
+      width: 370
+      height: 235
+    spriteID: 77be8a06a34af8849a3130facb7c483d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,179 +144,29 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_1
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 590
-      y: 4
-      width: 578
-      height: 777
-    spriteID: d383a80e68b879b4f9e422aa0c6959ad
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 590, y: 4}
-  - name: Frame_2
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1176
-      y: 4
-      width: 578
-      height: 777
-    spriteID: c8284f86bedf9c64cae7bcf8d752bf2f
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 1176, y: 4}
-  - name: Frame_3
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 590
-      y: 789
-      width: 578
-      height: 776
-    spriteID: ea871dd0be4d4874ba8c580d5fa7c288
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 590, y: 789}
-  - name: Frame_4
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1176
-      y: 789
-      width: 578
-      height: 774
-    spriteID: e8b14d7bb20c8204e9fc172871f6f81b
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 1176, y: 789}
-  - name: Frame_5
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 7
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 789
-      width: 578
-      height: 777
-    spriteID: 5bfb15efaf4ea4943a7c53fb04d53d88
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 789}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 3601336578
+      value0: 892599042
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: BossArenaFrontPillars_1
+    name: EscaleraCutradaHisotirca
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: EscaleraCutradaHisotirca
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 634
+        x: 0
         y: 0
-        width: 578
-        height: 777
-      spriteId: bf0b8cb2e53ace4438c27e6f479c7afb
-    - name: Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 777
-      spriteId: d383a80e68b879b4f9e422aa0c6959ad
-    - name: Frame_2
-      frameIndex: 2
-      additiveSortOrder: 0
-      cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 777
-      spriteId: c8284f86bedf9c64cae7bcf8d752bf2f
-    - name: Frame_3
-      frameIndex: 3
-      additiveSortOrder: 0
-      cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 776
-      spriteId: ea871dd0be4d4874ba8c580d5fa7c288
-    - name: Frame_4
-      frameIndex: 4
-      additiveSortOrder: 0
-      cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 774
-      spriteId: e8b14d7bb20c8204e9fc172871f6f81b
-    - name: Frame_5
-      frameIndex: 5
-      additiveSortOrder: 0
-      cellRect:
-        x: 634
-        y: 0
-        width: 578
-        height: 777
-      spriteId: 5bfb15efaf4ea4943a7c53fb04d53d88
+        width: 370
+        height: 235
+      spriteId: 77be8a06a34af8849a3130facb7c483d
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -359,5 +209,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 1846, y: 1135}
-  previousTextureSize: {x: 2048, y: 2048}
+  canvasSize: {x: 370, y: 235}
+  previousTextureSize: {x: 512, y: 256}
