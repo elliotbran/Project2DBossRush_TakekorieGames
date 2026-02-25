@@ -38,6 +38,7 @@ public class EnemyController : MonoBehaviour
 
     public GameObject CameraGroup;
     public GameObject CameraPlayer;
+    public GameObject bossHealthbar;
 
     private void Awake()
     {
@@ -148,6 +149,7 @@ public class EnemyController : MonoBehaviour
 
         _animator.SetBool("IsDead", true);
 
+        bossHealthbar.SetActive(false);
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
 
