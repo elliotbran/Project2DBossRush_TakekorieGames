@@ -297,7 +297,7 @@ MonoBehaviour:
   NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
   AmplitudeGain: 0
-  FrequencyGain: 0
+  FrequencyGain: 5
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &40474427
 MonoBehaviour:
@@ -1137,8 +1137,8 @@ BoxCollider2D:
   m_Offset: {x: 0.047646552, y: 0.59161377}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4583333, y: 0}
-    oldSize: {x: 0.75, y: 1.09375}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.375, y: 1.40625}
     newSize: {x: 1.15625, y: 1.15625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1766,6 +1766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1078465790}
   - component: {fileID: 1078465794}
+  - component: {fileID: 1078465797}
   - component: {fileID: 1078465795}
   - component: {fileID: 1078465787}
   - component: {fileID: 1078465791}
@@ -1949,6 +1950,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.8
+--- !u!114 &1078465797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078465786}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa7f2451d3f2b54fa1233804322e7fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1085151139
 GameObject:
   m_ObjectHideFlags: 0
@@ -2871,6 +2884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2010664645}
   - component: {fileID: 2010664658}
+  - component: {fileID: 2010664660}
   - component: {fileID: 2010664655}
   - component: {fileID: 2010664659}
   - component: {fileID: 2010664657}
@@ -3076,7 +3090,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   timeBetweenAttacks: 2
-  sightRange: 20
+  sightRange: 0
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -3116,6 +3130,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.61, y: 0.28}
   m_Radius: 0.5
+--- !u!114 &2010664660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010664644}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dafdd9105db6e429415f029ef7f0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2058622336
 PrefabInstance:
   m_ObjectHideFlags: 0

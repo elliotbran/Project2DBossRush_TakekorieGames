@@ -99,7 +99,6 @@ public class EnemyController : MonoBehaviour
         if (!_alreadyAttacked)
         {
             _animator.SetTrigger("Attack");
-            CinemachineShake.Instance.ShakeCamera(5f, 0.1f); // Shake the camera when the boss attacks
 
             _alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
