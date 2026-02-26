@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask enemyLayers; //Its used by the boss to detect our player
 
+    public bool canMove = true;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
     } 
     void Update()
     {
+        if (canMove == false) return; //If canMove is false, the player cannot move or do any action
         if (dialogueUI.IsOpen) return; //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
         if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime; 
         if (_parrycooldowntime > 0f) _parrycooldowntime -= Time.deltaTime;
@@ -396,4 +399,5 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
 }
