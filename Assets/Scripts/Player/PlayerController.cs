@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player Speed")]
     [SerializeField] float _speed;
     private float _maxSpeed = 10f;
+    public bool canMove = true;
+
 
     [Header("Parry system")]
     [SerializeField] private float _parrycooldown = 1f;
@@ -74,7 +76,6 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask enemyLayers; //Its used by the boss to detect our player
 
-    public bool canMove = true;
 
     void Awake()
     {
@@ -156,10 +157,10 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
 
         /////////------------NO TOCAR------------/////////
-        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        /*Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = mouseWorldPos - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        target.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        target.transform.rotation = Quaternion.Euler(0, 0, angle - 90);*/
         /////////------------NO TOCAR------------/////////
         
         
@@ -290,6 +291,7 @@ public class PlayerController : MonoBehaviour
         {
             health = 0;
             currentState = PlayerState.Dead;
+            canMove = true;
             Debug.Log("El jugador ha muerto");
             // Trigger death animation, disable player controls, etc.
             _animator.SetBool("IsDead", true);
