@@ -2270,6 +2270,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
+  canMove: 1
 --- !u!70 &1078465795
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

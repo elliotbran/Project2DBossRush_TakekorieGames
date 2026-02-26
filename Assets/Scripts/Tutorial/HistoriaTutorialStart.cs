@@ -17,11 +17,13 @@ public class HistoriaTutorialStart : MonoBehaviour
 
     public IEnumerator StartTutorial()
     {
-        _playerController.canMove = false;
-        yield return new WaitForSeconds(1f);
+
         if (_playerAnimator != null)
-            _playerAnimator.SetTrigger("StandUp");
-        yield return new WaitForSeconds(1f);
+            _playerAnimator.Play("Player_WakeUp");
+
+        _playerController.canMove = false;
+
+        yield return new WaitForSeconds(2f);
         _playerController.canMove = true;
     }
 }
