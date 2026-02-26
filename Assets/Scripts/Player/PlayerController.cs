@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         Rolling,
         Attacking,
         Parry,
+        Dead,
     }
     public bool isAttacking;
 
@@ -111,6 +112,9 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Parry:
                 _rb.linearVelocity = Vector2.zero; // While parryign the player cannot move
                 break;
+            case PlayerState.Dead:
+                _rb.linearVelocity = Vector2.zero; // When the player is dead, it cannot move
+                break;
         }
     } 
     void Update()
@@ -178,6 +182,8 @@ public class PlayerController : MonoBehaviour
                 {
                     HandleParry(); // Calls "handleParry" when the player is parryng and canParry is true
                 }
+                break;
+            case PlayerState.Dead:
                 break;
         }
     }
@@ -276,12 +282,15 @@ public class PlayerController : MonoBehaviour
     public void ReceiveDamage(float quantity) // Damage player
     {
         health -= quantity;
+        _animator.SetTrigger("Hurt"); // Trigger hurt animation
+
         if (health <= 0)
         {
             health = 0;
+            currentState = PlayerState.Dead;
             Debug.Log("El jugador ha muerto");
             // Trigger death animation, disable player controls, etc.
-            //_animator.SetBool("IsDead", true);
+            _animator.SetBool("IsDead", true);
             playerHitbox.enabled = false; // Disable hitbox to prevent further damage
             this.enabled = false; // Disable this script to stop player movement and actions
         }
