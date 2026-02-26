@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
 
     public GameObject target;
+    public BoxCollider2D playerHitbox;
 
     [Header("Combat")]
     [SerializeField] private float attackDuration = 0.25f; // how long the attack lasts (seconds)
@@ -252,7 +253,7 @@ public class PlayerController : MonoBehaviour
             _rollCooldownTimer = _rollCooldown;
         }
     }
-
+        
     void HandleRolling() // Rolling behavior and cooldown management
     {
         float rollSpeedDropMultiplier = 5f;
@@ -276,7 +277,10 @@ public class PlayerController : MonoBehaviour
         {
             health = 0;
             Debug.Log("El jugador ha muerto");
-            Destroy(gameObject);
+            // Trigger death animation, disable player controls, etc.
+            //_animator.SetBool("IsDead", true);
+            playerHitbox.enabled = false; // Disable hitbox to prevent further damage
+            this.enabled = false; // Disable this script to stop player movement and actions
         }
     }
 
