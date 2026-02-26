@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [Header("Parry system")]
     [SerializeField] private float _parrycooldown = 1f;
     private float _parrycooldowntime = 0;
+
     public enum PlayerState //State machine for the player
     {
         Normal,        
@@ -32,7 +33,6 @@ public class PlayerController : MonoBehaviour
         Parry,
     }
     public bool isAttacking;
-
     private bool canParry = false;   
 
     public Vector3 moveDir;
@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera;
     private PlayerController _playerController;
     private ManaController _manacontroller;
+    private PlayerParryShake _playerparryshake;
     private Animator _playerAnimator;
     private Rigidbody2D _rb;
     private Collider2D _object;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         _playerController = GetComponent<PlayerController>();
         _manacontroller = GameObject.FindAnyObjectByType<ManaController>();
+        _playerparryshake = GetComponent<PlayerParryShake>();
         _playerAnimator = GetComponent<Animator>();
         if (target != null)
         {
@@ -342,6 +344,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("parreando");
                 Destroy(_object.gameObject);
                 Debug.Log("destruido");
+                if (_playerparryshake != null) 
+                {
+                    _playerparryshake.TriggerShake();
+                }
             }
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto
             {
