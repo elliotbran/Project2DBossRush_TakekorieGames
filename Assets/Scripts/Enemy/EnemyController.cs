@@ -40,6 +40,9 @@ public class EnemyController : MonoBehaviour
     public GameObject CameraPlayer;
     public GameObject bossHealthbar;
 
+    public Transform playerPosition;
+    public SpriteRenderer spriteRenderer;
+    public PlayerController playerController;
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -59,13 +62,23 @@ public class EnemyController : MonoBehaviour
         UpdateStates();
         playerInAttackRange = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
-        
+
+        // Flip the boss's sprite based on the player's position relative to the boss
+        spriteRenderer.flipX = playerPosition.transform.position.x > spriteRenderer.transform.position.x;
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
     {      
         if (!playerInSightRange)
         {
+            currentState = BossState.Idle;
+            UpdateIdle();
+        }
+
+        if (playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
+        {
+            sightRange = 0;
+            attackRange = 0;
             currentState = BossState.Idle;
             UpdateIdle();
         }
