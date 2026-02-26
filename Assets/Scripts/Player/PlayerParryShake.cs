@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PlayerParryShake : MonoBehaviour
 {
-    private void Update()
+    public void TriggerShake()
     {
-        CinemachineShake.Instance.ShakeCamera(10f, .2f); // Shake the camera when the boss attacks
+        // Solo se activará cuando lo llamemos desde el PlayerController
+        CinemachineShake.Instance.ShakeCamera(10f, .2f);
     }
 }
