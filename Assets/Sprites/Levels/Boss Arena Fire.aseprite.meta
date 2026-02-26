@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 674835734c71a254c8a28821bcdd0dab
+guid: 0a385902e4b8c9c44aded31eaaaebe0e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639066258901926067
+  platformSettingsDirtyTick: 639077321976797500
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: BossArenaBackground_1
+  - name: Boss Arena Fire
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.49891657, y: 0.3145072}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1324
-      height: 850
-    spriteID: 5dba87862c1860e4a94bdc6ff5fd3f39
+      width: 1846
+      height: 903
+    spriteID: 044c5741e7f14e3439b086b50d58ca78
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,179 +144,29 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_1
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1336
-      y: 4
-      width: 1324
-      height: 850
-    spriteID: 86f50c9c48c5ed840bc679ef50d69308
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 1336, y: 4}
-  - name: Frame_2
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 2668
-      y: 4
-      width: 1324
-      height: 850
-    spriteID: 10ebc8c526c308e44b19e6d76d28b2ff
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 2668, y: 4}
-  - name: Frame_3
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 862
-      width: 1324
-      height: 850
-    spriteID: 758579a816909204cad90ea82e978900
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 862}
-  - name: Frame_4
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1336
-      y: 862
-      width: 1324
-      height: 850
-    spriteID: 88920fcb78d4ed644b8c03e62fa88414
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 1336, y: 862}
-  - name: Frame_5
-    originalName: 
-    pivot: {x: 0.5, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 2668
-      y: 862
-      width: 1324
-      height: 850
-    spriteID: 44a6666a6c2fcb04eb464c8973a01215
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 2668, y: 862}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2091866458
+      value0: 1706187564
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: BossArenaBackground_1
+    name: Boss Arena Fire
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: Boss Arena Fire
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 261
-        y: 0
-        width: 1324
-        height: 850
-      spriteId: 5dba87862c1860e4a94bdc6ff5fd3f39
-    - name: Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 261
-        y: 0
-        width: 1324
-        height: 850
-      spriteId: 86f50c9c48c5ed840bc679ef50d69308
-    - name: Frame_2
-      frameIndex: 2
-      additiveSortOrder: 0
-      cellRect:
-        x: 261
-        y: 0
-        width: 1324
-        height: 850
-      spriteId: 10ebc8c526c308e44b19e6d76d28b2ff
-    - name: Frame_3
-      frameIndex: 3
-      additiveSortOrder: 0
-      cellRect:
-        x: 261
-        y: 0
-        width: 1324
-        height: 850
-      spriteId: 758579a816909204cad90ea82e978900
-    - name: Frame_4
-      frameIndex: 4
-      additiveSortOrder: 0
-      cellRect:
-        x: 261
-        y: 0
-        width: 1324
-        height: 850
-      spriteId: 88920fcb78d4ed644b8c03e62fa88414
-    - name: Frame_5
-      frameIndex: 5
-      additiveSortOrder: 0
-      cellRect:
-        x: 261
-        y: 0
-        width: 1324
-        height: 850
-      spriteId: 44a6666a6c2fcb04eb464c8973a01215
+        x: 0
+        y: -284
+        width: 1846
+        height: 903
+      spriteId: 044c5741e7f14e3439b086b50d58ca78
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -359,5 +209,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 1846, y: 1135}
-  previousTextureSize: {x: 4096, y: 2048}
+  canvasSize: {x: 1842, y: 851}
+  previousTextureSize: {x: 2048, y: 1024}
