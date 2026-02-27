@@ -2366,7 +2366,7 @@ MonoBehaviour:
   _rollCooldown: 1
   currentState: 0
   mainCamera: {fileID: 525409375}
-  manaHandler: {fileID: 0}
+  manaHandler: {fileID: 1690676797}
   target: {fileID: 1490241309}
   playerHitbox: {fileID: 357182782}
   attackDuration: 0.25
@@ -3515,6 +3515,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1690676797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3461287631870280144, guid: e74c87e675ad7fe4ca560fbe63f4a13c, type: 3}
+  m_PrefabInstance: {fileID: 55003229}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1842096e8436c48abd62f96c5735f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1715471477
 GameObject:
   m_ObjectHideFlags: 0
