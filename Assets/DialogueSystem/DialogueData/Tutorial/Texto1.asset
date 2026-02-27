@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf4132ac25529a428723c1702b29c02, type: 3}
   m_Name: Texto1
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: 187512ca83399c04ab889a7b0678f515, type: 2}
   portraitId: 
   hasName: 1
-  dialogue: []
+  dialogue:
+  - Donde estoy
   responses: []
