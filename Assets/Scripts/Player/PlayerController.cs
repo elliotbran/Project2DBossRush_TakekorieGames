@@ -343,6 +343,7 @@ public class PlayerController : MonoBehaviour
             var enemyController = enemy.GetComponent<EnemyController>();
             if (enemyController != null)
             {
+                StartCoroutine(HitStop()); // Start hit stop effect
                 enemyController.TakeDamage(attackDamage);
                 Debug.Log("We hit " + enemy.name);
             }
@@ -360,6 +361,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.40f); //tiempo del parry
         canParry = true;
         currentState = PlayerState.Normal; //vuelve al estado nromal
+    }
+
+    IEnumerator HitStop()
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = 0.1f; // Slow down time to create hit stop effect
+        yield return new WaitForSecondsRealtime(0.1f); // Wait for a short duration in real time
+        Time.timeScale = originalTimeScale; // Restore original time scale
     }
     void HandleParry()
     {

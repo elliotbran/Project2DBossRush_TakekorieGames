@@ -49,6 +49,7 @@ public class EnemyController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
         _animator = GetComponent<Animator>(); // Get the Animator component attached to the boss
+        particleblood.Stop();
     }
 
     private void Start()
