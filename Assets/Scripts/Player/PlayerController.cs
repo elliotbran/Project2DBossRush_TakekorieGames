@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
     } 
     void Update()
     {
-        if (canMove == false) return; //If canMove is false, the player cannot move or do any action
+         //If canMove is false, the player cannot move or do any action
         if (dialogueUI.IsOpen) return; //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
         if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime; 
         if (_parrycooldowntime > 0f) _parrycooldowntime -= Time.deltaTime;
@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
     #region Movement
     void HandleMovement() // Normal movement and roll initiation
     {
+        if (canMove == false) return;
         _speed = _maxSpeed;
 
         float moveX = 0f;
