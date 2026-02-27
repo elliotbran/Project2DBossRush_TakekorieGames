@@ -353,18 +353,18 @@ public class PlayerController : MonoBehaviour
     {
         if (canParry && _object != null) //detecta el objeto y mira que tag le corresponde
         {
-            if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana y destrulle el objeto 
+            if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana con las particulas de mana y destrulle el objeto 
             {
-                if (manaHandler != null)
+                if (manaHandler != null) //suelta 5 bolas de particulas de mana
                 {
-                    manaHandler.SpawnMana(4);
+                    manaHandler.SpawnMana(5);
                 }
                 Debug.Log("parreando");
                 Destroy(_object.gameObject);
                 Debug.Log("destruido");
-                if (_playerparryshake != null) 
+                if (_playerparryshake != null) //la camara se sacude 
                 { 
-                   _playerparryshake.TriggerShake();
+                   _playerparryshake.TriggerShake(); 
                 }
             }
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto

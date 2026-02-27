@@ -17,15 +17,15 @@ public class ManaController : MonoBehaviour
     {
 
     }
-    public void RefillMana(float amount) //esta funcion rellena la barra de mana y cuando ve que esta llena deja la barra a cero y rellena la pocion 
+    public void RefillMana(float amount) //esta funcion rellena la barra de mana cuando las particulas tocan al player
     {
-        _currentMana += amount;
-        if (_currentMana >= _maxMana)
+        _currentMana += amount; //llena un punto de mana 
+        if (_currentMana >= _maxMana)  //cuando se llena el mana a tope deja de añadir mas
         {
             _currentMana = _maxMana;
         }
 
-        UpdateStatus();
+        UpdateStatus(); //actualizamos la barra de mana
     }
     public bool ConsumeMana(float amount)// esta funcion intenta gastar mana si ha gastado mana devuelve el true y si no devuelve el false
     {
