@@ -76,6 +76,8 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask enemyLayers; //Its used by the boss to detect our player
 
+    public bool autoTrigger = false;
+
 
     void Awake()
     {
@@ -127,6 +129,11 @@ public class PlayerController : MonoBehaviour
         if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime; 
         if (_parrycooldowntime > 0f) _parrycooldowntime -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit")) //In case is not open, this activates it if the player is in range of an interactable object and presses the interact button
+        {
+            interactable?.Interact(this);
+        }
+
+        if (autoTrigger) //This is used for the boss fight, it automatically triggers the dialogue when the player enters the trigger area
         {
             interactable?.Interact(this);
         }
