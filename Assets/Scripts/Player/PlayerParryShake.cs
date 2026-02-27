@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerParryShake : MonoBehaviour
 {
-    private void Update()
+    public void TriggerShake()
     {
-        CinemachineShake.Instance.ShakeCamera(10f, .2f); // Shake the camera when the boss attacks
+        CinemachineShake.Instance.ShakeCamera(10f, .2f);
     }
 }

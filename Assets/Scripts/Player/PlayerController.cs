@@ -20,19 +20,22 @@ public class PlayerController : MonoBehaviour
     [Header("Player Speed")]
     [SerializeField] float _speed;
     private float _maxSpeed = 10f;
+    public bool canMove = true;
+
 
     [Header("Parry system")]
     [SerializeField] private float _parrycooldown = 1f;
     private float _parrycooldowntime = 0;
+
     public enum PlayerState //State machine for the player
     {
         Normal,        
         Rolling,
         Attacking,
         Parry,
+        Dead,
     }
     public bool isAttacking;
-
     private bool canParry = false;   
 
     public Vector3 moveDir;
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera;
     private PlayerController _playerController;
     private ManaController _manacontroller;
+    private PlayerParryShake _playerparryshake;
     private Animator _playerAnimator;
     private Rigidbody2D _rb;
     private Collider2D _object;
@@ -72,7 +76,6 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask enemyLayers; //Its used by the boss to detect our player
 
-    public bool canMove = true;
 
     void Awake()
     {
@@ -86,6 +89,7 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         _playerController = GetComponent<PlayerController>();
         _manacontroller = GameObject.FindAnyObjectByType<ManaController>();
+        _playerparryshake = GetComponent<PlayerParryShake>();
         _playerAnimator = GetComponent<Animator>();
         if (target != null)
         {
@@ -110,6 +114,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Parry:
                 _rb.linearVelocity = Vector2.zero; // While parryign the player cannot move
+                break;
+            case PlayerState.Dead:
+                _rb.linearVelocity = Vector2.zero; // When the player is dead, it cannot move
                 break;
         }
     } 
@@ -150,10 +157,10 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
 
         /////////------------NO TOCAR------------/////////
-        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        /*Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = mouseWorldPos - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        target.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+        target.transform.rotation = Quaternion.Euler(0, 0, angle - 90);*/
         /////////------------NO TOCAR------------/////////
         
         
@@ -178,6 +185,8 @@ public class PlayerController : MonoBehaviour
                 {
                     HandleParry(); // Calls "handleParry" when the player is parryng and canParry is true
                 }
+                break;
+            case PlayerState.Dead:
                 break;
         }
     }
@@ -276,12 +285,16 @@ public class PlayerController : MonoBehaviour
     public void ReceiveDamage(float quantity) // Damage player
     {
         health -= quantity;
+        _animator.SetTrigger("Hurt"); // Trigger hurt animation
+
         if (health <= 0)
         {
             health = 0;
+            currentState = PlayerState.Dead;
+            canMove = true;
             Debug.Log("El jugador ha muerto");
             // Trigger death animation, disable player controls, etc.
-            //_animator.SetBool("IsDead", true);
+            _animator.SetBool("IsDead", true);
             playerHitbox.enabled = false; // Disable hitbox to prevent further damage
             this.enabled = false; // Disable this script to stop player movement and actions
         }
@@ -345,6 +358,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("parreando");
                 Destroy(_object.gameObject);
                 Debug.Log("destruido");
+                if (_playerparryshake != null) 
+                {
+                    _playerparryshake.TriggerShake();
+                }
             }
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto
             {
