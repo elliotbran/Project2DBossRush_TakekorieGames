@@ -22,14 +22,9 @@ public class ManaController : MonoBehaviour
         _currentMana += amount;
         if (_currentMana >= _maxMana)
         {
-            _currentMana = 0; 
-            if (potioncontroller != null)
-            {
-                potioncontroller.UpdateStatus(true);
-                Debug.Log("Pocion Recargada");
-            }
+            _currentMana = _maxMana;
         }
-        _currentMana = Mathf.Clamp(_currentMana, 0f, _maxMana); 
+
         UpdateStatus();
     }
     public bool ConsumeMana(float amount)// esta funcion intenta gastar mana si ha gastado mana devuelve el true y si no devuelve el false
