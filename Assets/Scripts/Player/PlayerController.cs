@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public DialogueUI DialogueUI => dialogueUI; //Lets other scritps access the dialogueUI without allowing them to change it
     public IInteractable interactable { get; set; } //Gets the "IInteractable" interface from the object the player is interacting with
 
-
     [Header("Player Health")]
     public float health;
     public float maxHealth = 100f;
@@ -23,6 +22,18 @@ public class PlayerController : MonoBehaviour
     private float _maxSpeed = 10f;
     public bool canMove = true;
 
+    [Header("Player Dashing")]
+    [SerializeField] private float _rollCooldown = 1f; // cooldown in seconds
+    private float _rollSpeed = 20f;
+
+    [Header("Player Combat")]
+    [SerializeField] private float attackDuration = 0.25f; // how long the attack lasts (seconds)
+    public float attackRange = 0.5f;
+    public float attackRate = 2f;
+    private float nextAttackTime = 0f;
+    public int attackDamage = 40;
+    public UnityEngine.Transform attackPoint;
+    public LayerMask enemyLayers; //Its used by the boss to detect our player
 
     [Header("Parry system")]
     [SerializeField] private float _parrycooldown = 1f;
@@ -42,49 +53,32 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDir;
 
     private Vector3 _rollDir;
-    private Vector3 _lastMoveDir;
-
-    [SerializeField] private float _rollCooldown = 1f; // cooldown in seconds
-    private float _rollSpeed = 20f;
+    private Vector3 _lastMoveDir;       
 
     public PlayerState currentState;
 
     private float _rollCooldownTimer = 0f;
 
     public Camera mainCamera;
-    private PlayerController _playerController;
-    private ManaController _manacontroller;
-    public ManaParticleHandler manaHandler;
-    private PlayerParryShake _playerparryshake;
+    public GameObject target;
+    BoxCollider2D _playerHitbox;
+
     private Animator _playerAnimator;
     private Rigidbody2D _rb;
     private Collider2D _object;
     private Animator _animator;
 
-    public GameObject target;
-    public BoxCollider2D playerHitbox;
-
-    [Header("Combat")]
-    [SerializeField] private float attackDuration = 0.25f; // how long the attack lasts (seconds)
-
-    public UnityEngine.Transform attackPoint;
-
-    public float attackRange = 0.5f;
-    public int attackDamage = 40;
-
-    public float attackRate = 2f;
-
-    private float nextAttackTime = 0f;
-
-    public LayerMask enemyLayers; //Its used by the boss to detect our player
+    //Scripts
+    private PlayerController _playerController;
+    private PlayerParryShake _playerparryshake;            
+    public ManaParticleHandler manaHandler;
 
     public bool autoTrigger = false;
-
-
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
         _animator = GetComponent<Animator>(); // Get the Animator component
+        _playerHitbox = GetComponentInChildren<BoxCollider2D>(); // Get the BoxCollider2D component
         currentState = PlayerState.Normal; // Start in Normal state
     }
     void Start()
@@ -92,7 +86,6 @@ public class PlayerController : MonoBehaviour
         _speed = _maxSpeed;
         health = maxHealth;
         _playerController = GetComponent<PlayerController>();
-        _manacontroller = GameObject.FindAnyObjectByType<ManaController>();
         _playerparryshake = GetComponent<PlayerParryShake>();
         _playerAnimator = GetComponent<Animator>();
         if (target != null)
@@ -130,6 +123,7 @@ public class PlayerController : MonoBehaviour
         if (dialogueUI.IsOpen) return; //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
         if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime; 
         if (_parrycooldowntime > 0f) _parrycooldowntime -= Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Submit")) //In case is not open, this activates it if the player is in range of an interactable object and presses the interact button
         {
             interactable?.Interact(this);
@@ -140,6 +134,7 @@ public class PlayerController : MonoBehaviour
             interactable?.Interact(this);
             //Debug.Log("AutoTrigger activated");
         }
+
         // Cooldown timer 
         if (_rollCooldownTimer > 0f)
         {
@@ -161,6 +156,7 @@ public class PlayerController : MonoBehaviour
             _parrycooldowntime = _parrycooldown; //Inicia el Cooldown del parry
             StartCoroutine(ParryWindowRoutine()); //Llama a la corrutina ParryWindowRoutine()
         }
+
         UpdateStates();
 
         Ray ray = new Ray(transform.position, _playerController.moveDir); //Raycast that shows the direction the player is moving
@@ -171,9 +167,7 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = mouseWorldPos - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         target.transform.rotation = Quaternion.Euler(0, 0, angle - 90);*/
-        /////////------------NO TOCAR------------/////////
-        
-        
+        /////////------------NO TOCAR------------/////////             
     }
 
     void UpdateStates()
@@ -185,7 +179,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Rolling:
                 HandleRolling();
-                Shadows.me.Sombras_Skill();
                 break;
 
             case PlayerState.Attacking:
@@ -194,23 +187,13 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Parry:
                 if (canParry)
                 {
-                    HandleParry(); // Calls "handleParry" when the player is parryng and canParry is true
+                    HandleParry(); // Calls "handleParry" when the player is parrying and canParry is true
                 }
                 break;
             case PlayerState.Dead:
                 break;
         }
-    }
-
-    public void Cure(float quantity) // Heals the player with the potion
-    {
-        health += quantity;
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-    }
-    
+    }    
 
     #region Movement
     void HandleMovement() // Normal movement and roll initiation
@@ -239,6 +222,8 @@ public class PlayerController : MonoBehaviour
         }
 
         moveDir = new Vector3(moveX, moveY).normalized;
+
+        // Seamlessly blend between idle and movement animations by setting MoveX, MoveY, and MoveMagnitude parameters
         _animator.SetFloat("MoveX", moveX);
         _animator.SetFloat("MoveY", moveY);
         _animator.SetFloat("MoveMagnitude", moveDir.magnitude);
@@ -283,6 +268,7 @@ public class PlayerController : MonoBehaviour
     {
         float rollSpeedDropMultiplier = 5f;
         _rollSpeed -= _rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
+        Shadows.me.Sombras_Skill();
 
         float minRollSpeed = 15f;
         if (_rollSpeed < minRollSpeed)
@@ -292,9 +278,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-
-    #region Combat
-
+    #region Health and Healing
     public void ReceiveDamage(float quantity) // Damage player
     {
         health -= quantity;
@@ -308,11 +292,22 @@ public class PlayerController : MonoBehaviour
             Debug.Log("El jugador ha muerto");
             // Trigger death animation, disable player controls, etc.
             _animator.SetBool("IsDead", true);
-            playerHitbox.enabled = false; // Disable hitbox to prevent further damage
+            _playerHitbox.enabled = false; // Disable hitbox to prevent further damage
             this.enabled = false; // Disable this script to stop player movement and actions
         }
     }
 
+    public void Cure(float quantity) // Heals the player with the potion
+    {
+        health += quantity;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+    #endregion
+
+    #region Combat
     void Attack() // Initiate attack sequence
     {
         // Prevent starting a new attack while one is active
@@ -340,10 +335,10 @@ public class PlayerController : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            var enemyController = enemy.GetComponent<EnemyController>();
+            var enemyController = enemy.GetComponent<BossController>();
             if (enemyController != null)
             {
-                StartCoroutine(HitStop()); // Start hit stop effect
+                StartCoroutine(AttackHitStop()); // Start hit stop effect
                 enemyController.TakeDamage(attackDamage);
                 Debug.Log("We hit " + enemy.name);
             }
@@ -351,25 +346,7 @@ public class PlayerController : MonoBehaviour
 
         // Start coroutine to finish the attack after duration
         StartCoroutine(AttackRoutine());
-    }
-    IEnumerator ParryWindowRoutine()
-    {
-        currentState = PlayerState.Parry; //cambia el estado al estado del parry
-        Debug.Log("Parry Activado");
-        _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
-        canParry = false;
-        yield return new WaitForSeconds(0.40f); //tiempo del parry
-        canParry = true;
-        currentState = PlayerState.Normal; //vuelve al estado nromal
-    }
-
-    IEnumerator HitStop()
-    {
-        float originalTimeScale = Time.timeScale;
-        Time.timeScale = 0.1f; // Slow down time to create hit stop effect
-        yield return new WaitForSecondsRealtime(0.1f); // Wait for a short duration in real time
-        Time.timeScale = originalTimeScale; // Restore original time scale
-    }
+    }    
     void HandleParry()
     {
         if (canParry && _object != null) //detecta el objeto y mira que tag le corresponde
@@ -384,8 +361,9 @@ public class PlayerController : MonoBehaviour
                 Destroy(_object.gameObject);
                 Debug.Log("destruido");
                 if (_playerparryshake != null) //la camara se sacude 
-                { 
-                   _playerparryshake.TriggerShake(); 
+                {
+                    StartCoroutine(ParryHitStop()); // Start hit stop effect
+                    _playerparryshake.TriggerShake(); 
                 }
             }
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto
@@ -414,7 +392,7 @@ public class PlayerController : MonoBehaviour
             canParry = false;
         }
     }
-    private IEnumerator AttackRoutine() // Manages the attack lifecycle and resets state after attackDuration
+    IEnumerator AttackRoutine() // Manages the attack lifecycle and resets state after attackDuration
     {
         yield return new WaitForSeconds(attackDuration);
 
@@ -429,7 +407,17 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("ATAQUE FINALIZADO");
     }
+    IEnumerator ParryWindowRoutine()
+    {
+        currentState = PlayerState.Parry; //cambia el estado al estado del parry
+        Debug.Log("Parry Activado");
+        _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
 
+        canParry = false;
+        yield return new WaitForSeconds(0.40f); //tiempo del parry
+        canParry = true;
+        currentState = PlayerState.Normal; //vuelve al estado nromal
+    }
     private void OnDrawGizmosSelected() // Visualize attack range in editor
     {
         if (attackPoint == null)
@@ -439,7 +427,23 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
     #endregion
 
+    #region Hitstop
+    IEnumerator AttackHitStop()
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = 0.1f; // Slow down time to create hit stop effect
+        yield return new WaitForSecondsRealtime(0.1f); // Wait for a short duration in real time
+        Time.timeScale = originalTimeScale; // Restore original time scale
+    }
+
+    IEnumerator ParryHitStop()
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = 0.2f; // Slow down time to create hit stop effect
+        yield return new WaitForSecondsRealtime(0.3f); // Wait for a short duration in real time
+        Time.timeScale = originalTimeScale; // Restore original time scale
+    }    
+    #endregion
 }

@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
-
-
-
-public class EnemyController : MonoBehaviour
+public class BossController : MonoBehaviour
 {
     [Header("Health")] // Header for health related variables 
     public float damage = 25f;
     public float currentHealth;
     public float maxHealth = 100f;
+    public bool isDead = false;
 
-    [SerializeField] private ParticleSystem particleblood;
+    [Header("Combat")] // Header for combat related variables
+    // Attacking
+    public float attackRange;
+    public float timeBetweenAttacks = 2f;
+    bool _alreadyAttacked;
+
+    public float sightRange;
+    public bool playerInAttackRange, playerInSightRange;
+   
     public enum BossState // Different states for the boss
     {
         Idle,
@@ -21,35 +27,29 @@ public class EnemyController : MonoBehaviour
         Attack,
     }
 
-    [SerializeField] Transform player; // Get the player's position to chase and attack the player
-
     public BossState currentState;
-    public LayerMask whatIsPlayer;
-
-    // Attacking
-    public float timeBetweenAttacks = 2f;
-    bool _alreadyAttacked;
-
-    // States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public LayerMask whatIsPlayer;     
 
     // Components
     NavMeshAgent _agent;
     Animator _animator;
+    ParticleSystem _bloodParticles;
+    Transform _playerPosition; // Get the player's position to chase and attack the player
 
     public GameObject CameraGroup;
     public GameObject CameraPlayer;
     public GameObject bossHealthbar;
+    private SpriteRenderer _spriteRenderer;
 
-    public Transform playerPosition;
-    public SpriteRenderer spriteRenderer;
-    public PlayerController playerController;
+    private PlayerController _playerController;
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
         _animator = GetComponent<Animator>(); // Get the Animator component attached to the boss
-        particleblood.Stop();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
+        _playerPosition = GameObject.Find("Player").transform; // Get the player's position to chase and attack the player
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>(); // Get the PlayerController component attached to the player
+        _bloodParticles = GetComponentInChildren<ParticleSystem>(); // Get the ParticleSystem component attached to the boss for the blood effect when the boss takes damage
     }
 
     private void Start()
@@ -57,7 +57,8 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth; // Initialize the boss's health to the maximum health at the start of the game
         currentState = BossState.Idle; // Start the boss in the Idle state (doesn't matter right now because he detects the player right away and changes to Chase)
         _agent.updateRotation = false;  
-        _agent.updateUpAxis = false; 
+        _agent.updateUpAxis = false;
+        _bloodParticles.Stop();
     }
 
     private void Update()
@@ -67,7 +68,7 @@ public class EnemyController : MonoBehaviour
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
 
         // Flip the boss's sprite based on the player's position relative to the boss
-        spriteRenderer.flipX = playerPosition.transform.position.x < spriteRenderer.transform.position.x;
+        _spriteRenderer.flipX = _playerPosition.transform.position.x < _spriteRenderer.transform.position.x;
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
@@ -78,7 +79,7 @@ public class EnemyController : MonoBehaviour
             UpdateIdle();
         }
 
-        if (playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
+        if (_playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
         {
             sightRange = 0;
             attackRange = 0;
@@ -107,7 +108,7 @@ public class EnemyController : MonoBehaviour
 
     void UpdateChase() // In the Chase state, the boss will move towards the player and play the running animation
     {
-        _agent.SetDestination(player.position);
+        _agent.SetDestination(_playerPosition.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
 
@@ -137,11 +138,13 @@ public class EnemyController : MonoBehaviour
         currentHealth -= damage;
         
         _animator.SetTrigger("Hurt");
-        particleblood.Play();
+        _bloodParticles.Play();
 
         Debug.Log("Vida restante" + currentHealth);
         if (currentHealth <= 0)
         {
+            isDead = true;
+            //StartCoroutine(DeathHitStop()); // Start the hit stop effect when the boss dies
             Die();
         }
     }
@@ -154,6 +157,7 @@ public class EnemyController : MonoBehaviour
 
             if (player != null)
             {
+                StartCoroutine(AttackHitStop()); // Start the hit stop effect when the boss attacks the player
                 player.ReceiveDamage(damage);
                 Debug.Log("Daño realizado. Vida restante: " + player.health);
             }
@@ -163,11 +167,11 @@ public class EnemyController : MonoBehaviour
     void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
     {
         Debug.Log("El enemigo ha muerto");
+        Time.timeScale = 1f; // Ensure that time scale is reset to normal after the hit stop effect
 
         _animator.SetBool("IsDead", true);
 
         bossHealthbar.SetActive(false);
-        GetComponentInChildren<BoxCollider2D>().enabled = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
 
         CameraGroup.SetActive(false);
@@ -183,4 +187,20 @@ public class EnemyController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
+    #region HitStop
+    IEnumerator AttackHitStop()
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = 0.2f; // Slow down time to create hit stop effect
+        yield return new WaitForSecondsRealtime(0.3f); // Wait for a short duration in real time
+        Time.timeScale = originalTimeScale; // Restore original time scale      
+    }
+    /*IEnumerator DeathHitStop()
+    {
+        float originalTimeScale = Time.timeScale;
+        Time.timeScale = 0.2f; // Slow down time to create hit stop effect
+        yield return new WaitForSeconds(0.3f); // Wait for a short duration in real time
+        Time.timeScale = originalTimeScale; // Restore original time scale        
+    }*/
+    #endregion
 }

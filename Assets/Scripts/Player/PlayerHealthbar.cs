@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class PlayerHealthbar : MonoBehaviour
 {
     public Image PlayerlifeBar;
-    private PlayerController player_controller;
+    private PlayerController _playerController;
 
     void Start()
     {
-        player_controller = GameObject.Find("Player").GetComponent<PlayerController>();
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        PlayerlifeBar.fillAmount = player_controller.health / player_controller.maxHealth;
+        PlayerlifeBar.fillAmount = _playerController.health / _playerController.maxHealth;
     }
 }
