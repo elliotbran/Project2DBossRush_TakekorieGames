@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public float damage = 25f;
     public float currentHealth;
     public float maxHealth = 100f;
+
     [SerializeField] private ParticleSystem particleblood;
     public enum BossState // Different states for the boss
     {
@@ -165,7 +166,7 @@ public class EnemyController : MonoBehaviour
         _animator.SetBool("IsDead", true);
 
         bossHealthbar.SetActive(false);
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponentInChildren<BoxCollider2D>().enabled = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
 
         CameraGroup.SetActive(false);
