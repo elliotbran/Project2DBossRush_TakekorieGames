@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public float damage = 25f;
     public float currentHealth;
     public float maxHealth = 100f;
+    [SerializeField] private ParticleSystem particleblood;
     public enum BossState // Different states for the boss
     {
         Idle,
@@ -64,7 +65,7 @@ public class EnemyController : MonoBehaviour
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
 
         // Flip the boss's sprite based on the player's position relative to the boss
-        spriteRenderer.flipX = playerPosition.transform.position.x > spriteRenderer.transform.position.x;
+        spriteRenderer.flipX = playerPosition.transform.position.x < spriteRenderer.transform.position.x;
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
@@ -132,8 +133,9 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
         currentHealth -= damage;
-
+        
         _animator.SetTrigger("Hurt");
+        particleblood.Play();
 
         Debug.Log("Vida restante" + currentHealth);
         if (currentHealth <= 0)
