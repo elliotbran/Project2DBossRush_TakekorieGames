@@ -23,7 +23,7 @@ public class HistoriaTutorialStart : MonoBehaviour
 
         _playerController.canMove = false;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         _playerController.canMove = true;
     }
 }

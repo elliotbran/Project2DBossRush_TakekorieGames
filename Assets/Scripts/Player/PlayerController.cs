@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyLayers; //Its used by the boss to detect our player
 
     public bool canMove = true;
+    
 
     void Awake()
     {
