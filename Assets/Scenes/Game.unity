@@ -9119,7 +9119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 2095006175}
-  playerTarget: {fileID: 1078465790}
+  player: {fileID: 1078465790}
   manaController: {fileID: 5648083540247390350}
 --- !u!4 &560573596445940684
 Transform:
