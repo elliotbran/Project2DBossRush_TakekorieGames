@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
+using UnityEngine.UI;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : MonoBehaviour
@@ -184,6 +185,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Rolling:
                 HandleRolling();
+                Shadows.me.Sombras_Skill();
                 break;
 
             case PlayerState.Attacking:
@@ -260,6 +262,7 @@ public class PlayerController : MonoBehaviour
         // Only allow roll if cooldown has expired
         if (Input.GetKeyDown(KeyCode.Space) && _rollCooldownTimer <= 0f)
         {
+
             // fallback direction if player hasn't moved yet
             if (_lastMoveDir == Vector3.zero)
             {

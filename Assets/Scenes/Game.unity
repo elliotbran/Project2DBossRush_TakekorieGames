@@ -1256,6 +1256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 588553518}
   - component: {fileID: 588553519}
+  - component: {fileID: 588553520}
   m_Layer: 6
   m_Name: Body
   m_TagString: Player
@@ -1333,6 +1334,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &588553520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588553517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b50ac0efdcd57449c6860141d8dd35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sombra: {fileID: 9192517706194574599, guid: c7283d4422376e44d9583325fd5b3272, type: 3}
+  pool: []
+  speed: 20
+  _color: {r: 1, g: 0.4156863, b: 0.5176471, a: 1}
 --- !u!1 &651634542
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,6 +3242,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!198 &1641280371 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 606297025471881964, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+  m_PrefabInstance: {fileID: 1210287925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1644096547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4139,7 +4161,7 @@ MonoBehaviour:
   damage: 25
   currentHealth: 0
   maxHealth: 100
-  particleblood: {fileID: 0}
+  particleblood: {fileID: 1641280371}
   player: {fileID: 1078465790}
   currentState: 0
   whatIsPlayer:
