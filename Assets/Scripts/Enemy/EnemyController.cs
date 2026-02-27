@@ -64,7 +64,7 @@ public class EnemyController : MonoBehaviour
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
 
         // Flip the boss's sprite based on the player's position relative to the boss
-        spriteRenderer.flipX = playerPosition.transform.position.x > spriteRenderer.transform.position.x;
+        spriteRenderer.flipX = playerPosition.transform.position.x < spriteRenderer.transform.position.x;
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state

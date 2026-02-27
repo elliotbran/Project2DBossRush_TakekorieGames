@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d60aae87aee1de54bb9d0da8eda25abb
+guid: d97f604c64fd39c4d96a9db91a9c1d0a
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639071258371322207
+  platformSettingsDirtyTick: 639078097975420481
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,72 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: BossArenaFrontBridge
     originalName: 
-    pivot: {x: 0.527027, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 179
-      width: 37
-      height: 39
-    spriteID: d73fa21f59cc90e499ba44ab51bc41e4
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 179}
-  - name: Frame_1
-    originalName: 
-    pivot: {x: 0.527027, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 69
-      y: 4
-      width: 37
-      height: 39
-    spriteID: 8558600e4a6f91c4889ad4e0fdf1838c
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 69, y: 4}
-  - name: Frame_2
-    originalName: 
-    pivot: {x: 0.527027, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 69
-      y: 51
-      width: 37
-      height: 39
-    spriteID: 5d6907cae7e7f504cb2ff5ddabe9ad36
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 69, y: 51}
-  - name: Frame_3
-    originalName: 
-    pivot: {x: 0.58771926, y: 0}
+    pivot: {x: 0.5, y: 0.6}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -196,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 57
-      height: 36
-    spriteID: 18a3e26b7b2f8944f808563bc322fc84
+      width: 527
+      height: 449
+    spriteID: 044a85f954af6dc448da2bae1de6621b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -207,146 +144,29 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_4
-    originalName: 
-    pivot: {x: 0.57272726, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 48
-      width: 55
-      height: 36
-    spriteID: 191b0327edfde104c975f1768dd48e99
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 48}
-  - name: Frame_5
-    originalName: 
-    pivot: {x: 0.5648148, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 92
-      width: 54
-      height: 36
-    spriteID: 1577ffadcf1292b4e8f4342eae9845f2
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 92}
-  - name: Frame_6
-    originalName: 
-    pivot: {x: 0.47777775, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 136
-      width: 45
-      height: 35
-    spriteID: e2353125c800077428dd0dabfc5013a0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 136}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 216346209
+      value0: 2355134488
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: MainCharacter_Attack_S
+    name: BossArenaFrontBridge
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: BossArenaFrontBridge
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 20
+        x: 655
         y: 0
-        width: 37
-        height: 39
-      spriteId: d73fa21f59cc90e499ba44ab51bc41e4
-    - name: Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 20
-        y: 0
-        width: 37
-        height: 39
-      spriteId: 8558600e4a6f91c4889ad4e0fdf1838c
-    - name: Frame_2
-      frameIndex: 2
-      additiveSortOrder: 0
-      cellRect:
-        x: 20
-        y: 0
-        width: 37
-        height: 39
-      spriteId: 5d6907cae7e7f504cb2ff5ddabe9ad36
-    - name: Frame_3
-      frameIndex: 3
-      additiveSortOrder: 0
-      cellRect:
-        x: 6
-        y: 0
-        width: 57
-        height: 36
-      spriteId: 18a3e26b7b2f8944f808563bc322fc84
-    - name: Frame_4
-      frameIndex: 4
-      additiveSortOrder: 0
-      cellRect:
-        x: 8
-        y: 0
-        width: 55
-        height: 36
-      spriteId: 191b0327edfde104c975f1768dd48e99
-    - name: Frame_5
-      frameIndex: 5
-      additiveSortOrder: 0
-      cellRect:
-        x: 9
-        y: 0
-        width: 54
-        height: 36
-      spriteId: 1577ffadcf1292b4e8f4342eae9845f2
-    - name: Frame_6
-      frameIndex: 6
-      additiveSortOrder: 0
-      cellRect:
-        x: 18
-        y: 0
-        width: 45
-        height: 35
-      spriteId: e2353125c800077428dd0dabfc5013a0
+        width: 527
+        height: 449
+      spriteId: 044a85f954af6dc448da2bae1de6621b
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -389,5 +209,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 79, y: 48}
-  previousTextureSize: {x: 128, y: 256}
+  canvasSize: {x: 1846, y: 1135}
+  previousTextureSize: {x: 1024, y: 512}

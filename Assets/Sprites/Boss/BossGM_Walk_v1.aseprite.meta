@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 32
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 639078074724147538
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Frame_0
     originalName: 
-    pivot: {x: 0.816092, y: -0.74358976}
+    pivot: {x: 0.5517241, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -146,7 +146,7 @@ ScriptedImporter:
     uvTransform: {x: 101, y: 4}
   - name: Frame_1
     originalName: 
-    pivot: {x: 0.816092, y: -0.74358976}
+    pivot: {x: 0.5517241, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -167,7 +167,7 @@ ScriptedImporter:
     uvTransform: {x: 101, y: 168}
   - name: Frame_2
     originalName: 
-    pivot: {x: 0.82022464, y: -0.74358976}
+    pivot: {x: 0.56179774, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -188,7 +188,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: Frame_3
     originalName: 
-    pivot: {x: 0.82022464, y: -0.74358976}
+    pivot: {x: 0.56179774, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -209,7 +209,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 168}
   - name: Frame_4
     originalName: 
-    pivot: {x: 0.82022464, y: -0.74358976}
+    pivot: {x: 0.56179774, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -230,7 +230,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 332}
   - name: Frame_5
     originalName: 
-    pivot: {x: 0.9264705, y: -0.74358976}
+    pivot: {x: 0.5882353, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -251,7 +251,7 @@ ScriptedImporter:
     uvTransform: {x: 101, y: 332}
   - name: Frame_6
     originalName: 
-    pivot: {x: 0.9264705, y: -0.74358976}
+    pivot: {x: 0.5882353, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -272,7 +272,7 @@ ScriptedImporter:
     uvTransform: {x: 196, y: 4}
   - name: Frame_7
     originalName: 
-    pivot: {x: 1.0166668, y: -0.74358976}
+    pivot: {x: 0.6333332, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -293,7 +293,7 @@ ScriptedImporter:
     uvTransform: {x: 196, y: 168}
   - name: Frame_8
     originalName: 
-    pivot: {x: 1.0166668, y: -0.74358976}
+    pivot: {x: 0.6333332, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -314,7 +314,7 @@ ScriptedImporter:
     uvTransform: {x: 196, y: 332}
   - name: Frame_9
     originalName: 
-    pivot: {x: 1.0188679, y: -0.74358976}
+    pivot: {x: 0.58490574, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -335,7 +335,7 @@ ScriptedImporter:
     uvTransform: {x: 272, y: 332}
   - name: Frame_10
     originalName: 
-    pivot: {x: 1.0188679, y: -0.74358976}
+    pivot: {x: 0.58490574, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -356,7 +356,7 @@ ScriptedImporter:
     uvTransform: {x: 340, y: 4}
   - name: Frame_11
     originalName: 
-    pivot: {x: 1.0208333, y: -0.74358976}
+    pivot: {x: 0.54166675, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -377,7 +377,7 @@ ScriptedImporter:
     uvTransform: {x: 401, y: 4}
   - name: Frame_12
     originalName: 
-    pivot: {x: 1.0208333, y: -0.74358976}
+    pivot: {x: 0.54166675, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -398,7 +398,7 @@ ScriptedImporter:
     uvTransform: {x: 401, y: 168}
   - name: Frame_13
     originalName: 
-    pivot: {x: 1.0208333, y: -0.74358976}
+    pivot: {x: 0.54166675, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -419,7 +419,7 @@ ScriptedImporter:
     uvTransform: {x: 401, y: 332}
   - name: Frame_14
     originalName: 
-    pivot: {x: 1.0188679, y: -0.74358976}
+    pivot: {x: 0.58490574, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -440,7 +440,7 @@ ScriptedImporter:
     uvTransform: {x: 340, y: 168}
   - name: Frame_15
     originalName: 
-    pivot: {x: 1.0188679, y: -0.74358976}
+    pivot: {x: 0.58490574, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -461,7 +461,7 @@ ScriptedImporter:
     uvTransform: {x: 340, y: 332}
   - name: Frame_16
     originalName: 
-    pivot: {x: 1.0166668, y: -0.74358976}
+    pivot: {x: 0.6333332, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -482,7 +482,7 @@ ScriptedImporter:
     uvTransform: {x: 272, y: 4}
   - name: Frame_17
     originalName: 
-    pivot: {x: 1.0166668, y: -0.74358976}
+    pivot: {x: 0.6333332, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -519,8 +519,8 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 249
-        y: 116
+        x: 272
+        y: 0
         width: 87
         height: 156
       spriteId: 87aef2b4b4348ef4a9405144014ee145
@@ -528,8 +528,8 @@ ScriptedImporter:
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 249
-        y: 116
+        x: 272
+        y: 0
         width: 87
         height: 156
       spriteId: ac20b17aeccb9c247ae89794ff430d3f
@@ -537,8 +537,8 @@ ScriptedImporter:
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 247
-        y: 116
+        x: 270
+        y: 0
         width: 89
         height: 156
       spriteId: 42a25013560d1ec4d860584839f4e5a9
@@ -546,8 +546,8 @@ ScriptedImporter:
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 247
-        y: 116
+        x: 270
+        y: 0
         width: 89
         height: 156
       spriteId: ff9e53d73b33a3e4bbfba4081aa9f3dc
@@ -555,8 +555,8 @@ ScriptedImporter:
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
-        x: 247
-        y: 116
+        x: 270
+        y: 0
         width: 89
         height: 156
       spriteId: fd3988ae2d5a71244b172e52b568b8b0
@@ -564,8 +564,8 @@ ScriptedImporter:
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
-        x: 257
-        y: 116
+        x: 280
+        y: 0
         width: 68
         height: 156
       spriteId: d9255b6a5291f184882d867653de6468
@@ -573,8 +573,8 @@ ScriptedImporter:
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:
-        x: 257
-        y: 116
+        x: 280
+        y: 0
         width: 68
         height: 156
       spriteId: 959b837ce8ec88a42b8a132aa84e6d16
@@ -582,8 +582,8 @@ ScriptedImporter:
       frameIndex: 7
       additiveSortOrder: 0
       cellRect:
-        x: 259
-        y: 116
+        x: 282
+        y: 0
         width: 60
         height: 156
       spriteId: 4b224b35cf83192408e3b55e39309aa0
@@ -591,8 +591,8 @@ ScriptedImporter:
       frameIndex: 8
       additiveSortOrder: 0
       cellRect:
-        x: 259
-        y: 116
+        x: 282
+        y: 0
         width: 60
         height: 156
       spriteId: 977d6be97e62d924aada3c0d4962e299
@@ -600,8 +600,8 @@ ScriptedImporter:
       frameIndex: 9
       additiveSortOrder: 0
       cellRect:
-        x: 266
-        y: 116
+        x: 289
+        y: 0
         width: 53
         height: 156
       spriteId: c7a7a952a07f0464cbe389a5c19cec70
@@ -609,8 +609,8 @@ ScriptedImporter:
       frameIndex: 10
       additiveSortOrder: 0
       cellRect:
-        x: 266
-        y: 116
+        x: 289
+        y: 0
         width: 53
         height: 156
       spriteId: fa042c247b66c9a419d3a4c9598c7b9d
@@ -618,8 +618,8 @@ ScriptedImporter:
       frameIndex: 11
       additiveSortOrder: 0
       cellRect:
-        x: 271
-        y: 116
+        x: 294
+        y: 0
         width: 48
         height: 156
       spriteId: 6ec9436f356bb3d48845aebab1195b27
@@ -627,8 +627,8 @@ ScriptedImporter:
       frameIndex: 12
       additiveSortOrder: 0
       cellRect:
-        x: 271
-        y: 116
+        x: 294
+        y: 0
         width: 48
         height: 156
       spriteId: 631a7eeddee69ac468020f3085eaba28
@@ -636,8 +636,8 @@ ScriptedImporter:
       frameIndex: 13
       additiveSortOrder: 0
       cellRect:
-        x: 271
-        y: 116
+        x: 294
+        y: 0
         width: 48
         height: 156
       spriteId: a39f798b56bc1db46bf9ce843f7025fe
@@ -645,8 +645,8 @@ ScriptedImporter:
       frameIndex: 14
       additiveSortOrder: 0
       cellRect:
-        x: 266
-        y: 116
+        x: 289
+        y: 0
         width: 53
         height: 156
       spriteId: 6f9e074b87087634aa4088f7151df0b0
@@ -654,8 +654,8 @@ ScriptedImporter:
       frameIndex: 15
       additiveSortOrder: 0
       cellRect:
-        x: 266
-        y: 116
+        x: 289
+        y: 0
         width: 53
         height: 156
       spriteId: 6b52d83b907afd3498c9bd0569cca59d
@@ -663,8 +663,8 @@ ScriptedImporter:
       frameIndex: 16
       additiveSortOrder: 0
       cellRect:
-        x: 259
-        y: 116
+        x: 282
+        y: 0
         width: 60
         height: 156
       spriteId: 013b623a831b21343be23adcf77897f6
@@ -672,8 +672,8 @@ ScriptedImporter:
       frameIndex: 17
       additiveSortOrder: 0
       cellRect:
-        x: 259
-        y: 116
+        x: 282
+        y: 0
         width: 60
         height: 156
       spriteId: 0b85f1e079e1a4243b635ccc97a01a9f
@@ -684,6 +684,30 @@ ScriptedImporter:
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
