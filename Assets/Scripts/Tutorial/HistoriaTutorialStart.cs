@@ -8,6 +8,7 @@ public class HistoriaTutorialStart : MonoBehaviour
     private Animator _playerAnimator;
 
     [SerializeField] private GameObject dialogue1;
+    [SerializeField] private GameObject dialogue2;
 
     private void Start()
     {
@@ -19,21 +20,21 @@ public class HistoriaTutorialStart : MonoBehaviour
 
     public IEnumerator StartTutorial()
     {
+        _playerController.canMove = false;
 
         if (_playerAnimator != null)
             _playerAnimator.Play("Player_WakeUp");
 
-        _playerController.canMove = false;
 
         yield return new WaitForSeconds(2.5f);
-        _playerController.canMove = true;
 
         dialogue1.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
 
         _playerController.autoTrigger = true;
-        Debug.Log(_playerController.autoTrigger);
-        yield return new WaitForSeconds(0.5f);
-        _playerController.autoTrigger = false;
+        //Debug.Log(_playerController.autoTrigger);
+        yield return new WaitForSeconds(0.3f);
+        _playerController.canMove = true;
 
         dialogue1.SetActive(false);
 

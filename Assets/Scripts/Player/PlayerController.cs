@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     public Camera mainCamera;
     private PlayerController _playerController;
     private ManaController _manacontroller;
+    public ManaParticleHandler manaHandler;
     private PlayerParryShake _playerparryshake;
     private Animator _playerAnimator;
     private Rigidbody2D _rb;
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
     } 
     void Update()
     {
-        if (canMove == false) return; //If canMove is false, the player cannot move or do any action
+         //If canMove is false, the player cannot move or do any action
         if (dialogueUI.IsOpen) return; //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
         if (_rollCooldownTimer > 0f) _rollCooldownTimer -= Time.deltaTime; 
         if (_parrycooldowntime > 0f) _parrycooldowntime -= Time.deltaTime;
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
         if (autoTrigger) //This is used for the boss fight, it automatically triggers the dialogue when the player enters the trigger area
         {
             interactable?.Interact(this);
-            Debug.Log("AutoTrigger activated");
+            //Debug.Log("AutoTrigger activated");
         }
         // Cooldown timer 
         if (_rollCooldownTimer > 0f)
@@ -212,6 +213,7 @@ public class PlayerController : MonoBehaviour
     #region Movement
     void HandleMovement() // Normal movement and roll initiation
     {
+        if (canMove == false) return;
         _speed = _maxSpeed;
 
         float moveX = 0f;
@@ -360,15 +362,18 @@ public class PlayerController : MonoBehaviour
     {
         if (canParry && _object != null) //detecta el objeto y mira que tag le corresponde
         {
-            if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana y destrulle el objeto
+            if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana con las particulas de mana y destrulle el objeto 
             {
-                if (_manacontroller != null) _manacontroller.RefillMana(1f);
+                if (manaHandler != null) //suelta 5 bolas de particulas de mana
+                {
+                    manaHandler.SpawnMana(5);
+                }
                 Debug.Log("parreando");
                 Destroy(_object.gameObject);
                 Debug.Log("destruido");
-                if (_playerparryshake != null) 
-                {
-                    _playerparryshake.TriggerShake();
+                if (_playerparryshake != null) //la camara se sacude 
+                { 
+                   _playerparryshake.TriggerShake(); 
                 }
             }
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto

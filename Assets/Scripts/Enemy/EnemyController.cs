@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public float damage = 25f;
     public float currentHealth;
     public float maxHealth = 100f;
+    [SerializeField] private ParticleSystem particleblood;
     public enum BossState // Different states for the boss
     {
         Idle,
@@ -132,8 +133,9 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
         currentHealth -= damage;
-
+        
         _animator.SetTrigger("Hurt");
+        particleblood.Play();
 
         Debug.Log("Vida restante" + currentHealth);
         if (currentHealth <= 0)

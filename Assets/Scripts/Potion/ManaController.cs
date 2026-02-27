@@ -17,20 +17,22 @@ public class ManaController : MonoBehaviour
     {
 
     }
-    public void RefillMana(float amount) //esta funcion rellena la barra de mana y cuando ve que esta llena deja la barra a cero y rellena la pocion 
+    public void RefillMana(float amount) //esta funcion rellena la barra de mana cuando las particulas tocan al player
     {
-        _currentMana += amount;
-        if (_currentMana >= _maxMana)
+        _currentMana += amount; //se suma 1 de mana que nos da la primera particula
+
+        if (_currentMana >= _maxMana) //Si el mana se llena se vacia la barra de mana y se rellena la pocima cambiandola de color a verde
         {
-            _currentMana = 0; 
+            _currentMana = 0; //se vacia la barra de mana y empieza de cero 
+
             if (potioncontroller != null)
             {
-                potioncontroller.UpdateStatus(true);
-                Debug.Log("Pocion Recargada");
+                potioncontroller.UpdateStatus(true); //que cambie la pocion de color cuando se llene 
+                Debug.Log("Mana llena Poción lists");
             }
         }
-        _currentMana = Mathf.Clamp(_currentMana, 0f, _maxMana); 
-        UpdateStatus();
+
+        UpdateStatus(); //actualizamos la barra de mana
     }
     public bool ConsumeMana(float amount)// esta funcion intenta gastar mana si ha gastado mana devuelve el true y si no devuelve el false
     {
