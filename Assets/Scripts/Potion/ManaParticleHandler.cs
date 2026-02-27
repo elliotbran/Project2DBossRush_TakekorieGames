@@ -9,7 +9,7 @@ public class ManaParticleHandler : MonoBehaviour
     private bool _shouldChase = false;
     private bool _hasaddedmana = false;
     private float _currentSpeed = 0f;
-    private const float speed_initial = 8f;
+    private const float speed_initial = 5f;
     private const float acceleration = 20f;
 
     public void SpawnMana(int amount) //Se activa esta funcion cuando hacemos un parry con exito 
@@ -18,7 +18,7 @@ public class ManaParticleHandler : MonoBehaviour
         _currentSpeed = speed_initial; //la velocidad de las partiuclas se resetea y empiezan lentos
         ps.Emit(amount); //salen las particulas azules
         _shouldChase = false; //no sigue al jugador 
-        Invoke("EnableChasing", 0.8f); //esperamos a que caigan y depues que vuelen al player
+        Invoke("EnableChasing", 0.2f); //esperamos a que caigan y depues que vuelen al player
     }
 
     void EnableChasing() { _shouldChase = true; } //activa el movimiento de las particulas
