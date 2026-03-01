@@ -158,7 +158,7 @@ public class BossController : MonoBehaviour
             if (player != null)
             {
                 StartCoroutine(AttackHitStop()); // Start the hit stop effect when the boss attacks the player
-                player.ReceiveDamage(damage);
+                player.TakeDamage(damage);
                 Debug.Log("Daño realizado. Vida restante: " + player.health);
             }
         }
@@ -190,10 +190,9 @@ public class BossController : MonoBehaviour
     #region HitStop
     IEnumerator AttackHitStop()
     {
-        float originalTimeScale = Time.timeScale;
         Time.timeScale = 0.2f; // Slow down time to create hit stop effect
         yield return new WaitForSecondsRealtime(0.3f); // Wait for a short duration in real time
-        Time.timeScale = originalTimeScale; // Restore original time scale      
+        Time.timeScale = 1; // Restore original time scale      
     }
     /*IEnumerator DeathHitStop()
     {

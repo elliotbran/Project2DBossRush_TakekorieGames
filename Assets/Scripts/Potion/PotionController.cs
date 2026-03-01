@@ -39,7 +39,7 @@ public class PotionController : MonoBehaviour
 
     void UsePotion() //la funcion llama al playercontroller y cura al player con 25 de vida y la potion se queda vacia
     {
-        playerController.Cure(25f);
+        playerController.Heal(25f);
         UpdateStatus(false);
         Debug.Log("Pocima usada, salud restaurada");
     }
