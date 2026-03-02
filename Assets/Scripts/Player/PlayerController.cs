@@ -365,6 +365,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana con las particulas de mana y destrulle el objeto 
             {
+                _bloodParticlesPlayer.Stop();
                 if (manaHandler != null) //suelta 5 bolas de particulas de mana
                 {
                     manaHandler.SpawnMana(5);
@@ -376,6 +377,7 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(ParryHitStop()); // Start hit stop effect
                     _playerParryShake.TriggerShake(); 
+
                 }
             }
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto
