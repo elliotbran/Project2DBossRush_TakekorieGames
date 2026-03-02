@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     BoxCollider2D _playerHitbox;
 
     private Animator _playerAnimator;
-    ParticleSystem _bloodParticlesPlayer;
+    [SerializeField]ParticleSystem _bloodParticlesPlayer;
     private Rigidbody2D _rb;
     private Collider2D _object;
     private Animator _animator;
@@ -81,7 +81,6 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>(); // Get the Animator component
         _playerHitbox = GetComponentInChildren<BoxCollider2D>(); // Get the BoxCollider2D component
         currentState = PlayerState.Normal; // Start in Normal state
-        _bloodParticlesPlayer = GetComponentInChildren<ParticleSystem>(); // Get the ParticleSystem component attached to the boss for the blood effect when the boss takes damage
     }
     void Start()
     {
