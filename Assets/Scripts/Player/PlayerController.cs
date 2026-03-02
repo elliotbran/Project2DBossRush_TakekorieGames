@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider2D _playerHitbox;
 
     private Animator _playerAnimator;
+    [SerializeField] ParticleSystem _bloodParticlesPlayer;
     private Rigidbody2D _rb;
     private Collider2D _object;
     private Animator _animator;
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _playerParryShake = GetComponent<PlayerParryShake>();
         _playerAnimator = GetComponent<Animator>();
+        _bloodParticlesPlayer.Stop();
         if (target != null)
         {
             target.SetActive(false);
@@ -281,6 +283,7 @@ public class PlayerController : MonoBehaviour
     #region Health and Healing
     public void TakeDamage(float quantity) // Damage player
     {
+        _bloodParticlesPlayer.Play();
         if (isParrying) // If the player can parry, they will parry instead of taking damage
         {
             return;
