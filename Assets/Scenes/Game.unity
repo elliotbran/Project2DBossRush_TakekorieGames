@@ -4543,7 +4543,7 @@ MonoBehaviour:
   isDead: 0
   attackRange: 3
   timeBetweenAttacks: 2
-  sightRange: 10
+  sightRange: 30
   playerInAttackRange: 0
   playerInSightRange: 0
   currentState: 0

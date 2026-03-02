@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
         Dead,
     }
     private bool canParry = false;   
+    private bool isParrying = false;
 
     private Vector3 _rollDir;
     private Vector3 _lastMoveDir;       
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
         _animator = GetComponent<Animator>(); // Get the Animator component
-        _playerHitbox = GetComponentInChildren<CapsuleCollider2D>(); // Get the BoxCollider2D component
+        _playerHitbox = GetComponent<CapsuleCollider2D>(); // Get the BoxCollider2D component
         currentState = PlayerState.Normal; // Start in Normal state
     }
     void Start()
@@ -280,8 +281,16 @@ public class PlayerController : MonoBehaviour
     #region Health and Healing
     public void TakeDamage(float quantity) // Damage player
     {
-        health -= quantity;
-        _animator.SetTrigger("Hurt"); // Trigger hurt animation
+        if (isParrying) // If the player can parry, they will parry instead of taking damage
+        {
+            return;
+        }
+
+        else
+        {
+            health -= quantity;
+            _animator.SetTrigger("Hurt"); // Trigger hurt animation
+        }
 
         if (health <= 0)
         {
@@ -408,6 +417,8 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator ParryWindowRoutine()
     {
+        isParrying = true;
+        _playerHitbox.enabled = false; // Disable hitbox to prevent further damage
         currentState = PlayerState.Parrying; //cambia el estado al estado del parry
         Debug.Log("Parry Activado");
         _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
@@ -415,6 +426,8 @@ public class PlayerController : MonoBehaviour
         canParry = false;
         yield return new WaitForSeconds(0.40f); //tiempo del parry
         canParry = true;
+        isParrying = false;
+        _playerHitbox.enabled = true; // Disable hitbox to prevent further damage
         currentState = PlayerState.Normal; //vuelve al estado nromal
     }
     private void OnDrawGizmosSelected() // Visualize attack range in editor
