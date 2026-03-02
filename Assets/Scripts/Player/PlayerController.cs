@@ -132,6 +132,7 @@ public class PlayerController : MonoBehaviour
         if (autoTrigger) //This is used for the boss fight, it automatically triggers the dialogue when the player enters the trigger area
         {
             interactable?.Interact(this);
+            autoTrigger = false; //Reset autoTrigger to prevent multiple triggers
             //Debug.Log("AutoTrigger activated");
         }
 
