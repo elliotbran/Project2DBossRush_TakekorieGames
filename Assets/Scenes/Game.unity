@@ -2728,6 +2728,7 @@ MonoBehaviour:
   currentState: 0
   mainCamera: {fileID: 525409375}
   target: {fileID: 1490241309}
+  _bloodParticlesPlayer: {fileID: 2082700648}
   manaHandler: {fileID: 1690676797}
   autoTrigger: 0
 --- !u!70 &1078465795
@@ -4834,18 +4835,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4588309892802721036, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588309892802721036, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588309892802721036, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
-      propertyPath: InitialModule.startSpeed.minScalar
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8932208496170356189, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
       propertyPath: m_Name
       value: SangrePlayer
@@ -4858,6 +4847,11 @@ PrefabInstance:
 --- !u!4 &2082700646 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+  m_PrefabInstance: {fileID: 2082700645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2082700648 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4588309892802721036, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
   m_PrefabInstance: {fileID: 2082700645}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &560573596445940684
