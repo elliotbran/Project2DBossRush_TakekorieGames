@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAttackShake : MonoBehaviour
+public class BossAttackShake : MonoBehaviour
 {
     private void Update()
     {

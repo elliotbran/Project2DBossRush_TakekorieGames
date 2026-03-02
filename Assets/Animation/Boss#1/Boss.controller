@@ -68,7 +68,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss#1_Hurt
+  m_Name: Boss_Hurt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -98,7 +98,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss#1_Run
+  m_Name: Boss_Run
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -150,7 +150,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss#1_Idle
+  m_Name: Boss_Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -201,7 +201,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss#1
+  m_Name: Boss
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed
@@ -345,7 +345,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss#1_Death
+  m_Name: Boss_Death
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -421,7 +421,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss#1_Attack
+  m_Name: Boss_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
