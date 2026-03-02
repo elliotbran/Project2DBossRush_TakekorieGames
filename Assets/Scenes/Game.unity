@@ -1489,7 +1489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sombra: {fileID: 9192517706194574599, guid: c7283d4422376e44d9583325fd5b3272, type: 3}
   pool: []
-  speed: 20
+  speed: 40
   _color: {r: 1, g: 0.4156863, b: 0.5176471, a: 1}
 --- !u!1 &651634542
 GameObject:
