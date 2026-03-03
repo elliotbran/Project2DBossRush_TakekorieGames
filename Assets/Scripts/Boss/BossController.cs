@@ -14,7 +14,11 @@ public class BossController : MonoBehaviour
     [Header("Combat")] // Header for combat related variables
     // Attacking
     public float attackRange;
-    public float timeBetweenAttacks = 2f;
+    public float timeBetweenMeleeAttacks = 2f;
+    public float timeBetweenRangeAttacks = 4f;
+    private float _projectileSpeed = 10f;
+    public GameObject projectilePrefab;
+    public Transform projectileSpawnPoint;
     bool _alreadyAttacked;
 
     public float sightRange;
@@ -24,7 +28,8 @@ public class BossController : MonoBehaviour
     {
         Idle,
         Chase,
-        Attack,
+        MeleeAttack,
+        RangeAttack,
     }
 
     public BossState currentState;
@@ -46,9 +51,9 @@ public class BossController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
         _animator = GetComponent<Animator>(); // Get the Animator component attached to the boss
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
         _playerPosition = GameObject.Find("Player").transform; // Get the player's position to chase and attack the player
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>(); // Get the PlayerController component attached to the player
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
         _bloodParticles = GetComponentInChildren<ParticleSystem>(); // Get the ParticleSystem component attached to the boss for the blood effect when the boss takes damage
     }
 
@@ -95,8 +100,14 @@ public class BossController : MonoBehaviour
 
         if (playerInAttackRange && playerInSightRange)
         {
-            currentState = BossState.Attack;
-            UpdateAttack();
+            currentState = BossState.MeleeAttack;
+            UpdateMeleeAttack();
+        }
+
+        if (playerInSightRange && !playerInAttackRange)
+        {
+            currentState = BossState.RangeAttack;
+            //UpdateRangeAttack();
         }
 
     }
@@ -112,7 +123,7 @@ public class BossController : MonoBehaviour
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
 
-    void UpdateAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
+    void UpdateMeleeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
@@ -120,12 +131,31 @@ public class BossController : MonoBehaviour
 
         if (!_alreadyAttacked)
         {
-            _animator.SetTrigger("Attack");
+            _animator.SetTrigger("MeleeAttack");
 
             _alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            Invoke(nameof(ResetAttack), timeBetweenMeleeAttacks);
         }        
     }
+
+    /*void UpdateRangeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
+    {
+        _agent.SetDestination(transform.position);
+        _animator.SetFloat("Speed", 0);
+
+
+        if (!_alreadyAttacked)
+        {
+            _animator.SetTrigger("RangeAttack");
+            // Instantiate the projectile prefab
+            Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            // Make the projectile move towards the player
+
+
+            _alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenRangeAttacks);
+        }
+    }*/
 
     private void ResetAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
@@ -188,7 +218,7 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
     #region HitStop
-    IEnumerator AttackHitStop()
+    public IEnumerator AttackHitStop()
     {
         Time.timeScale = 0.2f; // Slow down time to create hit stop effect
         yield return new WaitForSecondsRealtime(0.3f); // Wait for a short duration in real time

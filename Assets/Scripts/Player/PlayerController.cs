@@ -430,7 +430,7 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
 
         canParry = false;
-        yield return new WaitForSeconds(0.40f); //tiempo del parry
+        yield return new WaitForSeconds(.2f); //tiempo del parry
         canParry = true;
         isParrying = false;
         _playerHitbox.enabled = true; // Disable hitbox to prevent further damage
