@@ -2555,6 +2555,7 @@ Transform:
   - {fileID: 1915888505}
   - {fileID: 1044307358}
   - {fileID: 55003230}
+  - {fileID: 1678353970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1078465791
@@ -2611,6 +2612,7 @@ MonoBehaviour:
   currentState: 0
   mainCamera: {fileID: 525409375}
   target: {fileID: 1490241309}
+  _bloodParticlesPlayer: {fileID: 1678353972}
   manaHandler: {fileID: 1690676797}
   autoTrigger: 0
 --- !u!70 &1078465795
@@ -3083,6 +3085,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
   m_PrefabInstance: {fileID: 1210287925}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1211471101 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+  m_PrefabInstance: {fileID: 1466680303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1339015522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,6 +3339,63 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!1001 &1466680303
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2010664645}
+    m_Modifications:
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.011661363
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830123832749903382, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5490055253426428477, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
+      propertyPath: m_Name
+      value: SangreBoss
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d20f0f38a43b2f4f860160ff630723b, type: 3}
 --- !u!1 &1490241309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3884,6 +3948,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1678353970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+  m_PrefabInstance: {fileID: 1859319776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1678353972 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4588309892802721036, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+  m_PrefabInstance: {fileID: 1859319776}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1690676797 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3461287631870280144, guid: e74c87e675ad7fe4ca560fbe63f4a13c, type: 3}
@@ -4084,6 +4158,63 @@ Transform:
   - {fileID: 199432491}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1859319776
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1078465790}
+    m_Modifications:
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.482
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.011661363
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 207826605984897526, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932208496170356189, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
+      propertyPath: m_Name
+      value: SangrePlayer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe1d83ac191f9d043a9c0da17925c852, type: 3}
 --- !u!1 &1874904885
 GameObject:
   m_ObjectHideFlags: 0
@@ -4414,6 +4545,7 @@ Transform:
   - {fileID: 1339015523}
   - {fileID: 463650365}
   - {fileID: 1210287926}
+  - {fileID: 1211471101}
   - {fileID: 88420810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
