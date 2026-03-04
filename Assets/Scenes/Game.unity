@@ -1691,7 +1691,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 93368250
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -4201,10 +4201,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1.64
   m_Speed: 7
-  m_Acceleration: 8
+  m_Acceleration: 7
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 35
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -4265,13 +4265,15 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   isDead: 0
-  attackRange: 3
-  timeBetweenMeleeAttacks: 2
-  timeBetweenRangeAttacks: 4
+  meleeAttackRange: 3
+  rangeAttackRange: 20
+  timeBetweenMeleeAttacks: 1
+  timeBetweenRangeAttacks: 5
   projectilePrefab: {fileID: 7094630049418330413, guid: 2a8693b813053fa4389a30cdf9ed276b, type: 3}
   projectileSpawnPoint: {fileID: 1369774594}
   sightRange: 30
-  playerInAttackRange: 0
+  playerInMeleeAttackRange: 0
+  playerInRangeAttackRange: 0
   playerInSightRange: 0
   currentState: 0
   whatIsPlayer:

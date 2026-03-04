@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float damage = 20f;
-    float _speed = 10f;
+    [SerializeField]float _speed = 30f;
     Transform _player; // Assign the player in the Inspector
+    
+    BossController _bossController; // Reference to the boss controller to manage projectile behavior
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").transform; // Get the player's position to chase the player
+        _bossController = GameObject.Find("Boss").GetComponent<BossController>(); // Get reference to the boss controller
     }   
 
     void Update()
@@ -36,7 +38,8 @@ public class Projectile : MonoBehaviour
         {
             PlayerController player = collision.GetComponent<PlayerController>();
             Destroy(gameObject); // Destroy the projectile on impact
-            player.TakeDamage(damage); // Apply damage to the player
+            player.TakeDamage(15f); // Apply damage to the player
+            _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
         }        
     }
 
