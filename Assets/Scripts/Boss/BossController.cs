@@ -69,21 +69,21 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         UpdateStates();
-        UpdateRanges();
-
-        // Flip the boss's sprite based on the player's position relative to the boss
-        _spriteRenderer.flipX = _playerPosition.transform.position.x < _spriteRenderer.transform.position.x;
+        UpdateRanges();        
     }
 
     void UpdateRanges()
     {
+        playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
         playerInMeleeAttackRange = Physics2D.OverlapCircle(transform.position, meleeAttackRange, whatIsPlayer);
         playerInRangeAttackRange = Physics2D.OverlapCircle(transform.position, rangeAttackRange, whatIsPlayer);
-        playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
-    {      
+    {
+        // Flip the boss's sprite based on the player's position relative to the boss
+        _spriteRenderer.flipX = _playerPosition.transform.position.x < _spriteRenderer.transform.position.x;
+
         if (!playerInSightRange)
         {
             currentState = BossState.Idle;
