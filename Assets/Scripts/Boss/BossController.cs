@@ -69,12 +69,17 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         UpdateStates();
-        playerInMeleeAttackRange = Physics2D.OverlapCircle(transform.position, meleeAttackRange, whatIsPlayer);
-        playerInRangeAttackRange = Physics2D.OverlapCircle(transform.position, rangeAttackRange, whatIsPlayer);
-        playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
+        UpdateRanges();
 
         // Flip the boss's sprite based on the player's position relative to the boss
         _spriteRenderer.flipX = _playerPosition.transform.position.x < _spriteRenderer.transform.position.x;
+    }
+
+    void UpdateRanges()
+    {
+        playerInMeleeAttackRange = Physics2D.OverlapCircle(transform.position, meleeAttackRange, whatIsPlayer);
+        playerInRangeAttackRange = Physics2D.OverlapCircle(transform.position, rangeAttackRange, whatIsPlayer);
+        playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
@@ -84,7 +89,6 @@ public class BossController : MonoBehaviour
             currentState = BossState.Idle;
             UpdateIdle();
         }
-
 
         if (!playerInMeleeAttackRange && !playerInRangeAttackRange && playerInSightRange)
         {
@@ -145,8 +149,6 @@ public class BossController : MonoBehaviour
 
     void UpdateRangeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
-        _agent.isStopped = false;
-
         if (!_alreadyAttacked)
         {
             _alreadyAttacked = true;
@@ -154,6 +156,7 @@ public class BossController : MonoBehaviour
             _agent.SetDestination(transform.position);
             _animator.SetFloat("Speed", 0);
             _animator.SetTrigger("RangeAttack");
+
             // Instantiate the projectile prefab
             Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
             Invoke(nameof(ResetAttack), timeBetweenRangeAttacks);
