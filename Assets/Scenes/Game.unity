@@ -4267,7 +4267,7 @@ MonoBehaviour:
   isDead: 0
   meleeAttackRange: 3
   rangeAttackRange: 20
-  timeBetweenMeleeAttacks: 1
+  timeBetweenMeleeAttacks: 1.25
   timeBetweenRangeAttacks: 5
   projectilePrefab: {fileID: 7094630049418330413, guid: 2a8693b813053fa4389a30cdf9ed276b, type: 3}
   projectileSpawnPoint: {fileID: 1369774594}
