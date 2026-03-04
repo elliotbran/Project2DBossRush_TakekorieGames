@@ -13,18 +13,23 @@ public class BossController : MonoBehaviour
 
     [Header("Combat")] // Header for combat related variables
     // Attacking
-    public float attackRange;
-    public float timeBetweenAttacks = 2f;
+    public float meleeAttackRange;
+    public float rangeAttackRange;
+    public float timeBetweenMeleeAttacks = 2f;
+    public float timeBetweenRangeAttacks = 4f;
+    public GameObject projectilePrefab;
+    public Transform projectileSpawnPoint;
     bool _alreadyAttacked;
 
     public float sightRange;
-    public bool playerInAttackRange, playerInSightRange;
+    public bool playerInMeleeAttackRange, playerInRangeAttackRange, playerInSightRange;
    
     public enum BossState // Different states for the boss
     {
         Idle,
         Chase,
-        Attack,
+        MeleeAttack,
+        RangeAttack,
     }
 
     public BossState currentState;
@@ -46,9 +51,9 @@ public class BossController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
         _animator = GetComponent<Animator>(); // Get the Animator component attached to the boss
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
         _playerPosition = GameObject.Find("Player").transform; // Get the player's position to chase and attack the player
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>(); // Get the PlayerController component attached to the player
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
         _bloodParticles = GetComponentInChildren<ParticleSystem>(); // Get the ParticleSystem component attached to the boss for the blood effect when the boss takes damage
     }
 
@@ -64,7 +69,8 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         UpdateStates();
-        playerInAttackRange = Physics2D.OverlapCircle(transform.position, attackRange, whatIsPlayer);
+        playerInMeleeAttackRange = Physics2D.OverlapCircle(transform.position, meleeAttackRange, whatIsPlayer);
+        playerInRangeAttackRange = Physics2D.OverlapCircle(transform.position, rangeAttackRange, whatIsPlayer);
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
 
         // Flip the boss's sprite based on the player's position relative to the boss
@@ -79,59 +85,91 @@ public class BossController : MonoBehaviour
             UpdateIdle();
         }
 
-        if (_playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
-        {
-            sightRange = 0;
-            attackRange = 0;
-            currentState = BossState.Idle;
-            UpdateIdle();
-        }
 
-        if (!playerInAttackRange && playerInSightRange)
+        if (!playerInMeleeAttackRange && !playerInRangeAttackRange && playerInSightRange)
         {
             currentState = BossState.Chase;
             UpdateChase();
         }
 
-        if (playerInAttackRange && playerInSightRange)
+        if (playerInMeleeAttackRange && playerInSightRange)
         {
-            currentState = BossState.Attack;
-            UpdateAttack();
+            currentState = BossState.MeleeAttack;
+            playerInRangeAttackRange = false; // If the player is in melee attack range, the boss will not be able to use the range attack, so we set playerInRangeAttackRange to false to prevent the boss from using the range attack while the player is in melee attack range
+            UpdateMeleeAttack();
         }
 
+        if (playerInSightRange && playerInRangeAttackRange)
+        {
+            currentState = BossState.RangeAttack;
+            UpdateRangeAttack();
+        }
+
+        if (_playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
+        {
+            sightRange = 0;
+            meleeAttackRange = 0;
+            rangeAttackRange = 0;
+            currentState = BossState.Idle;
+            UpdateIdle();
+        }
     }
     void UpdateIdle() // In the Idle state, the boss will stop moving and play the idle animation
     {
+        _agent.isStopped = true;
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);              
     }
 
     void UpdateChase() // In the Chase state, the boss will move towards the player and play the running animation
     {
+        _agent.isStopped = false;
         _agent.SetDestination(_playerPosition.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
 
-    void UpdateAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
+    void UpdateMeleeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
+        if (!_alreadyAttacked)
+        {
+            _agent.isStopped = true;
+            _animator.SetTrigger("MeleeAttack");
+
+            _alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenMeleeAttacks);
+        }        
+    }
+
+    void UpdateRangeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
+    {
+        _agent.isStopped = false;
 
         if (!_alreadyAttacked)
         {
-            _animator.SetTrigger("Attack");
-
             _alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }        
+            _agent.isStopped = true;
+            _agent.SetDestination(transform.position);
+            _animator.SetFloat("Speed", 0);
+            _animator.SetTrigger("RangeAttack");
+            // Instantiate the projectile prefab
+            Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            Invoke(nameof(ResetAttack), timeBetweenRangeAttacks);
+        }
+
+        else
+        {
+            currentState = BossState.Chase;
+            UpdateChase(); // If the boss is already attacking, it will chase the player until the time between attacks has passed and the boss can attack again
+        }
     }
 
     private void ResetAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
         _alreadyAttacked = false;
-    }
-        
+    }        
 
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
@@ -183,17 +221,20 @@ public class BossController : MonoBehaviour
     private void OnDrawGizmos() // Show the attack range and sight range of the boss in the editor for debugging.
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange); 
+        Gizmos.DrawWireSphere(transform.position, meleeAttackRange); 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, rangeAttackRange);
     }
     #region HitStop
-    IEnumerator AttackHitStop()
+    public IEnumerator AttackHitStop()
     {
         Time.timeScale = 0.2f; // Slow down time to create hit stop effect
         yield return new WaitForSecondsRealtime(0.3f); // Wait for a short duration in real time
         Time.timeScale = 1; // Restore original time scale      
     }
+
     /*IEnumerator DeathHitStop()
     {
         float originalTimeScale = Time.timeScale;
