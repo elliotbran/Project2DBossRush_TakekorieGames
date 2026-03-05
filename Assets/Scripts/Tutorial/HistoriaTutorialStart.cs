@@ -21,7 +21,7 @@ public class HistoriaTutorialStart : MonoBehaviour
     public IEnumerator StartTutorial()
     {
         _playerController.canMove = false;
-
+        _playerController.canAttack = false;
         if (_playerAnimator != null)
             _playerAnimator.Play("Player_WakeUp");
 
@@ -37,6 +37,8 @@ public class HistoriaTutorialStart : MonoBehaviour
         _playerController.canMove = true;
 
         dialogue1.SetActive(false);
+
+        _playerController.canAttack = true;
 
         //dialogue2.SetActive(true);
     }

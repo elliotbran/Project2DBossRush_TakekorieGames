@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class DialogueUI : MonoBehaviour
 {
+    PlayerController player;
+
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private GameObject nameBox;
     [SerializeField] private TMP_Text textLabel;
@@ -19,6 +21,7 @@ public class DialogueUI : MonoBehaviour
     private TypewriterEffect typewriterEffect;
     private void Start()
     {
+        player = FindAnyObjectByType<PlayerController>();
         typewriterEffect = GetComponent<TypewriterEffect>();
         responseHandler = GetComponent<ResponseHandler>();
 
@@ -85,6 +88,7 @@ public class DialogueUI : MonoBehaviour
         }
         else
         {
+            player.canMove = true;
             CloseDialogueBox();
         }
     }

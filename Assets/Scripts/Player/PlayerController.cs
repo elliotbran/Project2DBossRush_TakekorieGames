@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDir;
     private float _maxSpeed = 10f;
     public bool canMove = true;
+    public bool canAttack;
 
     [Header("Player Dashing")]
     [SerializeField] private float _dashCooldown = 1f; // cooldown in seconds
@@ -140,10 +141,6 @@ private void FixedUpdate()
 
             return;
         }
-        else
-        {
-            canMove = true;
-        }
  //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
             
         if (_dashCooldownTimer > 0f) _dashCooldownTimer -= Time.deltaTime; 
@@ -224,6 +221,7 @@ private void FixedUpdate()
     #region Movement
     void HandleMovement() // Normal movement and roll initiation
     {
+        
         if (canMove == false) return;
         _speed = _maxSpeed;
 
@@ -345,6 +343,7 @@ private void FixedUpdate()
     #region Combat
     void Attack() // Initiate attack sequence
     {
+        if(canAttack == false) return;
         // Prevent starting a new attack while one is active
         if (isAttacking)
             return;
