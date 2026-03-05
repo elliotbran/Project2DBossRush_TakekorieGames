@@ -3268,6 +3268,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 525089655719729129, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_Color.b
+      value: 0.81189924
+      objectReference: {fileID: 0}
+    - target: {fileID: 525089655719729129, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_Color.g
+      value: 0.81189924
+      objectReference: {fileID: 0}
+    - target: {fileID: 525089655719729129, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965855810598659614, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177578268529635598, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4610189692952186818, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
       propertyPath: m_Name
       value: Dialogue
@@ -3275,6 +3295,18 @@ PrefabInstance:
     - target: {fileID: 4610189692952186818, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177005134710136515, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7859113
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177005134710136515, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7859113
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177005134710136515, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8207547
       objectReference: {fileID: 0}
     - target: {fileID: 5974253215328240481, guid: 32b72b89464a67042a19f96dd1a32283, type: 3}
       propertyPath: m_AnchoredPosition.x
