@@ -96,8 +96,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+private void FixedUpdate()
+{
+    if (!canMove)
     {
+        _rb.linearVelocity = Vector2.zero;
+        return;
+    }
+
         // Movement based on state
         switch (currentState)
         {
@@ -121,8 +127,25 @@ public class PlayerController : MonoBehaviour
     } 
     void Update()
     {
-         //If canMove is false, the player cannot move or do any action
-        if (dialogueUI.IsOpen) return; //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
+        if (dialogueUI.IsOpen)
+        {
+            canMove = false;
+
+            // Detener completamente al jugador
+            moveDir = Vector3.zero;
+            _rb.linearVelocity = Vector2.zero;
+
+            // Parar animaciÃ³n de movimiento
+            _animator.SetFloat("MoveMagnitude", 0);
+
+            return;
+        }
+        else
+        {
+            canMove = true;
+        }
+ //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
+            
         if (_dashCooldownTimer > 0f) _dashCooldownTimer -= Time.deltaTime; 
         if (_parryCooldownTime > 0f) _parryCooldownTime -= Time.deltaTime;
 
@@ -380,11 +403,11 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
-            else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daño y se destruye el objeto
+            else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no parrea hace 25 de daï¿½o y se destruye el objeto
             {
                 TakeDamage(25f);
                 //Destroy(_object.gameObject);
-                Debug.Log("No parreando Daño recibido");
+                Debug.Log("No parreando Daï¿½o recibido");
             }
             canParry = false;
             _object = null;
