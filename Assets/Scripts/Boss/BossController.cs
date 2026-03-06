@@ -13,14 +13,21 @@ public class BossController : MonoBehaviour
 
     [Header("Combat")] // Header for combat related variables
     // Attacking
+    
+    [Range(0, 5f)]
     public float meleeAttackRange;
+    [Range(0, 30f)]
     public float rangeAttackRange;
-    public float timeBetweenMeleeAttacks = 2f;
-    public float timeBetweenRangeAttacks = 4f;
+    [Range(0, 10f)]
+    public float timeBetweenMeleeAttacks;
+    [Range(0, 10f)]
+    public float timeBetweenRangeAttacks;
     public GameObject projectilePrefab;
     public Transform projectileSpawnPoint;
-    bool _alreadyAttacked;
+    bool _alreadyMeleeAttacked;
+    bool _alreadyRangeAttacked;
 
+    [Range(0, 50f)]
     public float sightRange;
     public bool playerInMeleeAttackRange, playerInRangeAttackRange, playerInSightRange;
    
@@ -99,11 +106,10 @@ public class BossController : MonoBehaviour
         if (playerInMeleeAttackRange && playerInSightRange)
         {
             currentState = BossState.MeleeAttack;
-            playerInRangeAttackRange = false; // If the player is in melee attack range, the boss will not be able to use the range attack, so we set playerInRangeAttackRange to false to prevent the boss from using the range attack while the player is in melee attack range
             UpdateMeleeAttack();
         }
 
-        if (playerInSightRange && playerInRangeAttackRange)
+        if (playerInRangeAttackRange && !playerInMeleeAttackRange && playerInSightRange)
         {
             currentState = BossState.RangeAttack;
             UpdateRangeAttack();
@@ -120,14 +126,12 @@ public class BossController : MonoBehaviour
     }
     void UpdateIdle() // In the Idle state, the boss will stop moving and play the idle animation
     {
-        _agent.isStopped = true;
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);              
     }
 
     void UpdateChase() // In the Chase state, the boss will move towards the player and play the running animation
     {
-        _agent.isStopped = false;
         _agent.SetDestination(_playerPosition.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
@@ -137,42 +141,42 @@ public class BossController : MonoBehaviour
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
-        if (!_alreadyAttacked)
+        if (!_alreadyMeleeAttacked)
         {
-            _agent.isStopped = true;
             _animator.SetTrigger("MeleeAttack");
 
-            _alreadyAttacked = true;
+            _alreadyMeleeAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenMeleeAttacks);
         }        
     }
 
     void UpdateRangeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
-        if (!_alreadyAttacked)
+        _agent.SetDestination(transform.position);
+        _animator.SetFloat("Speed", 0);
+
+        if (!_alreadyRangeAttacked)
         {
-            _alreadyAttacked = true;
-            _agent.isStopped = true;
-            _agent.SetDestination(transform.position);
-            _animator.SetFloat("Speed", 0);
             _animator.SetTrigger("RangeAttack");
 
             // Instantiate the projectile prefab
             Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
-            Invoke(nameof(ResetAttack), timeBetweenRangeAttacks);
-        }
-
-        else
-        {
-            currentState = BossState.Chase;
-            UpdateChase(); // If the boss is already attacking, it will chase the player until the time between attacks has passed and the boss can attack again
-        }
+            _alreadyRangeAttacked = true;
+            rangeAttackRange = 0; // Set range to 0 to prevent the boss from attacking again while the projectile is still in the air
+            Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
+        }        
     }
 
     private void ResetAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
-        _alreadyAttacked = false;
-    }        
+        _alreadyMeleeAttacked = false;
+    }
+
+    private void ResetRangeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
+    {
+        _alreadyRangeAttacked = false;
+        rangeAttackRange = 20f; // Reset sight range to its original value after the time between range attacks has passed
+    }
 
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
@@ -203,11 +207,11 @@ public class BossController : MonoBehaviour
                 Debug.Log("Daño realizado. Vida restante: " + player.health);
             }
         }
-    }
+    }    
 
     void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
     {
-        Debug.Log("El enemigo ha muerto");
+        Debug.Log("El boss ha muerto");
         Time.timeScale = 1f; // Ensure that time scale is reset to normal after the hit stop effect
 
         _animator.SetBool("IsDead", true);

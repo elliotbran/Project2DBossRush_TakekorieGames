@@ -2227,6 +2227,7 @@ MonoBehaviour:
   _speed: 0
   moveDir: {x: 0, y: 0, z: 0}
   canMove: 1
+  canAttack: 1
   _dashCooldown: 1
   attackDuration: 0.25
   attackRange: 1
@@ -3775,7 +3776,7 @@ Transform:
   m_GameObject: {fileID: 1781906464}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
