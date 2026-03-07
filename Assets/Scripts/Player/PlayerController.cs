@@ -388,9 +388,17 @@ private void FixedUpdate()
             if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana con las particulas de mana y destrulle el objeto
             {
                 _bloodParticlesPlayer.Stop();
-                if (manaHandler != null) //Suelta 5 bolas de particulas de mana 
-                {
-                    manaHandler.SpawnMana(5);
+                if (!manaHandler.manaController.potioncontroller.IsFull) 
+                { 
+                    if (manaHandler != null) //Suelta 5 bolas de particulas de mana 
+                    {
+                        manaHandler.SpawnMana(5);
+                    }
+                    else
+                    {
+                        Debug.Log("Pocima llena y sin particulas");
+                    }
+
                 }
                 Debug.Log("Parreado");
                 if (_playerParryShake != null) //la camara se sacude 
