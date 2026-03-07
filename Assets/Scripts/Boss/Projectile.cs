@@ -37,9 +37,14 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerController player = collision.GetComponent<PlayerController>();
+            if (player.currentState == PlayerController.PlayerState.Parrying)
+            {
+                return;
+            }
             Destroy(gameObject); // Destroy the projectile on impact
             player.TakeDamage(15f); // Apply damage to the player
-            _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
+            if (_bossController != null)
+                _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
         }        
     }
 
