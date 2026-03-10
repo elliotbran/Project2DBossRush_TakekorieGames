@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - AtaqueNormal
   - AtaqueAmarillo
+  - AtaqueMelee
   layers:
   - Default
   - TransparentFX
