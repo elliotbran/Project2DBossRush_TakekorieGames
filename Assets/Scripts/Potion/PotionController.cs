@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +11,20 @@ public class PotionController : MonoBehaviour
 
     private bool _isFull = false;
 
+    private Animator _playerAnimator;
+
     void Start()
     {
         UpdateStatus(false); //empieza la pocion vacia
+        _playerAnimator = playerController.GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && _isFull) //Al darle a la tecla F llama a la funcion UsePotion
+        if (Input.GetKeyDown(KeyCode.R) && _isFull) //Al darle a la tecla F llama a la funcion UsePotion
         {
             UsePotion();
+            _playerAnimator.SetTrigger("Heal");
         }
     }
 
@@ -41,7 +46,15 @@ public class PotionController : MonoBehaviour
     void UsePotion() //la funcion llama al playercontroller y cura al player con 25 de vida y la potion se queda vacia
     {
         playerController.Heal(25f);
+        playerController.currentState = PlayerController.PlayerState.Healing;
         UpdateStatus(false);
         Debug.Log("Pocima usada, salud restaurada");
+        StartCoroutine(HealAnimation());
+    }
+
+    IEnumerator HealAnimation () //la animacion de curacion dura 1 segundo y luego vuelve al estado normal del player
+    {
+        yield return new WaitForSeconds(1.25f);
+        playerController.currentState = PlayerController.PlayerState.Normal;
     }
 }
