@@ -19,6 +19,10 @@ public class ManaController : MonoBehaviour
     }
     public void RefillMana(float amount) //esta funcion rellena la barra de mana cuando las particulas tocan al player
     {
+        if (potioncontroller != null && potioncontroller.IsFull)
+        { 
+            return;
+        }
         _currentMana += amount; //se suma 1 de mana que nos da la primera particula
 
         if (_currentMana >= _maxMana) //Si el mana se llena se vacia la barra de mana y se rellena la pocima cambiandola de color a verde
