@@ -38,7 +38,7 @@ public class HistoriaTutorialStart : MonoBehaviour
 
         dialogue1.SetActive(false);
 
-        _playerController.canAttack = true;
+        //_playerController.canAttack = true;
 
         //dialogue2.SetActive(true);
     }

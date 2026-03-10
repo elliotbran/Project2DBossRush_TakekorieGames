@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         Dashing,
         Attacking,
         Parrying,
+        Healing,
         Dead,
     }
     private bool canParry = false;   
@@ -117,6 +118,9 @@ private void FixedUpdate()
             case PlayerState.Attacking:
                 // While attacking, movement is restricted by reduced _speed set in Attack()
                 _rb.linearVelocity = moveDir * _speed;
+                break;
+            case PlayerState.Healing:
+                _rb.linearVelocity = Vector2.zero; // While healing the player cannot move
                 break;
             case PlayerState.Parrying:
                 _rb.linearVelocity = Vector2.zero; // While parryign the player cannot move
@@ -212,6 +216,8 @@ private void FixedUpdate()
                 {
                     HandleParry(); // Calls "handleParry" when the player is parrying and canParry is true
                 }
+                break;
+            case PlayerState.Healing:
                 break;
             case PlayerState.Dead:
                 break;
@@ -429,8 +435,7 @@ private void FixedUpdate()
                 canParry = false;
                 Debug.Log("No parreado");
             }
-            canParry = false;
-           
+            canParry = false;           
         }
     }
     private void OnTriggerEnter2D(Collider2D collision) //Si hay un objeto con el tag AtaqueAmarillo o AtaqueNormal, guarda el objeto y activa el parry
