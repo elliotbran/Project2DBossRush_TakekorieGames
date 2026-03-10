@@ -4645,7 +4645,7 @@ GameObject:
   - component: {fileID: 1089989661882257092}
   m_Layer: 0
   m_Name: Parry
-  m_TagString: AtaqueAmarillo
+  m_TagString: AtaqueMelee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
