@@ -2227,6 +2227,7 @@ MonoBehaviour:
   _speed: 0
   moveDir: {x: 0, y: 0, z: 0}
   canMove: 1
+  canAttack: 1
   _dashCooldown: 1
   attackDuration: 0.25
   attackRange: 1
