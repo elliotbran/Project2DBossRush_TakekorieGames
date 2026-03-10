@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PotionController : MonoBehaviour
 {
     public Image potion; 
+    public bool IsFull => _isFull;
     public PlayerController playerController;
     public ManaController manaController;
 
