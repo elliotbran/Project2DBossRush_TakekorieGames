@@ -383,31 +383,42 @@ private void FixedUpdate()
     }
     void HandleParry()
     {
-        if (canParry && _object != null) //detecta el objeto y mira que tag le corresponde 
-        {
-            if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana con las particulas de mana y destrulle el objeto
+        if (canParry && _object != null) 
+        { 
+            if (_object.CompareTag("AtaqueMelee")) //Objeto con el tag AtaqueMelee rellena 1 de mana con las particulas de mana, parrea el ataque mana y sacude la camaa
             {
-                _bloodParticlesPlayer.Stop();
-                if (!manaHandler.manaController.potioncontroller.IsFull) 
-                { 
-                    if (manaHandler != null) //Suelta 5 bolas de particulas de mana 
-                    {
-                        manaHandler.SpawnMana(5);
-                    }
-                    else
-                    {
-                        Debug.Log("Pocima llena y sin particulas");
-                    }
-
+                _bloodParticlesPlayer.Stop(); //Desactiva partículas de sangre
+                if (manaHandler != null && !manaHandler.manaController.potioncontroller.IsFull)
+                {
+                    manaHandler.SpawnMana(5); //Suelta 5 bolas de particulas de mana
                 }
-                Debug.Log("Parreado");
                 if (_playerParryShake != null) //la camara se sacude 
                 {
                     StartCoroutine(ParryHitStop()); //Start hit stop effect
                     _playerParryShake.TriggerShake();
                 }
+                Debug.Log("Parry Melee");
+                _object = null;
+                canParry = false;
+            }
+            else if (_object.CompareTag("AtaqueAmarillo")) //Objeto con el tag AtaqueAmarillo rellena 1 de mana con las particulas de mana, sacude la camara y destrulle el objeto
+            {
+                _bloodParticlesPlayer.Stop();
+                if (!manaHandler.manaController.potioncontroller.IsFull)
+                {
+                    if (manaHandler != null) //Suelta 5 bolas de particulas de mana 
+                    {
+                        manaHandler.SpawnMana(5);
+                    }
+                    if (_playerParryShake != null) //la camara se sacude 
+                    {
+                        StartCoroutine(ParryHitStop()); //Start hit stop effect
+                        _playerParryShake.TriggerShake();
+                    }
+                }
+                Debug.Log("Parreado");
                 Destroy(_object.gameObject);
-                _object = null; 
+                _object = null;
                 canParry = false;
             }
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no pparrea hace25 de daño y se destruye el objeto
@@ -415,14 +426,16 @@ private void FixedUpdate()
                 TakeDamage(25f); //25 de daño 
                 Destroy(_object.gameObject);
                 _object = null;
+                canParry = false;
                 Debug.Log("No parreado");
             }
-             canParry = false;
+            canParry = false;
+           
         }
     }
     private void OnTriggerEnter2D(Collider2D collision) //Si hay un objeto con el tag AtaqueAmarillo o AtaqueNormal, guarda el objeto y activa el parry
     {
-        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueNormal"))
+        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueNormal") || collision.CompareTag("AtaqueMelee"))
         {
             _object = collision;
             canParry = true;
