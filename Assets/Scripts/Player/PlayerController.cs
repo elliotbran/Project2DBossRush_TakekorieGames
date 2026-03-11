@@ -457,7 +457,7 @@ public class PlayerController : MonoBehaviour
             else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no pparrea hace25 de daño y se destruye el objeto
             {
                 TakeDamage(25f); //25 de daño 
-                Destroy(_object.gameObject);
+                //Destroy(_object.gameObject);
                 _object = null;
                 canParry = false;
                 Debug.Log("No parreado");

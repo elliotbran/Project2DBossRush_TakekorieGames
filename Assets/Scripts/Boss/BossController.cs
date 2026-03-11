@@ -13,7 +13,8 @@ public class BossController : MonoBehaviour
 
     [Header("Combat")] // Header for combat related variables
     // Attacking
-    public int attackType; // 1 for normal melee attack, 2 for golden melee attack
+    [SerializeField] int _attackType = 0; // 1 for normal melee attack, 2 for golden melee attack
+
     [Range(0, 5f)]
     public float meleeAttackRange;
     [Range(0, 30f)]
@@ -108,7 +109,7 @@ public class BossController : MonoBehaviour
 
         if (playerInMeleeAttackRange && playerInSightRange)
         {
-            attackType = Random.Range(1, 2); // Randomly choose between the normal melee attack and the golden melee attack
+            _attackType = Random.Range(1, 3); // Randomly choose between the normal melee attack and the golden melee attack
             currentState = BossState.MeleeAttack;
             UpdateMeleeAttack();
         }
@@ -124,7 +125,7 @@ public class BossController : MonoBehaviour
             sightRange = 0;
             meleeAttackRange = 0;
             rangeAttackRange = 0;
-            currentState = BossState.Idle;
+            currentState = BossState.Idle;            
             UpdateIdle();
         }
     }
@@ -146,21 +147,23 @@ public class BossController : MonoBehaviour
         _animator.SetFloat("Speed", 0);
 
 
-        if (!_alreadyMeleeAttacked && attackType == 1)
+        if (!_alreadyMeleeAttacked && _attackType == 1)
         {
             _animator.SetTrigger("NormalMeleeAttack");
 
             _alreadyMeleeAttacked = true;
-            Debug.Log(attackType);
+            Debug.Log(_attackType
+    );
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
         }
 
-        if (!_alreadyMeleeAttacked && attackType == 2)
+        if (!_alreadyMeleeAttacked && _attackType == 2)
         {
             _animator.SetTrigger("GoldenMeleeAttack");
 
             _alreadyMeleeAttacked = true;
-            Debug.Log(attackType);
+            Debug.Log(_attackType
+    );
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
         }
     }
@@ -185,7 +188,7 @@ public class BossController : MonoBehaviour
     private void ResetMeleeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
         _alreadyMeleeAttacked = false;
-        attackType = Random.Range(1, 2); // Randomly choose between the normal melee attack and the golden melee attack
+        _attackType = 0; // Randomly choose between the normal melee attack and the golden melee attack
     }
 
     private void ResetRangeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
@@ -221,7 +224,7 @@ public class BossController : MonoBehaviour
             {
                 StartCoroutine(AttackHitStop()); // Start the hit stop effect when the boss attacks the player
                 player.TakeDamage(damage);
-                Debug.Log("Daño realizado. Vida restante: " + player.health);
+                Debug.Log("Daï¿½o realizado. Vida restante: " + player.health);
             }
         }
     }    

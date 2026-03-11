@@ -665,7 +665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &335146713
 Animator:
   serializedVersion: 7
@@ -4712,7 +4712,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 20
   isDead: 0
-  attackType: 0
+  _attackType: 0
   meleeAttackRange: 3
   rangeAttackRange: 20
   timeBetweenMeleeAttacks: 1.25

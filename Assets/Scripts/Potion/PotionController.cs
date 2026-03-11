@@ -54,7 +54,7 @@ public class PotionController : MonoBehaviour
 
     IEnumerator HealAnimation () //la animacion de curacion dura 1 segundo y luego vuelve al estado normal del player
     {
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(1);
         playerController.currentState = PlayerController.PlayerState.Normal;
     }
 }
