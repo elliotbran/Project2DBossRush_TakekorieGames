@@ -52,6 +52,7 @@ public class BossController : MonoBehaviour
     public GameObject CameraPlayer;
     public GameObject bossHealthbar;
     private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _originalRenderer;
 
     private PlayerController _playerController;
     private void Awake()
@@ -60,7 +61,9 @@ public class BossController : MonoBehaviour
         _animator = GetComponent<Animator>(); // Get the Animator component attached to the boss
         _playerPosition = GameObject.Find("Player").transform; // Get the player's position to chase and attack the player
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>(); // Get the PlayerController component attached to the player
+        _originalRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
+        _spriteRenderer = _originalRenderer;
         _bloodParticles = GetComponentInChildren<ParticleSystem>(); // Get the ParticleSystem component attached to the boss for the blood effect when the boss takes damage
     }
 
@@ -182,7 +185,8 @@ public class BossController : MonoBehaviour
     {
         currentHealth -= damage;
         
-        _animator.SetTrigger("Hurt");
+        //_animator.SetTrigger("Hurt");
+        StartCoroutine(HurtAnimation());
         _bloodParticles.Play();
 
         Debug.Log("Vida restante" + currentHealth);
@@ -233,6 +237,13 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sightRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, rangeAttackRange);
+    }
+
+    IEnumerator HurtAnimation()
+    {
+        _spriteRenderer.color = Color.red; // Change the boss's sprite color to red to indicate that it has taken damage
+        yield return new WaitForSeconds(0.1f); // Wait for the hurt animation to finish before changing the boss's sprite color back to normal
+        _spriteRenderer.color = Color.white; // Change the boss's sprite color back to normal after the hurt animation has finished
     }
     #region HitStop
     public IEnumerator AttackHitStop()
