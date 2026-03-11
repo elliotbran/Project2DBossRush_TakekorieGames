@@ -19,8 +19,5 @@ MonoBehaviour:
   - Perfecto
   - "La primera leccion, tienes en tu posesion una lanza, presiona Cuadrado para
     blandirla y hacer da\xF1o a los enemigos."
-  responses:
-  - responseText: Entendido
-    dialogueObject: {fileID: 11400000, guid: 7768bed539748a3468420b40fba66698, type: 2}
-  - responseText: Entendido 2
-    dialogueObject: {fileID: 11400000, guid: 7768bed539748a3468420b40fba66698, type: 2}
+  - Pruebalo y vuelve a mi cuando lo hayas dominado
+  responses: []
