@@ -13,7 +13,7 @@ public class BossController : MonoBehaviour
 
     [Header("Combat")] // Header for combat related variables
     // Attacking
-    
+    public int attackType; // 1 for normal melee attack, 2 for golden melee attack
     [Range(0, 5f)]
     public float meleeAttackRange;
     [Range(0, 30f)]
@@ -108,6 +108,7 @@ public class BossController : MonoBehaviour
 
         if (playerInMeleeAttackRange && playerInSightRange)
         {
+            attackType = Random.Range(1, 2); // Randomly choose between the normal melee attack and the golden melee attack
             currentState = BossState.MeleeAttack;
             UpdateMeleeAttack();
         }
@@ -144,13 +145,24 @@ public class BossController : MonoBehaviour
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
-        if (!_alreadyMeleeAttacked)
+
+        if (!_alreadyMeleeAttacked && attackType == 1)
         {
-            _animator.SetTrigger("MeleeAttack");
+            _animator.SetTrigger("NormalMeleeAttack");
 
             _alreadyMeleeAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenMeleeAttacks);
-        }        
+            Debug.Log(attackType);
+            Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
+        }
+
+        if (!_alreadyMeleeAttacked && attackType == 2)
+        {
+            _animator.SetTrigger("GoldenMeleeAttack");
+
+            _alreadyMeleeAttacked = true;
+            Debug.Log(attackType);
+            Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
+        }
     }
 
     void UpdateRangeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
@@ -170,9 +182,10 @@ public class BossController : MonoBehaviour
         }        
     }
 
-    private void ResetAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
+    private void ResetMeleeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
         _alreadyMeleeAttacked = false;
+        attackType = Random.Range(1, 2); // Randomly choose between the normal melee attack and the golden melee attack
     }
 
     private void ResetRangeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed

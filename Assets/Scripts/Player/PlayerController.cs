@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour
 
         float _leftTrigger;
         _leftTrigger = Input.GetAxis("ParryL2"); // Get the value of the right trigger for dashing
-        Debug.Log("Left Trigger Value: " + _leftTrigger); // Log the value of the left trigger for debugging
+        //Debug.Log("Left Trigger Value: " + _leftTrigger); // Log the value of the left trigger for debugging
         if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal && _parryCooldownTime <= 0f || Input.GetButtonDown("Parry") && currentState == PlayerState.Normal && _parryCooldownTime <= 0f || _leftTrigger > 0.5f && currentState == PlayerState.Normal && _parryCooldownTime <= 0f) 
         {
             _parryCooldownTime = _parryCooldown; //Inicia el Cooldown del parry
