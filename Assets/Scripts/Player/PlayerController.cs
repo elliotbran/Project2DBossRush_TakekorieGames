@@ -102,8 +102,7 @@ public class PlayerController : MonoBehaviour
             target.SetActive(false);
         }
     }
-
-private void FixedUpdate()
+    void FixedUpdate()
 {
     if (!canMove)
     {
@@ -144,8 +143,6 @@ private void FixedUpdate()
     } 
     void Update()
     {
-       
-
         if (dialogueUI.IsOpen)
         {
             canMove = false;
@@ -215,6 +212,7 @@ private void FixedUpdate()
         /////////------------NO TOCAR------------/////////             
     }
 
+    #region Movement
     void UpdateStates()
     {
         switch (currentState) // Change behavior based on state
@@ -241,8 +239,6 @@ private void FixedUpdate()
                 break;
         }
     }    
-
-    #region Movement
     void HandleMovement() // Normal movement and roll initiation
     {
         
@@ -316,8 +312,7 @@ private void FixedUpdate()
             // start cooldown
             _dashCooldownTimer = _dashCooldown;
         }
-    }
-        
+    }        
     void HandleRolling() // Rolling behavior and cooldown management
     {
         float rollSpeedDropMultiplier = 5f;
