@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -76,9 +77,13 @@ public class PlayerController : MonoBehaviour
     private PlayerParryShake _playerParryShake;            
     public ManaParticleHandler manaHandler;
 
+    public GameObject youDiedPanel;
+
+
     public bool autoTrigger = false;
     void Awake()
     {
+        youDiedPanel.SetActive(false); // Ensure "You Died" panel is hidden at start
         _rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
         _animator = GetComponent<Animator>(); // Get the Animator component
         _playerHitbox = GetComponent<CapsuleCollider2D>(); // Get the BoxCollider2D component
@@ -126,12 +131,21 @@ private void FixedUpdate()
                 _rb.linearVelocity = Vector2.zero; // While parryign the player cannot move
                 break;
             case PlayerState.Dead:
+                canMove = false;
+                // Detener completamente al jugador
+                moveDir = Vector3.zero;
+                _rb.linearVelocity = Vector2.zero;
+
+                // Parar animación de movimiento
+                _animator.SetFloat("MoveMagnitude", 0);
                 _rb.linearVelocity = Vector2.zero; // When the player is dead, it cannot move
                 break;
         }
     } 
     void Update()
     {
+       
+
         if (dialogueUI.IsOpen)
         {
             canMove = false;
@@ -170,7 +184,7 @@ private void FixedUpdate()
 
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetMouseButtonDown(0)) 
+            if (Input.GetMouseButtonDown(0) || Input.GetButton("Attack")) 
             {
                 Debug.Log("ATAQUE INICIADO");
                 // set next attack time (cooldown)
@@ -178,7 +192,11 @@ private void FixedUpdate()
                 Attack(); // Attack will handle isAttacking and its reset
             }
         }
-        if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal && _parryCooldownTime <= 0f) 
+
+        float _leftTrigger;
+        _leftTrigger = Input.GetAxis("ParryL2"); // Get the value of the right trigger for dashing
+        Debug.Log("Left Trigger Value: " + _leftTrigger); // Log the value of the left trigger for debugging
+        if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal && _parryCooldownTime <= 0f || Input.GetButtonDown("Parry") && currentState == PlayerState.Normal && _parryCooldownTime <= 0f || _leftTrigger > 0.5f && currentState == PlayerState.Normal && _parryCooldownTime <= 0f) 
         {
             _parryCooldownTime = _parryCooldown; //Inicia el Cooldown del parry
             StartCoroutine(ParryWindowRoutine()); //Llama a la corrutina ParryWindowRoutine()
@@ -232,7 +250,9 @@ private void FixedUpdate()
         _speed = _maxSpeed;
 
         float moveX = 0f;
+        moveX = Input.GetAxisRaw("Horizontal");
         float moveY = 0f;
+        moveY = Input.GetAxisRaw("Vertical");
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -276,7 +296,11 @@ private void FixedUpdate()
         }
 
         // Only allow roll if cooldown has expired
-        if (Input.GetKeyDown(KeyCode.Space) && _dashCooldownTimer <= 0f)
+        float _rightTrigger;
+        _rightTrigger = Input.GetAxis("DashR2"); // Get the value of the right trigger for dashing
+        
+
+        if (Input.GetKeyDown(KeyCode.Space) && _dashCooldownTimer <= 0f || Input.GetButtonDown("Dash") && _dashCooldownTimer <= 0f || _rightTrigger >0.7f && _dashCooldownTimer <= 0f)
         {
 
             // fallback direction if player hasn't moved yet
@@ -331,8 +355,7 @@ private void FixedUpdate()
             Debug.Log("El jugador ha muerto");
             // Trigger death animation, disable player controls, etc.
             _animator.SetBool("IsDead", true);
-            _playerHitbox.enabled = false; // Disable hitbox to prevent further damage
-            this.enabled = false; // Disable this script to stop player movement and actions
+            StartCoroutine(WaitForDisablingScript()); // Start coroutine to disable the script after a short delay
         }
     }
 
@@ -343,6 +366,15 @@ private void FixedUpdate()
         {
             health = maxHealth;
         }
+    }
+
+    IEnumerator WaitForDisablingScript()
+    {
+        yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds before disabling the script 
+        _playerHitbox.enabled = false; // Disable hitbox to prevent further damage
+        this.enabled = false; // Disable this script to stop player movement and actions
+        yield return new WaitForSeconds(1f); // Wait for 1 second before showing the "You Died" panel
+        youDiedPanel.SetActive(true); // Show "You Died" panel
     }
     #endregion
 

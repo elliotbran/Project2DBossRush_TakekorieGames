@@ -21,7 +21,7 @@ public class PotionController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && _isFull) //Al darle a la tecla F llama a la funcion UsePotion
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Heal") && _isFull) //Al darle a la tecla F llama a la funcion UsePotion
         {
             UsePotion();
             _playerAnimator.SetTrigger("Heal");
