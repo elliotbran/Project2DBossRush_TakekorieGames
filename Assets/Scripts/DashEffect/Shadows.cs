@@ -25,18 +25,20 @@ public class Shadows : MonoBehaviour
     {
         for (int i = 0; i < pool.Count; i++)
         {
-            if (!pool[i].activeInHierarchy) // Añade el "!" para buscar los apagados
+            if (!pool[i].activeInHierarchy)
             {
                 pool[i].SetActive(true);
                 pool[i].transform.position = transform.position;
                 pool[i].transform.rotation = transform.rotation;
+                pool[i].transform.localScale = transform.parent.localScale; //Accede a la escala del Player para copiarle la rotacion y la escala
                 pool[i].GetComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
                 pool[i].GetComponent<Solid>()._color = _color;
                 return pool[i];
-
             }
         }
+
         GameObject obj = Instantiate(Sombra, transform.position, transform.rotation) as GameObject;
+        obj.transform.localScale = transform.parent.localScale; //Accede a la escala del Player para que la primera Sombra aparezca ya rotada y cambiado la escala 
         obj.GetComponent<SpriteRenderer>().sprite = GetComponent<SpriteRenderer>().sprite;
         obj.GetComponent<Solid>()._color = _color;
         pool.Add(obj);
