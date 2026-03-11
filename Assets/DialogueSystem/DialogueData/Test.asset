@@ -28,25 +28,3 @@ MonoBehaviour:
     dialogueObject: {fileID: 11400000, guid: a5e206407f969e746b9a50fc8d67b4a7, type: 2}
   - responseText: Segunda opcion
     dialogueObject: {fileID: 11400000, guid: b1967303b9742bd4a999ceab3efeb9f2, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}
-  - responseText: Cierrra el dialogo
-    dialogueObject: {fileID: 11400000, guid: 22d52e5ec13933a449347c4fa6cc7fb3, type: 2}

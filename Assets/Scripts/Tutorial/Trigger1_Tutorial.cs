@@ -5,6 +5,7 @@ using UnityEngine;
 public class Trigger1_Tutorial : MonoBehaviour
 {
     [SerializeField] GameObject shadowIzel;
+    [SerializeField] GameObject dialogueTrigger;
     private Animator anim;
     [SerializeField] private CircleCollider2D dialogueActivator;
     public void Start()
@@ -22,6 +23,7 @@ public class Trigger1_Tutorial : MonoBehaviour
     public IEnumerator TriggerStairsCoroutine()
     {
         dialogueActivator.enabled = false;
+        dialogueTrigger.SetActive(true);
         yield return new WaitForSeconds(1f);
         anim.Play("Disappear");
         yield return new WaitForSeconds(1f);

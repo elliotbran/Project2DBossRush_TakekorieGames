@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf4132ac25529a428723c1702b29c02, type: 3}
+  m_Name: 2Dialogo_Segunda IZel
+  m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: f130b3cacf575bd4aa13935d7b6d96e7, type: 2}
+  portraitId: 
+  hasName: 1
+  dialogue:
+  - Has sido sacrificado a los dioses, pero no te preocupes, debido a tu linje tienes
+    la opcion de luchar por tu vida.
+  - Aunque para esto deberas ser uno contigo mismo y aprender a controlar tus habilidades.
+  - Estas listo para comenzar tu entrenamiento?
+  responses:
+  - responseText: Si
+    dialogueObject: {fileID: 11400000, guid: 0c46c98808cdaee4fbcb6aae9439164c, type: 2}
+  - responseText: ...
+    dialogueObject: {fileID: 11400000, guid: 8bf0ddf34aa7b3643baf88a5453475db, type: 2}
