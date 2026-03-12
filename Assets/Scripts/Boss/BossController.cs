@@ -119,8 +119,14 @@ public class BossController : MonoBehaviour
         if (playerInRangeAttackRange && !playerInMeleeAttackRange && playerInSightRange)
         {
             currentState = BossState.RangeAttack;
-            UpdateRangeAttack();
+            StartCoroutine(RangeAttackDelayAfterMelee()); // Start the delay before the boss can range attack again after leaving the melee attack range to prevent the boss from spamming the range attack immediately after leaving the melee attack range
         }
+
+        /*if (playerInRangeAttackRange && playerInMeleeAttackRange && playerInSightRange)
+        {
+            StartCoroutine(RangeAttackDelayAfterMelee()); // Start the delay before the boss can range attack again after leaving the melee attack range to prevent the boss from spamming the range attack immediately after leaving the melee attack range
+
+        }*/
 
         if (_playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
         {
@@ -200,7 +206,6 @@ public class BossController : MonoBehaviour
             // Instantiate the projectile prefab
             Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
             _alreadyRangeAttacked = true;
-            rangeAttackRange = 0; // Set range to 0 to prevent the boss from attacking again while the projectile is still in the air
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
         }        
     }
@@ -277,6 +282,13 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, rangeAttackRange);
     }
 
+    // The boss shouldn't be able to range attack immediately after leaving the melee attack range, so we can add a short delay before the boss can range attack again after leaving the melee attack range. This will prevent the boss from spamming the range attack immediately after leaving the melee attack range and make the fight more balanced for the player.
+    IEnumerator RangeAttackDelayAfterMelee()
+    {
+        rangeAttackRange = 0; // Set range attack range to 0 to prevent the boss from attacking while the delay is active
+        yield return new WaitForSeconds(1f); // Wait for 1 second before allowing the boss to range attack again
+        rangeAttackRange = 20f; // Reset range attack range to its original value after the delay has passed
+    }
     IEnumerator HurtAnimation()
     {
         _spriteRenderer.color = Color.red; // Change the boss's sprite color to red to indicate that it has taken damage
