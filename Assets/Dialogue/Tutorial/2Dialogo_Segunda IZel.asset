@@ -16,12 +16,13 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - Has sido sacrificado a los dioses, pero no te preocupes, debido a tu linje tienes
-    la opcion de luchar por tu vida.
-  - Aunque para esto deberas ser uno contigo mismo y aprender a controlar tus habilidades.
-  - Estas listo para comenzar tu entrenamiento?
+  - "Parece que has decidido luchar por tu vida, bien, te ense\xF1are lo que necesitas
+    para enfrentarte con la muerte y pelear por los que mas quieres en el mundo de
+    los vivos."
+  - Lo primero y mas importante, portas una lanza, para blandira presiona cuadrado.
+  - Prueba a golpearme 5 veces con ella.
   responses:
-  - responseText: Si
-    dialogueObject: {fileID: 11400000, guid: 0c46c98808cdaee4fbcb6aae9439164c, type: 2}
-  - responseText: ...
-    dialogueObject: {fileID: 11400000, guid: 8bf0ddf34aa7b3643baf88a5453475db, type: 2}
+  - responseText: Estas segura?
+    dialogueObject: {fileID: 11400000, guid: a844d4f087fd9894e8c0d4fc8f22a640, type: 2}
+  - responseText: Entendido.
+    dialogueObject: {fileID: 11400000, guid: 28921bfb734a7d540b548b77116f9261, type: 2}

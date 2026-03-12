@@ -3,16 +3,10 @@ using UnityEngine;
 public class triggerTutorial2 : MonoBehaviour
 {
     public GameObject shadow2;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    PlayerController playerController;
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        playerController = FindAnyObjectByType<PlayerController>();
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,6 +14,7 @@ public class triggerTutorial2 : MonoBehaviour
         {
             Debug.Log("TriggerTutorial2 Iniciado");
             shadow2.SetActive(true);
+            playerController.canAttack = true;
             gameObject.SetActive(false);
         }
     }
