@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8112064296470775559}
   - component: {fileID: 8349207430978351721}
   - component: {fileID: 6687264441811164637}
+  - component: {fileID: 1875827647616553351}
   m_Layer: 0
   m_Name: NormalProjectile
   m_TagString: AtaqueNormal
@@ -152,3 +153,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1875827647616553351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591349116901812736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6d96e2e3665f2429507577ee3bf749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10
