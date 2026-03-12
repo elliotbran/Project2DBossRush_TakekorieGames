@@ -16,10 +16,13 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - "Hola texto prueba estas en el infierno y no se que mas poner empieza el tutorial
-    jaja salu2 xdd \nDe puta madre crac"
+  - Estas en las puertas del infierno ya que has sido sacrificado a los dioses.
+  - Pero no te preocupes ya que gracias a tu linaje tienes la oportunidad de luchar
+    por tu vida
+  - Si tienes lo que hay que tener avanza al centro de la arena, en el caso de que
+    prefieras asumir tu muerte puedes abandonarla por donde has venido
   responses:
-  - responseText: Que (Las 2 hacen lo mismo)
+  - responseText: Entiendo
     dialogueObject: {fileID: 11400000, guid: 3cd83a8bf664f744898c5b8aa25bad37, type: 2}
-  - responseText: So (Las 2 hacen lo mismo)
+  - responseText: ...
     dialogueObject: {fileID: 11400000, guid: 3cd83a8bf664f744898c5b8aa25bad37, type: 2}
