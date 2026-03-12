@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (_bossController.currentHealth == _bossController.maxHealth/2) // If the boss is at full health, destroy the projectile immediately
+        if (_bossController.currentHealth == _bossController.maxHealth / 2) // If the boss is at full health, destroy the projectile immediately
         {
             _speed = 20f;
         }

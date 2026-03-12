@@ -6,7 +6,7 @@ public class ManaController : MonoBehaviour
     public Image mana;
     public PotionController potioncontroller;
     private float _currentMana = 0;
-    private float _maxMana = 5;
+    private float _maxMana = 3;
 
     void Start()
     {
