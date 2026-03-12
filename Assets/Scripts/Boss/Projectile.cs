@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField]float _speed = 30f;
+    [SerializeField]float _speed;
     Transform _player; // Assign the player in the Inspector
     
     BossController _bossController; // Reference to the boss controller to manage projectile behavior
@@ -18,6 +18,10 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        if (_bossController.currentHealth == _bossController.maxHealth/2) // If the boss is at full health, destroy the projectile immediately
+        {
+            _speed = 20f;
+        }
         if (_player != null)
         {
             Vector2 direction = (Vector2)_player.position - (Vector2)transform.position;

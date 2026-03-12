@@ -10,10 +10,12 @@ public class BossController : MonoBehaviour
     public float currentHealth;
     public float maxHealth = 100f;
     public bool isDead = false;
+    public bool secondPhase = false;
 
     [Header("Combat")] // Header for combat related variables
     // Attacking
-    [SerializeField] int _attackType = 0; // 1 for normal melee attack, 2 for golden melee attack
+    [SerializeField] int _meleeAttackType = 0; // 1 for normal melee attack, 2 for golden melee attack
+    [SerializeField] int _rangeAttackType = 0; // 1 for normal range attack, 2 for golden range attack
 
     [Range(0, 5f)]
     public float meleeAttackRange;
@@ -23,7 +25,8 @@ public class BossController : MonoBehaviour
     public float timeBetweenMeleeAttacks;
     [Range(0, 10f)]
     public float timeBetweenRangeAttacks;
-    public GameObject projectilePrefab;
+    public GameObject normalProjectilePrefab;
+    public GameObject goldenProjectilePrefab;
     public Transform projectileSpawnPoint;
     bool _alreadyMeleeAttacked;
     bool _alreadyRangeAttacked;
@@ -80,7 +83,8 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         UpdateStates();
-        UpdateRanges();        
+        UpdateRanges();      
+        SecondPhase();
     }
 
     void UpdateRanges()
@@ -109,16 +113,23 @@ public class BossController : MonoBehaviour
 
         if (playerInMeleeAttackRange && playerInSightRange)
         {
-            _attackType = Random.Range(1, 3); // Randomly choose between the normal melee attack and the golden melee attack
+            _meleeAttackType = Random.Range(1, 5); // Randomly choose between the normal melee attack and the golden melee attack
             currentState = BossState.MeleeAttack;
             UpdateMeleeAttack();
         }
 
         if (playerInRangeAttackRange && !playerInMeleeAttackRange && playerInSightRange)
         {
+            _rangeAttackType = Random.Range(1, 3); // Randomly choose between the normal range attack and the golden range attack
             currentState = BossState.RangeAttack;
             UpdateRangeAttack();
         }
+
+        /*if (playerInRangeAttackRange && playerInMeleeAttackRange && playerInSightRange)
+        {
+            StartCoroutine(RangeAttackDelayAfterMelee()); // Start the delay before the boss can range attack again after leaving the melee attack range to prevent the boss from spamming the range attack immediately after leaving the melee attack range
+
+        }*/
 
         if (_playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
         {
@@ -129,6 +140,24 @@ public class BossController : MonoBehaviour
             UpdateIdle();
         }
     }
+    void SecondPhase()
+    {
+        if (!secondPhase && currentHealth == maxHealth / 2)
+        {
+            secondPhase = true; // If the boss's health is less than or equal to half of its maximum health, it will enter the second phase of the fight where it will become more aggressive and use different attacks
+        }
+
+        if (secondPhase)
+        {
+            _agent.speed = _agent.speed * 2f; // Increase the boss's speed when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
+            damage = 35; // Increase the boss's damage when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
+            timeBetweenMeleeAttacks = 1.25f;
+            timeBetweenRangeAttacks = 5;
+            _spriteRenderer.color = Color.green; // Change the boss's sprite color to yellow to indicate that it is in the second phase of the fight when its health is less than or equal to half of its maximum health
+            secondPhase = false;
+        }
+    }
+
     void UpdateIdle() // In the Idle state, the boss will stop moving and play the idle animation
     {
         _agent.SetDestination(transform.position);
@@ -147,23 +176,39 @@ public class BossController : MonoBehaviour
         _animator.SetFloat("Speed", 0);
 
 
-        if (!_alreadyMeleeAttacked && _attackType == 1)
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 1)
         {
             _animator.SetTrigger("NormalMeleeAttack");
 
             _alreadyMeleeAttacked = true;
-            Debug.Log(_attackType
-    );
+            Debug.Log(_meleeAttackType);
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
         }
 
-        if (!_alreadyMeleeAttacked && _attackType == 2)
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 2)
         {
             _animator.SetTrigger("GoldenMeleeAttack");
 
             _alreadyMeleeAttacked = true;
-            Debug.Log(_attackType
-    );
+            Debug.Log(_meleeAttackType);
+            Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
+        }
+
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 3)
+        {
+            _animator.SetTrigger("NormalSplashAttack");
+
+            _alreadyMeleeAttacked = true;
+            Debug.Log(_meleeAttackType);
+            Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
+        }
+
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 4)
+        {
+            _animator.SetTrigger("GoldenSplashAttack");
+
+            _alreadyMeleeAttacked = true;
+            Debug.Log(_meleeAttackType);
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
         }
     }
@@ -173,27 +218,39 @@ public class BossController : MonoBehaviour
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
-        if (!_alreadyRangeAttacked)
+        if (!_alreadyRangeAttacked && _rangeAttackType == 1)
         {
             _animator.SetTrigger("RangeAttack");
 
+            rangeAttackRange = 0;
             // Instantiate the projectile prefab
-            Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
             _alreadyRangeAttacked = true;
-            rangeAttackRange = 0; // Set range to 0 to prevent the boss from attacking again while the projectile is still in the air
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
-        }        
+        }
+
+        if (!_alreadyRangeAttacked && _rangeAttackType == 2)
+        {
+            _animator.SetTrigger("RangeAttack");
+
+            rangeAttackRange = 0;
+            // Instantiate the projectile prefab
+            Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            _alreadyRangeAttacked = true;
+            Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
+        }
     }
 
     private void ResetMeleeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
         _alreadyMeleeAttacked = false;
-        _attackType = 0; // Randomly choose between the normal melee attack and the golden melee attack
+        _meleeAttackType = 0; // Randomly choose between the normal melee attack and the golden melee attack
     }
 
     private void ResetRangeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
         _alreadyRangeAttacked = false;
+        _rangeAttackType = 0; // Randomly choose between the normal range attack and the golden range attack
         rangeAttackRange = 20f; // Reset sight range to its original value after the time between range attacks has passed
     }
 
@@ -204,10 +261,12 @@ public class BossController : MonoBehaviour
         //_animator.SetTrigger("Hurt");
         StartCoroutine(HurtAnimation());
         _bloodParticles.Play();
-
+        
         Debug.Log("Vida restante" + currentHealth);
+
         if (currentHealth <= 0)
         {
+            _spriteRenderer.color = Color.white; // Original sprite color
             isDead = true;
             //StartCoroutine(DeathHitStop()); // Start the hit stop effect when the boss dies
             Die();
@@ -255,6 +314,13 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, rangeAttackRange);
     }
 
+    // The boss shouldn't be able to range attack immediately after leaving the melee attack range, so we can add a short delay before the boss can range attack again after leaving the melee attack range. This will prevent the boss from spamming the range attack immediately after leaving the melee attack range and make the fight more balanced for the player.
+    IEnumerator RangeAttackDelayAfterMelee()
+    {
+        rangeAttackRange = 0; // Set range attack range to 0 to prevent the boss from attacking while the delay is active
+        yield return new WaitForSeconds(1f); // Wait for 1 second before allowing the boss to range attack again
+        rangeAttackRange = 20f; // Reset range attack range to its original value after the delay has passed
+    }
     IEnumerator HurtAnimation()
     {
         _spriteRenderer.color = Color.red; // Change the boss's sprite color to red to indicate that it has taken damage
