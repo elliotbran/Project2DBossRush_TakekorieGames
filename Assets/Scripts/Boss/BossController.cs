@@ -10,6 +10,7 @@ public class BossController : MonoBehaviour
     public float currentHealth;
     public float maxHealth = 100f;
     public bool isDead = false;
+    public bool secondPhase = false;
 
     [Header("Combat")] // Header for combat related variables
     // Attacking
@@ -80,7 +81,8 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         UpdateStates();
-        UpdateRanges();        
+        UpdateRanges();      
+        SecondPhase();
     }
 
     void UpdateRanges()
@@ -129,6 +131,24 @@ public class BossController : MonoBehaviour
             UpdateIdle();
         }
     }
+    void SecondPhase()
+    {
+        if (!secondPhase && currentHealth == maxHealth / 2)
+        {
+            secondPhase = true; // If the boss's health is less than or equal to half of its maximum health, it will enter the second phase of the fight where it will become more aggressive and use different attacks
+        }
+
+        if (secondPhase)
+        {
+            _agent.speed = _agent.speed * 2f; // Increase the boss's speed when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
+            damage = 35; // Increase the boss's damage when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
+            timeBetweenMeleeAttacks = 1.25f;
+            timeBetweenRangeAttacks = 5;
+            _spriteRenderer.color = Color.green; // Change the boss's sprite color to yellow to indicate that it is in the second phase of the fight when its health is less than or equal to half of its maximum health
+            secondPhase = false;
+        }
+    }
+
     void UpdateIdle() // In the Idle state, the boss will stop moving and play the idle animation
     {
         _agent.SetDestination(transform.position);
@@ -204,10 +224,12 @@ public class BossController : MonoBehaviour
         //_animator.SetTrigger("Hurt");
         StartCoroutine(HurtAnimation());
         _bloodParticles.Play();
-
+        
         Debug.Log("Vida restante" + currentHealth);
+
         if (currentHealth <= 0)
         {
+            _spriteRenderer.color = Color.white; // Original sprite color
             isDead = true;
             //StartCoroutine(DeathHitStop()); // Start the hit stop effect when the boss dies
             Die();
