@@ -4710,7 +4710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   currentHealth: 0
-  maxHealth: 20
+  maxHealth: 100
   isDead: 0
   _attackType: 0
   meleeAttackRange: 3

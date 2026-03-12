@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : MonoBehaviour
@@ -370,6 +371,8 @@ public class PlayerController : MonoBehaviour
         this.enabled = false; // Disable this script to stop player movement and actions
         yield return new WaitForSeconds(1f); // Wait for 1 second before showing the "You Died" panel
         youDiedPanel.SetActive(true); // Show "You Died" panel
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(1);
     }
     #endregion
 
