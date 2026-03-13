@@ -9,6 +9,8 @@ public class TutorialAA : MonoBehaviour
     public GameObject izelGetsHit;
     private Animator animIzelHit;
 
+    public GameObject hudHits;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,5 +34,6 @@ public class TutorialAA : MonoBehaviour
         izelStart.SetActive(false);
         yield return new WaitForSeconds(1f);
         izelGetsHit.SetActive(true);
+        hudHits.SetActive(true);
     }
 }

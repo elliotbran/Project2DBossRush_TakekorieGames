@@ -59,6 +59,9 @@ public class EnemyTutorialController : MonoBehaviour
 
     [SerializeField] bool canAttack = true;
     [SerializeField] bool tutorialStatic = false;
+    public bool isGetting5Attacks = false;
+
+    UITutorialControl _UITutorialControl;
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -70,6 +73,7 @@ public class EnemyTutorialController : MonoBehaviour
 
     private void Start()
     {
+        _UITutorialControl = FindAnyObjectByType<UITutorialControl>();
         currentHealth = maxHealth; // Initialize the boss's health to the maximum health at the start of the game
         currentState = EnemyState.Idle; // Start the boss in the Idle state (doesn't matter right now because he detects the player right away and changes to Chase)
         _agent.updateRotation = false;
@@ -199,6 +203,10 @@ public class EnemyTutorialController : MonoBehaviour
 
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
+        if(isGetting5Attacks == true)
+        {
+            _UITutorialControl.hitsTutorial++;
+        }
         currentHealth -= damage;
 
         //_animator.SetTrigger("Hurt");
