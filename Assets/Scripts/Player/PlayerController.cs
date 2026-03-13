@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     public Camera mainCamera;
     public GameObject target;
-    CapsuleCollider2D _playerHitbox;
+    [SerializeField] CapsuleCollider2D _playerHitbox;
 
     private Animator _playerAnimator;
     [SerializeField] ParticleSystem _bloodParticlesPlayer;
@@ -116,9 +116,11 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerState.Normal:
                 _rb.linearVelocity = moveDir * _speed;
+                _playerHitbox.enabled = true; // Ensure hitbox is enabled during normal movement
                 break;
             case PlayerState.Dashing:
                 _rb.linearVelocity = _rollDir * _dashSpeed;
+                _playerHitbox.enabled = false; // Disable hitbox to prevent damage while dashing
                 break;
             case PlayerState.Attacking:
                 // While attacking, movement is restricted by reduced _speed set in Attack()
@@ -222,7 +224,7 @@ public class PlayerController : MonoBehaviour
                 HandleMovement();               
                 break;
             case PlayerState.Dashing:
-                HandleRolling();
+                HandleDashing();
                 break;
 
             case PlayerState.Attacking:
@@ -242,7 +244,7 @@ public class PlayerController : MonoBehaviour
     }    
     void HandleMovement() // Normal movement and roll initiation
     {
-        
+        _playerHitbox.enabled = true; // Ensure hitbox is enabled during normal movement
         if (canMove == false) return;
         _speed = _maxSpeed;
 
@@ -314,11 +316,12 @@ public class PlayerController : MonoBehaviour
             _dashCooldownTimer = _dashCooldown;
         }
     }        
-    void HandleRolling() // Rolling behavior and cooldown management
+    void HandleDashing() // Rolling behavior and cooldown management
     {
         float rollSpeedDropMultiplier = 5f;
         _dashSpeed -= _dashSpeed * rollSpeedDropMultiplier * Time.deltaTime;
         Shadows.me.Sombras_Skill();
+        _playerHitbox.enabled = false; // Disable hitbox to prevent damage while dashing
 
         float minRollSpeed = 15f;
         if (_dashSpeed < minRollSpeed)

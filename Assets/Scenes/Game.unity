@@ -2537,6 +2537,7 @@ MonoBehaviour:
   currentState: 0
   mainCamera: {fileID: 525409375}
   target: {fileID: 1490241309}
+  _playerHitbox: {fileID: 0}
   _bloodParticlesPlayer: {fileID: 4588309894166758124}
   manaHandler: {fileID: 3461287631824062861}
   youDiedPanel: {fileID: 335146712}
