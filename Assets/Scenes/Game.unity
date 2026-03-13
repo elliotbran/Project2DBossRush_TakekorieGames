@@ -4760,10 +4760,11 @@ MonoBehaviour:
   meleeAttackRange: 3
   rangeAttackRange: 20
   timeBetweenMeleeAttacks: 2.5
-  timeBetweenRangeAttacks: 10
+  timeBetweenRangeAttacks: 7
   normalProjectilePrefab: {fileID: 2591349116901812736, guid: 8aa2550ed78fcbb4dbcabd1ea4c5b954, type: 3}
   goldenProjectilePrefab: {fileID: 7094630049418330413, guid: 2a8693b813053fa4389a30cdf9ed276b, type: 3}
   projectileSpawnPoint: {fileID: 1369774594}
+  rangeAttackActivateDelay: 1
   sightRange: 30
   playerInMeleeAttackRange: 0
   playerInRangeAttackRange: 0

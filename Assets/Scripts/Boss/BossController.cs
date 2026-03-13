@@ -31,6 +31,10 @@ public class BossController : MonoBehaviour
     bool _alreadyMeleeAttacked;
     bool _alreadyRangeAttacked;
 
+    [Header("Range Attack Activation")]
+    [Tooltip("Delay in seconds before re-enabling range attack after the player leaves melee range.")]
+    public float rangeAttackActivateDelay = 1.0f;
+
     [Range(0, 50f)]
     public float sightRange;
     public bool playerInMeleeAttackRange, playerInRangeAttackRange, playerInSightRange;
@@ -59,6 +63,12 @@ public class BossController : MonoBehaviour
     private SpriteRenderer _originalRenderer;
 
     private PlayerController _playerController;
+
+    // Fields for managing range re-enable logic
+    float _defaultRangeAttackRange;
+    bool _wasPlayerInMeleeAttackRange;
+    Coroutine _rangeEnableCoroutine;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -78,12 +88,17 @@ public class BossController : MonoBehaviour
         _agent.updateRotation = false;  
         _agent.updateUpAxis = false;
         _bloodParticles.Stop();
+
+        // Preserve the configured range attack radius so we can restore it after delay
+        _defaultRangeAttackRange = rangeAttackRange;
+        _wasPlayerInMeleeAttackRange = false;
     }
 
     private void Update()
     {
         UpdateStates();
-        UpdateRanges();      
+        UpdateRanges();
+        ManageRangeAttackRangeActivation(); // handle enter/exit melee -> disable/enable range with delay
         SecondPhase();
     }
 
@@ -92,6 +107,49 @@ public class BossController : MonoBehaviour
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
         playerInMeleeAttackRange = Physics2D.OverlapCircle(transform.position, meleeAttackRange, whatIsPlayer);
         playerInRangeAttackRange = Physics2D.OverlapCircle(transform.position, rangeAttackRange, whatIsPlayer);
+    }
+
+    // New: handle disabling range while player is in melee range and re-enable after delay when they leave
+    void ManageRangeAttackRangeActivation()
+    {
+        // Entered melee range this frame
+        if (playerInMeleeAttackRange && !_wasPlayerInMeleeAttackRange)
+        {
+            // Cancel any pending re-enable
+            if (_rangeEnableCoroutine != null)
+            {
+                StopCoroutine(_rangeEnableCoroutine);
+                _rangeEnableCoroutine = null;
+            }
+
+            // Completely disable range attack while in melee range
+            rangeAttackRange = 0f;
+        }
+
+        // Exited melee range this frame
+        if (!playerInMeleeAttackRange && _wasPlayerInMeleeAttackRange)
+        {
+            // Start coroutine to re-enable range attack after delay
+            if (_rangeEnableCoroutine != null)
+                StopCoroutine(_rangeEnableCoroutine);
+
+            _rangeEnableCoroutine = StartCoroutine(EnableRangeAfterDelay(rangeAttackActivateDelay));
+        }
+
+        _wasPlayerInMeleeAttackRange = playerInMeleeAttackRange;
+    }
+
+    IEnumerator EnableRangeAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Only re-enable if player still isn't in melee range
+        if (!playerInMeleeAttackRange)
+        {
+            rangeAttackRange = _defaultRangeAttackRange;
+        }
+
+        _rangeEnableCoroutine = null;
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
@@ -113,6 +171,7 @@ public class BossController : MonoBehaviour
 
         if (playerInMeleeAttackRange && playerInSightRange)
         {
+            rangeAttackRange = 0; // Set the range attack range to 0 when the player is in melee attack range to prevent the boss from using the range attack when the player is in melee attack range
             _meleeAttackType = Random.Range(1, 5); // Randomly choose between the normal melee attack and the golden melee attack
             currentState = BossState.MeleeAttack;
             UpdateMeleeAttack();
@@ -139,10 +198,11 @@ public class BossController : MonoBehaviour
         if (!secondPhase && currentHealth == maxHealth / 2)
         {
             secondPhase = true; // If the boss's health is less than or equal to half of its maximum health, it will enter the second phase of the fight where it will become more aggressive and use different attacks
-            _agent.speed = _agent.speed * 2f; // Increase the boss's speed when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
+            _agent.speed = 10; // Increase the boss's speed when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
+            _agent.acceleration = 20; // Increase the boss's acceleration when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
             damage = 35; // Increase the boss's damage when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
             timeBetweenMeleeAttacks = 1.25f;
-            timeBetweenRangeAttacks = 5;
+            timeBetweenRangeAttacks = 3;
             _spriteRenderer.color = Color.green; // Change the boss's sprite color to yellow to indicate that it is in the second phase of the fight when its health is less than or equal to half of its maximum health
         }
 
@@ -245,7 +305,12 @@ public class BossController : MonoBehaviour
     {
         _alreadyRangeAttacked = false;
         _rangeAttackType = 0; // Randomly choose between the normal range attack and the golden range attack
-        rangeAttackRange = 20f;
+        rangeAttackRange = _defaultRangeAttackRange;
+    }
+
+    private void DelayRangeAttack()
+    {
+
     }
 
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
