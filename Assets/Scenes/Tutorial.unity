@@ -932,7 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 291882597}
   - component: {fileID: 291882598}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2106,7 +2106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 739209279}
   - component: {fileID: 739209280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2192,7 +2192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 865169624}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4695,8 +4695,16 @@ PrefabInstance:
       value: ShadowIzel_Tutorial_AutoAttack
       objectReference: {fileID: 0}
     - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5039765228563559632, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_Enabled
@@ -4841,6 +4849,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2016465920}
+    - targetCorrespondingSourceObject: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2016465921}
   m_SourcePrefab: {fileID: 100100000, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
 --- !u!1 &2016465914 stripped
 GameObject:
@@ -4891,14 +4902,14 @@ MonoBehaviour:
   maxHealth: 1000
   isDead: 0
   _rangeAttackType: 0
-  meleeAttackRange: 2
-  rangeAttackRange: 7
-  timeBetweenMeleeAttacks: 1
-  timeBetweenRangeAttacks: 5
+  meleeAttackRange: 0
+  rangeAttackRange: 0
+  timeBetweenMeleeAttacks: 0
+  timeBetweenRangeAttacks: 0
   normalProjectilePrefab: {fileID: 2591349116901812736, guid: 4acabd0af0e1e914c83b3ce9c1b997b4, type: 3}
   goldenProjectilePrefab: {fileID: 7094630049418330413, guid: 7b101db2549b6704297a1f693a37995c, type: 3}
   projectileSpawnPoint: {fileID: 865169624}
-  sightRange: 10
+  sightRange: 0
   playerInMeleeAttackRange: 0
   playerInRangeAttackRange: 0
   playerInSightRange: 0
@@ -4908,6 +4919,8 @@ MonoBehaviour:
     m_Bits: 64
   CameraGroup: {fileID: 40474419}
   CameraPlayer: {fileID: 1360606733}
+  canAttack: 0
+  tutorialStatic: 1
 --- !u!195 &2016465920
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4930,6 +4943,43 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!70 &2016465921
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016465914}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0000014915192, y: 0.2617684}
+  m_Size: {x: 0.9935482, y: 0.9935482}
+  m_Direction: 1
 --- !u!1 &2021542150
 GameObject:
   m_ObjectHideFlags: 0

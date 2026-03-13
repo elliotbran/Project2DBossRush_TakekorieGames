@@ -406,10 +406,17 @@ public class PlayerController : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             var enemyController = enemy.GetComponent<BossController>();
+            var tutorialController = enemy.GetComponent<EnemyTutorialController>();
             if (enemyController != null)
             {
                 StartCoroutine(AttackHitStop()); // Start hit stop effect
                 enemyController.TakeDamage(attackDamage);
+                Debug.Log("We hit " + enemy.name);
+            }
+            if (tutorialController != null)
+            {
+                StartCoroutine(AttackHitStop()); // Start hit stop effect
+                tutorialController.TakeDamage(attackDamage);
                 Debug.Log("We hit " + enemy.name);
             }
         }

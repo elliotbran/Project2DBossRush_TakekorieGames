@@ -56,6 +56,9 @@ public class EnemyTutorialController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     private PlayerController _playerController;
+
+    [SerializeField] bool canAttack = true;
+    [SerializeField] bool tutorialStatic = false;
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -140,6 +143,8 @@ public class EnemyTutorialController : MonoBehaviour
 
     void UpdateMeleeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
+        if (canAttack == false) return;  
+
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
@@ -202,7 +207,7 @@ public class EnemyTutorialController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            _spriteRenderer.color = Color.white; // Original sprite color
+            _spriteRenderer.color = Color.black; // Original sprite color
             isDead = true;
             //StartCoroutine(DeathHitStop()); // Start the hit stop effect when the boss dies
             Die();
@@ -251,8 +256,12 @@ public class EnemyTutorialController : MonoBehaviour
     IEnumerator HurtAnimation()
     {
         _spriteRenderer.color = Color.red; // Change the boss's sprite color to red to indicate that it has taken damage
+        if (tutorialStatic == true)
+        {
+            _animator.Play("Enemy_Hurt");
+        }
         yield return new WaitForSeconds(0.1f); // Wait for the hurt animation to finish before changing the boss's sprite color back to normal
-        _spriteRenderer.color = Color.white; // Change the boss's sprite color back to normal after the hurt animation has finished
+        _spriteRenderer.color = Color.black; // Change the boss's sprite color back to normal after the hurt animation has finished
     }
     #region HitStop
     public IEnumerator AttackHitStop()
