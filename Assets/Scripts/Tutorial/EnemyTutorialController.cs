@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.AI;
-public class BossController : MonoBehaviour
+
+public class EnemyTutorialController : MonoBehaviour
 {
     [Header("Health")] // Header for health related variables 
     public float damage = 25f;
@@ -25,6 +26,7 @@ public class BossController : MonoBehaviour
     public float timeBetweenMeleeAttacks;
     [Range(0, 10f)]
     public float timeBetweenRangeAttacks;
+
     public GameObject normalProjectilePrefab;
     public GameObject goldenProjectilePrefab;
     public Transform projectileSpawnPoint;
@@ -34,8 +36,8 @@ public class BossController : MonoBehaviour
     [Range(0, 50f)]
     public float sightRange;
     public bool playerInMeleeAttackRange, playerInRangeAttackRange, playerInSightRange;
-   
-    public enum BossState // Different states for the boss
+
+    public enum EnemyState // Different states for the tutorial enemy
     {
         Idle,
         Chase,
@@ -43,8 +45,8 @@ public class BossController : MonoBehaviour
         RangeAttack,
     }
 
-    public BossState currentState;
-    public LayerMask whatIsPlayer;     
+    public EnemyState currentState;
+    public LayerMask whatIsPlayer;
 
     // Components
     NavMeshAgent _agent;
@@ -74,16 +76,16 @@ public class BossController : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth; // Initialize the boss's health to the maximum health at the start of the game
-        currentState = BossState.Idle; // Start the boss in the Idle state (doesn't matter right now because he detects the player right away and changes to Chase)
-        _agent.updateRotation = false;  
+        currentState = EnemyState.Idle; // Start the boss in the Idle state (doesn't matter right now because he detects the player right away and changes to Chase)
+        _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _bloodParticles.Stop();
     }
 
     private void Update()
     {
+        UpdateRanges();
         UpdateStates();
-        UpdateRanges();      
         SecondPhase();
     }
 
@@ -101,27 +103,27 @@ public class BossController : MonoBehaviour
 
         if (!playerInSightRange)
         {
-            currentState = BossState.Idle;
+            currentState = EnemyState.Idle;
             UpdateIdle();
         }
 
         if (!playerInMeleeAttackRange && !playerInRangeAttackRange && playerInSightRange)
         {
-            currentState = BossState.Chase;
+            currentState = EnemyState.Chase;
             UpdateChase();
         }
 
         if (playerInMeleeAttackRange && playerInSightRange)
         {
             _meleeAttackType = Random.Range(1, 5); // Randomly choose between the normal melee attack and the golden melee attack
-            currentState = BossState.MeleeAttack;
+            currentState = EnemyState.MeleeAttack;
             UpdateMeleeAttack();
         }
 
         if (playerInRangeAttackRange && !playerInMeleeAttackRange && playerInSightRange)
         {
             _rangeAttackType = Random.Range(1, 3); // Randomly choose between the normal range attack and the golden range attack
-            currentState = BossState.RangeAttack;
+            currentState = EnemyState.RangeAttack;
             UpdateRangeAttack();
         }
 
@@ -136,7 +138,7 @@ public class BossController : MonoBehaviour
             sightRange = 0;
             meleeAttackRange = 0;
             rangeAttackRange = 0;
-            currentState = BossState.Idle;            
+            currentState = EnemyState.Idle;
             UpdateIdle();
         }
     }
@@ -161,7 +163,7 @@ public class BossController : MonoBehaviour
     void UpdateIdle() // In the Idle state, the boss will stop moving and play the idle animation
     {
         _agent.SetDestination(transform.position);
-        _animator.SetFloat("Speed", 0);              
+        _animator.SetFloat("Speed", 0);
     }
 
     void UpdateChase() // In the Chase state, the boss will move towards the player and play the running animation
@@ -233,11 +235,11 @@ public class BossController : MonoBehaviour
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
         currentHealth -= damage;
-        
+
         //_animator.SetTrigger("Hurt");
         StartCoroutine(HurtAnimation());
         _bloodParticles.Play();
-        
+
         Debug.Log("Vida restante" + currentHealth);
 
         if (currentHealth <= 0)
@@ -262,7 +264,7 @@ public class BossController : MonoBehaviour
                 Debug.Log("Da�o realizado. Vida restante: " + player.health);
             }
         }
-    }    
+    }
 
     void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
     {
@@ -283,7 +285,7 @@ public class BossController : MonoBehaviour
     private void OnDrawGizmos() // Show the attack range and sight range of the boss in the editor for debugging.
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, meleeAttackRange); 
+        Gizmos.DrawWireSphere(transform.position, meleeAttackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
         Gizmos.color = Color.blue;
@@ -320,7 +322,7 @@ public class BossController : MonoBehaviour
         if (_alreadyRangeAttacked)
         {
             playerInRangeAttackRange = false; // Set the player in range attack range to false to prevent the boss from trying to range attack again immediately after leaving the melee attack range
-            currentState = BossState.Chase; // If the boss has already attacked, it will go back to the Chase state to chase the player again
+            currentState = EnemyState.Chase; // If the boss has already attacked, it will go back to the Chase state to chase the player again
         }
     }
     IEnumerator HurtAnimation()
