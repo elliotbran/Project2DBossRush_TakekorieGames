@@ -125,12 +125,6 @@ public class BossController : MonoBehaviour
             UpdateRangeAttack();
         }
 
-        /*if (playerInRangeAttackRange && playerInMeleeAttackRange && playerInSightRange)
-        {
-            StartCoroutine(RangeAttackDelayAfterMelee()); // Start the delay before the boss can range attack again after leaving the melee attack range to prevent the boss from spamming the range attack immediately after leaving the melee attack range
-
-        }*/
-
         if (_playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
         {
             sightRange = 0;
@@ -145,16 +139,16 @@ public class BossController : MonoBehaviour
         if (!secondPhase && currentHealth == maxHealth / 2)
         {
             secondPhase = true; // If the boss's health is less than or equal to half of its maximum health, it will enter the second phase of the fight where it will become more aggressive and use different attacks
-        }
-
-        if (secondPhase)
-        {
             _agent.speed = _agent.speed * 2f; // Increase the boss's speed when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
             damage = 35; // Increase the boss's damage when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
             timeBetweenMeleeAttacks = 1.25f;
             timeBetweenRangeAttacks = 5;
             _spriteRenderer.color = Color.green; // Change the boss's sprite color to yellow to indicate that it is in the second phase of the fight when its health is less than or equal to half of its maximum health
-            secondPhase = false;
+        }
+
+        if (secondPhase)
+        {
+            return; // If the boss is already in the second phase, it will not check for the health condition again to prevent the boss from entering the second phase multiple times
         }
     }
 
@@ -215,7 +209,30 @@ public class BossController : MonoBehaviour
 
     void UpdateRangeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
-        StartCoroutine(RangeAttackDelayAfterMelee()); // Start the delay before the boss can range attack again after leaving the melee attack range to prevent the boss from spamming the range attack immediately after leaving the melee attack range        
+        _agent.SetDestination(transform.position);
+        _animator.SetFloat("Speed", 0);
+
+        if (!_alreadyRangeAttacked && _rangeAttackType == 1)
+        {
+            rangeAttackRange = 0;
+            _animator.SetTrigger("RangeAttack");
+
+            // Instantiate the projectile prefab
+            Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            _alreadyRangeAttacked = true;
+            Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
+        }
+
+        if (!_alreadyRangeAttacked && _rangeAttackType == 2)
+        {
+            rangeAttackRange = 0;
+            _animator.SetTrigger("RangeAttack");
+
+            // Instantiate the projectile prefab
+            Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            _alreadyRangeAttacked = true;
+            Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
+        }
     }
 
     private void ResetMeleeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
@@ -228,6 +245,7 @@ public class BossController : MonoBehaviour
     {
         _alreadyRangeAttacked = false;
         _rangeAttackType = 0; // Randomly choose between the normal range attack and the golden range attack
+        rangeAttackRange = 20f;
     }
 
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
@@ -288,40 +306,6 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sightRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, rangeAttackRange);
-    }
-
-    // The boss shouldn't be able to range attack immediately after leaving the melee attack range, so we can add a short delay before the boss can range attack again after leaving the melee attack range. This will prevent the boss from spamming the range attack immediately after leaving the melee attack range and make the fight more balanced for the player.
-    IEnumerator RangeAttackDelayAfterMelee()
-    {
-        yield return new WaitForSeconds(2f); // Wait for a short duration before the boss can range attack again after leaving the melee attack range
-        _agent.SetDestination(transform.position);
-        _animator.SetFloat("Speed", 0);
-
-        if (!_alreadyRangeAttacked && _rangeAttackType == 1)
-        {
-            _animator.SetTrigger("RangeAttack");
-
-            // Instantiate the projectile prefab
-            Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
-            _alreadyRangeAttacked = true;
-            Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
-        }
-
-        if (!_alreadyRangeAttacked && _rangeAttackType == 2)
-        {
-            _animator.SetTrigger("RangeAttack");
-
-            // Instantiate the projectile prefab
-            Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
-            _alreadyRangeAttacked = true;
-            Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
-        }
-
-        if (_alreadyRangeAttacked)
-        {
-            playerInRangeAttackRange = false; // Set the player in range attack range to false to prevent the boss from trying to range attack again immediately after leaving the melee attack range
-            currentState = BossState.Chase; // If the boss has already attacked, it will go back to the Chase state to chase the player again
-        }
     }
     IEnumerator HurtAnimation()
     {
