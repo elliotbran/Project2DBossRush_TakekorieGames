@@ -78,6 +78,7 @@ public class EnemyTutorialController : MonoBehaviour
 
     private void Update()
     {
+        if(tutorialStatic) currentHealth = maxHealth; // If the tutorialStatic variable is true, the boss's health will be set to the maximum health every frame to prevent the boss from dying and allow the player to practice attacking the boss without worrying about killing him
         UpdateRanges();
         UpdateStates();
     }
