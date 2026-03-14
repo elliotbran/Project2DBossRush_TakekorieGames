@@ -238,7 +238,7 @@ public class EnemyTutorialController : MonoBehaviour
         }
     }
 
-    void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
+    public void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
     {
         Debug.Log("El boss ha muerto");
         Time.timeScale = 1f; // Ensure that time scale is reset to normal after the hit stop effect
