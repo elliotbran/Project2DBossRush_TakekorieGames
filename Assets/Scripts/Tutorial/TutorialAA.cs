@@ -29,11 +29,12 @@ public class TutorialAA : MonoBehaviour
     }
     public IEnumerator startAnimCoroutine()
     {
+        izelStart.GetComponent<CircleCollider2D>().enabled = false;
         animIzelStart.Play("Disappear");
         yield return new WaitForSeconds(1f);
         izelStart.SetActive(false);
         yield return new WaitForSeconds(1f);
-        izelGetsHit.SetActive(true);
         hudHits.SetActive(true);
+        izelGetsHit.SetActive(true);
     }
 }
