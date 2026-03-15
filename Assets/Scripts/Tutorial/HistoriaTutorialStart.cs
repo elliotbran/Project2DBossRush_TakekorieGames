@@ -29,12 +29,12 @@ public class HistoriaTutorialStart : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
         dialogue1.SetActive(true);
+        _playerController.autoTrigger = true;
         yield return new WaitForSeconds(0.2f);
 
-        _playerController.autoTrigger = true;
+        dialogue1.GetComponent<BoxCollider2D>().enabled = false;
         //Debug.Log(_playerController.autoTrigger);
         yield return new WaitForSeconds(0.3f);
-        dialogue1.GetComponent<BoxCollider2D>().enabled = false;
         _playerController.canMove = true;
 
         dialogue1.SetActive(false);
