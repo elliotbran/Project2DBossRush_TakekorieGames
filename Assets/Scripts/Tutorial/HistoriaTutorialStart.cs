@@ -34,6 +34,7 @@ public class HistoriaTutorialStart : MonoBehaviour
         _playerController.autoTrigger = true;
         //Debug.Log(_playerController.autoTrigger);
         yield return new WaitForSeconds(0.3f);
+        dialogue1.GetComponent<BoxCollider2D>().enabled = false;
         _playerController.canMove = true;
 
         dialogue1.SetActive(false);

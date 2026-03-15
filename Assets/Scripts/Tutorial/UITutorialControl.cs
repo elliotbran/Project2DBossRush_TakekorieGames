@@ -59,7 +59,10 @@ public class UITutorialControl : MonoBehaviour
         enemyTutorialController.GetComponent<Animator>().Play("Enemy_Disappear");
         yield return new WaitForSeconds(1);
         EnemyTutorial1.SetActive(false);
+        tutorialHud1.GetComponent<Animator>().Play("hudFadeOut");
         yield return new WaitForSeconds(0.5f);
         izel3Shadow.SetActive(true);
+        yield return new WaitForSeconds(1);
+        tutorialHud1.SetActive(false);
     }
 }
