@@ -56,6 +56,12 @@ public class EnemyTutorialController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     private PlayerController _playerController;
+
+    [SerializeField] bool canAttack = true;
+    [SerializeField] bool tutorialStatic = false;
+    public bool isGetting5Attacks = false;
+
+    UITutorialControl _UITutorialControl;
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -67,6 +73,7 @@ public class EnemyTutorialController : MonoBehaviour
 
     private void Start()
     {
+        _UITutorialControl = FindAnyObjectByType<UITutorialControl>();
         currentHealth = maxHealth; // Initialize the boss's health to the maximum health at the start of the game
         currentState = EnemyState.Idle; // Start the boss in the Idle state (doesn't matter right now because he detects the player right away and changes to Chase)
         _agent.updateRotation = false;
@@ -75,6 +82,7 @@ public class EnemyTutorialController : MonoBehaviour
 
     private void Update()
     {
+        if(tutorialStatic) currentHealth = maxHealth; // If the tutorialStatic variable is true, the boss's health will be set to the maximum health every frame to prevent the boss from dying and allow the player to practice attacking the boss without worrying about killing him
         UpdateRanges();
         UpdateStates();
     }
@@ -140,6 +148,8 @@ public class EnemyTutorialController : MonoBehaviour
 
     void UpdateMeleeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
     {
+        if (canAttack == false) return;  
+
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
@@ -193,6 +203,10 @@ public class EnemyTutorialController : MonoBehaviour
 
     public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
     {
+        if(isGetting5Attacks == true)
+        {
+            _UITutorialControl.hitsTutorial++;
+        }
         currentHealth -= damage;
 
         //_animator.SetTrigger("Hurt");
@@ -202,7 +216,7 @@ public class EnemyTutorialController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            _spriteRenderer.color = Color.white; // Original sprite color
+            _spriteRenderer.color = Color.black; // Original sprite color
             isDead = true;
             //StartCoroutine(DeathHitStop()); // Start the hit stop effect when the boss dies
             Die();
@@ -224,7 +238,7 @@ public class EnemyTutorialController : MonoBehaviour
         }
     }
 
-    void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
+    public void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
     {
         Debug.Log("El boss ha muerto");
         Time.timeScale = 1f; // Ensure that time scale is reset to normal after the hit stop effect
@@ -251,8 +265,12 @@ public class EnemyTutorialController : MonoBehaviour
     IEnumerator HurtAnimation()
     {
         _spriteRenderer.color = Color.red; // Change the boss's sprite color to red to indicate that it has taken damage
+        if (tutorialStatic == true)
+        {
+            _animator.Play("Enemy_Hurt");
+        }
         yield return new WaitForSeconds(0.1f); // Wait for the hurt animation to finish before changing the boss's sprite color back to normal
-        _spriteRenderer.color = Color.white; // Change the boss's sprite color back to normal after the hurt animation has finished
+        _spriteRenderer.color = Color.black; // Change the boss's sprite color back to normal after the hurt animation has finished
     }
     #region HitStop
     public IEnumerator AttackHitStop()
