@@ -337,7 +337,10 @@ public class PlayerController : MonoBehaviour
         _bloodParticlesPlayer.Play();
         if (isParrying) // If the player can parry, they will parry instead of taking damage
         {
-            return;
+            if (_object == null || !_object.CompareTag("AtaqueNormal"))
+            {
+                return;
+            }
         }
 
         else
@@ -467,20 +470,12 @@ public class PlayerController : MonoBehaviour
                 _object = null;
                 canParry = false;
             }
-            else if (_object.CompareTag("AtaqueNormal")) //Objeto con el tag AtaqueNormal no pparrea hace25 de daño y se destruye el objeto
-            {
-                TakeDamage(25f); //25 de daño 
-                //Destroy(_object.gameObject);
-                _object = null;
-                canParry = false;
-                Debug.Log("No parreado");
-            }
             canParry = false;           
         }
     }
     private void OnTriggerEnter2D(Collider2D collision) //Si hay un objeto con el tag AtaqueAmarillo o AtaqueNormal, guarda el objeto y activa el parry
     {
-        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueNormal") || collision.CompareTag("AtaqueMelee"))
+        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueMelee"))
         {
             _object = collision;
             canParry = true;
