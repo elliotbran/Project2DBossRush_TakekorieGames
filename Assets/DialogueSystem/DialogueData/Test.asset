@@ -23,6 +23,12 @@ MonoBehaviour:
     ense\xF1ara otro dialogo y acabara la conversacion."
   - '"Segunda opcion"  cambiara el script al seleccionado en "Dialogue Response Event",
     despues al volver a hablar saldra otro texto y apagara el objeto "Personaje Test"'
+  - '"Segunda opcion"  cambiara el script al seleccionado en "Dialogue Response Event",
+    despues al volver a hablar saldra otro texto y apagara el objeto "Personaje Test"'
+  - '"Segunda opcion"  cambiara el script al seleccionado en "Dialogue Response Event",
+    despues al volver a hablar saldra otro texto y apagara el objeto "Personaje Test"'
+  - '"Segunda opcion"  cambiara el script al seleccionado en "Dialogue Response Event",
+    despues al volver a hablar saldra otro texto y apagara el objeto "Personaje Test"'
   responses:
   - responseText: Primera Opcion
     dialogueObject: {fileID: 11400000, guid: a5e206407f969e746b9a50fc8d67b4a7, type: 2}

@@ -67,18 +67,35 @@ public class DialogueUI : MonoBehaviour
         responseHandler.AddResponseEvents(responseEvents);
     }
 
-    private  IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
+    private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
     {
-        for(int i = 0; i < dialogueObject.Dialogue.Length; i++)
+        // AÑADE ESTA LÍNEA AQUÍ:
+        yield return null;
+
+        Debug.Log("Iniciando secuencia de diálogo. Total frases: " + dialogueObject.Dialogue.Length);
+        for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
+        {
+            Debug.Log("Mostrando frase índice: " + i);
+            // ... resto del código
+        }
+
+        for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
         {
             string dialogue = dialogueObject.Dialogue[i];
 
             yield return RunTypingEffect(dialogue);
-
             textLabel.text = dialogue;
 
-            if (i == dialogueObject.Responses.Length - 1 && dialogueObject.HasResponses) break;
+            if (i == dialogueObject.Dialogue.Length - 1 && dialogueObject.HasResponses) break;
+
+            // --- 1. NUEVO: Esperar un frame para evitar que el mismo clic haga skip ---
             yield return null;
+
+            // --- 2. NUEVO: Esperar hasta que el jugador SUELTE la tecla antes de volver a preguntar ---
+            // Esto evita que si dejas el dedo pegado, se pasen todas las frases.
+            yield return new WaitUntil(() => !Input.GetKey(KeyCode.Space) && !Input.GetButton("Submit"));
+
+            // 3. Ahora sí, esperamos a que la vuelva a presionar para la siguiente frase
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"));
         }
 
@@ -88,7 +105,7 @@ public class DialogueUI : MonoBehaviour
         }
         else
         {
-            player.canMove = true;
+            if (player != null) player.canMove = true; // Asegúrate de que el player exista
             CloseDialogueBox();
         }
     }

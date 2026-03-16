@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf4132ac25529a428723c1702b29c02, type: 3}
+  m_Name: 3Dialogo
+  m_EditorClassIdentifier: 
+  character: {fileID: 11400000, guid: f130b3cacf575bd4aa13935d7b6d96e7, type: 2}
+  portraitId: 
+  hasName: 1
+  dialogue:
+  - Veo que has masterizado el ataque, pero un buen ataque sin una buena defensa
+    no sirve de nada.
+  - Tu lanza tiene la (habilidad del oro? por ejemplo), esta puede bloquear todos
+    los ataques enemigos dorados y absorberlos.
+  - Una vez almacenes suficiente energia dorada podras utilizarla para sanar tus
+    heridas.
+  - Pero ten cuidado, no podras absorber los ataques que no sean dorados, para evitarlos
+    tendras que deslizarte.
+  - 'Puebalo no se que mas poner happens '
+  responses:
+  - responseText: Entendido
+    dialogueObject: {fileID: 11400000, guid: d70c2f224cf99a34daab9106716df0e2, type: 2}
+  - responseText: Como deslizarme
+    dialogueObject: {fileID: 11400000, guid: 0cbdec8e37e49c348be8dfd8a774cf23, type: 2}
