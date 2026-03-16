@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
     private float _maxSpeed = 10f;
     public bool canMove = true;
     public bool canAttack;
+    public float knockbackForce; // Fuerza del knockback al recibir daño
+    public float knockbackCounter;
+    public float knockbackTotalTime;
+
+    public bool knockfromRight; // Variable para determinar la dirección del knockback (kept for compatibility; not used for directional knockback anymore)
 
     [Header("Player Dashing")]
     [SerializeField] private float _dashCooldown = 1f; // cooldown in seconds
@@ -48,6 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         Normal,        
         Dashing,
+        Stunned,
         Attacking,
         Parrying,
         Healing,
@@ -104,12 +110,12 @@ public class PlayerController : MonoBehaviour
         }
     }
     void FixedUpdate()
-{
-    if (!canMove)
     {
-        _rb.linearVelocity = Vector2.zero;
-        return;
-    }
+        if (!canMove)
+        {
+            _rb.linearVelocity = Vector2.zero;
+            return;
+        }
 
         // Movement based on state
         switch (currentState)
@@ -121,6 +127,10 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Dashing:
                 _rb.linearVelocity = _rollDir * _dashSpeed;
                 _playerHitbox.enabled = false; // Disable hitbox to prevent damage while dashing
+                break;
+            case PlayerState.Stunned:
+                _playerHitbox.enabled = false;
+                _rb.linearVelocity = moveDir * knockbackForce; // While stunned, movement is determined by knockback direction (set by attacker) and force
                 break;
             case PlayerState.Attacking:
                 // While attacking, movement is restricted by reduced _speed set in Attack()
@@ -159,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
             return;
         }
- //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
+        //Tracks if the dialogue is already open so the player doesn't open it again while it's already open
             
         if (_dashCooldownTimer > 0f) _dashCooldownTimer -= Time.deltaTime; 
         if (_parryCooldownTime > 0f) _parryCooldownTime -= Time.deltaTime;
@@ -212,7 +222,7 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = mouseWorldPos - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         target.transform.rotation = Quaternion.Euler(0, 0, angle - 90);*/
-        /////////------------NO TOCAR------------/////////             
+        /////////------------NO TOCAR------------/////////              }
     }
 
     #region Movement
@@ -225,6 +235,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Dashing:
                 HandleDashing();
+                break;
+            case PlayerState.Stunned:
+                HandleKnockback();
                 break;
 
             case PlayerState.Attacking:
@@ -315,7 +328,22 @@ public class PlayerController : MonoBehaviour
             // start cooldown
             _dashCooldownTimer = _dashCooldown;
         }
-    }        
+    }
+
+    void HandleKnockback()
+    {
+        if (knockbackCounter <= 0)
+        {
+            currentState = PlayerState.Normal;
+        }
+        else if (currentState == PlayerState.Stunned)
+        {
+            // Directional knockback: attacker sets moveDir to the normalized direction from attacker->player.
+            // Do not overwrite moveDir here, FixedUpdate will apply velocity: _rb.linearVelocity = moveDir * knockbackForce;
+            knockbackCounter -= Time.deltaTime;
+        }
+    }
+
     void HandleDashing() // Rolling behavior and cooldown management
     {
         float rollSpeedDropMultiplier = 5f;
@@ -342,6 +370,7 @@ public class PlayerController : MonoBehaviour
 
         else
         {
+            currentState = PlayerState.Stunned;
             health -= quantity;
             _animator.SetTrigger("Hurt"); // Trigger hurt animation
         }

@@ -340,6 +340,11 @@ public class BossController : MonoBehaviour
 
             if (player != null)
             {
+                // compute knockback direction from boss to player and store it on the player
+                Vector2 knockDir = (collision.transform.position - transform.position).normalized;
+                player.moveDir = new Vector3(knockDir.x, knockDir.y, 0f); // direction only, magnitude applied by player knockbackForce
+                player.knockbackCounter = player.knockbackTotalTime; // start knockback timer on player
+
                 StartCoroutine(AttackHitStop()); // Start the hit stop effect when the boss attacks the player
                 player.TakeDamage(damage);
                 Debug.Log("Da�o realizado. Vida restante: " + player.health);

@@ -2523,11 +2523,15 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0, z: 0}
   canMove: 1
   canAttack: 1
+  knockbackForce: 15
+  knockbackCounter: 0
+  knockbackTotalTime: 0.2
+  knockfromRight: 0
   _dashCooldown: 1
   attackDuration: 0.25
   attackRange: 1
   attackRate: 2
-  attackDamage: 10
+  attackDamage: 5
   attackPoint: {fileID: 1915888505}
   isAttacking: 0
   enemyLayers:
@@ -2537,7 +2541,7 @@ MonoBehaviour:
   currentState: 0
   mainCamera: {fileID: 525409375}
   target: {fileID: 1490241309}
-  _playerHitbox: {fileID: 0}
+  _playerHitbox: {fileID: 1078465795}
   _bloodParticlesPlayer: {fileID: 4588309894166758124}
   manaHandler: {fileID: 3461287631824062861}
   youDiedPanel: {fileID: 335146712}
@@ -4751,9 +4755,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f7c99080480c8439e29ada1dd668bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  damage: 20
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 250
   isDead: 0
   secondPhase: 0
   _meleeAttackType: 0
