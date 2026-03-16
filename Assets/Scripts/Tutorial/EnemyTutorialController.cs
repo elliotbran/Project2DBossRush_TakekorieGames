@@ -68,7 +68,11 @@ public class EnemyTutorialController : MonoBehaviour
         _animator = GetComponent<Animator>(); // Get the Animator component attached to the boss
         _playerPosition = GameObject.Find("Player").transform; // Get the player's position to chase and attack the player
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>(); // Get the PlayerController component attached to the player
-        _spriteRenderer = GameObject.Find("ShadowIzel_Tutorial_AutoAttack").GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
+        _spriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
+        //if (_spriteRenderer == null)
+        //{
+        //    GameObject.Find("ShadowIzel_Tutorial_ParryYCura").GetComponentInChildren<SpriteRenderer>();
+        //}
     }
 
     private void Start()
