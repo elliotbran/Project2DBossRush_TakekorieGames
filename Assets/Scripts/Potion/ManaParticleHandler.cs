@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ManaParticleHandler : MonoBehaviour
@@ -11,6 +12,10 @@ public class ManaParticleHandler : MonoBehaviour
     private float _currentSpeed = 0f;
     private const float speed_initial = 5f;
     private const float acceleration = 20f;
+
+    [Header("Audio Particle")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private List<AudioClip> _Particlesounds;
 
     public void SpawnMana(int amount) //Se activa esta funcion cuando hacemos un parry con exito 
     {
@@ -45,6 +50,11 @@ public class ManaParticleHandler : MonoBehaviour
             {
                 particles[i].remainingLifetime = -1f; //desaparece las particulas
 
+                if (_audioSource != null && _Particlesounds.Count > 0)
+                {
+                    int randomIndex = Random.Range(0, _Particlesounds.Count);
+                    _audioSource.PlayOneShot(_Particlesounds[randomIndex]);
+                }
                 if (!_hasaddedmana && manaController != null) //se llena el mana cuando toca la 1 particula 
                 {
                     manaController.RefillMana(1f); //sumamos 1 de mana 
