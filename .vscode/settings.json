@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Project2DBossRush_TakekorieGames.slnx"
+    "dotnet.defaultSolution": "Project2DBossRush_IELR.slnx"
 }
