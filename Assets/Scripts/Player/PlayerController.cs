@@ -374,6 +374,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PlayHealSound(AudioClip clip)
+    {
+        if (_audioSource != null && clip != null)
+        {
+            _audioSource.PlayOneShot(clip);
+        }
+    }
+
     IEnumerator WaitForDisablingScript()
     {
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds before disabling the script 
