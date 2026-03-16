@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _parryCooldown = 1f;
     private float _parryCooldownTime = 0;
 
+    [Header("Player Sound")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private List<AudioClip> _attackSounds;
+
     public enum PlayerState //State machine for the player
     {
         Normal,        
@@ -390,6 +394,11 @@ public class PlayerController : MonoBehaviour
         if (isAttacking)
             return;
 
+        if (_audioSource != null && _attackSounds.Count > 0)
+        {
+            int randomIndex = Random.Range(0, _attackSounds.Count);
+            _audioSource.PlayOneShot(_attackSounds[randomIndex]);
+        }
         // Activate attack bool
         isAttacking = true;
 
