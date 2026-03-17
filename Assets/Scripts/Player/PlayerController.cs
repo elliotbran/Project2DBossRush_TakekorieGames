@@ -403,13 +403,17 @@ public class PlayerController : MonoBehaviour
                 health = maxHealth;
                 return;
             }
-            health = 0;
-            currentState = PlayerState.Dead;
-            canMove = true;
-            Debug.Log("El jugador ha muerto");
-            // Trigger death animation, disable player controls, etc.
-            _animator.SetBool("IsDead", true);
-            StartCoroutine(WaitForDisablingScript()); // Start coroutine to disable the script after a short delay
+            else
+            {
+                    health = 0;
+                currentState = PlayerState.Dead;
+                canMove = true;
+                Debug.Log("El jugador ha muerto");
+                // Trigger death animation, disable player controls, etc.
+                _animator.SetBool("IsDead", true);
+                StartCoroutine(WaitForDisablingScript()); // Start coroutine to disable the script after a short delay
+
+            }
         }
     }
 
