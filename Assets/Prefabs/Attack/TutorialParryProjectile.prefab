@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5107744001252029453}
   - component: {fileID: -925138939800118799}
   - component: {fileID: 6563281127203691872}
+  - component: {fileID: -2215770283982609217}
   m_Layer: 0
   m_Name: TutorialParryProjectile
   m_TagString: AtaqueAmarillo
@@ -160,9 +161,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7094630049418330413}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a42e4dd133ad6e49956d5697a16dcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+--- !u!114 &-2215770283982609217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094630049418330413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2481922959563d40b08126f7f86bddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10

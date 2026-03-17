@@ -2879,7 +2879,7 @@ MonoBehaviour:
   isDead: 0
   _rangeAttackType: 0
   meleeAttackRange: 0
-  rangeAttackRange: 7
+  rangeAttackRange: 10
   timeBetweenMeleeAttacks: 0
   timeBetweenRangeAttacks: 3
   normalProjectilePrefab: {fileID: 2591349116901812736, guid: 4acabd0af0e1e914c83b3ce9c1b997b4, type: 3}
