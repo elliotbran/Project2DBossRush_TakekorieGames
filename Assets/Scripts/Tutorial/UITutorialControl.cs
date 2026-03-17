@@ -9,6 +9,9 @@ public class UITutorialControl : MonoBehaviour
 {
     [Header("Ints to count")]
     public int hitsTutorial;
+    public int parrysTutorial;
+    public int dashesTutorial;
+    public int curacionesTutorial;
 
     [Header("Hud")]
     public GameObject tutorialHud1;
@@ -19,6 +22,7 @@ public class UITutorialControl : MonoBehaviour
     [SerializeField] EnemyTutorialController enemyTutorialController;
     [SerializeField] GameObject EnemyTutorial1;
     [SerializeField] GameObject izel3Shadow;
+    [SerializeField] bool isTutorial2Active;
 
     bool corrutineRunning;
     public CapsuleCollider2D miCollider;
@@ -37,13 +41,18 @@ public class UITutorialControl : MonoBehaviour
         //enemyTutorialController = GetComponent<EnemyTutorialController>();
         if (enemyTutorialController.isGetting5Attacks == true && hitsTutorial<= 4)
         {
-            textoTuto1.text = "Ataques hechos " + hitsTutorial + "/5";
+            textoTuto1.text = "Ataques realizados: " + hitsTutorial + "/5";
         }
         else if(hitsTutorial >= 5 && corrutineRunning == false)
         {
-            textoTuto1.text = "Ataques hechos " + hitsTutorial + "/5";
+            textoTuto1.text = "Ataques realizados: " + hitsTutorial + "/5";
             enemyTutorialController = FindAnyObjectByType<EnemyTutorialController>();
             StartCoroutine(DeactivateEvent1());
+        }
+
+        if (isTutorial2Active)
+        {
+            textoTuto1.text = "Parrys realizados: " + parrysTutorial + "/3 \nDashes realizados: "+dashesTutorial+ "/3 \nCuraciones realizadas: "+curacionesTutorial+ "/1";
         }
     }
     public IEnumerator DeactivateEvent1()
@@ -64,5 +73,12 @@ public class UITutorialControl : MonoBehaviour
         izel3Shadow.SetActive(true);
         yield return new WaitForSeconds(1);
         tutorialHud1.SetActive(false);
+    }
+
+    public IEnumerator tutorialParryCoroutine()
+    {
+        isTutorial2Active= true;
+        yield return new WaitForSeconds(1);
+        tutorialHud1.SetActive(true);
     }
 }

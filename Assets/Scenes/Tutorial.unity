@@ -1170,6 +1170,7 @@ MonoBehaviour:
   enemyTutorialController: {fileID: 2016465917}
   EnemyTutorial1: {fileID: 3360115520949188083}
   izel3Shadow: {fileID: 2022088148}
+  isTutorial2Active: 0
   miCollider: {fileID: 2016465921}
 --- !u!114 &371395330
 MonoBehaviour:
@@ -2879,7 +2880,7 @@ MonoBehaviour:
   isDead: 0
   _rangeAttackType: 0
   meleeAttackRange: 0
-  rangeAttackRange: 10
+  rangeAttackRange: 0
   timeBetweenMeleeAttacks: 0
   timeBetweenRangeAttacks: 3
   normalProjectilePrefab: {fileID: 2591349116901812736, guid: 4acabd0af0e1e914c83b3ce9c1b997b4, type: 3}
@@ -11893,6 +11894,8 @@ MonoBehaviour:
   _bloodParticlesPlayer: {fileID: 7128297219838099886}
   manaHandler: {fileID: 1460855445526117591}
   youDiedPanel: {fileID: 1256843170}
+  playerUI: {fileID: 0}
+  bossUI: {fileID: 0}
   autoTrigger: 0
 --- !u!95 &6831898450720814492
 Animator:

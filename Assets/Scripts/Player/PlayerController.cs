@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private List<AudioClip> _attackSounds;
 
+    [Header("Tutorial")]
+    public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
+
     public enum PlayerState //State machine for the player
     {
         Normal,        
@@ -382,7 +385,12 @@ public class PlayerController : MonoBehaviour
         _animator.SetTrigger("Hurt"); // Trigger hurt animation
 
         if (health <= 0)
-        {            
+        {
+            if (onTutorial = true)
+            {
+                health = maxHealth;
+                return;
+            }
             health = 0;
             currentState = PlayerState.Dead;
             canMove = true;
