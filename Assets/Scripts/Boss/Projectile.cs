@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
             PlayerController player = collision.GetComponent<PlayerController>();
             if (player.currentState == PlayerController.PlayerState.Parrying)
             {
-                return;
+                return;   
             }
             Destroy(gameObject); // Destroy the projectile on impact
             player.TakeDamage(15f); // Apply damage to the player

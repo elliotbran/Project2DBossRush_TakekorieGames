@@ -367,6 +367,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float quantity) // Damage player
     {
         _bloodParticlesPlayer.Play();
+        bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         if (isParrying) // If the player can parry, they will parry instead of taking damage
         {
             if (_object == null || !_object.CompareTag("AtaqueNormal"))
@@ -374,13 +375,9 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         }
-
-        else
-        {
-            currentState = PlayerState.Stunned;
-            health -= quantity;
-            _animator.SetTrigger("Hurt"); // Trigger hurt animation
-        }
+        currentState = PlayerState.Stunned;
+        health -= quantity;
+        _animator.SetTrigger("Hurt"); // Trigger hurt animation
 
         if (health <= 0)
         {
@@ -521,10 +518,13 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) //Si hay un objeto con el tag AtaqueAmarillo o AtaqueNormal, guarda el objeto y activa el parry
     {
-        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueMelee"))
+        if (collision.CompareTag("AtaqueAmarillo") || collision.CompareTag("AtaqueMelee") || collision.CompareTag("AtaqueNormal"))
         {
             _object = collision;
-            canParry = true;
+            if (!collision.CompareTag("AtaqueNormal"))
+            {
+                canParry = true;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision) //si el parry no llega al objeto se cancela el parry

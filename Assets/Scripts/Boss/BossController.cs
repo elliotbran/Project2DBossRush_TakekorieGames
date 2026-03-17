@@ -232,6 +232,7 @@ public class BossController : MonoBehaviour
 
         if (!_alreadyMeleeAttacked && _meleeAttackType == 1)
         {
+            this.gameObject.tag = "AtaqueNormal";
             _animator.SetTrigger("NormalMeleeAttack");
 
             _alreadyMeleeAttacked = true;
@@ -285,7 +286,7 @@ public class BossController : MonoBehaviour
 
         if (!_alreadyRangeAttacked && _rangeAttackType == 2)
         {
-            rangeAttackRange = 0;
+            this.gameObject.tag = "AtaqueMelee";
             _animator.SetTrigger("RangeAttack");
 
             // Instantiate the projectile prefab
@@ -298,7 +299,7 @@ public class BossController : MonoBehaviour
     private void ResetMeleeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
     {
         _alreadyMeleeAttacked = false;
-        _meleeAttackType = 0; // Randomly choose between the normal melee attack and the golden melee attack
+        this.gameObject.tag = "Untagged";
     }
 
     private void ResetRangeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
