@@ -119,7 +119,8 @@ public class PlayerController : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _playerParryShake = GetComponent<PlayerParryShake>();
         _playerAnimator = GetComponent<Animator>();
-        uiTutorialControl = FindFirstObjectByType<UITutorialControl>();
+        if(onTutorial == true)
+            uiTutorialControl = FindFirstObjectByType<UITutorialControl>();
         _bloodParticlesPlayer.Stop();
         if (target != null)
         {
@@ -340,7 +341,7 @@ public class PlayerController : MonoBehaviour
 
             // start cooldown
             _dashCooldownTimer = _dashCooldown;
-            if (uiTutorialControl.isTutorial2Active && onTutorial == true)
+            if (uiTutorialControl != null && uiTutorialControl.isTutorial2Active && onTutorial == true)
             {
                 uiTutorialControl.dashesTutorial++;
             }
@@ -424,7 +425,7 @@ public class PlayerController : MonoBehaviour
         {
             health = maxHealth;
         }
-        if (uiTutorialControl.isTutorial2Active && onTutorial == true)
+        if (uiTutorialControl != null && uiTutorialControl.isTutorial2Active && onTutorial == true)
         {
             uiTutorialControl.curacionesTutorial++;
         }
@@ -591,7 +592,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(_object.gameObject);
                 _object = null;
                 canParry = false;
-                if(uiTutorialControl.isTutorial2Active && onTutorial == true)
+                if(uiTutorialControl!= null&& uiTutorialControl.isTutorial2Active && onTutorial == true)
                 {
                     uiTutorialControl.parrysTutorial++;
                 }
