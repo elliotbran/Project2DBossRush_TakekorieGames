@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Tutorial")]
     public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
+    UITutorialControl uiTutorialControl;
 
     public enum PlayerState //State machine for the player
     {
@@ -118,6 +119,7 @@ public class PlayerController : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _playerParryShake = GetComponent<PlayerParryShake>();
         _playerAnimator = GetComponent<Animator>();
+        uiTutorialControl = FindFirstObjectByType<UITutorialControl>();
         _bloodParticlesPlayer.Stop();
         if (target != null)
         {
@@ -338,6 +340,10 @@ public class PlayerController : MonoBehaviour
 
             // start cooldown
             _dashCooldownTimer = _dashCooldown;
+            if (uiTutorialControl.isTutorial2Active && onTutorial == true)
+            {
+                uiTutorialControl.dashesTutorial++;
+            }
         }
     }
 
@@ -413,6 +419,10 @@ public class PlayerController : MonoBehaviour
         if (health > maxHealth)
         {
             health = maxHealth;
+        }
+        if (uiTutorialControl.isTutorial2Active && onTutorial == true)
+        {
+            uiTutorialControl.curacionesTutorial++;
         }
     }
 
@@ -577,6 +587,10 @@ public class PlayerController : MonoBehaviour
                 Destroy(_object.gameObject);
                 _object = null;
                 canParry = false;
+                if(uiTutorialControl.isTutorial2Active && onTutorial == true)
+                {
+                    uiTutorialControl.parrysTutorial++;
+                }
             }
             canParry = false;           
         }
