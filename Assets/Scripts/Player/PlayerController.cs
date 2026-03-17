@@ -45,6 +45,12 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
     public LayerMask enemyLayers; //Its used by the boss to detect our player
 
+    // Knockback applied to enemies when player hits them
+    [Tooltip("Force applied to enemies when hit by player's attack")]
+    public float attackKnockbackForce = 2f;
+    [Tooltip("Duration (seconds) of the knockback push applied to enemies")]
+    public float attackKnockbackDuration = 0.2f;
+
     [Header("Parry System")]
     [SerializeField] private float _parryCooldown = 1f;
     private float _parryCooldownTime = 0;
@@ -464,6 +470,11 @@ public class PlayerController : MonoBehaviour
 
         // Detect enemies in range of attack and damage them immediately
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        // Track if we hit anything so we can apply player recoil once
+        bool hitAny = false;
+        Vector3 hitSource = Vector3.zero;
+
         foreach (Collider2D enemy in hitEnemies)
         {
             var enemyController = enemy.GetComponent<BossController>();
@@ -472,18 +483,60 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(AttackHitStop()); // Start hit stop effect
                 enemyController.TakeDamage(attackDamage);
+                // compute knockback direction for enemy if you still want to (not required now)
+                // Vector2 knockDirEnemy = (enemy.transform.position - transform.position).normalized;
+                // enemyController.ApplyKnockback(knockDirEnemy, attackKnockbackForce, attackKnockbackDuration);
                 Debug.Log("We hit " + enemy.name);
+
+                hitAny = true;
+                hitSource = enemy.transform.position;
             }
             if (tutorialController != null)
             {
                 StartCoroutine(AttackHitStop()); // Start hit stop effect
                 tutorialController.TakeDamage(attackDamage);
                 Debug.Log("We hit " + enemy.name);
+
+                hitAny = true;
+                hitSource = enemy.transform.position;
             }
+        }
+
+        // Apply recoil to player if we hit something
+        if (hitAny)
+        {
+            // push player away from the hit source
+            Vector2 recoilDir = ((Vector2)transform.position - (Vector2)hitSource).normalized;
+            moveDir = new Vector3(recoilDir.x, recoilDir.y, 0f);
+            knockbackCounter = knockbackTotalTime;
+            attackKnockbackForce = 1.25f;
         }
 
         // Start coroutine to finish the attack after duration
         StartCoroutine(AttackRoutine());
+    }
+
+    IEnumerator AttackRoutine() // Manages the attack lifecycle and resets state after attackDuration
+    {
+        yield return new WaitForSeconds(attackDuration);
+
+        // Deactivate target hitbox
+        if (target != null)
+            target.SetActive(false);
+
+        // Reset attack flags
+        isAttacking = false;
+
+        // Only return to Normal if the player was not knocked into Stunned by recoil.
+        // If the player is Stunned (from recoil), let HandleKnockback manage the state transition.
+        if (currentState == PlayerState.Attacking)
+        {
+            currentState = PlayerState.Normal;
+        }
+
+        _speed = _maxSpeed;
+
+        Debug.Log("ATAQUE FINALIZADO");
     }
     void HandleParry()
     {
@@ -546,21 +599,6 @@ public class PlayerController : MonoBehaviour
             _object = null;
             canParry = false;
         }
-    }
-    IEnumerator AttackRoutine() // Manages the attack lifecycle and resets state after attackDuration
-    {
-        yield return new WaitForSeconds(attackDuration);
-
-        // Deactivate target hitbox
-        if (target != null)
-            target.SetActive(false);
-
-        // Reset attack flags and state
-        isAttacking = false;
-        currentState = PlayerState.Normal;
-        _speed = _maxSpeed;
-
-        Debug.Log("ATAQUE FINALIZADO");
     }
     IEnumerator ParryWindowRoutine()
     {
