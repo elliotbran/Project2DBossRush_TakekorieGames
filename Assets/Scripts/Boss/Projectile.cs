@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    SpriteRenderer _spriteRenderer;
     [SerializeField]float _speed;
     Transform _player; // Assign the player in the Inspector
     
@@ -12,12 +13,15 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _player = GameObject.Find("Player").transform; // Get the player's position to chase the player
         _bossController = GameObject.Find("Boss").GetComponent<BossController>(); // Get reference to the boss controller
     }   
 
     void Update()
     {
+        _spriteRenderer.flipX = _player.transform.position.x < _spriteRenderer.transform.position.x;
+
         if (_bossController.currentHealth == _bossController.maxHealth / 2) // If the boss is at full health, destroy the projectile immediately
         {
             _speed = 20f;
