@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 public class BossController : MonoBehaviour
 {
+    public BossState currentState;
+
     [Header("Health")] // Header for health related variables 
     public float damage = 25f;
     public float currentHealth;
@@ -19,8 +21,11 @@ public class BossController : MonoBehaviour
 
     [Range(0, 5f)]
     public float meleeAttackRange;
+    [Header("Range distances")]
     [Range(0, 30f)]
-    public float rangeAttackRange;
+    public float rangeAttackMinRange = 15f; // minimum distance to allow ranged attack
+    [Range(0, 50f)]
+    public float rangeAttackRange = 20f; // maximum distance to allow ranged attack
     [Range(0, 10f)]
     public float timeBetweenMeleeAttacks;
     [Range(0, 10f)]
@@ -30,10 +35,6 @@ public class BossController : MonoBehaviour
     public Transform projectileSpawnPoint;
     bool _alreadyMeleeAttacked;
     bool _alreadyRangeAttacked;
-
-    [Header("Range Attack Activation")]
-    [Tooltip("Delay in seconds before re-enabling range attack after the player leaves melee range.")]
-    public float rangeAttackActivateDelay = 1.0f;
 
     [Range(0, 50f)]
     public float sightRange;
@@ -47,7 +48,6 @@ public class BossController : MonoBehaviour
         RangeAttack,
     }
 
-    public BossState currentState;
     public LayerMask whatIsPlayer;     
 
     // Components
@@ -64,11 +64,6 @@ public class BossController : MonoBehaviour
 
     private PlayerController _playerController;
 
-    // Fields for managing range re-enable logic
-    float _defaultRangeAttackRange;
-    bool _wasPlayerInMeleeAttackRange;
-    Coroutine _rangeEnableCoroutine;
-
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -77,8 +72,14 @@ public class BossController : MonoBehaviour
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>(); // Get the PlayerController component attached to the player
         _originalRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
-        _spriteRenderer = _originalRenderer;
+        _sprite_renderer_assign();
         _bloodParticles = GetComponentInChildren<ParticleSystem>(); // Get the ParticleSystem component attached to the boss for the blood effect when the boss takes damage
+    }
+
+    // helper to keep assignment consistent with original code style
+    void _sprite_renderer_assign()
+    {
+        _spriteRenderer = _originalRenderer;
     }
 
     private void Start()
@@ -88,17 +89,13 @@ public class BossController : MonoBehaviour
         _agent.updateRotation = false;  
         _agent.updateUpAxis = false;
         _bloodParticles.Stop();
-
-        // Preserve the configured range attack radius so we can restore it after delay
-        _defaultRangeAttackRange = rangeAttackRange;
-        _wasPlayerInMeleeAttackRange = false;
     }
 
     private void Update()
     {
-        UpdateStates();
+        // Ensure ranges are up-to-date before deciding states
         UpdateRanges();
-        ManageRangeAttackRangeActivation(); // handle enter/exit melee -> disable/enable range with delay
+        UpdateStates();
         SecondPhase();
     }
 
@@ -106,56 +103,25 @@ public class BossController : MonoBehaviour
     {
         playerInSightRange = Physics2D.OverlapCircle(transform.position, sightRange, whatIsPlayer);
         playerInMeleeAttackRange = Physics2D.OverlapCircle(transform.position, meleeAttackRange, whatIsPlayer);
-        playerInRangeAttackRange = Physics2D.OverlapCircle(transform.position, rangeAttackRange, whatIsPlayer);
-    }
 
-    // New: handle disabling range while player is in melee range and re-enable after delay when they leave
-    void ManageRangeAttackRangeActivation()
-    {
-        // Entered melee range this frame
-        if (playerInMeleeAttackRange && !_wasPlayerInMeleeAttackRange)
+        // Compute distance to player and use min/max window for ranged-attack eligibility
+        if (_playerPosition != null)
         {
-            // Cancel any pending re-enable
-            if (_rangeEnableCoroutine != null)
-            {
-                StopCoroutine(_rangeEnableCoroutine);
-                _rangeEnableCoroutine = null;
-            }
-
-            // Completely disable range attack while in melee range
-            rangeAttackRange = 0f;
+            float dist = Vector2.Distance(transform.position, _playerPosition.position);
+            // true only when between min and max (inclusive)
+            playerInRangeAttackRange = dist <= rangeAttackRange && dist >= rangeAttackMinRange;
         }
-
-        // Exited melee range this frame
-        if (!playerInMeleeAttackRange && _wasPlayerInMeleeAttackRange)
+        else
         {
-            // Start coroutine to re-enable range attack after delay
-            if (_rangeEnableCoroutine != null)
-                StopCoroutine(_rangeEnableCoroutine);
-
-            _rangeEnableCoroutine = StartCoroutine(EnableRangeAfterDelay(rangeAttackActivateDelay));
+            playerInRangeAttackRange = false;
         }
-
-        _wasPlayerInMeleeAttackRange = playerInMeleeAttackRange;
-    }
-
-    IEnumerator EnableRangeAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        // Only re-enable if player still isn't in melee range
-        if (!playerInMeleeAttackRange)
-        {
-            rangeAttackRange = _defaultRangeAttackRange;
-        }
-
-        _rangeEnableCoroutine = null;
     }
 
     void UpdateStates() // Update the boss's state based on the player's position and the boss's current state
     {
         // Flip the boss's sprite based on the player's position relative to the boss
-        _spriteRenderer.flipX = _playerPosition.transform.position.x < _spriteRenderer.transform.position.x;
+        if (_playerPosition != null)
+            _sprite_renderer_flip();
 
         if (!playerInSightRange)
         {
@@ -171,7 +137,6 @@ public class BossController : MonoBehaviour
 
         if (playerInMeleeAttackRange && playerInSightRange)
         {
-            rangeAttackRange = 0; // Set the range attack range to 0 when the player is in melee attack range to prevent the boss from using the range attack when the player is in melee attack range
             _meleeAttackType = Random.Range(1, 5); // Randomly choose between the normal melee attack and the golden melee attack
             currentState = BossState.MeleeAttack;
             UpdateMeleeAttack();
@@ -184,7 +149,7 @@ public class BossController : MonoBehaviour
             UpdateRangeAttack();
         }
 
-        if (_playerController.health <= 0) // If the player is in attack range but the player's health is less than or equal to 0, the boss will go back to the Idle state
+        if (_playerController != null && _playerController.health <= 0) // If the player is dead, go Idle
         {
             sightRange = 0;
             meleeAttackRange = 0;
@@ -193,42 +158,48 @@ public class BossController : MonoBehaviour
             UpdateIdle();
         }
     }
+
+    // helper to keep assignment consistent with original code style
+    void _sprite_renderer_flip()
+    {
+        _spriteRenderer.flipX = _playerPosition.transform.position.x < _spriteRenderer.transform.position.x;
+    }
+
     void SecondPhase()
     {
         if (!secondPhase && currentHealth == maxHealth / 2)
         {
-            secondPhase = true; // If the boss's health is less than or equal to half of its maximum health, it will enter the second phase of the fight where it will become more aggressive and use different attacks
-            _agent.speed = 10; // Increase the boss's speed when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
-            _agent.acceleration = 20; // Increase the boss's acceleration when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
-            damage = 35; // Increase the boss's damage when its health is less than or equal to half of its maximum health to make the fight more challenging for the player
+            secondPhase = true; // enter second phase
+            _agent.speed = 10;
+            _agent.acceleration = 20;
+            damage = 35;
             timeBetweenMeleeAttacks = 1.25f;
             timeBetweenRangeAttacks = 3;
-            _spriteRenderer.color = Color.green; // Change the boss's sprite color to yellow to indicate that it is in the second phase of the fight when its health is less than or equal to half of its maximum health
+            _spriteRenderer.color = Color.green;
         }
 
         if (secondPhase)
         {
-            return; // If the boss is already in the second phase, it will not check for the health condition again to prevent the boss from entering the second phase multiple times
+            return;
         }
     }
 
-    void UpdateIdle() // In the Idle state, the boss will stop moving and play the idle animation
+    void UpdateIdle()
     {
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);              
     }
 
-    void UpdateChase() // In the Chase state, the boss will move towards the player and play the running animation
+    void UpdateChase()
     {
         _agent.SetDestination(_playerPosition.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
     }
 
-    void UpdateMeleeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
+    void UpdateMeleeAttack()
     {
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
-
 
         if (!_alreadyMeleeAttacked && _meleeAttackType == 1)
         {
@@ -268,57 +239,47 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void UpdateRangeAttack() // In the Attack state, the boss will stop moving and play the attack animation. If the boss is already attacking, it will wait for the time between attacks before it can attack again.
+    void UpdateRangeAttack()
     {
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
         if (!_alreadyRangeAttacked && _rangeAttackType == 1)
         {
-            rangeAttackRange = 0;
+            rangeAttackRange = 0f;
             _animator.SetTrigger("RangeAttack");
-
-            // Instantiate the projectile prefab
-            Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
         }
 
         if (!_alreadyRangeAttacked && _rangeAttackType == 2)
         {
+            rangeAttackRange = 0f;
             this.gameObject.tag = "AtaqueMelee";
             _animator.SetTrigger("RangeAttack");
-
-            // Instantiate the projectile prefab
-            Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity); // Instantiate the projectile prefab at the projectile spawn point position with no rotation
+            Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
         }
     }
 
-    private void ResetMeleeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
+    private void ResetMeleeAttack()
     {
         _alreadyMeleeAttacked = false;
         this.gameObject.tag = "Untagged";
     }
 
-    private void ResetRangeAttack() // Reset the attack so the boss can attack again after the time between attacks has passed
+    private void ResetRangeAttack()
     {
         _alreadyRangeAttacked = false;
-        _rangeAttackType = 0; // Randomly choose between the normal range attack and the golden range attack
-        rangeAttackRange = _defaultRangeAttackRange;
+        rangeAttackRange = 20f;
     }
 
-    private void DelayRangeAttack()
-    {
-
-    }
-
-    public void TakeDamage(int damage) // This function is called when the boss takes damage. It reduces the boss's health by the amount of damage taken and checks if the boss's health is less than or equal to 0. If it is, the boss dies.
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         
-        //_animator.SetTrigger("Hurt");
         StartCoroutine(HurtAnimation());
         _bloodParticles.Play();
         
@@ -326,14 +287,13 @@ public class BossController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            _spriteRenderer.color = Color.white; // Original sprite color
+            _spriteRenderer.color = Color.white;
             isDead = true;
-            //StartCoroutine(DeathHitStop()); // Start the hit stop effect when the boss dies
             Die();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) // This function is called when the boss's attack hitbox collides with the player. It checks if the collided object is the player and if it is, it calls the player's ReceiveDamage function to deal damage to the player.
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -341,22 +301,21 @@ public class BossController : MonoBehaviour
 
             if (player != null)
             {
-                // compute knockback direction from boss to player and store it on the player
                 Vector2 knockDir = (collision.transform.position - transform.position).normalized;
-                player.moveDir = new Vector3(knockDir.x, knockDir.y, 0f); // direction only, magnitude applied by player knockbackForce
-                player.knockbackCounter = player.knockbackTotalTime; // start knockback timer on player
+                player.moveDir = new Vector3(knockDir.x, knockDir.y, 0f);
+                player.knockbackCounter = player.knockbackTotalTime;
 
-                StartCoroutine(AttackHitStop()); // Start the hit stop effect when the boss attacks the player
+                StartCoroutine(AttackHitStop());
                 player.TakeDamage(damage);
                 Debug.Log("Da�o realizado. Vida restante: " + player.health);
             }
         }
     }    
 
-    void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
+    void Die()
     {
         Debug.Log("El boss ha muerto");
-        Time.timeScale = 1f; // Ensure that time scale is reset to normal after the hit stop effect
+        Time.timeScale = 1f;
 
         _animator.SetBool("IsDead", true);
 
@@ -369,7 +328,7 @@ public class BossController : MonoBehaviour
         this.enabled = false;
     }
 
-    private void OnDrawGizmos() // Show the attack range and sight range of the boss in the editor for debugging.
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeAttackRange); 
@@ -377,27 +336,21 @@ public class BossController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sightRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, rangeAttackRange);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, rangeAttackMinRange);
     }
     IEnumerator HurtAnimation()
     {
-        _spriteRenderer.color = Color.red; // Change the boss's sprite color to red to indicate that it has taken damage
-        yield return new WaitForSeconds(0.1f); // Wait for the hurt animation to finish before changing the boss's sprite color back to normal
-        _spriteRenderer.color = Color.white; // Change the boss's sprite color back to normal after the hurt animation has finished
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _spriteRenderer.color = Color.white;
     }
     #region HitStop
     public IEnumerator AttackHitStop()
     {
-        Time.timeScale = 0.2f; // Slow down time to create hit stop effect
-        yield return new WaitForSecondsRealtime(0.3f); // Wait for a short duration in real time
-        Time.timeScale = 1; // Restore original time scale      
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(0.3f);
+        Time.timeScale = 1;
     }
-
-    /*IEnumerator DeathHitStop()
-    {
-        float originalTimeScale = Time.timeScale;
-        Time.timeScale = 0.2f; // Slow down time to create hit stop effect
-        yield return new WaitForSeconds(0.3f); // Wait for a short duration in real time
-        Time.timeScale = originalTimeScale; // Restore original time scale        
-    }*/
     #endregion
 }
