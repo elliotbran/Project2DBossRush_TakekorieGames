@@ -13,7 +13,7 @@ public class EnemyTutorialProjectile : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player").transform; // Get the player's position to chase the player
-        _enemyController = GameObject.Find("ShadowIzel_Tutorial_AutoAttack").GetComponent<EnemyTutorialController>(); // Get reference to the boss controller
+        _enemyController = FindAnyObjectByType<EnemyTutorialController>(); // Get reference to the boss controller
     }
 
     void Update()
