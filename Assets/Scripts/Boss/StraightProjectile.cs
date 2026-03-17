@@ -5,6 +5,7 @@ using UnityEngine;
 public class StraightProjectile : MonoBehaviour
 {
     [SerializeField] float _speed;
+    SpriteRenderer _spriteRenderer;
     Transform _player; // Assign the player in the Inspector
 
     BossController _bossController; // Reference to the boss controller to manage projectile behavior
@@ -15,6 +16,8 @@ public class StraightProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         var playerObj = GameObject.Find("Player");
         if (playerObj != null)
         {
@@ -22,9 +25,9 @@ public class StraightProjectile : MonoBehaviour
             _targetPosition = _player.position; // sample player's position once
             _direction = (_targetPosition - (Vector2)transform.position).normalized;
 
-            // Optional: rotate projectile to face travel direction
-            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            //// Optional: rotate projectile to face travel direction
+            //float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
         else
         {
@@ -41,6 +44,8 @@ public class StraightProjectile : MonoBehaviour
 
     void Update()
     {
+        _spriteRenderer.flipX = _player.transform.position.x < _spriteRenderer.transform.position.x;
+
         if (_bossController != null && _bossController.currentHealth <= _bossController.maxHealth / 2)
         {
             _speed = 20f;

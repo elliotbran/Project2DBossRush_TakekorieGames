@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5107744001252029453}
   - component: {fileID: -925138939800118799}
   - component: {fileID: -164081019048714812}
+  - component: {fileID: 6664826740432816487}
   m_Layer: 0
   m_Name: ParryProjectile
   m_TagString: AtaqueAmarillo
@@ -79,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 1922073265
   m_SortingLayer: 1
   m_SortingOrder: -1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9764706, g: 0.7607843, b: 0.16862746, a: 1}
+  m_Sprite: {fileID: 5160023257738637531, guid: 0d8e4f3b28e6d8a4a976b9443d856d63, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -166,3 +167,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+--- !u!95 &6664826740432816487
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094630049418330413}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 936bbd5e7f93eda46bb189b828e6fa27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
