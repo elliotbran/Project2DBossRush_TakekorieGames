@@ -1145,8 +1145,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -301.74, y: 114.82}
-  m_SizeDelta: {x: 8.9513, y: 8.9513}
+  m_AnchoredPosition: {x: -301.9353, y: 115.02}
+  m_SizeDelta: {x: 11.4718, y: 11.472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &230662764
 Animator:
@@ -1158,7 +1158,7 @@ Animator:
   m_GameObject: {fileID: 230662762}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 89eeb228deec13b47802fc465bae67df, type: 2}
+  m_Controller: {fileID: 9100000, guid: ec18ef0557a07a348b2376ef30847011, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1406,6 +1406,7 @@ MonoBehaviour:
   izel3Shadow: {fileID: 2022088148}
   isTutorial2Active: 0
   miCollider: {fileID: 2016465921}
+  cuadradoHUD: {fileID: 230662762}
 --- !u!114 &371395330
 MonoBehaviour:
   m_ObjectHideFlags: 0
