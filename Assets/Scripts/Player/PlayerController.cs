@@ -399,14 +399,14 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
-            if (onTutorial = true)
+            if (onTutorial == true)
             {
                 health = maxHealth;
                 return;
             }
             else
             {
-                    health = 0;
+                health = 0;
                 currentState = PlayerState.Dead;
                 canMove = true;
                 Debug.Log("El jugador ha muerto");
@@ -524,7 +524,7 @@ public class PlayerController : MonoBehaviour
             Vector2 recoilDir = ((Vector2)transform.position - (Vector2)hitSource).normalized;
             moveDir = new Vector3(recoilDir.x, recoilDir.y, 0f);
             knockbackCounter = knockbackTotalTime;
-            attackKnockbackForce = 1.25f;
+            attackKnockbackForce = .75f;
         }
 
         // Start coroutine to finish the attack after duration
