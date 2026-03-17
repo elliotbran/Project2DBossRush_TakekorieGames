@@ -2690,6 +2690,8 @@ MonoBehaviour:
   _bloodParticlesPlayer: {fileID: 4588309894166758124}
   manaHandler: {fileID: 3461287631824062861}
   youDiedPanel: {fileID: 335146712}
+  playerUI: {fileID: 1592044656}
+  bossUI: {fileID: 430725429}
   autoTrigger: 0
 --- !u!70 &1078465795
 CapsuleCollider2D:

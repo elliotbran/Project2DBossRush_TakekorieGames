@@ -299,6 +299,10 @@ public class BossController : MonoBehaviour
         {
             PlayerController player = collision.GetComponent<PlayerController>();
 
+            if (player.currentState == PlayerController.PlayerState.Dashing)
+            {
+                return; // Skip damage and knockback if the player is dashing
+            }
             if (player != null)
             {
                 Vector2 knockDir = (collision.transform.position - transform.position).normalized;
