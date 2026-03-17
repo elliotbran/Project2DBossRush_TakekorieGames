@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [Header("Parry System")]
     [SerializeField] private float _parryCooldown = 1f;
     private float _parryCooldownTime = 0;
+    private bool _Inmortal = false;
 
     [Header("Player Sound")]
     [SerializeField] private AudioSource _audioSource;
@@ -89,7 +90,8 @@ public class PlayerController : MonoBehaviour
     public ManaParticleHandler manaHandler;
 
     public GameObject youDiedPanel;
-
+    public GameObject playerUI;
+    public GameObject bossUI;
 
     public bool autoTrigger = false;
     void Awake()
@@ -126,14 +128,11 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerState.Normal:
                 _rb.linearVelocity = moveDir * _speed;
-                _playerHitbox.enabled = true; // Ensure hitbox is enabled during normal movement
                 break;
             case PlayerState.Dashing:
                 _rb.linearVelocity = _rollDir * _dashSpeed;
-                _playerHitbox.enabled = false; // Disable hitbox to prevent damage while dashing
                 break;
             case PlayerState.Stunned:
-                _playerHitbox.enabled = false;
                 _rb.linearVelocity = moveDir * knockbackForce; // While stunned, movement is determined by knockback direction (set by attacker) and force
                 break;
             case PlayerState.Attacking:
@@ -261,7 +260,6 @@ public class PlayerController : MonoBehaviour
     }    
     void HandleMovement() // Normal movement and roll initiation
     {
-        _playerHitbox.enabled = true; // Ensure hitbox is enabled during normal movement
         if (canMove == false) return;
         _speed = _maxSpeed;
 
@@ -353,7 +351,6 @@ public class PlayerController : MonoBehaviour
         float rollSpeedDropMultiplier = 5f;
         _dashSpeed -= _dashSpeed * rollSpeedDropMultiplier * Time.deltaTime;
         Shadows.me.Sombras_Skill();
-        _playerHitbox.enabled = false; // Disable hitbox to prevent damage while dashing
 
         float minRollSpeed = 15f;
         if (_dashSpeed < minRollSpeed)
@@ -366,6 +363,11 @@ public class PlayerController : MonoBehaviour
     #region Health and Healing
     public void TakeDamage(float quantity) // Damage player
     {
+        if (_Inmortal && _object != null && _object.CompareTag("AtaqueAmarillo"))
+        {
+            Debug.Log("Parry Amarillo Inmortal");
+            return;
+        }
         _bloodParticlesPlayer.Play();
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         if (isParrying) // If the player can parry, they will parry instead of taking damage
@@ -380,7 +382,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetTrigger("Hurt"); // Trigger hurt animation
 
         if (health <= 0)
-        {
+        {            
             health = 0;
             currentState = PlayerState.Dead;
             canMove = true;
@@ -409,11 +411,13 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator WaitForDisablingScript()
-    {
+    {        
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds before disabling the script 
         _playerHitbox.enabled = false; // Disable hitbox to prevent further damage
         this.enabled = false; // Disable this script to stop player movement and actions
         yield return new WaitForSeconds(1f); // Wait for 1 second before showing the "You Died" panel
+        playerUI.SetActive(false);
+        bossUI.SetActive(false);
         youDiedPanel.SetActive(true); // Show "You Died" panel
         yield return new WaitForSeconds(4f);
         SceneManager.LoadScene(1);
@@ -559,7 +563,8 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
 
         canParry = false;
-        yield return new WaitForSeconds(.2f); //tiempo del parry
+        yield return new WaitForSeconds(0.2f); //tiempo del parry
+        _Inmortal = true;
         canParry = true;
         isParrying = false;
         _playerHitbox.enabled = true; // Disable hitbox to prevent further damage
