@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [Header("Parry System")]
     [SerializeField] private float _parryCooldown = 1f;
     private float _parryCooldownTime = 0;
+    private bool _Inmortal = false;
 
     [Header("Player Sound")]
     [SerializeField] private AudioSource _audioSource;
@@ -366,6 +367,11 @@ public class PlayerController : MonoBehaviour
     #region Health and Healing
     public void TakeDamage(float quantity) // Damage player
     {
+        if (_Inmortal && _object != null && _object.CompareTag("AtaqueAmarillo"))
+        {
+            Debug.Log("Parry Amarillo Inmortal");
+            return;
+        }
         _bloodParticlesPlayer.Play();
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         if (isParrying) // If the player can parry, they will parry instead of taking damage
@@ -559,7 +565,8 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
 
         canParry = false;
-        yield return new WaitForSeconds(.2f); //tiempo del parry
+        yield return new WaitForSeconds(0.2f); //tiempo del parry
+        _Inmortal = true;
         canParry = true;
         isParrying = false;
         _playerHitbox.enabled = true; // Disable hitbox to prevent further damage
