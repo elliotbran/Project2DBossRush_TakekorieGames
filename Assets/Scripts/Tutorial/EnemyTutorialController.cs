@@ -60,6 +60,7 @@ public class EnemyTutorialController : MonoBehaviour
     [SerializeField] bool canAttack = true;
     [SerializeField] bool tutorialStatic = false;
     public bool isGetting5Attacks = false;
+    public bool tutorial2 = false;
 
     UITutorialControl _UITutorialControl;
     private void Awake()
@@ -121,7 +122,14 @@ public class EnemyTutorialController : MonoBehaviour
             UpdateMeleeAttack();
         }
 
-        if (playerInRangeAttackRange && !playerInMeleeAttackRange && playerInSightRange)
+        if (playerInRangeAttackRange && !playerInMeleeAttackRange && playerInSightRange) //
+        {
+            _rangeAttackType = Random.Range(1, 3); // Randomly choose between the normal range attack and the golden range attack
+            currentState = EnemyState.RangeAttack;
+            UpdateRangeAttack();
+        }
+
+        if (tutorial2 && playerInRangeAttackRange)
         {
             _rangeAttackType = Random.Range(1, 3); // Randomly choose between the normal range attack and the golden range attack
             currentState = EnemyState.RangeAttack;

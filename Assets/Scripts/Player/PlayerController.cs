@@ -45,13 +45,23 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
     public LayerMask enemyLayers; //Its used by the boss to detect our player
 
+    // Knockback applied to enemies when player hits them
+    [Tooltip("Force applied to enemies when hit by player's attack")]
+    public float attackKnockbackForce = 2f;
+    [Tooltip("Duration (seconds) of the knockback push applied to enemies")]
+    public float attackKnockbackDuration = 0.2f;
+
     [Header("Parry System")]
     [SerializeField] private float _parryCooldown = 1f;
     private float _parryCooldownTime = 0;
+    private bool _Inmortal = false;
 
     [Header("Player Sound")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private List<AudioClip> _attackSounds;
+
+    [Header("Tutorial")]
+    public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
 
     public enum PlayerState //State machine for the player
     {
@@ -89,7 +99,8 @@ public class PlayerController : MonoBehaviour
     public ManaParticleHandler manaHandler;
 
     public GameObject youDiedPanel;
-
+    public GameObject playerUI;
+    public GameObject bossUI;
 
     public bool autoTrigger = false;
     void Awake()
@@ -126,14 +137,11 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerState.Normal:
                 _rb.linearVelocity = moveDir * _speed;
-                _playerHitbox.enabled = true; // Ensure hitbox is enabled during normal movement
                 break;
             case PlayerState.Dashing:
                 _rb.linearVelocity = _rollDir * _dashSpeed;
-                _playerHitbox.enabled = false; // Disable hitbox to prevent damage while dashing
                 break;
             case PlayerState.Stunned:
-                _playerHitbox.enabled = false;
                 _rb.linearVelocity = moveDir * knockbackForce; // While stunned, movement is determined by knockback direction (set by attacker) and force
                 break;
             case PlayerState.Attacking:
@@ -261,7 +269,6 @@ public class PlayerController : MonoBehaviour
     }    
     void HandleMovement() // Normal movement and roll initiation
     {
-        _playerHitbox.enabled = true; // Ensure hitbox is enabled during normal movement
         if (canMove == false) return;
         _speed = _maxSpeed;
 
@@ -353,7 +360,6 @@ public class PlayerController : MonoBehaviour
         float rollSpeedDropMultiplier = 5f;
         _dashSpeed -= _dashSpeed * rollSpeedDropMultiplier * Time.deltaTime;
         Shadows.me.Sombras_Skill();
-        _playerHitbox.enabled = false; // Disable hitbox to prevent damage while dashing
 
         float minRollSpeed = 15f;
         if (_dashSpeed < minRollSpeed)
@@ -366,6 +372,11 @@ public class PlayerController : MonoBehaviour
     #region Health and Healing
     public void TakeDamage(float quantity) // Damage player
     {
+        if (_Inmortal && _object != null && _object.CompareTag("AtaqueAmarillo"))
+        {
+            Debug.Log("Parry Amarillo Inmortal");
+            return;
+        }
         _bloodParticlesPlayer.Play();
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         if (isParrying) // If the player can parry, they will parry instead of taking damage
@@ -381,6 +392,11 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
+            if (onTutorial = true)
+            {
+                health = maxHealth;
+                return;
+            }
             health = 0;
             currentState = PlayerState.Dead;
             canMove = true;
@@ -409,11 +425,13 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator WaitForDisablingScript()
-    {
+    {        
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds before disabling the script 
         _playerHitbox.enabled = false; // Disable hitbox to prevent further damage
         this.enabled = false; // Disable this script to stop player movement and actions
         yield return new WaitForSeconds(1f); // Wait for 1 second before showing the "You Died" panel
+        playerUI.SetActive(false);
+        bossUI.SetActive(false);
         youDiedPanel.SetActive(true); // Show "You Died" panel
         yield return new WaitForSeconds(4f);
         SceneManager.LoadScene(1);
@@ -452,6 +470,11 @@ public class PlayerController : MonoBehaviour
 
         // Detect enemies in range of attack and damage them immediately
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        // Track if we hit anything so we can apply player recoil once
+        bool hitAny = false;
+        Vector3 hitSource = Vector3.zero;
+
         foreach (Collider2D enemy in hitEnemies)
         {
             var enemyController = enemy.GetComponent<BossController>();
@@ -460,18 +483,60 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(AttackHitStop()); // Start hit stop effect
                 enemyController.TakeDamage(attackDamage);
+                // compute knockback direction for enemy if you still want to (not required now)
+                // Vector2 knockDirEnemy = (enemy.transform.position - transform.position).normalized;
+                // enemyController.ApplyKnockback(knockDirEnemy, attackKnockbackForce, attackKnockbackDuration);
                 Debug.Log("We hit " + enemy.name);
+
+                hitAny = true;
+                hitSource = enemy.transform.position;
             }
             if (tutorialController != null)
             {
                 StartCoroutine(AttackHitStop()); // Start hit stop effect
                 tutorialController.TakeDamage(attackDamage);
                 Debug.Log("We hit " + enemy.name);
+
+                hitAny = true;
+                hitSource = enemy.transform.position;
             }
+        }
+
+        // Apply recoil to player if we hit something
+        if (hitAny)
+        {
+            // push player away from the hit source
+            Vector2 recoilDir = ((Vector2)transform.position - (Vector2)hitSource).normalized;
+            moveDir = new Vector3(recoilDir.x, recoilDir.y, 0f);
+            knockbackCounter = knockbackTotalTime;
+            attackKnockbackForce = 1.25f;
         }
 
         // Start coroutine to finish the attack after duration
         StartCoroutine(AttackRoutine());
+    }
+
+    IEnumerator AttackRoutine() // Manages the attack lifecycle and resets state after attackDuration
+    {
+        yield return new WaitForSeconds(attackDuration);
+
+        // Deactivate target hitbox
+        if (target != null)
+            target.SetActive(false);
+
+        // Reset attack flags
+        isAttacking = false;
+
+        // Only return to Normal if the player was not knocked into Stunned by recoil.
+        // If the player is Stunned (from recoil), let HandleKnockback manage the state transition.
+        if (currentState == PlayerState.Attacking)
+        {
+            currentState = PlayerState.Normal;
+        }
+
+        _speed = _maxSpeed;
+
+        Debug.Log("ATAQUE FINALIZADO");
     }
     void HandleParry()
     {
@@ -535,21 +600,6 @@ public class PlayerController : MonoBehaviour
             canParry = false;
         }
     }
-    IEnumerator AttackRoutine() // Manages the attack lifecycle and resets state after attackDuration
-    {
-        yield return new WaitForSeconds(attackDuration);
-
-        // Deactivate target hitbox
-        if (target != null)
-            target.SetActive(false);
-
-        // Reset attack flags and state
-        isAttacking = false;
-        currentState = PlayerState.Normal;
-        _speed = _maxSpeed;
-
-        Debug.Log("ATAQUE FINALIZADO");
-    }
     IEnumerator ParryWindowRoutine()
     {
         isParrying = true;
@@ -559,7 +609,8 @@ public class PlayerController : MonoBehaviour
         _playerAnimator.SetTrigger("Parry"); //activa la animacion del parry
 
         canParry = false;
-        yield return new WaitForSeconds(.2f); //tiempo del parry
+        yield return new WaitForSeconds(0.2f); //tiempo del parry
+        _Inmortal = true;
         canParry = true;
         isParrying = false;
         _playerHitbox.enabled = true; // Disable hitbox to prevent further damage

@@ -1170,6 +1170,7 @@ MonoBehaviour:
   enemyTutorialController: {fileID: 2016465917}
   EnemyTutorial1: {fileID: 3360115520949188083}
   izel3Shadow: {fileID: 2022088148}
+  isTutorial2Active: 0
   miCollider: {fileID: 2016465921}
 --- !u!114 &371395330
 MonoBehaviour:
@@ -2165,7 +2166,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.16227674, y: 0}
+  m_Offset: {x: 1.2204609, y: 1.4865134}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2175,7 +2176,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 28.582909, y: 1}
+  m_Size: {x: 43.71104, y: 3.9730268}
   m_EdgeRadius: 0
 --- !u!4 &658601663
 Transform:
@@ -2779,7 +2780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!70 &1050601095
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2787,7 +2788,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050601094}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -2881,7 +2882,7 @@ MonoBehaviour:
   meleeAttackRange: 0
   rangeAttackRange: 0
   timeBetweenMeleeAttacks: 0
-  timeBetweenRangeAttacks: 0
+  timeBetweenRangeAttacks: 3
   normalProjectilePrefab: {fileID: 2591349116901812736, guid: 4acabd0af0e1e914c83b3ce9c1b997b4, type: 3}
   goldenProjectilePrefab: {fileID: 7094630049418330413, guid: 7b101db2549b6704297a1f693a37995c, type: 3}
   projectileSpawnPoint: {fileID: 457728300}
@@ -6186,7 +6187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ps: {fileID: 3501149107810558891}
   player: {fileID: 3623369009690347717}
-  manaController: {fileID: 0}
+  manaController: {fileID: 7363108697126166137}
   _audioSource: {fileID: 0}
   _Particlesounds: []
 --- !u!50 &1493462911611411097
@@ -11893,6 +11894,8 @@ MonoBehaviour:
   _bloodParticlesPlayer: {fileID: 7128297219838099886}
   manaHandler: {fileID: 1460855445526117591}
   youDiedPanel: {fileID: 1256843170}
+  playerUI: {fileID: 0}
+  bossUI: {fileID: 0}
   autoTrigger: 0
 --- !u!95 &6831898450720814492
 Animator:
