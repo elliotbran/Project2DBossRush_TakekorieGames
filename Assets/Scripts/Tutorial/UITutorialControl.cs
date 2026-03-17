@@ -22,7 +22,7 @@ public class UITutorialControl : MonoBehaviour
     [SerializeField] EnemyTutorialController enemyTutorialController;
     [SerializeField] GameObject EnemyTutorial1;
     [SerializeField] GameObject izel3Shadow;
-    [SerializeField] bool isTutorial2Active;
+    public bool isTutorial2Active;
 
     bool corrutineRunning;
     public CapsuleCollider2D miCollider;
@@ -41,18 +41,18 @@ public class UITutorialControl : MonoBehaviour
         //enemyTutorialController = GetComponent<EnemyTutorialController>();
         if (enemyTutorialController.isGetting5Attacks == true && hitsTutorial<= 4)
         {
-            textoTuto1.text = "Ataques realizados: " + hitsTutorial + "/5";
+            textoTuto1.text = "X: Ataques realizados: " + hitsTutorial + "/5";
         }
         else if(hitsTutorial >= 5 && corrutineRunning == false)
         {
-            textoTuto1.text = "Ataques realizados: " + hitsTutorial + "/5";
+            textoTuto1.text = "X: Ataques realizados: " + hitsTutorial + "/5";
             enemyTutorialController = FindAnyObjectByType<EnemyTutorialController>();
             StartCoroutine(DeactivateEvent1());
         }
 
         if (isTutorial2Active)
         {
-            textoTuto1.text = "Parrys realizados: " + parrysTutorial + "/3 \nDashes realizados: "+dashesTutorial+ "/3 \nCuraciones realizadas: "+curacionesTutorial+ "/1";
+            textoTuto1.text = "LB/LT: Parrys realizados: " + parrysTutorial + "/3 \nRB/B: Dashes realizados: "+dashesTutorial+ "/3 \nY: Curaciones realizadas: "+curacionesTutorial+ "/1";
         }
     }
     public IEnumerator DeactivateEvent1()
