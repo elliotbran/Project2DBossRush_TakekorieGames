@@ -74,7 +74,7 @@ public class StraightProjectile : MonoBehaviour
 
     IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(2.5f); // Destroy the projectile after 5 seconds if it doesn't hit the player
+        yield return new WaitForSeconds(5); // Destroy the projectile after 5 seconds if it doesn't hit the player
         Destroy(gameObject);
     }
 }

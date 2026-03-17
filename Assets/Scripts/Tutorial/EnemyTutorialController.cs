@@ -121,7 +121,7 @@ public class EnemyTutorialController : MonoBehaviour
             UpdateMeleeAttack();
         }
 
-        if (playerInRangeAttackRange && !playerInMeleeAttackRange && playerInSightRange)
+        if (playerInRangeAttackRange ) //&& !playerInMeleeAttackRange && playerInSightRange
         {
             _rangeAttackType = Random.Range(1, 3); // Randomly choose between the normal range attack and the golden range attack
             currentState = EnemyState.RangeAttack;

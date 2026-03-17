@@ -11,11 +11,14 @@ public class TutorialAA : MonoBehaviour
 
     public GameObject hudHits;
 
+    PlayerController _playerController;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animIzelStart = izelStart.GetComponent<Animator>();
         animIzelHit = izelGetsHit.GetComponent<Animator>();
+        _playerController = FindAnyObjectByType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,7 @@ public class TutorialAA : MonoBehaviour
     public IEnumerator startAnimCoroutine()
     {
         izelStart.GetComponent<CircleCollider2D>().enabled = false;
+        _playerController.canAttack = true;
         animIzelStart.Play("Disappear");
         yield return new WaitForSeconds(1f);
         izelStart.SetActive(false);
