@@ -1368,6 +1368,7 @@ MonoBehaviour:
   shadowStairsAbajo: {fileID: 461197891}
   youDied: {fileID: 1256843170}
   dialogueActivator: {fileID: 0}
+  colliderStart: {fileID: 1759883969}
 --- !u!114 &371395328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,6 +1384,7 @@ MonoBehaviour:
   izelStart: {fileID: 1467929610}
   izelGetsHit: {fileID: 3360115520949188083}
   hudHits: {fileID: 90322875}
+  izelExit: {fileID: 461197891}
 --- !u!114 &371395329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2324,7 +2326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &654825806
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3389,7 +3391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1035551586
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4182,6 +4184,10 @@ PrefabInstance:
     - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_Name
       value: Personaje Test (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5361,6 +5367,84 @@ Transform:
   - {fileID: 112924070}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1759883969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1759883971}
+  - component: {fileID: 1759883970}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!68 &1759883970
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759883969}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.58
+  m_Points:
+  - {x: -0.16846704, y: -0.5347367}
+  - {x: -0.07928789, y: -0.33436614}
+  - {x: -0.0087591885, y: -0.3374833}
+  - {x: 0.060903795, y: -0.34056225}
+  - {x: 0.1484898, y: -0.5445841}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!4 &1759883971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759883969}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.57, y: -1.73, z: 0}
+  m_LocalScale: {x: 41.1, y: 18.9, z: 35}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1814235920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5739,7 +5823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1956594234
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6594,6 +6678,10 @@ PrefabInstance:
     - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
       propertyPath: m_Name
       value: Personaje Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360115518932723210, guid: 2f25cf22d5a8e214e98c54fd14145938, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17786,6 +17874,7 @@ SceneRoots:
   - {fileID: 1050601099}
   - {fileID: 2022088147}
   - {fileID: 371395325}
+  - {fileID: 1759883971}
   - {fileID: 712135533}
   - {fileID: 658601663}
   - {fileID: 189540140}

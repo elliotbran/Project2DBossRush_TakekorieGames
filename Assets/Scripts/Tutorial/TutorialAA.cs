@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class TutorialAA : MonoBehaviour
@@ -12,6 +13,8 @@ public class TutorialAA : MonoBehaviour
     public GameObject hudHits;
 
     PlayerController _playerController;
+
+    public GameObject izelExit;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +36,7 @@ public class TutorialAA : MonoBehaviour
     public IEnumerator startAnimCoroutine()
     {
         izelStart.GetComponent<CircleCollider2D>().enabled = false;
+        izelExit.SetActive(false);
         _playerController.canAttack = true;
         animIzelStart.Play("Disappear");
         yield return new WaitForSeconds(1f);

@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Trigger1_Tutorial : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Trigger1_Tutorial : MonoBehaviour
     private Animator _playerAnimator;
     [SerializeField] private CircleCollider2D dialogueActivator;
     PlayerController _playerController;
+    public GameObject colliderStart;
     public void Start()
     {
         _playerController = FindAnyObjectByType<PlayerController>();
@@ -27,6 +29,7 @@ public class Trigger1_Tutorial : MonoBehaviour
     }
     public IEnumerator TriggerStairsCoroutine()
     {
+        colliderStart.SetActive(false);
         dialogueActivator.enabled = false;
         dialogueTrigger.SetActive(true);
         yield return new WaitForSeconds(1f);
@@ -43,11 +46,14 @@ public class Trigger1_Tutorial : MonoBehaviour
     public IEnumerator abandonarAnim()
     {
         _playerController.canMove = false;
+        shadowStairsAbajo.GetComponent<CircleCollider2D>().enabled = false  ;
+        
         yield return new WaitForSeconds(0.7f);
         _playerAnimator.Play("Player_Death");
         yield return new WaitForSeconds(1.5f);
         youDied.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        Application.Quit();
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //Application.Quit();
     }
 }
