@@ -36,6 +36,6 @@ public class SegundoTutorial : MonoBehaviour
         izelTuto2.SetActive(true);
         StartCoroutine(uiTutorialControl.tutorialParryCoroutine());
         yield return new WaitForSeconds(3f);
-        enemyTutorialController.rangeAttackRange = 10;
+        enemyTutorialController.rangeAttackRange = 7;
     }
 }
