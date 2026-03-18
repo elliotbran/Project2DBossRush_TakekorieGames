@@ -39,7 +39,7 @@ AnimatorStateMachine:
     m_Position: {x: 500, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6698062370874430335}
-    m_Position: {x: 500, y: 270, z: 0}
+    m_Position: {x: 510, y: 540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8433082599438526196}
     m_Position: {x: 120, y: -100, z: 0}
@@ -48,7 +48,7 @@ AnimatorStateMachine:
     m_Position: {x: 130, y: -260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4736320769155236993}
-    m_Position: {x: -270, y: 250, z: 0}
+    m_Position: {x: -270, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3203682476672645978}
     m_Position: {x: 120, y: 10, z: 0}
@@ -58,6 +58,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -5599515329192908589}
     m_Position: {x: 120, y: 120, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3624754074920312996}
+    m_Position: {x: 123.20001, y: 327.2, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 5289113870011265354}
@@ -296,6 +299,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-3624754074920312996
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Boss_RangeWallAttack
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: cc6697a57b553924e886481652864990, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-3203682476672645978
 AnimatorState:
   serializedVersion: 6

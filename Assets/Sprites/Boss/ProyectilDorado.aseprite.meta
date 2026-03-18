@@ -123,7 +123,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: CabezaBoss
+  - name: Frame_0
     originalName: 
     pivot: {x: 0.6176472, y: -0.083333336}
     alignment: 9
