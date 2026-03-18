@@ -119,7 +119,8 @@ public class PlayerController : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _playerParryShake = GetComponent<PlayerParryShake>();
         _playerAnimator = GetComponent<Animator>();
-        uiTutorialControl = FindFirstObjectByType<UITutorialControl>();
+        if(onTutorial == true)
+            uiTutorialControl = FindFirstObjectByType<UITutorialControl>();
         _bloodParticlesPlayer.Stop();
         if (target != null)
         {
@@ -340,7 +341,7 @@ public class PlayerController : MonoBehaviour
 
             // start cooldown
             _dashCooldownTimer = _dashCooldown;
-            if (uiTutorialControl.isTutorial2Active && onTutorial == true)
+            if (uiTutorialControl != null && uiTutorialControl.isTutorial2Active && onTutorial == true)
             {
                 uiTutorialControl.dashesTutorial++;
             }
@@ -398,14 +399,14 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
-            if (onTutorial = true)
+            if (onTutorial == true)
             {
                 health = maxHealth;
                 return;
             }
             else
             {
-                    health = 0;
+                health = 0;
                 currentState = PlayerState.Dead;
                 canMove = true;
                 Debug.Log("El jugador ha muerto");
@@ -424,7 +425,7 @@ public class PlayerController : MonoBehaviour
         {
             health = maxHealth;
         }
-        if (uiTutorialControl.isTutorial2Active && onTutorial == true)
+        if (uiTutorialControl != null && uiTutorialControl.isTutorial2Active && onTutorial == true)
         {
             uiTutorialControl.curacionesTutorial++;
         }
@@ -523,7 +524,7 @@ public class PlayerController : MonoBehaviour
             Vector2 recoilDir = ((Vector2)transform.position - (Vector2)hitSource).normalized;
             moveDir = new Vector3(recoilDir.x, recoilDir.y, 0f);
             knockbackCounter = knockbackTotalTime;
-            attackKnockbackForce = 1.25f;
+            attackKnockbackForce = .75f;
         }
 
         // Start coroutine to finish the attack after duration
@@ -591,7 +592,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(_object.gameObject);
                 _object = null;
                 canParry = false;
-                if(uiTutorialControl.isTutorial2Active && onTutorial == true)
+                if(uiTutorialControl!= null&& uiTutorialControl.isTutorial2Active && onTutorial == true)
                 {
                     uiTutorialControl.parrysTutorial++;
                 }
