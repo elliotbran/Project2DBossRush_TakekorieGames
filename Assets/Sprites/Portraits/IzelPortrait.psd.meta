@@ -212,7 +212,7 @@ TextureImporter:
       IzelPortrait_2: 9007815964111569608
       IzelPortrait_3: 745034086
   mipmapLimitGroupName: 
-  pSDRemoveMatte: 0
+  pSDRemoveMatte: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
