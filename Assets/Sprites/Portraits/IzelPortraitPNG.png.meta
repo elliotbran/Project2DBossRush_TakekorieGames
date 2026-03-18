@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2b384eaa451de11438dbcc2e0ec72773
+guid: d437b76dd86641a44aff2f6020591583
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -8,9 +8,6 @@ TextureImporter:
   - first:
       213: -1364623711419929997
     second: IzelPortrait_1
-  - first:
-      213: 9007815964111569608
-    second: IzelPortrait_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -81,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -112,9 +109,9 @@ TextureImporter:
         x: 0
         y: 0
         width: 500
-        height: 500
+        height: 471
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -131,12 +128,12 @@ TextureImporter:
       name: IzelPortrait_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 156
-        width: 6
-        height: 9
+        x: 257
+        y: 466
+        width: 10
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,55 +146,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: IzelPortrait_2
-      rect:
-        serializedVersion: 2
-        x: 255
-        y: 143
-        width: 9
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8c286f6d4e0320d70800000000000000
-      internalID: 9007815964111569608
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IzelPortrait_3
-      rect:
-        serializedVersion: 2
-        x: 311
-        y: 281
-        width: 23
-        height: 97
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d1b7065094464e49b9bf0c8208b4e60
-      internalID: 745034086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9e0b4245ef41f6a40babb18fcfdf7e4f
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -209,8 +162,6 @@ TextureImporter:
     nameFileIdTable:
       IzelPortrait_0: 1775038353979621689
       IzelPortrait_1: -1364623711419929997
-      IzelPortrait_2: 9007815964111569608
-      IzelPortrait_3: 745034086
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
