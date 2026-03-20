@@ -31,6 +31,9 @@ public class UITutorialControl : MonoBehaviour
     bool corrutineRunning3;
     public CapsuleCollider2D miCollider;
     public GameObject cuadradoHUD;
+    public GameObject rbHud;
+    public GameObject lbhud;
+    public GameObject triangulohud;
     public GameObject izelTutorialFinal;
     public GameObject izelHABLARFINAL;
     public EnemyTutorialController enemyTutorialController2;
@@ -39,6 +42,7 @@ public class UITutorialControl : MonoBehaviour
     public GameObject camaraTutorialPlayer;
     public GameObject camaraTutorialGroup;
     public GameObject triggerFinal;
+    bool finDelTutorial1;    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -67,13 +71,25 @@ public class UITutorialControl : MonoBehaviour
         if (isTutorial2Active)
         {
             textoTuto1.text = "Parrys realizados: " + parrysTutorial + "/3 \nDashes realizados: " + dashesTutorial + "/3 \nCuraciones realizadas: " + curacionesTutorial + "/1";
-
+            rbHud.SetActive(true);
+            lbhud.SetActive(true);
+            triangulohud.SetActive(true);
             if (parrysTutorial >= 3 && dashesTutorial >= 3 && curacionesTutorial >= 1 && corrutineRunning2 == false)
             {
                 enemyTutorialController = FindAnyObjectByType<EnemyTutorialController>();
                 UnityEngine.Debug.Log("Tutorial 2 completado");
+                rbHud.SetActive(false);
+                lbhud.SetActive(false);
+                triangulohud.SetActive(false);
                 StartCoroutine(tutorialParryCoroutine2());
             }
+        }
+        if(finDelTutorial1 == true)
+        {
+            textoTuto1.text = "Busca una salida";
+            rbHud.SetActive(false);
+            lbhud.SetActive(false);
+            triangulohud.SetActive(false);
         }
     }
     public IEnumerator DeactivateEvent1()
@@ -128,6 +144,9 @@ public class UITutorialControl : MonoBehaviour
 
         UnityEngine.Debug.Log("Paso 5");
         tutorialHud1.GetComponent<Animator>().Play("hudFadeOut");
+        rbHud.SetActive(false);
+        lbhud.SetActive(false);
+        triangulohud.SetActive(false);  
 
         UnityEngine.Debug.Log("Paso 6");
         yield return new WaitForSeconds(0.5f);
@@ -165,8 +184,10 @@ public class UITutorialControl : MonoBehaviour
 
     public void finDelTutorial()
     {
+        finDelTutorial1 = true;
+        UnityEngine.Debug.Log("Fin del tutorial");
+        tutorialHud1.SetActive(true);
         textoTuto1.text = "Busca una salida";
-        cuadradoHUD.SetActive(true);
-        //triggerFinal.SetActive(true);
+        triggerFinal.SetActive(true);
     }
 }
