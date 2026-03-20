@@ -63,6 +63,8 @@ public class EnemyTutorialController : MonoBehaviour
     public bool tutorial2 = false;
 
     UITutorialControl _UITutorialControl;
+    public GameObject barraVidaBOss;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -252,10 +254,11 @@ public class EnemyTutorialController : MonoBehaviour
 
     public void Die() // This function is called when the boss's health is less than or equal to 0. It plays the death animation and disables the boss's colliders and this script to prevent the boss from moving or attacking after it has died.
     {
+        barraVidaBOss.SetActive(false);
         Debug.Log("El boss ha muerto");
         Time.timeScale = 1f; // Ensure that time scale is reset to normal after the hit stop effect
 
-        _animator.SetBool("IsDead", true);
+        _animator.Play("Enemy_Death"); // Play the death animation
 
         GetComponent<CapsuleCollider2D>().enabled = false;
 
@@ -263,6 +266,7 @@ public class EnemyTutorialController : MonoBehaviour
         CameraPlayer.SetActive(true);
 
         this.enabled = false;
+        StartCoroutine(DeathSequence());
     }
 
     private void OnDrawGizmos() // Show the attack range and sight range of the boss in the editor for debugging.
@@ -283,6 +287,13 @@ public class EnemyTutorialController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f); // Wait for the hurt animation to finish before changing the boss's sprite color back to normal
         _spriteRenderer.color = Color.black; // Change the boss's sprite color back to normal after the hurt animation has finished
+    }
+    IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(3f); // Wait for the death animation to finish before destroying the boss object
+        _UITutorialControl.finDelTutorial(); // Call the finDelTutorial function in the UITutorialControl script to end the tutorial after the boss has died
+        this.gameObject.SetActive(false); // Deactivate the boss object after the death animation has finished
+        
     }
     #region HitStop
     public IEnumerator AttackHitStop()

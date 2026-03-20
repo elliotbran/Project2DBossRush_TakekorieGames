@@ -28,8 +28,23 @@ public class UITutorialControl : MonoBehaviour
 
     bool corrutineRunning;
     bool corrutineRunning2;
+    bool corrutineRunning3;
     public CapsuleCollider2D miCollider;
     public GameObject cuadradoHUD;
+    public GameObject rbHud;
+    public GameObject lbhud;
+    public GameObject triangulohud;
+    public GameObject izelTutorialFinal;
+    public GameObject izelHABLARFINAL;
+    public EnemyTutorialController enemyTutorialController2;
+
+    [Header("Camaras")]
+    public GameObject camaraTutorialPlayer;
+    public GameObject camaraTutorialGroup;
+    public GameObject triggerFinal;
+    bool finDelTutorial1;
+    public GameObject barraVidaBoss;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -57,13 +72,25 @@ public class UITutorialControl : MonoBehaviour
         if (isTutorial2Active)
         {
             textoTuto1.text = "Parrys realizados: " + parrysTutorial + "/3 \nDashes realizados: " + dashesTutorial + "/3 \nCuraciones realizadas: " + curacionesTutorial + "/1";
-
+            rbHud.SetActive(true);
+            lbhud.SetActive(true);
+            triangulohud.SetActive(true);
             if (parrysTutorial >= 3 && dashesTutorial >= 3 && curacionesTutorial >= 1 && corrutineRunning2 == false)
             {
                 enemyTutorialController = FindAnyObjectByType<EnemyTutorialController>();
                 UnityEngine.Debug.Log("Tutorial 2 completado");
+                rbHud.SetActive(false);
+                lbhud.SetActive(false);
+                triangulohud.SetActive(false);
                 StartCoroutine(tutorialParryCoroutine2());
             }
+        }
+        if(finDelTutorial1 == true)
+        {
+            textoTuto1.text = "Busca una salida";
+            rbHud.SetActive(false);
+            lbhud.SetActive(false);
+            triangulohud.SetActive(false);
         }
     }
     public IEnumerator DeactivateEvent1()
@@ -90,6 +117,7 @@ public class UITutorialControl : MonoBehaviour
 
     public IEnumerator tutorialParryCoroutine()
     {
+
         isTutorial2Active= true;
         yield return new WaitForSeconds(1);
         tutorialHud1.SetActive(true);
@@ -117,11 +145,51 @@ public class UITutorialControl : MonoBehaviour
 
         UnityEngine.Debug.Log("Paso 5");
         tutorialHud1.GetComponent<Animator>().Play("hudFadeOut");
+        rbHud.SetActive(false);
+        lbhud.SetActive(false);
+        triangulohud.SetActive(false);  
 
         UnityEngine.Debug.Log("Paso 6");
         yield return new WaitForSeconds(0.5f);
 
         UnityEngine.Debug.Log("Paso 7");
         tutorialHud1.SetActive(false);
+
+        izelHABLARFINAL.SetActive(true);
+    }
+
+    public void bossFightFinalTuto()
+    {
+        if (corrutineRunning3 == false)
+        {
+            enemyTutorialController2.sightRange = 0;
+            StartCoroutine(bossfightFinalTUtocorr());
+        }
+    }
+    public IEnumerator bossfightFinalTUtocorr()
+    {
+        corrutineRunning3 = true;
+        izelHABLARFINAL.GetComponent<CircleCollider2D>().enabled = false;
+        izelHABLARFINAL.GetComponent<Animator>().Play("Disappear");
+        yield return new WaitForSeconds(1);
+        izelHABLARFINAL.SetActive(false);
+        izelTutorialFinal.SetActive(true);
+        yield return new WaitForSeconds(1);
+        camaraTutorialGroup.SetActive(true);
+        camaraTutorialPlayer.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        barraVidaBoss.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        enemyTutorialController2.sightRange = 32;
+        yield return null;
+    }
+
+    public void finDelTutorial()
+    {
+        finDelTutorial1 = true;
+        UnityEngine.Debug.Log("Fin del tutorial");
+        tutorialHud1.SetActive(true);
+        textoTuto1.text = "Busca una salida";
+        triggerFinal.SetActive(true);
     }
 }
