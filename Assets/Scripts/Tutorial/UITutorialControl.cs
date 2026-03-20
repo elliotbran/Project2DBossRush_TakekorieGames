@@ -37,6 +37,8 @@ public class UITutorialControl : MonoBehaviour
     public GameObject izelTutorialFinal;
     public GameObject izelHABLARFINAL;
     public EnemyTutorialController enemyTutorialController2;
+    private PlayerController _playerController;
+
 
     [Header("Camaras")]
     public GameObject camaraTutorialPlayer;
@@ -48,6 +50,7 @@ public class UITutorialControl : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>(); // Get the PlayerController component attached to the player
         // Esto busca el collider en el objeto o en cualquiera de sus hijos
         miCollider = EnemyTutorial1.GetComponentInChildren<CapsuleCollider2D>();
         //miCollider.enabled = false;
@@ -169,6 +172,7 @@ public class UITutorialControl : MonoBehaviour
     public IEnumerator bossfightFinalTUtocorr()
     {
         corrutineRunning3 = true;
+        _playerController.canMove = true;
         izelHABLARFINAL.GetComponent<CircleCollider2D>().enabled = false;
         izelHABLARFINAL.GetComponent<Animator>().Play("Disappear");
         yield return new WaitForSeconds(1);
