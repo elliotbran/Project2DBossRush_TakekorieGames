@@ -35,9 +35,10 @@ public class UITutorialControl : MonoBehaviour
     public GameObject izelHABLARFINAL;
     public EnemyTutorialController enemyTutorialController2;
 
-    //[Header("Camaras")]
+    [Header("Camaras")]
     public GameObject camaraTutorialPlayer;
     public GameObject camaraTutorialGroup;
+    public GameObject triggerFinal;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -160,5 +161,12 @@ public class UITutorialControl : MonoBehaviour
         enemyTutorialController2.sightRange = 32;
         //Poner Barra De Vida
         yield return null;
+    }
+
+    public void finDelTutorial()
+    {
+        textoTuto1.text = "Busca una salida";
+        cuadradoHUD.SetActive(true);
+        //triggerFinal.SetActive(true);
     }
 }

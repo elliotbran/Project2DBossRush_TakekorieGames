@@ -287,8 +287,10 @@ public class EnemyTutorialController : MonoBehaviour
     }
     IEnumerator DeathSequence()
     {
-        yield return new WaitForSeconds(2f); // Wait for the death animation to finish before destroying the boss object
-        //this.gameObject.SetActive(false); // Deactivate the boss object after the death animation has finished
+        yield return new WaitForSeconds(3f); // Wait for the death animation to finish before destroying the boss object
+        this.gameObject.SetActive(false); // Deactivate the boss object after the death animation has finished
+        
+        _UITutorialControl.finDelTutorial(); // Call the finDelTutorial function in the UITutorialControl script to end the tutorial after the boss has died
     }
     #region HitStop
     public IEnumerator AttackHitStop()
