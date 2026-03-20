@@ -334,7 +334,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 194}
   spriteSheetImportData:
-  - name: Boss Health Fill
+  - name: HUD_0
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -343,10 +343,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 194
+      y: 112
       width: 1129
       height: 14
-    spriteID: f1f72ae88cf30e44cbf7da3569c4ed56
+    spriteID: bda476cea63f04449870ad35442465e9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -355,154 +355,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Player UI
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1145
-      y: 168
-      width: 245
-      height: 75
-    spriteID: db59e75ed58529144bc5ceb4a8f85f84
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: BG UI Player
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1397
-      y: 168
-      width: 245
-      height: 75
-    spriteID: 97fd21d3c08b05c46ad5a5777105a4e9
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Player Health Fill
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1651
-      y: 194
-      width: 235
-      height: 14
-    spriteID: 2d373ab118993614a912ef6ddef3a021
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Player Aura Fill
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1894
-      y: 195
-      width: 118
-      height: 14
-    spriteID: 867329c2f58d971428c6b39f89749370
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Boss Health BG
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 5
-      y: 169
-      width: 1133
-      height: 18
-    spriteID: 53397549a283a5b45b25735753ea9e31
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Player Heatlh BG
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1651
-      y: 168
-      width: 239
-      height: 18
-    spriteID: ee6fc1eee7e5e184abedd1a6afda6820
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: Player Aura BG
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 1898
-      y: 168
-      width: 122
-      height: 18
-    spriteID: 9324db65689274641a0ba8cb82b4297d
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 0, y: 0}
-  - name: BG UI Boss
+  - name: HUD_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -512,9 +365,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 86
-      width: 1152
-      height: 74
-    spriteID: 4ef1773fed3ae414bb279a7239ac954d
+      width: 1133
+      height: 18
+    spriteID: 0bd7cc77d39eb644fa2418e7ee366643
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -523,7 +376,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss UI
+  - name: HUD_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -535,7 +388,154 @@ ScriptedImporter:
       y: 4
       width: 1152
       height: 74
-    spriteID: 303e9573684855c4ca36e61086719764
+    spriteID: 1bf4818c9a3cd404e8cca7770bee7a12
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: HUD_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1164
+      y: 4
+      width: 245
+      height: 69
+    spriteID: 76c078cc15e5853408d2493e42466529
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: HUD_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1417
+      y: 52
+      width: 20
+      height: 20
+    spriteID: fe3fc6d901c5296469c18f6ce4409c9d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: HUD_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1445
+      y: 52
+      width: 18
+      height: 18
+    spriteID: cc97626de4ca8864087fa96108182afe
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: HUD_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1417
+      y: 30
+      width: 118
+      height: 14
+    spriteID: 79fdd3fc9cecc7b4695cc342465a1b3e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: HUD_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1417
+      y: 4
+      width: 239
+      height: 18
+    spriteID: d20d214e4969f4446a0a26c5c01b4496
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: HUD_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1664
+      y: 4
+      width: 235
+      height: 14
+    spriteID: 8c064fe9a597f1d4083308aa3300dd36
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: HUD_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1907
+      y: 4
+      width: 122
+      height: 18
+    spriteID: e2ef608388819fc4d95313c7b60060ce
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -557,24 +557,33 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
+    - name: Frame_3
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 17
+        y: 987
+        width: 245
+        height: 69
+      spriteId: e977a3714e4b03742ab13e794dc8eec1
     - name: Frame_4
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
-        x: 17
-        y: 981
-        width: 245
-        height: 75
-      spriteId: e977a3714e4b03742ab13e794dc8eec1
+        x: 20
+        y: 990
+        width: 20
+        height: 20
+      spriteId: a3c2dc7fd7b47e141a97bd9c71593f2f
     - name: Frame_5
       frameIndex: 5
       additiveSortOrder: 0
       cellRect:
-        x: 17
-        y: 981
-        width: 245
-        height: 75
-      spriteId: a3c2dc7fd7b47e141a97bd9c71593f2f
+        x: 21
+        y: 988
+        width: 18
+        height: 18
+      spriteId: c06e926d1da77b648b75fa1db0707f2e
     - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
@@ -583,7 +592,7 @@ ScriptedImporter:
         y: 1013
         width: 122
         height: 18
-      spriteId: c06e926d1da77b648b75fa1db0707f2e
+      spriteId: f96d1af2d28642940a9eea3612f6b7ed
     - name: Frame_7
       frameIndex: 7
       additiveSortOrder: 0
@@ -592,7 +601,7 @@ ScriptedImporter:
         y: 1015
         width: 118
         height: 14
-      spriteId: f96d1af2d28642940a9eea3612f6b7ed
+      spriteId: 33d1b09b0e050354ba586f05a528dd68
     - name: Frame_8
       frameIndex: 8
       additiveSortOrder: 0
@@ -601,7 +610,7 @@ ScriptedImporter:
         y: 1035
         width: 239
         height: 18
-      spriteId: 33d1b09b0e050354ba586f05a528dd68
+      spriteId: bb7674ea2cc2eab4a92fbd3a87717ac6
     - name: Frame_9
       frameIndex: 9
       additiveSortOrder: 0
@@ -610,7 +619,7 @@ ScriptedImporter:
         y: 1037
         width: 235
         height: 14
-      spriteId: bb7674ea2cc2eab4a92fbd3a87717ac6
+      spriteId: bfe50fe948939d746be300988d557135
     - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
@@ -619,18 +628,9 @@ ScriptedImporter:
         y: 133
         width: 1152
         height: 74
-      spriteId: bfe50fe948939d746be300988d557135
+      spriteId: 41138114db8eff446b263a42ba3dad93
     - name: Frame_1
       frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 390
-        y: 133
-        width: 1152
-        height: 74
-      spriteId: 41138114db8eff446b263a42ba3dad93
-    - name: Frame_2
-      frameIndex: 2
       additiveSortOrder: 0
       cellRect:
         x: 399
@@ -638,8 +638,8 @@ ScriptedImporter:
         width: 1133
         height: 18
       spriteId: 6f52beb47b2745c47ae01ea555c4833b
-    - name: Frame_3
-      frameIndex: 3
+    - name: Frame_2
+      frameIndex: 2
       additiveSortOrder: 0
       cellRect:
         x: 401

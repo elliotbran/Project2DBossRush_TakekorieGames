@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PotionController : MonoBehaviour
 {
-    public Image potion; 
+    public Image potion;
     public bool IsFull => _isFull;
     public PlayerController playerController;
     public ManaController manaController;
@@ -33,12 +33,12 @@ public class PotionController : MonoBehaviour
         _isFull = full;
         if (_isFull)
         {
-            potion.color = Color.green;
+            potion.color = Color.white;
             potion.fillAmount = 1f;
         }
         else
         {
-            potion.color = Color.red;
+            potion.color = Color.black;
             potion.fillAmount = 0.2f;
         }
     }
