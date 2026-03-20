@@ -2839,7 +2839,7 @@ Transform:
   m_GameObject: {fileID: 723415680}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.342944, y: -29.756443, z: 0.13877992}
+  m_LocalPosition: {x: 16.613796, y: -10.087129, z: 0.13877992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5972,7 +5972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1756046515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5990,10 +5990,10 @@ MonoBehaviour:
   maxHealth: 55
   isDead: 0
   _rangeAttackType: 0
-  meleeAttackRange: 2
+  meleeAttackRange: 1.5
   rangeAttackRange: 15
-  timeBetweenMeleeAttacks: 3
-  timeBetweenRangeAttacks: 5
+  timeBetweenMeleeAttacks: 2
+  timeBetweenRangeAttacks: 4
   normalProjectilePrefab: {fileID: 2591349116901812736, guid: 4acabd0af0e1e914c83b3ce9c1b997b4, type: 3}
   goldenProjectilePrefab: {fileID: 7094630049418330413, guid: 7b101db2549b6704297a1f693a37995c, type: 3}
   projectileSpawnPoint: {fileID: 1915181620}

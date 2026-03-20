@@ -255,7 +255,7 @@ public class EnemyTutorialController : MonoBehaviour
         Debug.Log("El boss ha muerto");
         Time.timeScale = 1f; // Ensure that time scale is reset to normal after the hit stop effect
 
-        _animator.SetBool("IsDead", true);
+        _animator.Play("Enemy_Death"); // Play the death animation
 
         GetComponent<CapsuleCollider2D>().enabled = false;
 
@@ -287,7 +287,7 @@ public class EnemyTutorialController : MonoBehaviour
     }
     IEnumerator DeathSequence()
     {
-        yield return new WaitForSeconds(1f); // Wait for the death animation to finish before destroying the boss object
+        yield return new WaitForSeconds(2f); // Wait for the death animation to finish before destroying the boss object
         //this.gameObject.SetActive(false); // Deactivate the boss object after the death animation has finished
     }
     #region HitStop
