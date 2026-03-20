@@ -39,6 +39,7 @@ public class BossController : MonoBehaviour
     [Range(0, 50f)]
     public float sightRange;
     public bool playerInMeleeAttackRange, playerInRangeAttackRange, playerInSightRange;
+
    
     public enum BossState // Different states for the boss
     {
@@ -167,11 +168,11 @@ public class BossController : MonoBehaviour
 
     void SecondPhase()
     {
-        if (!secondPhase && currentHealth == maxHealth / 2)
+        if (!secondPhase && currentHealth <= maxHealth / 2)
         {
             secondPhase = true; // enter second phase
-            _agent.speed = 10;
-            _agent.acceleration = 20;
+            _agent.speed = 8;
+            _agent.acceleration = 14;
             damage = 35;
             timeBetweenMeleeAttacks = 1.25f;
             timeBetweenRangeAttacks = 3;

@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
 
     //Scripts
     private PlayerController _playerController;
+    private BossController _bossController;
     private PlayerParryShake _playerParryShake;            
     public ManaParticleHandler manaHandler;
 
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
     public bool autoTrigger = false;
     void Awake()
     {
+        _bossController = GameObject.Find("Boss")?.GetComponent<BossController>(); // Get the BossController component attached to the boss
         youDiedPanel.SetActive(false); // Ensure "You Died" panel is hidden at start
         _rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component
         _animator = GetComponent<Animator>(); // Get the Animator component
@@ -171,6 +173,8 @@ public class PlayerController : MonoBehaviour
     } 
     void Update()
     {
+        if(_bossController != null)
+            StartCoroutine(BossDeathHitstop()); // Check if boss is dead to apply hit stop effect on boss death
         if (dialogueUI.IsOpen)
         {
             canMove = false;
@@ -659,6 +663,16 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0.2f; // Slow down time to create hit stop effect
         yield return new WaitForSecondsRealtime(0.3f); // Wait for a short duration in real time
         Time.timeScale = 1; // Restore original time scale
-    }    
+    }
+    
+    IEnumerator BossDeathHitstop()
+    {
+        if(_bossController.isDead) // If the boss is already dead, do not apply hit stop again
+        {
+            Time.timeScale = 0.15f; // Slow down time to create hit stop effect
+            yield return new WaitForSecondsRealtime(3f); // Wait for a short duration in real time
+            Time.timeScale = 1; // Restore original time scale
+        }        
+    }
     #endregion
 }
