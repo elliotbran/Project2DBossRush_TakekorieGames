@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
     private BossController _bossController;
     private PlayerParryShake _playerParryShake;            
     public ManaParticleHandler manaHandler;
+    public EnemyTutorialController _enemyTutorialController;
 
     public GameObject youDiedPanel;
     public GameObject playerUI;
@@ -175,6 +176,8 @@ public class PlayerController : MonoBehaviour
     {
         if(_bossController != null)
             StartCoroutine(BossDeathHitstop()); // Check if boss is dead to apply hit stop effect on boss death
+        if (_enemyTutorialController != null)
+            StartCoroutine(BossDeathHitstopTutorial());
         if (dialogueUI.IsOpen)
         {
             canMove = false;
@@ -673,6 +676,15 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSecondsRealtime(3f); // Wait for a short duration in real time
             Time.timeScale = 1; // Restore original time scale
         }        
+    }
+    IEnumerator BossDeathHitstopTutorial()
+    {
+        if (_enemyTutorialController.isDead) // If the boss is already dead, do not apply hit stop again
+        {
+            Time.timeScale = 0.15f; // Slow down time to create hit stop effect
+            yield return new WaitForSecondsRealtime(3f); // Wait for a short duration in real time
+            Time.timeScale = 1; // Restore original time scale
+        }
     }
     #endregion
 }

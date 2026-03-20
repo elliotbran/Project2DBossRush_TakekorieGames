@@ -1682,6 +1682,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703654386 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2328987185445730695, guid: 9c9aa36d0334ce64a9058c61ec1cac6c, type: 3}
+  m_PrefabInstance: {fileID: 6671186892244154962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &723415680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,6 +2470,7 @@ MonoBehaviour:
   _playerHitbox: {fileID: 1078465795}
   _bloodParticlesPlayer: {fileID: 4588309894166758124}
   manaHandler: {fileID: 3461287631824062861}
+  _enemyTutorialController: {fileID: 0}
   youDiedPanel: {fileID: 335146712}
   playerUI: {fileID: 1592044656}
   bossUI: {fileID: 430725429}
@@ -3585,6 +3597,24 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 3
   m_TargetDisplay: 0
+--- !u!1 &1638471695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 497523581861042084, guid: 9c9aa36d0334ce64a9058c61ec1cac6c, type: 3}
+  m_PrefabInstance: {fileID: 6671186892244154962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1638471700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638471695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdb16301342052468b88f6adcf46b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHealth: {fileID: 703654386}
 --- !u!1001 &1644096547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15122,10 +15152,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2065098871704270658, guid: 9c9aa36d0334ce64a9058c61ec1cac6c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 497523581861042084, guid: 9c9aa36d0334ce64a9058c61ec1cac6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1638471700}
   m_SourcePrefab: {fileID: 100100000, guid: 9c9aa36d0334ce64a9058c61ec1cac6c, type: 3}
 --- !u!114 &6926167099453146140
 MonoBehaviour:

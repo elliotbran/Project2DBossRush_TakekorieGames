@@ -20,7 +20,7 @@ public class triggerFinal : MonoBehaviour
     IEnumerator BomboBOmbastico()
     {
         player.canMove = false;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         fade.SetActive(true);
         fade.GetComponent<Animator>().Play("FadeOut");
         yield return new WaitForSeconds(2f);

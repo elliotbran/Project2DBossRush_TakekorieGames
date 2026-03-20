@@ -64,6 +64,7 @@ public class EnemyTutorialController : MonoBehaviour
 
     UITutorialControl _UITutorialControl;
     public GameObject barraVidaBOss;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss

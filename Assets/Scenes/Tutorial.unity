@@ -14072,6 +14072,7 @@ MonoBehaviour:
   _playerHitbox: {fileID: 0}
   _bloodParticlesPlayer: {fileID: 7128297219838099886}
   manaHandler: {fileID: 1460855445526117591}
+  _enemyTutorialController: {fileID: 1756046515}
   youDiedPanel: {fileID: 1256843170}
   playerUI: {fileID: 0}
   bossUI: {fileID: 0}

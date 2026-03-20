@@ -177,9 +177,10 @@ public class UITutorialControl : MonoBehaviour
         yield return new WaitForSeconds(1);
         camaraTutorialGroup.SetActive(true);
         camaraTutorialPlayer.SetActive(false);
-        yield return new WaitForSeconds(2f);
-        enemyTutorialController2.sightRange = 32;
+        yield return new WaitForSeconds(1f);
         barraVidaBoss.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        enemyTutorialController2.sightRange = 32;
         yield return null;
     }
 
