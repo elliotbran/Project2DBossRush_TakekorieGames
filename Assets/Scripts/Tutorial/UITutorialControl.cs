@@ -42,7 +42,8 @@ public class UITutorialControl : MonoBehaviour
     public GameObject camaraTutorialPlayer;
     public GameObject camaraTutorialGroup;
     public GameObject triggerFinal;
-    bool finDelTutorial1;    
+    bool finDelTutorial1;
+    public GameObject barraVidaBoss;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -178,7 +179,7 @@ public class UITutorialControl : MonoBehaviour
         camaraTutorialPlayer.SetActive(false);
         yield return new WaitForSeconds(2f);
         enemyTutorialController2.sightRange = 32;
-        //Poner Barra De Vida
+        barraVidaBoss.SetActive(true);
         yield return null;
     }
 
