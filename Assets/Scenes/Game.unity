@@ -3177,7 +3177,6 @@ MonoBehaviour:
   _playerHitbox: {fileID: 1078465795}
   _bloodParticlesPlayer: {fileID: 4588309894166758124}
   manaHandler: {fileID: 3461287631824062861}
-  _enemyTutorialController: {fileID: 0}
   youDiedPanel: {fileID: 335146712}
   playerUI: {fileID: 1592044656}
   bossUI: {fileID: 430725429}
@@ -4602,7 +4601,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668219271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfdb16301342052468b88f6adcf46b37, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a6093c0cd43de446913a2c47fd76ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bossHealth: {fileID: 1085151141}
