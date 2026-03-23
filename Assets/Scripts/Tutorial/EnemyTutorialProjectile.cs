@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyTutorialProjectile : MonoBehaviour
 {
     [SerializeField] float _speed;
+    SpriteRenderer _spriteRenderer;
     Transform _player; // Assign the player in the Inspector
 
     EnemyTutorialController _enemyController; // Reference to the boss controller to manage projectile behavior
@@ -12,12 +13,15 @@ public class EnemyTutorialProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _player = GameObject.Find("Player").transform; // Get the player's position to chase the player
         _enemyController = FindAnyObjectByType<EnemyTutorialController>(); // Get reference to the boss controller
     }
 
     void Update()
     {
+        _spriteRenderer.flipX = _player.transform.position.x < _spriteRenderer.transform.position.x;
+
         if (_enemyController.currentHealth == _enemyController.maxHealth / 2) // If the boss is at full health, destroy the projectile immediately
         {
             _speed = 20f;
