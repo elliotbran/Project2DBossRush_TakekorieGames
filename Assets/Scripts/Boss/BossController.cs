@@ -138,7 +138,7 @@ public class BossController : MonoBehaviour
 
         if (playerInMeleeAttackRange && playerInSightRange)
         {
-            _meleeAttackType = Random.Range(1, 5); // Randomly choose between the normal melee attack and the golden melee attack
+            _meleeAttackType = Random.Range(1, 10); // Randomly choose between the normal melee attack and the golden melee attack
             currentState = BossState.MeleeAttack;
             UpdateMeleeAttack();
         }
@@ -202,7 +202,7 @@ public class BossController : MonoBehaviour
         _agent.SetDestination(transform.position);
         _animator.SetFloat("Speed", 0);
 
-        if (!_alreadyMeleeAttacked && _meleeAttackType == 1)
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 1 || !_alreadyMeleeAttacked && _meleeAttackType == 2)
         {
             this.gameObject.tag = "AtaqueNormal";
             _animator.SetTrigger("NormalMeleeAttack");
@@ -212,7 +212,7 @@ public class BossController : MonoBehaviour
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
         }
 
-        if (!_alreadyMeleeAttacked && _meleeAttackType == 2)
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 3 || !_alreadyMeleeAttacked && _meleeAttackType == 4)
         {
             _animator.SetTrigger("GoldenMeleeAttack");
 
@@ -221,7 +221,7 @@ public class BossController : MonoBehaviour
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
         }
 
-        if (!_alreadyMeleeAttacked && _meleeAttackType == 3)
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 5 || !_alreadyMeleeAttacked && _meleeAttackType == 6)
         {
             _animator.SetTrigger("NormalSplashAttack");
 
@@ -230,13 +230,22 @@ public class BossController : MonoBehaviour
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
         }
 
-        if (!_alreadyMeleeAttacked && _meleeAttackType == 4)
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 7 || !_alreadyMeleeAttacked && _meleeAttackType == 8)
         {
             _animator.SetTrigger("GoldenSplashAttack");
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
+        }
+
+        // If _meleeAttackType is 5, idle for the duration of timeBetweenMeleeAttacks before the next attack
+
+        if (!_alreadyMeleeAttacked && _meleeAttackType == 9)
+        {
+            _alreadyMeleeAttacked = true;
+            Debug.Log(_meleeAttackType);
+            Invoke(nameof(ResetMeleeAttack), 1);
         }
     }
 
