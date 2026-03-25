@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
     [SerializeField]float _speed;
+    [SerializeField] private AudioClip _destroySound;
+    [SerializeField] private AudioClip _parryHitSound;
     Transform _player; // Assign the player in the Inspector
     
     BossController _bossController; // Reference to the boss controller to manage projectile behavior
@@ -45,10 +47,24 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerController player = collision.GetComponent<PlayerController>();
+            if (player == null) return;
+            if (player.currentState == PlayerController.PlayerState.Parrying)
+            {
+                if (_parryHitSound != null)
+                    AudioSource.PlayClipAtPoint(_parryHitSound, transform.position);
+                if (player.manaHandler != null)
+                {
+                    player.manaHandler.SpawnMana(5);
+                }
+
+                Destroy(gameObject);
+                return;
+            }
             if (player.currentState == PlayerController.PlayerState.Parrying)
             {
                 return;   
             }
+            PlayDestroySound();
             Destroy(gameObject); // Destroy the projectile on impact
             player.TakeDamage(15f); // Apply damage to the player
             if (_bossController != null)
@@ -59,6 +75,14 @@ public class Projectile : MonoBehaviour
     IEnumerator Destroy()
     {
         yield return new WaitForSeconds(2.5f); // Destroy the projectile after 5 seconds if it doesn't hit the player
+        PlayDestroySound();
         Destroy(gameObject);
+    }
+    private void PlayDestroySound()
+    {
+        if (_destroySound != null)
+        {
+            AudioSource.PlayClipAtPoint(_destroySound, transform.position);
+        }
     }
 }

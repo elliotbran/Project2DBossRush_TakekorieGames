@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+  _destroySound: {fileID: 8300000, guid: 24a0aad322ac75d44a77427c58ea724a, type: 3}
+  _parryHitSound: {fileID: 8300000, guid: 24a0aad322ac75d44a77427c58ea724a, type: 3}
 --- !u!95 &6664826740432816487
 Animator:
   serializedVersion: 7
