@@ -2388,6 +2388,7 @@ GameObject:
   - component: {fileID: 937358358}
   - component: {fileID: 937358359}
   - component: {fileID: 937358360}
+  - component: {fileID: 937358361}
   m_Layer: 0
   m_Name: Front Pillars
   m_TagString: Untagged
@@ -2491,6 +2492,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &937358361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937358357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c971e8bf4c4b18b4bb6427239223130f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 525409371}
+  parallaxEffect: 0.2
 --- !u!1001 &992084280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4435,6 +4450,7 @@ GameObject:
   - component: {fileID: 1918335100}
   - component: {fileID: 1918335102}
   - component: {fileID: 1918335101}
+  - component: {fileID: 1918335103}
   m_Layer: 0
   m_Name: Back Pillars
   m_TagString: Untagged
@@ -4540,6 +4556,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1918335103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918335099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c971e8bf4c4b18b4bb6427239223130f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 525409371}
+  parallaxEffect: 0.1
 --- !u!1 &1931224223
 GameObject:
   m_ObjectHideFlags: 0
@@ -17358,7 +17388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.6226807, y: 0}
+  m_AnchoredPosition: {x: 2.6228027, y: 0}
   m_SizeDelta: {x: 5.25, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7512885707342215826
