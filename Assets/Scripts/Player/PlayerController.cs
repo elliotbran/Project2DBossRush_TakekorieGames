@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Sound")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private List<AudioClip> _attackSounds;
+    [SerializeField] private AudioClip _bloodSound;
 
     [Header("Tutorial")]
     public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
@@ -392,6 +393,11 @@ public class PlayerController : MonoBehaviour
             return;
         }
         _bloodParticlesPlayer.Play();
+        if (_audioSource != null && _bloodSound != null)
+        {
+            _audioSource.pitch = Random.Range(0.9f, 1.1f); 
+            _audioSource.PlayOneShot(_bloodSound, 0.5f); 
+        }
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         if (isParrying) // If the player can parry, they will parry instead of taking damage
         {

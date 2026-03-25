@@ -40,7 +40,11 @@ public class BossController : MonoBehaviour
     public float sightRange;
     public bool playerInMeleeAttackRange, playerInRangeAttackRange, playerInSightRange;
 
-   
+    [Header("Sounds")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _bloodSound;
+
+
     public enum BossState // Different states for the boss
     {
         Idle,
@@ -291,8 +295,15 @@ public class BossController : MonoBehaviour
         currentHealth -= damage;
         
         StartCoroutine(HurtAnimation());
-        _bloodParticles.Play();
-        
+
+        if (_bloodParticles != null) _bloodParticles.Play();
+
+        if (_audioSource != null && _bloodSound != null)
+        {
+            Debug.Log("sangre del Boss"); 
+            _audioSource.PlayOneShot(_bloodSound, 1.0f); 
+        }
+
         Debug.Log("Vida restante" + currentHealth);
 
         if (currentHealth <= 0)
