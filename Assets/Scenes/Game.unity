@@ -3034,6 +3034,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 153f7d4b74027d3448ef37a71b8a8d97, type: 3}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
   _dashSound: {fileID: 8300000, guid: 19dc7ffec1170514db08ffd7629e49bc, type: 3}
+  _playerHurtSound: {fileID: 8300000, guid: 4b74bc01ba5803a48bede3f3e6e15594, type: 3}
+  _parrySound: {fileID: 8300000, guid: 7f268ce9b1946ec4c9811d2f7b28916e, type: 3}
   onTutorial: 0
   currentState: 0
   mainCamera: {fileID: 525409375}
@@ -5176,6 +5178,7 @@ MonoBehaviour:
   playerInSightRange: 0
   _audioSource: {fileID: 2010664661}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
+  _bossHurtSound: {fileID: 8300000, guid: 4b74bc01ba5803a48bede3f3e6e15594, type: 3}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64

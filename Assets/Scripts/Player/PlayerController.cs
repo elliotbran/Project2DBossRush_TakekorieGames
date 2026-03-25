@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _bloodSound;
     [SerializeField] private AudioClip _dashSound;
     [SerializeField] private AudioClip _playerHurtSound;
+    [SerializeField] private AudioClip _parrySound;
 
     [Header("Tutorial")]
     public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
@@ -233,6 +234,10 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Left Trigger Value: " + _leftTrigger); // Log the value of the left trigger for debugging
         if (Input.GetMouseButtonDown(1) && currentState == PlayerState.Normal && _parryCooldownTime <= 0f || Input.GetButtonDown("Parry") && currentState == PlayerState.Normal && _parryCooldownTime <= 0f || _leftTrigger > 0.5f && currentState == PlayerState.Normal && _parryCooldownTime <= 0f) 
         {
+            if (_audioSource != null && _parrySound != null)
+            {
+                _audioSource.PlayOneShot(_parrySound, 0.8f);
+            }
             _parryCooldownTime = _parryCooldown; //Inicia el Cooldown del parry
             StartCoroutine(ParryWindowRoutine()); //Llama a la corrutina ParryWindowRoutine()
         }
