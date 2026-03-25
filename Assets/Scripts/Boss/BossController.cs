@@ -43,6 +43,7 @@ public class BossController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _bloodSound;
+    [SerializeField] private AudioClip _bossHurtSound;
 
 
     public enum BossState // Different states for the boss
@@ -298,10 +299,20 @@ public class BossController : MonoBehaviour
 
         if (_bloodParticles != null) _bloodParticles.Play();
 
-        if (_audioSource != null && _bloodSound != null)
+        if (_audioSource != null)
         {
-            Debug.Log("sangre del Boss"); 
-            _audioSource.PlayOneShot(_bloodSound, 1.0f); 
+
+            if (_bloodSound != null)
+            {
+                _audioSource.PlayOneShot(_bloodSound, 1.0f);
+            }
+
+
+            if (_bossHurtSound != null)
+            {
+                _audioSource.pitch = Random.Range(0.8f, 1.0f); 
+                _audioSource.PlayOneShot(_bossHurtSound, 0.9f);
+            }
         }
 
         Debug.Log("Vida restante" + currentHealth);
