@@ -403,6 +403,13 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Parry Amarillo Inmortal");
             return;
         }
+        if (isParrying) // If the player can parry, they will parry instead of taking damage
+        {
+            if (_object == null || !_object.CompareTag("AtaqueNormal"))
+            {
+                return;
+            }
+        }
         _bloodParticlesPlayer.Play();
         if (_audioSource != null && _bloodSound != null)
         {
@@ -415,13 +422,6 @@ public class PlayerController : MonoBehaviour
             _audioSource.PlayOneShot(_playerHurtSound, 0.8f);
         }
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
-        if (isParrying) // If the player can parry, they will parry instead of taking damage
-        {
-            if (_object == null || !_object.CompareTag("AtaqueNormal"))
-            {
-                return;
-            }
-        }
         currentState = PlayerState.Stunned;
         health -= quantity;
         _animator.SetTrigger("Hurt"); // Trigger hurt animation
