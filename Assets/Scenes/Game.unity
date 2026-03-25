@@ -3033,6 +3033,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 26cc3bbb83217164d9a5216fe74d2394, type: 3}
   - {fileID: 8300000, guid: 153f7d4b74027d3448ef37a71b8a8d97, type: 3}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
+  _dashSound: {fileID: 8300000, guid: 19dc7ffec1170514db08ffd7629e49bc, type: 3}
   onTutorial: 0
   currentState: 0
   mainCamera: {fileID: 525409375}

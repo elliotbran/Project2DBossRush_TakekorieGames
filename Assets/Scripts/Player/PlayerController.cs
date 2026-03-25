@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private List<AudioClip> _attackSounds;
     [SerializeField] private AudioClip _bloodSound;
+    [SerializeField] private AudioClip _dashSound;
 
     [Header("Tutorial")]
     public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
@@ -336,6 +337,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _dashCooldownTimer <= 0f || Input.GetButtonDown("Dash") && _dashCooldownTimer <= 0f || _rightTrigger >0.7f && _dashCooldownTimer <= 0f)
         {
+            if (_audioSource != null && _dashSound != null)
+            {
+                _audioSource.PlayOneShot(_dashSound, 0.7f);
+            }
 
             // fallback direction if player hasn't moved yet
             if (_lastMoveDir == Vector3.zero)
