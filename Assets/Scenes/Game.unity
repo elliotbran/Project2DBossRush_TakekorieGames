@@ -2926,7 +2926,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 153f7d4b74027d3448ef37a71b8a8d97, type: 3}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
   _dashSound: {fileID: 8300000, guid: 19dc7ffec1170514db08ffd7629e49bc, type: 3}
-  _playerHurtSound: {fileID: 8300000, guid: 4b74bc01ba5803a48bede3f3e6e15594, type: 3}
+  _playerHurtSound: {fileID: 8300000, guid: e4bb3c09ea6fe924c80fdda178b92fcf, type: 3}
   _parrySound: {fileID: 8300000, guid: 7f268ce9b1946ec4c9811d2f7b28916e, type: 3}
   onTutorial: 0
   currentState: 0
@@ -11559,11 +11559,12 @@ MonoBehaviour:
   manaController: {fileID: 8598740001626095472}
   _audioSource: {fileID: 3623190724719121710}
   _Particlesounds:
-  - {fileID: 8300000, guid: f4834a82275c4a043aabc5cc4a2c3430, type: 3}
-  - {fileID: 8300000, guid: 9e137846b63ac384681ee867e0664ee8, type: 3}
-  - {fileID: 8300000, guid: 4dd421c1941c44245ad63e7f8cebace9, type: 3}
-  - {fileID: 8300000, guid: 7da334a7eaab93044b3a9ae1361ca957, type: 3}
-  - {fileID: 8300000, guid: 76b4a3d700b1db040a9597ee19fd49e9, type: 3}
+  - {fileID: 8300000, guid: 2d4b27a9c13cddd4092ecb2084014d96, type: 3}
+  - {fileID: 8300000, guid: 08f1864cc8532af48a1ef54e7fd02d8e, type: 3}
+  - {fileID: 8300000, guid: ce9bb4c21a0b3834987608da3052e829, type: 3}
+  - {fileID: 8300000, guid: a48330b5d07ef57428c87ba66afc1875, type: 3}
+  - {fileID: 8300000, guid: 89d9a0000a22f164580aec4a525796d2, type: 3}
+  - {fileID: 8300000, guid: 49e45a6fa69654c4290a9118f80eef49, type: 3}
 --- !u!4 &3592164219738529903
 Transform:
   m_ObjectHideFlags: 0
