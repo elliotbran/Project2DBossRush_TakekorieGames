@@ -2153,7 +2153,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1464363456188170719, guid: c5d9c653f538d59439aae15ca0b0b813, type: 3}
+  m_Sprite: {fileID: 8653240592996491715, guid: c5d9c653f538d59439aae15ca0b0b813, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3669,7 +3669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5321349501704225292, guid: c5d9c653f538d59439aae15ca0b0b813, type: 3}
+  m_Sprite: {fileID: -5547077410554862492, guid: c5d9c653f538d59439aae15ca0b0b813, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4357,8 +4357,6 @@ MonoBehaviour:
   isGetting5Attacks: 1
   tutorial2: 1
   barraVidaBOss: {fileID: 0}
-  _audioSource: {fileID: 1050601100}
-  _playerHurtSound: {fileID: 8300000, guid: e4bb3c09ea6fe924c80fdda178b92fcf, type: 3}
 --- !u!4 &1050601099
 Transform:
   m_ObjectHideFlags: 0
@@ -5849,8 +5847,6 @@ MonoBehaviour:
   isGetting5Attacks: 0
   tutorial2: 0
   barraVidaBOss: {fileID: 2414670587929395633}
-  _audioSource: {fileID: 1756046521}
-  _playerHurtSound: {fileID: 8300000, guid: e4bb3c09ea6fe924c80fdda178b92fcf, type: 3}
 --- !u!4 &1756046516
 Transform:
   m_ObjectHideFlags: 0
@@ -6963,8 +6959,6 @@ MonoBehaviour:
   isGetting5Attacks: 1
   tutorial2: 0
   barraVidaBOss: {fileID: 0}
-  _audioSource: {fileID: 3360115520949188084}
-  _playerHurtSound: {fileID: 8300000, guid: e4bb3c09ea6fe924c80fdda178b92fcf, type: 3}
 --- !u!195 &2016465920
 NavMeshAgent:
   m_ObjectHideFlags: 0
