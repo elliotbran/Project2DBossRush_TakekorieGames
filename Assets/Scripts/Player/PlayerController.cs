@@ -183,10 +183,19 @@ public class PlayerController : MonoBehaviour
                 _rb.linearVelocity = Vector2.zero; // When the player is dead, it cannot move
                 break;
         }
-    } 
+    }
+
+    [System.Obsolete]
     void Update()
     {
-        if (_bossController.isDead)
+        // Null-safe check (place where you currently test the boss state, e.g. in Update)
+        if (_bossController == null)
+        {
+            // Try to find the boss in the scene; if none exists this leaves _bossController null and is ignored.
+            _bossController = FindObjectOfType<BossController>();
+        }
+
+        if (_bossController != null && _bossController.isDead)
         {
             StartCoroutine(FadetoCredits()); // Start fade to credits coroutine when boss is dead
         }
@@ -744,7 +753,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(7f); // Optional delay before starting fade
         fadeToCredits.SetActive(true); // Activate fade to credits panel
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene(0); // Load the credits scene after a delay
+        SceneManager.LoadScene("Creditos"); // Load the credits scene after a delay
     }
     #endregion
 }

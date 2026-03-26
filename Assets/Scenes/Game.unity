@@ -5305,7 +5305,7 @@ MonoBehaviour:
   currentState: 0
   damage: 20
   currentHealth: 0
-  maxHealth: 20
+  maxHealth: 250
   isDead: 0
   secondPhase: 0
   _meleeAttackType: 0
