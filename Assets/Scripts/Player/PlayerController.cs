@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_audioSource != null && _parrySound != null)
             {
-                _audioSource.PlayOneShot(_parrySound, 0.8f);
+                _audioSource.PlayOneShot(_parrySound, 0.1f);
             }
             _parryCooldownTime = _parryCooldown; //Inicia el Cooldown del parry
             StartCoroutine(ParryWindowRoutine()); //Llama a la corrutina ParryWindowRoutine()
@@ -345,7 +345,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_audioSource != null && _dashSound != null)
             {
-                _audioSource.PlayOneShot(_dashSound, 0.7f);
+                _audioSource.PlayOneShot(_dashSound, 0.2f);
             }
 
             // fallback direction if player hasn't moved yet
@@ -413,13 +413,13 @@ public class PlayerController : MonoBehaviour
         _bloodParticlesPlayer.Play();
         if (_audioSource != null && _bloodSound != null)
         {
-            _audioSource.pitch = Random.Range(0.9f, 1.1f); 
-            _audioSource.PlayOneShot(_bloodSound, 0.5f); 
+            _audioSource.pitch = Random.Range(1f, 1f); 
+            _audioSource.PlayOneShot(_bloodSound, 0.3f); 
         }
         if (_audioSource != null && _playerHurtSound != null)
         {
             _audioSource.pitch = Random.Range(0.9f, 1.1f);
-            _audioSource.PlayOneShot(_playerHurtSound, 0.8f);
+            _audioSource.PlayOneShot(_playerHurtSound, 0.03f);
         }
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         currentState = PlayerState.Stunned;
@@ -493,7 +493,7 @@ public class PlayerController : MonoBehaviour
         if (_audioSource != null && _attackSounds.Count > 0)
         {
             int randomIndex = Random.Range(0, _attackSounds.Count);
-            _audioSource.PlayOneShot(_attackSounds[randomIndex], 0.1f);
+            _audioSource.PlayOneShot(_attackSounds[randomIndex], 0.05f);
         }
         // Activate attack bool
         isAttacking = true;
