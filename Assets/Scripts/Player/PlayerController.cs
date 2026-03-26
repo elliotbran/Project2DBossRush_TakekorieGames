@@ -482,9 +482,10 @@ public class PlayerController : MonoBehaviour
 
     public void PlayHealSound(AudioClip clip)
     {
-        if (_audioSource != null && clip != null)
+        if (_audioSource != null && _parrySound != null) // Usa _parrySound o el que quieras
         {
-            _audioSource.PlayOneShot(clip);
+            _audioSource.pitch = Random.Range(0.55f, 0.65f);
+            _audioSource.PlayOneShot(_parrySound, 0.4f);
         }
     }
 

@@ -2929,7 +2929,6 @@ GameObject:
   - component: {fileID: 1078465796}
   - component: {fileID: 1078465798}
   - component: {fileID: 1078465799}
-  - component: {fileID: 1078465800}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3041,11 +3040,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  audioSource: {fileID: 1078465799}
   stepSound: {fileID: 8300000, guid: 7951ef92a5c220140abd69cc42a18fac, type: 3}
   stepInterval: 0.4
-  stepPitchMin: 0.95
-  stepPitchMax: 1.1
   attackKnockbackForce: 2
   attackKnockbackDuration: 0.2
   _parryCooldown: 1
@@ -3259,31 +3255,6 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!169 &1078465800
-AudioLowPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078465786}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_LowpassResonanceQ: 1
-  lowpassLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.099590726
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5291,6 +5262,8 @@ MonoBehaviour:
   _audioSource: {fileID: 2010664661}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
   _bossHurtSound: {fileID: 8300000, guid: 4b74bc01ba5803a48bede3f3e6e15594, type: 3}
+  stepSound: {fileID: 0}
+  stepInterval: 0.5
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
