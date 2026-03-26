@@ -3621,6 +3621,7 @@ MonoBehaviour:
   _playerHurtSound: {fileID: 8300000, guid: 4b74bc01ba5803a48bede3f3e6e15594, type: 3}
   _parrySound: {fileID: 8300000, guid: 7f268ce9b1946ec4c9811d2f7b28916e, type: 3}
   onTutorial: 0
+  fadeToCredits: {fileID: 0}
   currentState: 0
   mainCamera: {fileID: 525409375}
   target: {fileID: 1490241309}
@@ -6674,6 +6675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typewriterSpeed: 50
+  _typingSound: {fileID: 0}
+  _typeAudioSource: {fileID: 0}
 --- !u!222 &1344710159645024248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17755,7 +17758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4638825113475234799
 RectTransform:
   m_ObjectHideFlags: 0

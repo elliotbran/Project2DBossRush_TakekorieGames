@@ -17,12 +17,12 @@ MonoBehaviour:
   hasName: 1
   dialogue:
   - "Parece que has decidido luchar por tu vida, bien, te ense\xF1are lo que necesitas
-    para enfrentarte con la muerte y pelear por los que mas quieres en el mundo de
-    los vivos."
-  - Lo primero y mas importante, portas una lanza, para blandira presiona cuadrado.
-  - Prueba a golpearme 5 veces con ella.
+    para enfrentarte con El Se\xF1or de los Muertos y pelear por los que m\xE1s quieres
+    en el mundo de los vivos."
+  - "Lo primero y m\xE1s importante, portas una lanza, prueba a blandirla."
+  - Golpeame cinco veces con ella.
   responses:
-  - responseText: Estas segura?
+  - responseText: "\xBFEst\xE1s segura?"
     dialogueObject: {fileID: 11400000, guid: a844d4f087fd9894e8c0d4fc8f22a640, type: 2}
   - responseText: Entendido.
     dialogueObject: {fileID: 11400000, guid: 28921bfb734a7d540b548b77116f9261, type: 2}

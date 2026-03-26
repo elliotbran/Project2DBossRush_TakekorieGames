@@ -16,13 +16,13 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - Estas en las puertas del infierno ya que has sido sacrificado a los dioses.
-  - Pero no te preocupes ya que gracias a tu linaje tienes la oportunidad de luchar
-    por tu vida
+  - "Est\xE1s en las puertas del Mictl\xE1n, ya que has sido ofrecida como sacrificio
+    a los dioses."
+  - Gracias a tu linaje tienes la oportunidad de luchar por tu vida.
   - Si tienes lo que hay que tener avanza al centro de la arena, en el caso de que
-    prefieras asumir tu muerte puedes abandonarla por donde has venido
+    prefieras asumir tu muerte puedes abandonarla por donde has venido.
   responses:
-  - responseText: Entiendo
+  - responseText: Entiendo.
     dialogueObject: {fileID: 11400000, guid: 3cd83a8bf664f744898c5b8aa25bad37, type: 2}
   - responseText: ...
     dialogueObject: {fileID: 11400000, guid: 3cd83a8bf664f744898c5b8aa25bad37, type: 2}
