@@ -51,7 +51,7 @@ public class Projectile : MonoBehaviour
             if (player.currentState == PlayerController.PlayerState.Parrying)
             {
                 if (_parryHitSound != null)
-                    AudioSource.PlayClipAtPoint(_parryHitSound, transform.position);
+                    AudioSource.PlayClipAtPoint(_parryHitSound, transform.position, 0.6f);
                 if (player.manaHandler != null)
                 {
                     player.manaHandler.SpawnMana(5);
