@@ -409,7 +409,7 @@ public class PlayerController : MonoBehaviour
         if (Time.time >= nextStepTime)
         {
             _audioSource.pitch = Random.Range(0.9f, 1.1f);
-            _audioSource.PlayOneShot(stepSound);
+            _audioSource.PlayOneShot(stepSound, 0.2f);
             nextStepTime = Time.time + stepInterval;
         }
     }
