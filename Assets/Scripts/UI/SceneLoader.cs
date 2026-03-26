@@ -25,6 +25,10 @@ public class SceneLoader : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        }
     }
     public void sceneTutorial()
     {
