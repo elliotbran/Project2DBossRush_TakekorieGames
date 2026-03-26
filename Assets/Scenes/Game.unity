@@ -3041,6 +3041,11 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
+  audioSource: {fileID: 1078465799}
+  stepSound: {fileID: 8300000, guid: 7951ef92a5c220140abd69cc42a18fac, type: 3}
+  stepInterval: 0.4
+  stepPitchMin: 0.95
+  stepPitchMax: 1.1
   attackKnockbackForce: 2
   attackKnockbackDuration: 0.2
   _parryCooldown: 1

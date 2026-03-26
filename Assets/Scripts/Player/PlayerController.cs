@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : MonoBehaviour
@@ -44,6 +45,11 @@ public class PlayerController : MonoBehaviour
     public UnityEngine.Transform attackPoint;
     public bool isAttacking;
     public LayerMask enemyLayers; //Its used by the boss to detect our player
+
+    [Header("Audio Settings")]
+    public AudioClip stepSound;       // Sonido de pasos
+    public float stepInterval = 0.5f; // Intervalo entre cada paso
+    private float nextStepTime = 0f;  // Control del tiempo entre pasos
 
     // Knockback applied to enemies when player hits them
     [Tooltip("Force applied to enemies when hit by player's attack")]
@@ -321,6 +327,10 @@ public class PlayerController : MonoBehaviour
         _animator.SetFloat("LastMoveX", _lastMoveDir.x);
         _animator.SetFloat("LastMoveY", _lastMoveDir.y);
 
+        if (moveDir.magnitude > 0.1f)
+        {
+            PlayStepSound();
+        }
 
         if (moveX != 0 || moveY != 0)
         {
@@ -391,6 +401,16 @@ public class PlayerController : MonoBehaviour
         if (_dashSpeed < minRollSpeed)
         {
             currentState = PlayerState.Normal;
+        }
+    }
+
+    void PlayStepSound()
+    {
+        if (Time.time >= nextStepTime)
+        {
+            _audioSource.pitch = Random.Range(0.9f, 1.1f);
+            _audioSource.PlayOneShot(stepSound);
+            nextStepTime = Time.time + stepInterval;
         }
     }
     #endregion
