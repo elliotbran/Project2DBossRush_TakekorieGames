@@ -515,7 +515,7 @@ public class PlayerController : MonoBehaviour
         bossUI.SetActive(false);
         youDiedPanel.SetActive(true); // Show "You Died" panel
         yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Game");
     }
     #endregion
 

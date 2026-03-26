@@ -340,11 +340,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: bafaed15eaa6acc44a85ee17a6f25229, type: 3}
+  m_Resource: {fileID: 8300000, guid: b91c3fa6aa804c14aa4b1164d6cdb52a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1344,8 +1344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 667.6029, y: 143.5205}
+  m_AnchoredPosition: {x: 0, y: -58}
+  m_SizeDelta: {x: 1751.4576, y: 516.0958}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &458307717
 MonoBehaviour:
@@ -1369,8 +1369,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: YOU DIED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5bacbd4fa1027704180f4aacb5ba51be, type: 2}
-  m_sharedMaterial: {fileID: 8835830117257093610, guid: 5bacbd4fa1027704180f4aacb5ba51be, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}
+  m_sharedMaterial: {fileID: -8393567617771864370, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

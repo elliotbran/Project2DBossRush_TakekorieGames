@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
 public class TypewriterEffect : MonoBehaviour
 {
     [SerializeField] private float typewriterSpeed = 50f;
+    [SerializeField] AudioClip _typingSound;
+    [SerializeField] private AudioSource _typeAudioSource;
 
     public bool IsRunning { get; private set; }
 
@@ -61,6 +65,9 @@ public class TypewriterEffect : MonoBehaviour
                 bool isLast = i >= textToType.Length - 1;
 
                 textLabel.maxVisibleCharacters = i + 1;
+
+                _typeAudioSource.pitch = Random.Range(0.8f, 1.2f);
+                _typeAudioSource.PlayOneShot(_typingSound, 0.2f);
 
                 if (IsPunctuation(textToType[i], out float waitTime) && !isLast && !IsPunctuation(textToType[i + 1], out _))
                 {
