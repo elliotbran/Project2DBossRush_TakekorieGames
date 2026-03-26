@@ -53,6 +53,7 @@ public class ManaParticleHandler : MonoBehaviour
                 if (_audioSource != null && _Particlesounds.Count > 0)
                 {
                     int randomIndex = Random.Range(0, _Particlesounds.Count);
+                    _audioSource.pitch = Random.Range(0.6f, 0.8f);
                     _audioSource.PlayOneShot(_Particlesounds[randomIndex]);
                 }
                 if (!_hasaddedmana && manaController != null) //se llena el mana cuando toca la 1 particula 
