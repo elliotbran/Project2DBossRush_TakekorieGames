@@ -304,7 +304,7 @@ public class BossController : MonoBehaviour
 
             if (_bloodSound != null)
             {
-                _audioSource.PlayOneShot(_bloodSound, 1.0f);
+                _audioSource.PlayOneShot(_bloodSound, 0.3f);
             }
 
 
