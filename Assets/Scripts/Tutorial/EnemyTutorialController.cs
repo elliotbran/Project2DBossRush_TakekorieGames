@@ -65,9 +65,6 @@ public class EnemyTutorialController : MonoBehaviour
     UITutorialControl _UITutorialControl;
     public GameObject barraVidaBOss;
 
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _playerHurtSound;
-
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component attached to the boss
@@ -226,11 +223,7 @@ public class EnemyTutorialController : MonoBehaviour
         }
         currentHealth -= damage;
 
-        if (_audioSource != null && _playerHurtSound != null)
-        {
-            _audioSource.pitch = 0.8f;
-            _audioSource.PlayOneShot(_playerHurtSound, 0.1f);
-        }
+
         //_animator.SetTrigger("Hurt");
         StartCoroutine(HurtAnimation());
 
