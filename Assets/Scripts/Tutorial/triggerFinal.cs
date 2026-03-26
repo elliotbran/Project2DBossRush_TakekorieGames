@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class triggerFinal : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class triggerFinal : MonoBehaviour
     }
     IEnumerator BomboBOmbastico()
     {
+        fade.GetComponent<Image>().enabled = true;
         player.canMove = false;
         yield return new WaitForSeconds(.1f);
         fade.SetActive(true);
