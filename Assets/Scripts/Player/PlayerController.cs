@@ -418,8 +418,8 @@ public class PlayerController : MonoBehaviour
         }
         if (_audioSource != null && _playerHurtSound != null)
         {
-            _audioSource.pitch = Random.Range(0.9f, 1.1f);
-            _audioSource.PlayOneShot(_playerHurtSound, 0.03f);
+            _audioSource.pitch = 0.8f;
+            _audioSource.PlayOneShot(_playerHurtSound, 0.1f);
         }
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         currentState = PlayerState.Stunned;
