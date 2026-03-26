@@ -44,6 +44,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _bloodSound;
     [SerializeField] private AudioClip _bossHurtSound;
+    [SerializeField] private AudioClip _deathSound;
     public AudioClip stepSound;       // Sonido de pasos
     public float stepInterval = 0.5f; // Intervalo entre cada paso
     private float nextStepTime = 0f;  // Control del tiempo entre pasos
@@ -288,27 +289,35 @@ public class BossController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        
-        StartCoroutine(HurtAnimation());
 
-        if (_bloodParticles != null) _bloodParticles.Play();
-
-        if (_audioSource != null)
+        if (currentHealth > 0)
         {
+            StartCoroutine(HurtAnimation());
+            if (_bloodParticles != null) _bloodParticles.Play();
 
-            if (_bloodSound != null)
+            if (_audioSource != null)
             {
-                _audioSource.PlayOneShot(_bloodSound, 0.3f);
-            }
-
-
-            if (_bossHurtSound != null)
-            {
-                _audioSource.pitch = Random.Range(0.8f, 1.0f); 
-                _audioSource.PlayOneShot(_bossHurtSound, 0.9f);
+                if (_bloodSound != null) _audioSource.PlayOneShot(_bloodSound, 0.3f);
+                if (_bossHurtSound != null)
+                {
+                    _audioSource.pitch = Random.Range(0.8f, 1.0f);
+                    _audioSource.PlayOneShot(_bossHurtSound, 0.9f);
+                }
             }
         }
+        else if (!isDead) 
+        {
+            isDead = true;
+            _spriteRenderer.color = Color.white;
 
+            if (_audioSource != null && _deathSound != null)
+            {
+                _audioSource.pitch = 0.9f;
+                _audioSource.PlayOneShot(_deathSound, 0.5f);
+            }
+
+            Die();
+        }
         Debug.Log("Vida restante" + currentHealth);
 
         if (currentHealth <= 0)

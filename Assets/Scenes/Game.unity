@@ -5325,6 +5325,7 @@ MonoBehaviour:
   _audioSource: {fileID: 2010664661}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
   _bossHurtSound: {fileID: 8300000, guid: 4b74bc01ba5803a48bede3f3e6e15594, type: 3}
+  _deathSound: {fileID: 8300000, guid: 13a84a6b9797ff64a8f0a6e302c69e4d, type: 3}
   stepSound: {fileID: 0}
   stepInterval: 0.5
   whatIsPlayer:
@@ -6052,6 +6053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typewriterSpeed: 50
+  _typingSound: {fileID: 0}
+  _typeAudioSource: {fileID: 0}
 --- !u!222 &1367202743094195856
 CanvasRenderer:
   m_ObjectHideFlags: 0

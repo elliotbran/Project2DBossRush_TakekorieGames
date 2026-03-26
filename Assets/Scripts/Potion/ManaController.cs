@@ -8,6 +8,13 @@ public class ManaController : MonoBehaviour
     private float _currentMana = 0;
     private float _maxMana = 3;
 
+    public bool IsManaFull
+    {
+        get
+        {
+            return (potioncontroller != null && potioncontroller.IsFull);
+        }
+    }
     void Start()
     {
         UpdateStatus();//actualiza la barra del mana de la UI empezando en 0/vacia
@@ -19,6 +26,7 @@ public class ManaController : MonoBehaviour
     }
     public void RefillMana(float amount) //esta funcion rellena la barra de mana cuando las particulas tocan al player
     {
+        if (IsManaFull) return;
         if (potioncontroller != null && potioncontroller.IsFull)
         { 
             return;
