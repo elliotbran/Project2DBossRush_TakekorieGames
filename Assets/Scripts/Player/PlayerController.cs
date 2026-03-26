@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
     UITutorialControl uiTutorialControl;
 
+    public GameObject fadeToCredits;
+
     public enum PlayerState //State machine for the player
     {
         Normal,        
@@ -184,7 +186,12 @@ public class PlayerController : MonoBehaviour
     } 
     void Update()
     {
-        if(_bossController != null)
+        if (_bossController.isDead)
+        {
+            StartCoroutine(FadetoCredits()); // Start fade to credits coroutine when boss is dead
+        }
+
+        if (_bossController != null)
             StartCoroutine(BossDeathHitstop()); // Check if boss is dead to apply hit stop effect on boss death
         if (_enemyTutorialController != null)
             StartCoroutine(BossDeathHitstopTutorial());
@@ -728,6 +735,16 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSecondsRealtime(3f); // Wait for a short duration in real time
             Time.timeScale = 1; // Restore original time scale
         }
+    }
+    #endregion
+
+    #region Coroutines
+    IEnumerator FadetoCredits()
+    {
+        yield return new WaitForSeconds(7f); // Optional delay before starting fade
+        fadeToCredits.SetActive(true); // Activate fade to credits panel
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(0); // Load the credits scene after a delay
     }
     #endregion
 }
