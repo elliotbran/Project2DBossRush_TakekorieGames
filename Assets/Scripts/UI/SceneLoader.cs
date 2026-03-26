@@ -49,10 +49,10 @@ public class SceneLoader : MonoBehaviour
         switch(sceneIndex)
         {
             case 1:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
                 break;
             case 2:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
                 break;
             case 3:
                 Application.Quit();
