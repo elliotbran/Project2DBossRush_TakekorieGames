@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Fade : MonoBehaviour
+public class FadeTrigger : MonoBehaviour
 {
 
     public Animator animator;
