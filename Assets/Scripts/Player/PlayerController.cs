@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
     public bool onTutorial = false; //This is used to prevent the player from dying during the tutorial, it allows the player to have infinite health during the tutorial
     UITutorialControl uiTutorialControl;
 
+    public GameObject fadeToCredits;
+
     public enum PlayerState //State machine for the player
     {
         Normal,        
@@ -181,10 +183,24 @@ public class PlayerController : MonoBehaviour
                 _rb.linearVelocity = Vector2.zero; // When the player is dead, it cannot move
                 break;
         }
-    } 
+    }
+
+    [System.Obsolete]
     void Update()
     {
-        if(_bossController != null)
+        // Null-safe check (place where you currently test the boss state, e.g. in Update)
+        if (_bossController == null)
+        {
+            // Try to find the boss in the scene; if none exists this leaves _bossController null and is ignored.
+            _bossController = FindObjectOfType<BossController>();
+        }
+
+        if (_bossController != null && _bossController.isDead)
+        {
+            StartCoroutine(FadetoCredits()); // Start fade to credits coroutine when boss is dead
+        }
+
+        if (_bossController != null)
             StartCoroutine(BossDeathHitstop()); // Check if boss is dead to apply hit stop effect on boss death
         if (_enemyTutorialController != null)
             StartCoroutine(BossDeathHitstopTutorial());
@@ -499,7 +515,7 @@ public class PlayerController : MonoBehaviour
         bossUI.SetActive(false);
         youDiedPanel.SetActive(true); // Show "You Died" panel
         yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Game");
     }
     #endregion
 
@@ -728,6 +744,16 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSecondsRealtime(3f); // Wait for a short duration in real time
             Time.timeScale = 1; // Restore original time scale
         }
+    }
+    #endregion
+
+    #region Coroutines
+    IEnumerator FadetoCredits()
+    {
+        yield return new WaitForSeconds(7f); // Optional delay before starting fade
+        fadeToCredits.SetActive(true); // Activate fade to credits panel
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("Creditos"); // Load the credits scene after a delay
     }
     #endregion
 }

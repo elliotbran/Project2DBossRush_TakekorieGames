@@ -5,6 +5,7 @@ using UnityEngine;
 public class StraightProjectile : MonoBehaviour
 {
     [SerializeField] float _speed;
+    [SerializeField] float lifetime = 3f; // seconds before auto-destroy
     Transform _player; // Assign the player in the Inspector
 
     BossController _bossController; // Reference to the boss controller to manage projectile behavior
@@ -15,7 +16,6 @@ public class StraightProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         var playerObj = GameObject.Find("Player");
         if (playerObj != null)
         {
@@ -37,12 +37,11 @@ public class StraightProjectile : MonoBehaviour
             _bossController = bossObj.GetComponent<BossController>();
 
         // Start lifetime countdown once
-        StartCoroutine(Destroy());
+        StartCoroutine(DestroyAfterLifetime());
     }
 
     void Update()
     {
-
         if (_bossController != null && _bossController.currentHealth <= _bossController.maxHealth / 2)
         {
             _speed = 20f;
@@ -50,12 +49,6 @@ public class StraightProjectile : MonoBehaviour
 
         // Move in a straight line using the precomputed direction
         transform.position = (Vector2)transform.position + _direction * _speed * Time.deltaTime;
-
-        // Destroy if reached close to the sampled target position
-        if (Vector2.Distance(transform.position, _targetPosition) <= 0.1f)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,9 +67,9 @@ public class StraightProjectile : MonoBehaviour
         }
     }
 
-    IEnumerator Destroy()
+    IEnumerator DestroyAfterLifetime()
     {
-        yield return new WaitForSeconds(5); // Destroy the projectile after 5 seconds if it doesn't hit the player
+        yield return new WaitForSeconds(lifetime); // Destroy the projectile after lifetime seconds if it doesn't hit the player
         Destroy(gameObject);
     }
 }
