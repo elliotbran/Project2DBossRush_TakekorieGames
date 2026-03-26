@@ -6458,6 +6458,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plataforma
       objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: eb80c6f5ca9979741abd9e673cd8356e, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: eb80c6f5ca9979741abd9e673cd8356e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1886177341
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: eb80c6f5ca9979741abd9e673cd8356e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.21
@@ -14248,11 +14256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'New Text
-
-    New Text
-
-    New Text'
+  m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}
   m_sharedMaterial: {fileID: -8393567617771864370, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}
@@ -14279,8 +14283,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.7
-  m_fontSizeBase: 11.7
+  m_fontSize: 10.5
+  m_fontSizeBase: 10.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -14290,7 +14294,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_wordSpacing: 35
   m_lineSpacing: 20
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0

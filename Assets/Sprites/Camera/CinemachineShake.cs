@@ -1,5 +1,4 @@
 using Unity.Cinemachine;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 public class CinemachineShake : MonoBehaviour
 {
