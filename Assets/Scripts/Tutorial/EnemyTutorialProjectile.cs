@@ -7,6 +7,7 @@ public class EnemyTutorialProjectile : MonoBehaviour
     [SerializeField] float _speed;
     SpriteRenderer _spriteRenderer;
     Transform _player; // Assign the player in the Inspector
+    [SerializeField] private AudioClip _explosionSound;
 
     EnemyTutorialController _enemyController; // Reference to the boss controller to manage projectile behavior
 
@@ -49,13 +50,20 @@ public class EnemyTutorialProjectile : MonoBehaviour
             {
                 return;
             }
+            ReproducirExplosion();
             Destroy(gameObject); // Destroy the projectile on impact
             player.TakeDamage(15f); // Apply damage to the player
             if (_enemyController != null)
                 _enemyController.StartCoroutine(_enemyController.AttackHitStop()); // Trigger hit stop effect in the boss controller
         }
     }
-
+    private void ReproducirExplosion()
+    {
+        if (_explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_explosionSound, transform.position, 0.5f);
+        }
+    }
     IEnumerator Destroy()
     {
         yield return new WaitForSeconds(5f); // Destroy the projectile after 5 seconds if it doesn't hit the player
