@@ -14624,7 +14624,10 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  attackKnockbackForce: 2
+  audioSource: {fileID: 0}
+  stepSound: {fileID: 0}
+  stepInterval: 0.5
+  attackKnockbackForce: 1.96
   attackKnockbackDuration: 0.2
   _parryCooldown: 1
   _audioSource: {fileID: 0}
