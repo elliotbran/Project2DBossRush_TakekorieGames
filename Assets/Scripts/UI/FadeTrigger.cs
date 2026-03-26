@@ -20,7 +20,7 @@ public class Fade : MonoBehaviour
     IEnumerator FadeIn()
     {
         animator.Play("FadeText");
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("Game");
     }
 }
