@@ -52,24 +52,23 @@ public class Projectile : MonoBehaviour
             {
                 if (_parryHitSound != null)
                     AudioSource.PlayClipAtPoint(_parryHitSound, transform.position, 0.6f);
-                if (player.manaHandler != null)
+                if (gameObject.CompareTag("AtaqueAmarillo") && player.manaHandler != null)
                 {
-                    player.manaHandler.SpawnMana(5);
+                    var mc = player.manaHandler.manaController;
+                    if (mc != null && !mc.IsManaFull)
+                    {
+                        player.manaHandler.SpawnMana(5);
+                    }
                 }
-
-                Destroy(gameObject);
+                Destroy(gameObject); 
                 return;
             }
-            if (player.currentState == PlayerController.PlayerState.Parrying)
-            {
-                return;   
-            }
             PlayDestroySound();
-            Destroy(gameObject); // Destroy the projectile on impact
-            player.TakeDamage(15f); // Apply damage to the player
+            player.TakeDamage(15f);
             if (_bossController != null)
                 _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
-        }        
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator Destroy()
