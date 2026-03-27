@@ -19,7 +19,7 @@ public class RangeZero : MonoBehaviour
     IEnumerator WaitOneSecondRange()
     {
         _bossController.rangeAttackRange = 0; // Set isRangeZero to false after 1 second
-        yield return new WaitForSeconds(1f); // Wait for 1 second
+        yield return new WaitForSeconds(1.75f); // Wait for 1 second
         _bossController.rangeAttackRange = 20; // Set isRangeZero to false after 1 second
     }
         
