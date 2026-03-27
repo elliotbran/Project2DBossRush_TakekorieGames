@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     [SerializeField]float _speed;
     [SerializeField] private AudioClip _destroySound;
-    [SerializeField] private AudioClip _parryHitSound;
     Transform _player; // Assign the player in the Inspector
     
     BossController _bossController; // Reference to the boss controller to manage projectile behavior
@@ -49,9 +48,7 @@ public class Projectile : MonoBehaviour
             PlayerController player = collision.GetComponent<PlayerController>();
             if (player == null) return;
             if (player.currentState == PlayerController.PlayerState.Parrying)
-            {
-                if (_parryHitSound != null)
-                    AudioSource.PlayClipAtPoint(_parryHitSound, transform.position, 0.6f);
+            {                
                 if (gameObject.CompareTag("AtaqueAmarillo") && player.manaHandler != null)
                 {
                     var mc = player.manaHandler.manaController;
@@ -60,21 +57,19 @@ public class Projectile : MonoBehaviour
                         player.manaHandler.SpawnMana(5);
                     }
                 }
+                PlayDestroySound();
+                player.TakeDamage(15f);
+                if (_bossController != null)
+                    _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
                 Destroy(gameObject); 
                 return;
-            }
-            PlayDestroySound();
-            player.TakeDamage(15f);
-            if (_bossController != null)
-                _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
-            Destroy(gameObject);
+            }           
         }
     }
 
     IEnumerator Destroy()
     {
         yield return new WaitForSeconds(2.5f); // Destroy the projectile after 5 seconds if it doesn't hit the player
-        PlayDestroySound();
         Destroy(gameObject);
     }
     private void PlayDestroySound()
