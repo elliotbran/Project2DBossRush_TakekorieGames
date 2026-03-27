@@ -15,19 +15,23 @@ public class SceneLoader : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Tutorial");
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Tutorial-Game");
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Creditos");
         }
     }
     public void sceneTutorial()
@@ -53,10 +57,10 @@ public class SceneLoader : MonoBehaviour
         switch(sceneIndex)
         {
             case 1:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Tutorial");
                 break;
             case 2:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
                 break;
             case 3:
                 Application.Quit();

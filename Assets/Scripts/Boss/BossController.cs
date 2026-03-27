@@ -45,6 +45,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private AudioClip _bloodSound;
     [SerializeField] private AudioClip _bossHurtSound;
     [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private AudioClip _lightAttackSound;
+    [SerializeField] private AudioClip _heavyAttackSound;
+    [SerializeField] private AudioClip _rangeSound;
     public AudioClip stepSound;       // Sonido de pasos
     public float stepInterval = 0.5f; // Intervalo entre cada paso
     private float nextStepTime = 0f;  // Control del tiempo entre pasos
@@ -204,6 +207,21 @@ public class BossController : MonoBehaviour
     {
         _agent.SetDestination(_playerPosition.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
+
+        if (_agent.speed > 0.1f)
+        {
+            PlayStepSound();
+        }
+
+    }
+    void PlayStepSound()
+    {
+        if (Time.time >= nextStepTime)
+        {
+            _audioSource.pitch = Random.Range(1.25f, 1.3f);
+            _audioSource.PlayOneShot(stepSound, 0.3f);
+            nextStepTime = Time.time + stepInterval;
+        }
     }
 
     void UpdateMeleeAttack()
@@ -215,6 +233,7 @@ public class BossController : MonoBehaviour
         {
             this.gameObject.tag = "AtaqueNormal";
             _animator.SetTrigger("NormalMeleeAttack");
+            _audioSource.PlayOneShot(_lightAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -224,6 +243,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 2)
         {
             _animator.SetTrigger("GoldenMeleeAttack");
+            _audioSource.PlayOneShot(_lightAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -233,6 +253,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 3)
         {
             _animator.SetTrigger("NormalSplashAttack");
+            _audioSource.PlayOneShot(_heavyAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -242,6 +263,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 4)
         {
             _animator.SetTrigger("GoldenSplashAttack");
+            _audioSource.PlayOneShot(_heavyAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -258,6 +280,7 @@ public class BossController : MonoBehaviour
         {
             rangeAttackRange = 0f;
             _animator.SetTrigger("RangeAttack");
+            _audioSource.PlayOneShot(_rangeSound, 0.35f);
             Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
@@ -268,6 +291,7 @@ public class BossController : MonoBehaviour
             rangeAttackRange = 0f;
             this.gameObject.tag = "AtaqueMelee";
             _animator.SetTrigger("RangeAttack");
+            _audioSource.PlayOneShot(_rangeSound, 0.35f);
             Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
@@ -300,8 +324,8 @@ public class BossController : MonoBehaviour
                 if (_bloodSound != null) _audioSource.PlayOneShot(_bloodSound, 0.3f);
                 if (_bossHurtSound != null)
                 {
-                    _audioSource.pitch = Random.Range(0.8f, 1.0f);
-                    _audioSource.PlayOneShot(_bossHurtSound, 0.9f);
+                    _audioSource.pitch = Random.Range(0.8f, 0.85f);
+                    _audioSource.PlayOneShot(_bossHurtSound, 0.35f);
                 }
             }
         }
