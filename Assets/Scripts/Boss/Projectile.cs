@@ -46,7 +46,6 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerController player = collision.GetComponent<PlayerController>();
-            if (player == null) return;
             if (player.currentState == PlayerController.PlayerState.Parrying)
             {                
                 if (gameObject.CompareTag("AtaqueAmarillo") && player.manaHandler != null)
@@ -58,12 +57,18 @@ public class Projectile : MonoBehaviour
                     }
                 }
                 PlayDestroySound();
-                player.TakeDamage(15f);
                 if (_bossController != null)
                     _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
-                Destroy(gameObject); 
-                return;
-            }           
+            }
+
+            else             
+            {
+                player.TakeDamage(15f);
+                PlayDestroySound();
+                if (_bossController != null)
+                    _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
+                Destroy(gameObject);
+            }
         }
     }
 

@@ -60,11 +60,7 @@ public class StraightProjectile : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController player = collision.GetComponent<PlayerController>();
-            if (player.currentState == PlayerController.PlayerState.Parrying)
-            {
-                return;
-            }
+            PlayerController player = collision.GetComponent<PlayerController>();            
             Destroy(gameObject); // Destroy the projectile on impact
             player.TakeDamage(15f); // Apply damage to the player
             if (_bossController != null)
