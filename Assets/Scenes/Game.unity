@@ -5469,6 +5469,8 @@ MonoBehaviour:
   _bossHurtSound: {fileID: 8300000, guid: 6381601b212b2bf48bbdbb588d50c632, type: 3}
   stepSound: {fileID: 8300000, guid: b52e7d6ae929044409d79b134cd283f0, type: 3}
   bossMelee1: {fileID: 8300000, guid: f4d06e12a737fb147bf89dee586a6ddf, type: 3}
+  bossMelee2: {fileID: 8300000, guid: de217da13811f154a9523c15492abb2b, type: 3}
+  bossRange: {fileID: 8300000, guid: 789cdedcf0d6801458d190fbbe8fc14e, type: 3}
   stepInterval: 0.5
   whatIsPlayer:
     serializedVersion: 2

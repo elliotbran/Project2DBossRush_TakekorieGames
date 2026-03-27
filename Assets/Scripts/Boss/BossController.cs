@@ -46,6 +46,8 @@ public class BossController : MonoBehaviour
     [SerializeField] private AudioClip _bossHurtSound;
     public AudioClip stepSound;       // Sonido de pasos
     public AudioClip bossMelee1;
+    public AudioClip bossMelee2;
+    public AudioClip bossRange;
     public float stepInterval = 0.5f; // Intervalo entre cada paso
     private float nextStepTime = 0f;  // Control del tiempo entre pasos
 
@@ -249,6 +251,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 3)
         {
             _animator.SetTrigger("NormalSplashAttack");
+            _audioSource.PlayOneShot(bossMelee2, 0.3f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -258,6 +261,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 4)
         {
             _animator.SetTrigger("GoldenSplashAttack");
+            _audioSource.PlayOneShot(bossMelee2, 0.3f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -275,6 +279,7 @@ public class BossController : MonoBehaviour
             rangeAttackRange = 0f;
             _animator.SetTrigger("RangeAttack");
             Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            _audioSource.PlayOneShot(bossRange, 0.5f);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
         }
@@ -285,6 +290,7 @@ public class BossController : MonoBehaviour
             this.gameObject.tag = "AtaqueMelee";
             _animator.SetTrigger("RangeAttack");
             Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            _audioSource.PlayOneShot(bossRange, 0.5f);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
         }
