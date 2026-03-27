@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_audioSource != null && _parrySound != null)
             {
-                _audioSource.PlayOneShot(_parrySound, 0.1f);
+                _audioSource.PlayOneShot(_parrySound, 0.3f);
             }
             _parryCooldownTime = _parryCooldown; //Inicia el Cooldown del parry
             StartCoroutine(ParryWindowRoutine()); //Llama a la corrutina ParryWindowRoutine()
@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         UpdateStates();
 
         Ray ray = new Ray(transform.position, _playerController.moveDir); //Raycast that shows the direction the player is moving
-        Debug.DrawRay(ray.origin, ray.direction*5f, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * 5f, Color.red);
 
         /////////------------NO TOCAR------------/////////
         /*Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -353,7 +353,6 @@ public class PlayerController : MonoBehaviour
             // Not Idle
             _lastMoveDir = moveDir;
 
-
             // Swap direction of sprite depending on walk direction
             if (moveX > 0)
                 transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
@@ -371,7 +370,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_audioSource != null && _dashSound != null)
             {
-                _audioSource.PlayOneShot(_dashSound, 0.2f);
+                _audioSource.PlayOneShot(_dashSound, 1f);
             }
 
             // fallback direction if player hasn't moved yet
@@ -424,8 +423,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.time >= nextStepTime)
         {
-            _audioSource.pitch = Random.Range(0.9f, 1.1f);
-            _audioSource.PlayOneShot(stepSound, 0.2f);
+            _audioSource.pitch = Random.Range(1.25f, 1.3f);
+            _audioSource.PlayOneShot(stepSound, 0.3f);
             nextStepTime = Time.time + stepInterval;
         }
     }
@@ -449,12 +448,11 @@ public class PlayerController : MonoBehaviour
         _bloodParticlesPlayer.Play();
         if (_audioSource != null && _bloodSound != null)
         {
-            _audioSource.pitch = Random.Range(1f, 1f); 
             _audioSource.PlayOneShot(_bloodSound, 0.3f); 
         }
         if (_audioSource != null && _playerHurtSound != null)
         {
-            _audioSource.pitch = 0.8f;
+            _audioSource.pitch = 0.65f;
             _audioSource.PlayOneShot(_playerHurtSound, 0.1f);
         }
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));

@@ -45,6 +45,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private AudioClip _bloodSound;
     [SerializeField] private AudioClip _bossHurtSound;
     public AudioClip stepSound;       // Sonido de pasos
+    public AudioClip bossMelee1;
     public float stepInterval = 0.5f; // Intervalo entre cada paso
     private float nextStepTime = 0f;  // Control del tiempo entre pasos
 
@@ -203,6 +204,20 @@ public class BossController : MonoBehaviour
     {
         _agent.SetDestination(_playerPosition.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
+
+        if (_agent.velocity.magnitude > 0.1f)
+        {
+            PlayStepSound();
+        }
+    }
+    void PlayStepSound()
+    {
+        if (Time.time >= nextStepTime)
+        {
+            _audioSource.pitch = Random.Range(0.6f, 0.65f);
+            _audioSource.PlayOneShot(stepSound, 0.2f);
+            nextStepTime = Time.time + stepInterval;
+        }
     }
 
     void UpdateMeleeAttack()
@@ -214,6 +229,7 @@ public class BossController : MonoBehaviour
         {
             this.gameObject.tag = "AtaqueNormal";
             _animator.SetTrigger("NormalMeleeAttack");
+            _audioSource.PlayOneShot(bossMelee1, 0.5f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -223,6 +239,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 2)
         {
             _animator.SetTrigger("GoldenMeleeAttack");
+            _audioSource.PlayOneShot(bossMelee1, 0.5f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -305,7 +322,7 @@ public class BossController : MonoBehaviour
             if (_bossHurtSound != null)
             {
                 _audioSource.pitch = Random.Range(0.8f, 1.0f); 
-                _audioSource.PlayOneShot(_bossHurtSound, 0.9f);
+                _audioSource.PlayOneShot(_bossHurtSound, 0.4f);
             }
         }
 
