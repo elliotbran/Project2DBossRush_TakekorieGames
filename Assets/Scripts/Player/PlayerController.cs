@@ -528,7 +528,7 @@ public class PlayerController : MonoBehaviour
         if (_audioSource != null && _attackSounds.Count > 0)
         {
             int randomIndex = Random.Range(0, _attackSounds.Count);
-            _audioSource.PlayOneShot(_attackSounds[randomIndex], 0.1f);
+            _audioSource.PlayOneShot(_attackSounds[randomIndex], 0.05f);
         }
         // Activate attack bool
         isAttacking = true;
