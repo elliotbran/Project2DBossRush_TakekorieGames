@@ -55,15 +55,15 @@ public class Projectile : MonoBehaviour
                     if (mc != null && !mc.IsManaFull)
                     {
                         player.manaHandler.SpawnMana(5);
-                    }
-                }
-                PlayDestroySound();
-                player.TakeDamage(15f);
-                if (_bossController != null)
-                    _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller
-                Destroy(gameObject); 
-                return;
-            }           
+                    }                    
+                }                       
+            }
+            if (_bossController != null)
+                _bossController.StartCoroutine(_bossController.AttackHitStop()); // Trigger hit stop effect in the boss controller         
+            PlayDestroySound();
+            player.TakeDamage(15f);
+            Destroy(gameObject);
+
         }
     }
 

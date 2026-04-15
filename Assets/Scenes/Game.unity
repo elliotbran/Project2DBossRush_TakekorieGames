@@ -3106,7 +3106,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 153f7d4b74027d3448ef37a71b8a8d97, type: 3}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
   _dashSound: {fileID: 8300000, guid: 19dc7ffec1170514db08ffd7629e49bc, type: 3}
-  _playerHurtSound: {fileID: 8300000, guid: e4bb3c09ea6fe924c80fdda178b92fcf, type: 3}
+  _playerHurtSound: {fileID: 8300000, guid: 025c0e8d99898c64c9a1c6ddf03129fe, type: 3}
   _parrySound: {fileID: 8300000, guid: 569b66e9f34635649a3cf0308e41d14f, type: 3}
   onTutorial: 0
   fadeToCredits: {fileID: 1831406053}
