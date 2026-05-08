@@ -15468,7 +15468,7 @@ MonoBehaviour:
   _bloodSound: {fileID: 8300000, guid: 06abc74982ba69345b3ca78955c7f952, type: 3}
   _dashSound: {fileID: 8300000, guid: 19dc7ffec1170514db08ffd7629e49bc, type: 3}
   _playerHurtSound: {fileID: 8300000, guid: e4bb3c09ea6fe924c80fdda178b92fcf, type: 3}
-  _parrySound: {fileID: 8300000, guid: 7f268ce9b1946ec4c9811d2f7b28916e, type: 3}
+  _parrySound: {fileID: 8300000, guid: 569b66e9f34635649a3cf0308e41d14f, type: 3}
   onTutorial: 1
   fadeToCredits: {fileID: 0}
   currentState: 0

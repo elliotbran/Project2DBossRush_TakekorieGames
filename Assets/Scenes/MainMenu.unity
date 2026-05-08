@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.680375, y: 0.14181481}
   m_AnchorMax: {x: 0.8382293, y: 0.20922223}
-  m_AnchoredPosition: {x: -5.5899963, y: 1.5}
+  m_AnchoredPosition: {x: -125.00003, y: -5.9849854}
   m_SizeDelta: {x: 6.039795, y: 7.5219116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &143811143
@@ -288,7 +288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.67464584, y: 0.31851852}
   m_AnchorMax: {x: 0.8382293, y: 0.40285185}
-  m_AnchoredPosition: {x: -0.08999634, y: 1.5}
+  m_AnchoredPosition: {x: -119.50003, y: -105.484985}
   m_SizeDelta: {x: 72.3865, y: -10.4781}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &474256937
@@ -421,7 +421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.680375, y: 0.5138519}
   m_AnchorMax: {x: 0.8382293, y: 0.58985186}
-  m_AnchoredPosition: {x: -8, y: -5}
+  m_AnchoredPosition: {x: -125, y: -191}
   m_SizeDelta: {x: 151.21, y: 27.5485}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674747159
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 816687176}
   - component: {fileID: 816687175}
   m_Layer: 5
-  m_Name: Image
+  m_Name: IZEL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,7 +553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -411, y: -190.83}
+  m_AnchoredPosition: {x: -494, y: -165}
   m_SizeDelta: {x: 83.468, y: 164.3413}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &816687175
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2614197654611963915, guid: fd14c547460069149b617fc73d957c17, type: 3}
+  m_Sprite: {fileID: -8795258399168759056, guid: a0acbd33283ca4e4aa46bd7916634ebf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1325,7 +1325,7 @@ GameObject:
   - component: {fileID: 1758558907}
   - component: {fileID: 1758558906}
   m_Layer: 5
-  m_Name: Fondo (1)
+  m_Name: LOGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1347,8 +1347,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1105, y: 649}
-  m_SizeDelta: {x: 1572.8623, y: 1248.0062}
+  m_AnchoredPosition: {x: 1028, y: 779.25}
+  m_SizeDelta: {x: 1226.0598, y: 972.8317}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1758558906
 MonoBehaviour:

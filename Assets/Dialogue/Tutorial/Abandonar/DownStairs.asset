@@ -16,7 +16,7 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - Estas segura de que no quieres pelear por tu vida?
+  - "\xBFEst\xE1s segura de que no quieres pelear por tu vida?"
   responses:
   - responseText: Si
     dialogueObject: {fileID: 11400000, guid: 75ac7d5823dc6074ab34a2475a58cd08, type: 2}
