@@ -45,6 +45,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private AudioClip _bloodSound;
     [SerializeField] private AudioClip _bossHurtSound;
     [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private AudioClip _lightAttackSound;
+    [SerializeField] private AudioClip _heavyAttackSound;
+    [SerializeField] private AudioClip _rangeSound;
     public AudioClip stepSound;       // Sonido de pasos
     public float stepInterval = 0.5f; // Intervalo entre cada paso
     private float nextStepTime = 0f;  // Control del tiempo entre pasos
@@ -58,7 +61,7 @@ public class BossController : MonoBehaviour
         RangeAttack,
     }
 
-    public LayerMask whatIsPlayer;     
+    public LayerMask whatIsPlayer;
 
     // Components
     NavMeshAgent _agent;
@@ -96,7 +99,7 @@ public class BossController : MonoBehaviour
     {
         currentHealth = maxHealth; // Initialize the boss's health to the maximum health at the start of the game
         currentState = BossState.Idle; // Start the boss in the Idle state (doesn't matter right now because he detects the player right away and changes to Chase)
-        _agent.updateRotation = false;  
+        _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         _bloodParticles.Stop();
     }
@@ -164,7 +167,7 @@ public class BossController : MonoBehaviour
             sightRange = 0;
             meleeAttackRange = 0;
             rangeAttackRange = 0;
-            currentState = BossState.Idle;            
+            currentState = BossState.Idle;
             UpdateIdle();
         }
     }
@@ -197,13 +200,28 @@ public class BossController : MonoBehaviour
     void UpdateIdle()
     {
         _agent.SetDestination(transform.position);
-        _animator.SetFloat("Speed", 0);              
+        _animator.SetFloat("Speed", 0);
     }
 
     void UpdateChase()
     {
         _agent.SetDestination(_playerPosition.position);
         _animator.SetFloat("Speed", Mathf.Abs(_agent.speed));
+
+        if (_agent.speed > 0.1f)
+        {
+            PlayStepSound();
+        }
+
+    }
+    void PlayStepSound()
+    {
+        if (Time.time >= nextStepTime)
+        {
+            _audioSource.pitch = Random.Range(1.25f, 1.3f);
+            _audioSource.PlayOneShot(stepSound, 0.3f);
+            nextStepTime = Time.time + stepInterval;
+        }
     }
 
     void UpdateMeleeAttack()
@@ -215,6 +233,7 @@ public class BossController : MonoBehaviour
         {
             this.gameObject.tag = "AtaqueNormal";
             _animator.SetTrigger("NormalMeleeAttack");
+            _audioSource.PlayOneShot(_lightAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -224,6 +243,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 2)
         {
             _animator.SetTrigger("GoldenMeleeAttack");
+            _audioSource.PlayOneShot(_lightAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -233,6 +253,7 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 3)
         {
             _animator.SetTrigger("NormalSplashAttack");
+            _audioSource.PlayOneShot(_heavyAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
@@ -242,11 +263,12 @@ public class BossController : MonoBehaviour
         if (!_alreadyMeleeAttacked && _meleeAttackType == 4)
         {
             _animator.SetTrigger("GoldenSplashAttack");
+            _audioSource.PlayOneShot(_heavyAttackSound, 0.35f);
 
             _alreadyMeleeAttacked = true;
             Debug.Log(_meleeAttackType);
             Invoke(nameof(ResetMeleeAttack), timeBetweenMeleeAttacks);
-        }        
+        }
     }
 
     void UpdateRangeAttack()
@@ -258,6 +280,7 @@ public class BossController : MonoBehaviour
         {
             rangeAttackRange = 0f;
             _animator.SetTrigger("RangeAttack");
+            _audioSource.PlayOneShot(_rangeSound, 0.35f);
             Instantiate(normalProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
@@ -268,6 +291,7 @@ public class BossController : MonoBehaviour
             rangeAttackRange = 0f;
             this.gameObject.tag = "AtaqueMelee";
             _animator.SetTrigger("RangeAttack");
+            _audioSource.PlayOneShot(_rangeSound, 0.35f);
             Instantiate(goldenProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
             _alreadyRangeAttacked = true;
             Invoke(nameof(ResetRangeAttack), timeBetweenRangeAttacks);
@@ -300,12 +324,12 @@ public class BossController : MonoBehaviour
                 if (_bloodSound != null) _audioSource.PlayOneShot(_bloodSound, 0.3f);
                 if (_bossHurtSound != null)
                 {
-                    _audioSource.pitch = Random.Range(0.8f, 1.0f);
-                    _audioSource.PlayOneShot(_bossHurtSound, 0.9f);
+                    _audioSource.pitch = Random.Range(0.8f, 0.85f);
+                    _audioSource.PlayOneShot(_bossHurtSound, 0.35f);
                 }
             }
         }
-        else if (!isDead) 
+        else if (!isDead)
         {
             isDead = true;
             _spriteRenderer.color = Color.white;
@@ -349,7 +373,7 @@ public class BossController : MonoBehaviour
                 Debug.Log("Da�o realizado. Vida restante: " + player.health);
             }
         }
-    }    
+    }
 
     void Die()
     {
@@ -370,7 +394,7 @@ public class BossController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, meleeAttackRange); 
+        Gizmos.DrawWireSphere(transform.position, meleeAttackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
         Gizmos.color = Color.blue;
