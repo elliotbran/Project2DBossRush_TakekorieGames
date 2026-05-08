@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ShadowIzel
   m_EditorClassIdentifier: 
   characterName: ???
-  defaultPortrait: {fileID: 21300000, guid: bbd6f22b5d896054b831b8de086100be, type: 3}
+  defaultPortrait: {fileID: 21300000, guid: 50fbc1d231b94c34b82a38fb26d36189, type: 3}
   portraits: []

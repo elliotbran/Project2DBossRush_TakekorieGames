@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 20acf28eb7ed5e04e8aa632cc34ffbdf
+guid: fd14c547460069149b617fc73d957c17
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3318222800836393693
-    second: CuadroDeDialogoPrueba_0
+      213: -2614197654611963915
+    second: PLAYER_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,13 +46,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 34, y: 30, z: 34, w: 30}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -72,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,7 +98,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 128
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CuadroDeDialogoPrueba_0
+      name: PLAYER_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 74
         y: 0
-        width: 128
-        height: 128
+        width: 1242
+        height: 2446
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 9, y: 8, z: 9, w: 8}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3258b8e71fd43f1d0800000000000000
-      internalID: -3318222800836393693
+      spriteID: 5ffc130751188bbd0800000000000000
+      internalID: -2614197654611963915
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 979990310c79d3d4c83b70a117534ad2
-    internalID: -1722082120
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CuadroDeDialogoPrueba_0: -3318222800836393693
+      PLAYER_0: -2614197654611963915
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
