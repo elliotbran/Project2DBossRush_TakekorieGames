@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Izel
   m_EditorClassIdentifier: 
   characterName: Izel
-  defaultPortrait: {fileID: -2614197654611963915, guid: 5bb16f2e13c5e5c47be489f711fd5d86, type: 3}
+  defaultPortrait: {fileID: 21300000, guid: 039798e499edf9746977d7a14fa41774, type: 3}
   portraits: []
