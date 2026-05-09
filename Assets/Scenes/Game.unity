@@ -498,7 +498,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Aunque me hayas derrotado, habr\xE1n otros que se alzar\xE1n contra ti..."
+  m_text: You might have bested me, but there will be others who will rise against
+    you...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}
   m_sharedMaterial: {fileID: -8393567617771864370, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}

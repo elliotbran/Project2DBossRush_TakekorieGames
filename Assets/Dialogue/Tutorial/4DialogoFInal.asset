@@ -16,10 +16,9 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - "Ahora que has aprendido todas las t\xE9cnicas necesarias tienes que aceptarte
-    a ti mismo."
+  - Now that you've learned all the necessary techniques you will have to face yourself.
   responses:
-  - responseText: "\xBFEso qu\xE9 significa?"
+  - responseText: What does that mean?
     dialogueObject: {fileID: 11400000, guid: 1f11186f4d4db3c499c17a802d9be317, type: 2}
-  - responseText: "\xBFA qu\xE9 te refieres?"
+  - responseText: What do you mean?
     dialogueObject: {fileID: 11400000, guid: 1f11186f4d4db3c499c17a802d9be317, type: 2}

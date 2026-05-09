@@ -16,7 +16,5 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - 'A que te refieres con eso?
-
-'
+  - What do you mean by that?
   responses: []
