@@ -26,6 +26,6 @@ public class triggerFinal : MonoBehaviour
         fade.SetActive(true);
         fade.GetComponent<Animator>().Play("FadeOut");
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("Tutorial-Game");
+        SceneManager.LoadScene(3);
     }
 }

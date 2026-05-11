@@ -4,7 +4,7 @@ using TMPro;
 using System.Collections;
 
 
-public class SImpleIntro : MonoBehaviour
+public class SImpleIntro2 : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private TypewriterEffect typewriterEffect;
@@ -14,9 +14,7 @@ public class SImpleIntro : MonoBehaviour
     [TextArea(3, 10)]
     [SerializeField] private string introText; // Aquí escribes tu historia
     [TextArea(3, 10)]
-    [SerializeField] private string introText2;
-    [TextArea(3, 10)]
-    [SerializeField] private string introText3;
+    [SerializeField] private string introText2;    
 
     void Start()
     {
@@ -40,14 +38,11 @@ public class SImpleIntro : MonoBehaviour
                 {
                     typewriterEffect.Run(introText2, textLabel);
                 }
+                
                 else if (textLabel.text == introText2)
                 {
-                    typewriterEffect.Run(introText3, textLabel);
-                }
-                else if (textLabel.text == introText3)
-                {
                     textLabel.text = "";
-                    SceneManager.LoadScene("Tutorial");
+                    SceneManager.LoadScene(4);
                 }
 
             }
