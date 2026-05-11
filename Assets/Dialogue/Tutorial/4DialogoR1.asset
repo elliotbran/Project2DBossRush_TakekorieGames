@@ -16,5 +16,5 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - What do you mean by that?
+  - "\xBFA qu\xE9 te refieres con eso?"
   responses: []

@@ -2214,7 +2214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You've made a great mistake coming here...
+  m_text: "No deber\xEDas haber venido aqu\xED..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3dc2cd2312ab7f4d9bc7a971631a1c0, type: 2}
   m_sharedMaterial: {fileID: -8393567617771864370, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}

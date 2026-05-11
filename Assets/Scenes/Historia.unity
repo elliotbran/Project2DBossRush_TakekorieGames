@@ -407,12 +407,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   typewriterEffect: {fileID: 282156673}
   textLabel: {fileID: 109218245}
-  introText: 'For centuries, the children of the Axolotl were raised for a single
-    purpose: to feed the gods.'
-  introText2: "Chained beneath the depths of the temple, they awaited the day of
-    sacrifice\u2026 for no executioner could kill them forever."
-  introText3: Dragged from your cell, you climbed the pyramid beneath chants of war
-    and blood. The blade fell. Your body died.
+  introText: "Durante siglos, los hijos del Ajolote fueron criados para un \xFAnico
+    destino: alimentar a los dioses."
+  introText2: "Encadenados en las profundidades del templo, esperaban el d\xEDa del
+    sacrificio\u2026 porque ning\xFAn verdugo pod\xEDa matarlos para siempre.\n"
+  introText3: "Arrancado de tu celda, ascendiste la pir\xE1mide bajo c\xE1nticos
+    de guerra y sangre. La hoja cay\xF3. Tu cuerpo muri\xF3. "
 --- !u!1 &727919119
 GameObject:
   m_ObjectHideFlags: 0

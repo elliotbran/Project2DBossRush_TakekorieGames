@@ -16,15 +16,16 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - I see that you have now mastered the attack, but a good offense without a great
-    defense is useless in the heat of battle.
-  - Your spear has a unique ability, this ability can block golden attacks and absorb
-    them.
-  - Once you have accumulated enough golden energy you can use it to heal your wounds.
-  - But be careful, you will not be able to absorb attacks other than golden, to
-    evade them you will have to dodge them.
+  - Veo que has dominado el ataque, pero un buen ataque sin una buena defensa no
+    sirve de nada.
+  - "Tu lanza tiene una habilidad \xFAnica, esta puede bloquear todos los ataques
+    enemigos dorados y absorberlos."
+  - Una vez almacenes suficiente energia dorada podras utilizarla para sanar tus
+    heridas.
+  - "Pero ten cuidado, no podr\xE1s absorber los ataques que no sean dorados, para
+    evitarlos tendr\xE1s que esquivarlos."
   responses:
-  - responseText: Understood.
+  - responseText: Entendido.
     dialogueObject: {fileID: 11400000, guid: d70c2f224cf99a34daab9106716df0e2, type: 2}
-  - responseText: How can I dodge?
+  - responseText: Como puedo esquivar.
     dialogueObject: {fileID: 11400000, guid: 0cbdec8e37e49c348be8dfd8a774cf23, type: 2}

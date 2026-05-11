@@ -63,18 +63,18 @@ public class UITutorialControl : MonoBehaviour
         //enemyTutorialController = GetComponent<EnemyTutorialController>();
         if (enemyTutorialController.isGetting5Attacks == true && hitsTutorial<= 4)
         {
-            textoTuto1.text = "Performed attacks: " + hitsTutorial + "/5";
+            textoTuto1.text = "Ataques realizados: " + hitsTutorial + "/5";
         }
         else if(hitsTutorial >= 5 && corrutineRunning == false)
         {
-            textoTuto1.text = "Performed attacks: " + hitsTutorial + "/5";
+            textoTuto1.text = "Ataques realizados: " + hitsTutorial + "/5";
             enemyTutorialController = FindAnyObjectByType<EnemyTutorialController>();
             StartCoroutine(DeactivateEvent1());
         }
 
         if (isTutorial2Active)
         {
-            textoTuto1.text = "Performed parries: " + parrysTutorial + "/3 \nPerformed dodges: " + dashesTutorial + "/3 \nPerformed heals: " + curacionesTutorial + "/1";
+            textoTuto1.text = "Parries realizados: " + parrysTutorial + "/3 \nDashes realizados: " + dashesTutorial + "/3 \nCuraciones realizadas: " + curacionesTutorial + "/1";
             rbHud.SetActive(true);
             lbhud.SetActive(true);
             triangulohud.SetActive(true);
@@ -90,7 +90,7 @@ public class UITutorialControl : MonoBehaviour
         }
         if(finDelTutorial1 == true)
         {
-            textoTuto1.text = "Find an exit";
+            textoTuto1.text = "Busca una salida";
             rbHud.SetActive(false);
             lbhud.SetActive(false);
             triangulohud.SetActive(false);

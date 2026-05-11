@@ -467,10 +467,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SImpleIntro2
   typewriterEffect: {fileID: 672774722}
   textLabel: {fileID: 779946242}
-  introText: "And then\u2026 the god descended to claim what had been offered."
-  introText2: 'But this time, the prey was ready to fight.
-
-'
+  introText: "Y entonces\u2026 el dios descendi\xF3 para reclamar aquello que le
+    hab\xEDan ofrecido.\n"
+  introText2: Pero esta vez, la presa estaba lista para luchar.
 --- !u!114 &672774722
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,13 +16,13 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - It seems you have chosen to fight for your life, good, I will show you exactly
-    what you need to face the Lord of the Dead and fight for those you love the most
-    in the world of the living.
-  - First and foremost, you wield a spear, try swinging it around.
-  - Hit me five times with it.
+  - "Parece que has decidido luchar por tu vida, bien, te ense\xF1are lo que necesitas
+    para enfrentarte con El Se\xF1or de los Muertos y pelear por los que m\xE1s quieres
+    en el mundo de los vivos."
+  - "Lo primero y m\xE1s importante, portas una lanza, prueba a blandirla."
+  - Golpeame cinco veces con ella.
   responses:
-  - responseText: Are you sure?
+  - responseText: "\xBFEst\xE1s segura?"
     dialogueObject: {fileID: 11400000, guid: a844d4f087fd9894e8c0d4fc8f22a640, type: 2}
-  - responseText: Understood.
+  - responseText: Entendido.
     dialogueObject: {fileID: 11400000, guid: 28921bfb734a7d540b548b77116f9261, type: 2}

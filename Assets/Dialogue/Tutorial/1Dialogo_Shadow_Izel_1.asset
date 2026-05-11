@@ -16,13 +16,13 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - "You are currently at Mictl\xE1n's Doors, due to the fact that you have been
-    offered as a sacrifice to the Gods."
-  - Thanks to your lineage you have the oportunity to fight for your life.
-  - If you have what it takes go forth towards the center of the arena, but if you
-    wish to give up and accept your death go back from where you came.
+  - "Est\xE1s en las puertas del Mictl\xE1n, ya que has sido ofrecida como sacrificio
+    a los dioses."
+  - Gracias a tu linaje tienes la oportunidad de luchar por tu vida.
+  - Si tienes lo que hay que tener avanza al centro de la arena, en el caso de que
+    prefieras asumir tu muerte puedes abandonarla por donde has venido.
   responses:
-  - responseText: I see...
+  - responseText: Entiendo...
     dialogueObject: {fileID: 11400000, guid: 3cd83a8bf664f744898c5b8aa25bad37, type: 2}
   - responseText: ...
     dialogueObject: {fileID: 11400000, guid: 3cd83a8bf664f744898c5b8aa25bad37, type: 2}

@@ -16,5 +16,5 @@ MonoBehaviour:
   portraitId: 
   hasName: 1
   dialogue:
-  - Are you sure you want me to hit you?
+  - "\xBFEst\xE1s segura de que quieres que te golpee?"
   responses: []
