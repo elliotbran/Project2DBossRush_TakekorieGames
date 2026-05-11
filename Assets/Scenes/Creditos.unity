@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.28739586, y: 0}
   m_AnchorMax: {x: 0.70500004, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2039.7078}
-  m_SizeDelta: {x: 0, y: 1400.9844}
+  m_AnchoredPosition: {x: 0, y: -1384}
+  m_SizeDelta: {x: 0, y: 454.4238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &130632781
 Animator:
@@ -205,8 +205,8 @@ MonoBehaviour:
     Rubio\nLucas Ruiz\n\n\nGAMEPLAY DESIGN\n\nElliot Molestina\nIker Rubio\nLucas
     Ruiz\n\n \nINTERFACE DESIGN\n\nElliot Molestina\n\n\n\n\n\n\nTHANKS FOR PLAYING!\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}
-  m_sharedMaterial: {fileID: -8393567617771864370, guid: 38425bd450b314440b290bbbfe269fe9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e3dc2cd2312ab7f4d9bc7a971631a1c0, type: 2}
+  m_sharedMaterial: {fileID: 237110824216898502, guid: e3dc2cd2312ab7f4d9bc7a971631a1c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -230,8 +230,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
