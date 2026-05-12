@@ -119,6 +119,68 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1175729
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1078465790}
+    m_Modifications:
+    - target: {fileID: 5367301767368315296, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_Name
+      value: Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.24000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 30.099998
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+--- !u!4 &1175730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+  m_PrefabInstance: {fileID: 1175729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3730857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,6 +2608,17 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &819284981 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5993357850474965345, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+  m_PrefabInstance: {fileID: 1175729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
 --- !u!1 &864107210
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,6 +3637,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1175730}
   - {fileID: 588553518}
   - {fileID: 1502069495}
   - {fileID: 1490241310}
@@ -3619,6 +3693,8 @@ MonoBehaviour:
   knockbackTotalTime: 0.2
   knockfromRight: 0
   _dashCooldown: 1
+  _dashSpeed: 20
+  _dashDuration: 0.18
   attackDuration: 0.25
   attackRange: 1
   attackRate: 2
@@ -3628,6 +3704,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
+  attackIsCharged: 0
+  attackMultiplier: 2
   stepSound: {fileID: 8300000, guid: 7951ef92a5c220140abd69cc42a18fac, type: 3}
   stepInterval: 0.5
   attackKnockbackForce: 2
@@ -3644,7 +3722,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 153f7d4b74027d3448ef37a71b8a8d97, type: 3}
   _bloodSound: {fileID: 8300000, guid: 9a472b77b4591c741867c38360517729, type: 3}
   _dashSound: {fileID: 8300000, guid: 19dc7ffec1170514db08ffd7629e49bc, type: 3}
-  _playerHurtSound: {fileID: 8300000, guid: 4b74bc01ba5803a48bede3f3e6e15594, type: 3}
+  _playerHurtSound: {fileID: 8300000, guid: 025c0e8d99898c64c9a1c6ddf03129fe, type: 3}
   _parrySound: {fileID: 8300000, guid: 7f268ce9b1946ec4c9811d2f7b28916e, type: 3}
   onTutorial: 0
   fadeToCredits: {fileID: 0}
@@ -3658,6 +3736,7 @@ MonoBehaviour:
   youDiedPanel: {fileID: 335146712}
   playerUI: {fileID: 161564089792065113}
   bossUI: {fileID: 2577256391261203715}
+  lightAttack: {fileID: 819284981}
   autoTrigger: 0
 --- !u!70 &1078465795
 CapsuleCollider2D:

@@ -35,7 +35,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Dashing")]
     [SerializeField] private float _dashCooldown = 1f; // cooldown in seconds
-    private float _dashSpeed = 20f;
+    [SerializeField] private float _dashSpeed = 30f; // speed during dash (editable)
+    [SerializeField] private float _dashDuration = 0.25f; // how long dash lasts (seconds)
+    private float _dashTimer = 0f;
 
     [Header("Player Combat")]
     [SerializeField] private float attackDuration = 0.25f; // how long the attack lasts (seconds)
@@ -390,7 +392,7 @@ public class PlayerController : MonoBehaviour
             }
 
             _rollDir = _lastMoveDir;
-            _dashSpeed = 30f;
+            _dashTimer = _dashDuration; // start the duration timer
             currentState = PlayerState.Dashing;
 
             // start cooldown
@@ -416,14 +418,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleDashing() // Rolling behavior and cooldown management
+    void HandleDashing() // Rolling behavior controlled by duration
     {
-        float rollSpeedDropMultiplier = 5f;
-        _dashSpeed -= _dashSpeed * rollSpeedDropMultiplier * Time.deltaTime;
+        // Maintain fixed dash speed while the timer runs
+        _dashTimer -= Time.deltaTime;
         Shadows.me.Sombras_Skill();
 
-        float minRollSpeed = 15f;
-        if (_dashSpeed < minRollSpeed)
+        if (_dashTimer <= 0f)
         {
             currentState = PlayerState.Normal;
         }

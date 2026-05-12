@@ -15528,6 +15528,8 @@ MonoBehaviour:
   knockbackTotalTime: 0
   knockfromRight: 0
   _dashCooldown: 1
+  _dashSpeed: 20
+  _dashDuration: 0.18
   attackDuration: 0.25
   attackRange: 1
   attackRate: 2

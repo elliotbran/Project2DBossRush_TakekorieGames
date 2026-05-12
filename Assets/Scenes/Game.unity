@@ -3122,6 +3122,8 @@ MonoBehaviour:
   knockbackTotalTime: 0.2
   knockfromRight: 0
   _dashCooldown: 1
+  _dashSpeed: 20
+  _dashDuration: 0.18
   attackDuration: 0.25
   attackRange: 1
   attackRate: 2
@@ -11770,8 +11772,8 @@ RectTransform:
   - {fileID: 5423369895138432240}
   - {fileID: 4638825113475234799}
   - {fileID: 2796626939443005973}
-  - {fileID: 1831406054}
   - {fileID: 791780974}
+  - {fileID: 1831406054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
