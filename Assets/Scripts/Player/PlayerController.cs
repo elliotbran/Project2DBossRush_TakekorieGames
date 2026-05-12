@@ -751,7 +751,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(7f); // Optional delay before starting fade
         fadeToCredits.SetActive(true); // Activate fade to credits panel
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene("Creditos"); // Load the credits scene after a delay
+        SceneManager.LoadScene(7); // Load the credits scene after a delay
     }
     #endregion
 }
