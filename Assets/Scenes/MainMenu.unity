@@ -2138,6 +2138,7 @@ MonoBehaviour:
   bestTimeText: {fileID: 625730901}
   nameInputField: {fileID: 0}
   submitButton: {fileID: 0}
+  submitbuttonGame: {fileID: 0}
 --- !u!1 &1982928603
 GameObject:
   m_ObjectHideFlags: 0
