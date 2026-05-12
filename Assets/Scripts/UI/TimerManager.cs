@@ -12,6 +12,7 @@ public class TimerManager : MonoBehaviour
     public TextMeshProUGUI bestTimeText;
     public TMP_InputField nameInputField;
     public Button submitButton;
+    public GameObject submitbuttonGame;
 
     private float elapsedTime = 0f;
     private bool isRunning = true;
@@ -73,6 +74,7 @@ public class TimerManager : MonoBehaviour
     public void SubmitScore()
     {
         if (submitButton != null) submitButton.interactable = false;
+        submitbuttonGame.SetActive(false);
 
         // LEEMOS EL TIEMPO DESDE PLAYERPREFS (para evitar el error del 0)
         float timeToSubmit = PlayerPrefs.GetFloat("CurrentTime", 0f);
