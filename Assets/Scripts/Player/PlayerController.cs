@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
     public Light2D lightAttack;
 
     public bool autoTrigger = false;
+    TimerManager timerManager;
     void Awake()
     {
         _bossController = GameObject.Find("Boss")?.GetComponent<BossController>(); // Get the BossController component attached to the boss
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>(); // Get the Animator component
         _playerHitbox = GetComponent<CapsuleCollider2D>(); // Get the BoxCollider2D component
         currentState = PlayerState.Normal; // Start in Normal state
+        timerManager = FindAnyObjectByType<TimerManager>(); // Get the TimerManager in the scene
         GetComponentInChildren<Light2D>(); 
     }
     void Start()
@@ -473,6 +475,7 @@ public class PlayerController : MonoBehaviour
         bool esAtaqueNormal = (_object != null && _object.CompareTag("AtaqueNormal"));
         currentState = PlayerState.Stunned;
         health -= quantity;
+        timerManager.elapsedTime += 1.5f; // Penaliza al jugador aumentando el tiempo en el timer cuando recibe daño
         _animator.SetTrigger("Hurt"); // Trigger hurt animation
 
         if (health <= 0)
