@@ -14,7 +14,8 @@ public class TimerManager : MonoBehaviour
     public Button submitButton;
     public GameObject submitbuttonGame;
 
-    private float elapsedTime = 0f;
+
+    public float elapsedTime = 0f;
     private bool isRunning = true;
     private const string BestTimeKey = "BestTimeRecord";
 
