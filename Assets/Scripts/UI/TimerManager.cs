@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerManager : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class TimerManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI bestTimeText;
     public TMP_InputField nameInputField; // Arrastra aquí tu InputField de la UI
+    public Button submitButton; // Arrastra aquí tu botón de "Enviar" de la UI
 
     private float elapsedTime = 0f;
     private bool isRunning = true;
@@ -37,6 +40,8 @@ public class TimerManager : MonoBehaviour
     {
         isRunning = false;
         if (timerText != null) timerText.color = Color.yellow;
+
+        PlayerPrefs.SetFloat("CurrentTime", elapsedTime);
 
         CheckNewRecord();
     }
@@ -69,6 +74,7 @@ public class TimerManager : MonoBehaviour
     // Llama a esta función desde el botón de "Enviar"
     public void SubmitScore()
     {
+        submitButton.interactable = false;
         string playerName = nameInputField != null ? nameInputField.text : "Anonymous Player";
 
         if (!string.IsNullOrEmpty(playerName))
@@ -77,29 +83,33 @@ public class TimerManager : MonoBehaviour
         }
         else
         {
+            playerName = "Anonymous Player";
+            StartCoroutine(PostToGoogle(playerName, elapsedTime));
             Debug.LogWarning("Write a name please");
         }
-    }
 
-    IEnumerator PostToGoogle(string name, float time)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField(entryNombre, name);
-        form.AddField(entryTiempo, time.ToString("F2"));
-
-        using (UnityWebRequest www = UnityWebRequest.Post(formURL, form))
+        IEnumerator PostToGoogle(string name, float time)
         {
-            yield return www.SendWebRequest();
+            WWWForm form = new WWWForm();
+            form.AddField(entryNombre, name);
+            form.AddField(entryTiempo, time.ToString("F2"));
 
-            if (www.result != UnityWebRequest.Result.Success)
+            using (UnityWebRequest www = UnityWebRequest.Post(formURL, form))
             {
-                Debug.LogError("Error al subir a Google: " + www.error);
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError("Error al subir a Google: " + www.error);
+                }
+                else
+                {
+                    Debug.Log("¡Puntuación subida a la nube con éxito!");
+                    // Opcional: Desactivar el botón tras enviar
+                }
             }
-            else
-            {
-                Debug.Log("¡Puntuación subida a la nube con éxito!");
-                // Opcional: Desactivar el botón tras enviar
-            }
+            yield return new WaitForSeconds(2f);
+            SceneManager.LoadScene(6);
         }
     }
 }
