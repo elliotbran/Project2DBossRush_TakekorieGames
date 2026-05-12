@@ -47,6 +47,10 @@ public class Projectile : MonoBehaviour
         {
             PlayerController player = collision.GetComponent<PlayerController>();
             if (player == null) return;
+            if (player.currentState == PlayerController.PlayerState.Dashing)
+            {
+                return;
+            }
             if (player.currentState == PlayerController.PlayerState.Parrying)
             {                
                 if (gameObject.CompareTag("AtaqueAmarillo") && player.manaHandler != null)

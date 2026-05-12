@@ -240,10 +240,14 @@ public class EnemyTutorialController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) // This function is called when the boss's attack hitbox collides with the player. It checks if the collided object is the player and if it is, it calls the player's ReceiveDamage function to deal damage to the player.
     {
+
         if (collision.CompareTag("Player"))
         {
             PlayerController player = collision.GetComponent<PlayerController>();
-
+            if (player.currentState == PlayerController.PlayerState.Dashing)
+            {
+                return; // Skip damage and knockback if the player is dashing
+            }
             if (player != null)
             {
                 StartCoroutine(AttackHitStop()); // Start the hit stop effect when the boss attacks the player

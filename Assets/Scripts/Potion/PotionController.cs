@@ -49,6 +49,7 @@ public class PotionController : MonoBehaviour
         playerController.currentState = PlayerController.PlayerState.Healing;
         UpdateStatus(false);
         Debug.Log("Pocima usada, salud restaurada");
+        playerController.attackIsCharged= true;
         StartCoroutine(HealAnimation());
     }
 

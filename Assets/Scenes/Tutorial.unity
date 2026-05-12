@@ -3550,6 +3550,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPosition: {fileID: 3623369009690347717}
+--- !u!4 &797111255 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+  m_PrefabInstance: {fileID: 1333169637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &797111256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5993357850474965345, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+  m_PrefabInstance: {fileID: 1333169637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
 --- !u!1 &809987403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,6 +5222,63 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &1333169637
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3623369009690347717}
+    m_Modifications:
+    - target: {fileID: 5367301767368315296, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_Name
+      value: Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443828106498243751, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ba45f6b4b44cab44ab42b8a8e3f3ac7, type: 3}
 --- !u!1 &1348375588
 GameObject:
   m_ObjectHideFlags: 0
@@ -14069,6 +14142,7 @@ Transform:
   - {fileID: 4685771851272672809}
   - {fileID: 1555739520844354869}
   - {fileID: 6891182762861702484}
+  - {fileID: 797111255}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3740638283815843684
@@ -15454,6 +15528,8 @@ MonoBehaviour:
   knockbackTotalTime: 0
   knockfromRight: 0
   _dashCooldown: 1
+  _dashSpeed: 20
+  _dashDuration: 0.18
   attackDuration: 0.25
   attackRange: 1
   attackRate: 2
@@ -15463,6 +15539,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
+  attackIsCharged: 0
+  attackMultiplier: 2
   stepSound: {fileID: 8300000, guid: 7951ef92a5c220140abd69cc42a18fac, type: 3}
   stepInterval: 0.5
   attackKnockbackForce: 1.96
@@ -15493,6 +15571,7 @@ MonoBehaviour:
   youDiedPanel: {fileID: 1256843170}
   playerUI: {fileID: 3084063109859077023}
   bossUI: {fileID: 0}
+  lightAttack: {fileID: 797111256}
   autoTrigger: 0
 --- !u!223 &6767853179896999391
 Canvas:

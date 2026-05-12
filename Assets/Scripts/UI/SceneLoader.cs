@@ -45,6 +45,16 @@ public class SceneLoader : MonoBehaviour
         sceneIndex = 3;
         StartCoroutine(scene1Load());
     }
+    public void sceneLeaderboard()
+    {
+        sceneIndex = 4;
+        StartCoroutine(scene1Load());
+    }
+    public void mainMenu()
+    {
+        sceneIndex = 5;
+        StartCoroutine(scene1Load());
+    }
     IEnumerator scene1Load()
     {
         fade.GetComponent<Image>().enabled = true;
@@ -56,10 +66,16 @@ public class SceneLoader : MonoBehaviour
                 UnityEngine.SceneManagement.SceneManager.LoadScene(1);
                 break;
             case 2:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(5);
                 break;
             case 3:
                 Application.Quit();
+                break;
+            case 4:
+                UnityEngine.SceneManagement.SceneManager.LoadScene(8);
+                break;
+            case 5:
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
                 break;
         }
     }

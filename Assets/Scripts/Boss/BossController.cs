@@ -76,6 +76,7 @@ public class BossController : MonoBehaviour
     private SpriteRenderer _originalRenderer;
 
     private PlayerController _playerController;
+    private TimerManager _timerManager;
 
     private void Awake()
     {
@@ -87,6 +88,7 @@ public class BossController : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // Get the SpriteRenderer component attached to the boss body
         _sprite_renderer_assign();
         _bloodParticles = GetComponentInChildren<ParticleSystem>(); // Get the ParticleSystem component attached to the boss for the blood effect when the boss takes damage
+        _timerManager = FindAnyObjectByType<TimerManager>(); // Get the TimerManager component to stop the timer when the boss dies
     }
 
     // helper to keep assignment consistent with original code style
@@ -377,6 +379,7 @@ public class BossController : MonoBehaviour
 
     void Die()
     {
+        _timerManager.StopTimer();
         Debug.Log("El boss ha muerto");
         Time.timeScale = 1f;
 
