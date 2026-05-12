@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
 using UnityEngine.UI;
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour
     public UnityEngine.Transform attackPoint;
     public bool isAttacking;
     public LayerMask enemyLayers; //Its used by the boss to detect our player
+    public bool attackIsCharged;
+    public int attackMultiplier = 2; // Multiplier for damage when attack is charged
 
     [Header("Audio Settings")]
     public AudioClip stepSound;       // Sonido de pasos
@@ -117,6 +120,8 @@ public class PlayerController : MonoBehaviour
     public GameObject playerUI;
     public GameObject bossUI;
 
+    public Light2D lightAttack;
+
     public bool autoTrigger = false;
     void Awake()
     {
@@ -126,6 +131,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>(); // Get the Animator component
         _playerHitbox = GetComponent<CapsuleCollider2D>(); // Get the BoxCollider2D component
         currentState = PlayerState.Normal; // Start in Normal state
+        GetComponentInChildren<Light2D>(); 
     }
     void Start()
     {
@@ -263,6 +269,10 @@ public class PlayerController : MonoBehaviour
             _parryCooldownTime = _parryCooldown; //Inicia el Cooldown del parry
             StartCoroutine(ParryWindowRoutine()); //Llama a la corrutina ParryWindowRoutine()
         }
+
+        if(attackIsCharged)
+            lightAttack.intensity = Mathf.Lerp(lightAttack.intensity, 5.5f, Time.deltaTime * 10f);
+        else lightAttack.intensity = Mathf.Lerp(lightAttack.intensity, 0f, Time.deltaTime * 10f);
 
         UpdateStates();
 
@@ -433,6 +443,10 @@ public class PlayerController : MonoBehaviour
     #region Health and Healing
     public void TakeDamage(float quantity) // Damage player
     {
+        //if (currentState == PlayerState.Dashing)
+        //{
+        //    return; // Sale de la función sin aplicar daño
+        //}
         if (_Inmortal && _object != null && _object.CompareTag("AtaqueAmarillo"))
         {
             Debug.Log("Parry Amarillo Inmortal");
@@ -560,8 +574,18 @@ public class PlayerController : MonoBehaviour
             var tutorialController = enemy.GetComponent<EnemyTutorialController>();
             if (enemyController != null)
             {
-                StartCoroutine(AttackHitStop()); // Start hit stop effect
-                enemyController.TakeDamage(attackDamage);
+                 // Start hit stop effect
+                if(attackIsCharged == true)
+                {
+                    StartCoroutine(HeavyAttackHitStop());
+                    enemyController.TakeDamage(attackDamage*attackMultiplier);
+                    attackIsCharged = false;
+                }
+                else
+                {
+                    StartCoroutine(AttackHitStop());
+                    enemyController.TakeDamage(attackDamage);
+                }
                 // compute knockback direction for enemy if you still want to (not required now)
                 // Vector2 knockDirEnemy = (enemy.transform.position - transform.position).normalized;
                 // enemyController.ApplyKnockback(knockDirEnemy, attackKnockbackForce, attackKnockbackDuration);
@@ -572,8 +596,19 @@ public class PlayerController : MonoBehaviour
             }
             if (tutorialController != null)
             {
-                StartCoroutine(AttackHitStop()); // Start hit stop effect
-                tutorialController.TakeDamage(attackDamage);
+                //StartCoroutine(AttackHitStop()); // Start hit stop effect
+                                //StartCoroutine(AttackHitStop()); // Start hit stop effect
+                if(attackIsCharged == true)
+                {
+                    StartCoroutine(HeavyAttackHitStop());
+                    tutorialController.TakeDamage(attackDamage*attackMultiplier);
+                    attackIsCharged = false;
+                }
+                else
+                {
+                    StartCoroutine(AttackHitStop());
+                    tutorialController.TakeDamage(attackDamage);
+                }
                 Debug.Log("We hit " + enemy.name);
 
                 hitAny = true;
@@ -716,6 +751,15 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0.1f; // Slow down time to create hit stop effect
         yield return new WaitForSecondsRealtime(0.1f); // Wait for a short duration in real time
         Time.timeScale = 1; // Restore original time scale
+
+    }
+
+    IEnumerator HeavyAttackHitStop()
+    {
+        Time.timeScale = 0.1f; // Slow down time to create hit stop effect
+        yield return new WaitForSecondsRealtime(0.2f); // Wait for a short duration in real time
+        Time.timeScale = 1; // Restore original time scale
+
     }
 
     IEnumerator ParryHitStop()

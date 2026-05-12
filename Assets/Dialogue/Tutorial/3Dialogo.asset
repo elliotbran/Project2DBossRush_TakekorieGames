@@ -20,7 +20,8 @@ MonoBehaviour:
     defense is useless in the heat of battle.
   - Your spear has a unique ability, this ability can block golden attacks and absorb
     them.
-  - Once you have accumulated enough golden energy you can use it to heal your wounds.
+  - Once you have accumulated enough golden energy you can use it to heal your wounds,
+    while also doubling the power of your next strike.
   - But be careful, you will not be able to absorb attacks other than golden, to
     evade them you will have to dodge them.
   responses:
