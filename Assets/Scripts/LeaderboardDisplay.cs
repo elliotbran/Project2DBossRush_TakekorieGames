@@ -37,7 +37,7 @@ public class LeaderboardDisplay : MonoBehaviour
 
     IEnumerator GetScores()
     {
-        if (leaderboardText != null) leaderboardText.text = "Loading Rankings...";
+        if (leaderboardText != null) leaderboardText.text = "Cargando rankings...";
 
         using (UnityWebRequest www = UnityWebRequest.Get(webAppUrl))
         {
@@ -46,7 +46,7 @@ public class LeaderboardDisplay : MonoBehaviour
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError("Error: " + www.error);
-                if (leaderboardText != null) leaderboardText.text = "Error loading data.";
+                if (leaderboardText != null) leaderboardText.text = "Error cargando los datos...";
             }
             else
             {
@@ -69,7 +69,7 @@ public class LeaderboardDisplay : MonoBehaviour
 
         if (scores == null || scores.Count == 0)
         {
-            leaderboardText.text += "No records yet. Be the first!";
+            leaderboardText.text += "No hay records todavia. ¡Sé el primero!";
             return;
         }
 

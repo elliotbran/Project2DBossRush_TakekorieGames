@@ -45,7 +45,7 @@ public class SImpleIntro3 : MonoBehaviour
                     inputField.SetActive(true);
                     boton2.SetActive(true);
                     boton3.SetActive(true);
-                    currentTime.text = "Current time: " + PlayerPrefs.GetFloat("CurrentTime", 0f).ToString("F2");
+                    currentTime.text = "Tiempo actual: " + PlayerPrefs.GetFloat("CurrentTime", 0f).ToString("F2");
                     if (bestTimeText != null)
                     {
                         float best = PlayerPrefs.GetFloat(BestTimeKey, 0f);
@@ -71,7 +71,7 @@ public class SImpleIntro3 : MonoBehaviour
         inputField.SetActive(true);
         boton2.SetActive(true);
         boton3.SetActive(true);
-        currentTime.text = "Current time: "+PlayerPrefs.GetFloat("CurrentTime", 0f).ToString("F2");
+        currentTime.text = "Tiempo actual: "+PlayerPrefs.GetFloat("CurrentTime", 0f).ToString("F2");
         if (bestTimeText != null)
         {
             float best = PlayerPrefs.GetFloat(BestTimeKey, 0f);

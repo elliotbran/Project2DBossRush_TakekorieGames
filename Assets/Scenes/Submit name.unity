@@ -566,9 +566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Submit
-
-'
+  m_text: Enviar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3dc2cd2312ab7f4d9bc7a971631a1c0, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -730,7 +728,7 @@ MonoBehaviour:
   boton3: {fileID: 1070323557}
   currentTime: {fileID: 7828210191165147018}
   bestTimeText: {fileID: 7828210190027356892}
-  introText: Do you want to submit your score to the leadeboard?
+  introText: "\xBFQuieres enviar tu puntuaci\xF3n a la tabla de clasificaci\xF3n?"
 --- !u!114 &282156675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,7 +940,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Enter your name here, \nor you will be shown as\n 'Anonymous Player'."
+  m_text: "Inserta tu nombre aqui, \no ser\xE1s registrado como \n\"Jugador An\xF3nimo\"."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3dc2cd2312ab7f4d9bc7a971631a1c0, type: 2}
   m_sharedMaterial: {fileID: 237110824216898502, guid: e3dc2cd2312ab7f4d9bc7a971631a1c0, type: 2}
@@ -1436,7 +1434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: No, i dont want to submit my score
+  m_text: "No, no quiero enviar mi puntuaci\xF3n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3dc2cd2312ab7f4d9bc7a971631a1c0, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2048,8 +2046,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.277, y: 0.8072223}
   m_AnchorMax: {x: 0.40620834, y: 0.8692593}
-  m_AnchoredPosition: {x: -4.497986, y: -10.088013}
-  m_SizeDelta: {x: 8.996498, y: -3.8246}
+  m_AnchoredPosition: {x: -4.4978943, y: -3.4999084}
+  m_SizeDelta: {x: 63.996, y: -3.8246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1760458915241568395
 RectTransform:

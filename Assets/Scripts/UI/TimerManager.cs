@@ -77,7 +77,7 @@ public class TimerManager : MonoBehaviour
         // LEEMOS EL TIEMPO DESDE PLAYERPREFS (para evitar el error del 0)
         float timeToSubmit = PlayerPrefs.GetFloat("CurrentTime", 0f);
 
-        string playerName = "Anonymous Player";
+        string playerName = "Jugador Anónimo";
         if (nameInputField != null && !string.IsNullOrEmpty(nameInputField.text))
         {
             playerName = nameInputField.text;
